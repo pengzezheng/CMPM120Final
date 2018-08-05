@@ -12,6 +12,6 @@ Final Project for CMPM120
   **Programmer**: Pengze Zheng,  Qingqi Gao,  Jan Yu
  
 ## Files:
-  *main.js*
-  **Prefabs**:
-  **States**:
+  *main.js*  
+  **Prefabs**:  
+  **States**:  
