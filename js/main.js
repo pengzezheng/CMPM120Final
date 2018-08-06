@@ -5,6 +5,7 @@ function preload() {
     game.load.image('ground', 'assets/platform.png');
     game.load.image('star', 'assets/star.png');
     game.load.image('diamond', 'assets/diamond.png');
+    game.load.image('firstaid', 'assets/firstaid.png');
     game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
 }
 
@@ -58,8 +59,12 @@ function create() {
     player.animations.add('left', [0, 1, 2, 3], 10, true);
     player.animations.add('right', [5, 6, 7, 8], 10, true);
 
-    aET=new EnemyTorrent(game,"star");
-    game.add.existing(aET);
+    /*aELand=new EnemyLand1(game,"star");
+    game.add.existing(aELand);*/
+     aEFly=new EnemyFly1(game,"star");
+    game.add.existing(aEFly);
+      /*aET=new EnemyTorrent(game,"star");
+    game.add.existing(aET);*/
 
 }
 
@@ -67,6 +72,7 @@ function update() {
 
     //  Collide the player and the stars with the platforms
     var hitPlatform = game.physics.arcade.collide(player, platforms);
+    //var hitPlatform = game.physics.arcade.collide(bomb, platforms);
     cursors = game.input.keyboard.createCursorKeys();
 
     player.body.velocity.x = 0;

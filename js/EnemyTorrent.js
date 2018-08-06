@@ -1,10 +1,10 @@
 function EnemyTorrent(game, key){
 	Phaser.Sprite.call(this, game, 400, 500, key);// call phaser sprite
 	this.scale.setTo(0.5);
-	game.physics.enable(this);//enable physics
+	game.physics.enable(this, Phaser.Physics.ARCADE);//enable physics
 	this.enableBody=true;
 	//timer=game.time.create();
-	game.time.events.loop(Phaser.Timer.SECOND, shootBullet, this);
+	game.time.events.loop(Phaser.Timer.SECOND*2, shootBullet, this);
 }
 
 function shootBullet(){
