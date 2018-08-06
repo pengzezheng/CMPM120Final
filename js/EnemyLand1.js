@@ -18,4 +18,4 @@ EnemyLand1.prototype.constructor = EnemyLand1;
 EnemyLand1.prototype.update = function() {
 	game.physics.arcade.overlap(this, player, rush, null, this);
 
-}
+} 
