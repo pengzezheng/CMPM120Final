@@ -8,13 +8,12 @@ function Bomb(game, key){
 
 function explo(bomb, player){//kill bullet and do damage
 		bomb.kill();
-		hp -=3;
 		bgm.play();//make sounds
 	}
 
 Bomb.prototype = Object.create(Phaser.Sprite.prototype);// make prototype
-Bomb.prototype.constructor = Bullet;
+Bomb.prototype.constructor = Bomb;
 
 Bomb.prototype.update = function() {
-	
+	timer.add(Phaser.Timer.SECOND*2, this.explo, this);
 }	
