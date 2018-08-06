@@ -28,4 +28,4 @@ EnemyTorrent.prototype.constructor = EnemyTorrent;
 
 EnemyTorrent.prototype.update = function() {
 	
-}
+} 
