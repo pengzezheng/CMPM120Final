@@ -58,8 +58,8 @@ function create() {
     player.animations.add('left', [0, 1, 2, 3], 10, true);
     player.animations.add('right', [5, 6, 7, 8], 10, true);
 
-    aEFly=new EnemyFly1(game,"star");
-    game.add.existing(aEFly);
+    aET=new EnemyTorrent(game,"star");
+    game.add.existing(aET);
 
 }
 
