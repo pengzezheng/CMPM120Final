@@ -1,6 +1,7 @@
 var LoadingState = function(game) {};
 LoadingState.prototype = {
 	preload: function() {
+		game.load.atlas('player','assets/candleman.png','assets/candleman.json');
 		game.load.image('sky', 'assets/background.png');
 	    game.load.image('ground', 'assets/platform.png');
 	    game.load.image('star', 'assets/mob.png');
