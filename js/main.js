@@ -1,12 +1,13 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 var hp =5;
 function preload() {
-    game.load.image('sky', 'assets/sky.png');
-    game.load.image('ground', 'assets/platform.png');
-    game.load.image('star', 'assets/star.png');
+    game.load.image('sky', 'assets/background.png');
+    game.load.image('ground', 'assets/platforms.png');
+    game.load.image('star', 'assets/monster.png');
     game.load.image('diamond', 'assets/diamond.png');
     game.load.image('firstaid', 'assets/firstaid.png');
-    game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
+    game.load.image('candle', 'assets/stand.png');
+
 }
 
 var platforms;
@@ -19,8 +20,8 @@ function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //  A simple background for our game
-    var sky =game.add.sprite(0, 0, 'sky');
-   	sky.scale.setTo(10,2);
+    var sky =game.add.sprite(-100, 0, 'sky');
+   	sky.scale.setTo(1.5,0.5);
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = game.add.group();
@@ -32,7 +33,7 @@ function create() {
     var ground = platforms.create(0, game.world.height - 64, 'ground');
 
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-    ground.scale.setTo(10, 2);
+    ground.scale.setTo(3, 0.1);
 
     //  This stops it from falling away when you jump on it
     ground.body.immovable = true;
@@ -41,13 +42,16 @@ function create() {
     var ledge = platforms.create(400, 750, 'ground');
 
     ledge.body.immovable = true;
+    ledge.scale.setTo(0.1, 0.1);
 
-    ledge = platforms.create(-150, 700, 'ground');
+    ledge = platforms.create(0, 700, 'ground');
 
     ledge.body.immovable = true;
+    ledge.scale.setTo(0.1, 0.1);
 
     // The player and its settings
-    player = game.add.sprite(32, game.world.height - 150, 'dude');
+    player = game.add.sprite(32, game.world.height - 150, 'candle');
+    player.scale.setTo(0.05);
     game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
     //  We need to enable physics on the player
     game.physics.arcade.enable(player);
@@ -57,16 +61,23 @@ function create() {
     player.body.gravity.y = 300;
     player.body.collideWorldBounds = true;
 
-    //  Our two animations, walking left and right.
-    player.animations.add('left', [0, 1, 2, 3], 10, true);
-    player.animations.add('right', [5, 6, 7, 8], 10, true);
-
-    /*aELand=new EnemyLand1(game,"star");
-    game.add.existing(aELand);*/
+    //for (var i =0; i <20; i++){
+        console.log("a");
+        aELand=new EnemyLand1(game,"star");
+        game.add.existing(aELand);
+        aELand.x = 100 + 150;
+        aELand.scale.setTo(0.1);
+    //}
      aEFly=new EnemyFly1(game,"star");
     game.add.existing(aEFly);
-      /*aET=new EnemyTorrent(game,"star");
-    game.add.existing(aET);*/
+    aEFly.x=1000;
+    aEFly.y=700;
+    aEFly.scale.setTo(0.1)
+    aET=new EnemyTorrent(game,"star");
+    game.add.existing(aET);
+    aET.x=1000;
+    aET.y=800;
+    aET.scale.setTo(0.1)
 }
 
 function update() {
@@ -83,14 +94,14 @@ function update() {
         //  Move to the left
         player.body.velocity.x = -300;
 
-        player.animations.play('left');
+        //player.animations.play('left');
     }
     else if (cursors.right.isDown)
     {
         //  Move to the right
         player.body.velocity.x = 300;
 
-        player.animations.play('right');
+        //player.animations.play('right');
     }
     else
     {
