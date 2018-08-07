@@ -59,7 +59,7 @@ function create() {
         aELand.y = 800;
         aELand.scale.setTo(0.1);
     }
-     aEFly=new EnemyFly1(game,"star");
+     /*aEFly=new EnemyFly1(game,"star");
     game.add.existing(aEFly);
     aEFly.x=1000;
     aEFly.y=700;
@@ -70,7 +70,7 @@ function create() {
         aET.x=200+ 300*i;
         aET.y=800;
         aET.scale.setTo(0.1)
-    }
+    }*/
 }
 
 function update() {
@@ -84,14 +84,14 @@ function update() {
     if (cursors.left.isDown)
     {
         //  Move to the left
-        player.body.velocity.x = -300;
+        player.body.velocity.x = -200;
 
         //player.animations.play('left');
     }
     else if (cursors.right.isDown)
     {
         //  Move to the right
-        player.body.velocity.x = 300;
+        player.body.velocity.x = 200;
 
         //player.animations.play('right');
     }

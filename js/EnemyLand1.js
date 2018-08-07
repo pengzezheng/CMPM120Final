@@ -3,8 +3,7 @@ function EnemyLand1(game, key){
 	this.scale.setTo(0.5);
 	game.physics.enable(this);//enable physics
 	this.enableBody=true;
-	this.body.velocity.x = -50;
-	this.body.gravity.y=100;
+	//this.body.gravity.y=100;
 }
 
 function rush(enemyLand1, player){//kill enemy and do damage to player
@@ -18,8 +17,12 @@ EnemyLand1.prototype.constructor = EnemyLand1;
 
 EnemyLand1.prototype.update = function() {
 	game.physics.arcade.overlap(this, player, rush, null, this);
-	if (player.y >= 480){
+	if (player.y >= 750){
 		game.physics.arcade.moveToObject(this,player);
 	}
+	if(this.y >800 || this.y <790){
+		this.y=800;
+	}
+	game.world.wrap(this, 0, true);
 
 } 
