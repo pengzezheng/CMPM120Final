@@ -23,31 +23,21 @@ function create() {
     var sky =game.add.sprite(-100, 0, 'sky');
    	sky.scale.setTo(1.5,0.5);
 
-    //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = game.add.group();
 
-    //  We will enable physics for any object that is created in this group
     platforms.enableBody = true;
 
     // Here we create the ground.
     var ground = platforms.create(0, game.world.height - 64, 'ground');
 
-    //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
     ground.scale.setTo(3, 0.1);
-
-    //  This stops it from falling away when you jump on it
     ground.body.immovable = true;
 
-    //  Now let's create two ledges
-    var ledge = platforms.create(400, 750, 'ground');
-
+    for (var i =1; i <20; i++){
+    var ledge = platforms.create(400*i, 750, 'ground');
     ledge.body.immovable = true;
     ledge.scale.setTo(0.1, 0.1);
-
-    ledge = platforms.create(0, 700, 'ground');
-
-    ledge.body.immovable = true;
-    ledge.scale.setTo(0.1, 0.1);
+}
 
     // The player and its settings
     player = game.add.sprite(32, game.world.height - 150, 'candle');
@@ -61,30 +51,32 @@ function create() {
     player.body.gravity.y = 300;
     player.body.collideWorldBounds = true;
 
-    //for (var i =0; i <20; i++){
+    for (var i =0; i <20; i++){
         console.log("a");
         aELand=new EnemyLand1(game,"star");
         game.add.existing(aELand);
-        aELand.x = 100 + 150;
+        aELand.x = 500 + 150*i;
+        aELand.y = 800;
         aELand.scale.setTo(0.1);
-    //}
+    }
      aEFly=new EnemyFly1(game,"star");
     game.add.existing(aEFly);
     aEFly.x=1000;
     aEFly.y=700;
     aEFly.scale.setTo(0.1)
-    aET=new EnemyTorrent(game,"star");
-    game.add.existing(aET);
-    aET.x=1000;
-    aET.y=800;
-    aET.scale.setTo(0.1)
+    for (var i =0; i <10; i++){
+        aET=new EnemyTorrent(game,"star");
+        game.add.existing(aET);
+        aET.x=200+ 300*i;
+        aET.y=800;
+        aET.scale.setTo(0.1)
+    }
 }
 
 function update() {
 
     //  Collide the player and the stars with the platforms
     var hitPlatform = game.physics.arcade.collide(player, platforms);
-   // game.physics.arcade.collide(aELand, platforms);
     cursors = game.input.keyboard.createCursorKeys();
 
     player.body.velocity.x = 0;
@@ -117,7 +109,7 @@ function update() {
         player.body.velocity.y = -350;
     }
 
-    if (hp<4){
+    if (hp<0){
     	player.kill();
     }
 
