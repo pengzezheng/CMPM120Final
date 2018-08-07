@@ -1,4 +1,7 @@
 var GameState = function(game) {};
+var candles;
+var eLand={};
+var aELand;
 GameState.prototype = {
 	create: function() {
 		scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
@@ -21,11 +24,70 @@ GameState.prototype = {
 	    ground.scale.setTo(3, 0.1);
 	    ground.body.immovable = true;
 
-	    for (var i =1; i <20; i++){
+	   /* for (var i =1; i <20; i++){
 	    	var ledge = platforms.create(400*i, 750, 'ground');
 	    	ledge.body.immovable = true;
 	    	ledge.scale.setTo(0.1, 0.1);
-		}
+		}*/
+		var ledge = platforms.create(400,750,'ground');
+		ledge.scale.setTo(0.1, 0.1);
+		ledge.body.immovable = true;
+		var ledge = platforms.create(750,550,'ground');
+		ledge.scale.setTo(0.1, 0.1);
+		ledge.body.immovable = true;
+		var ledge = platforms.create(1050,750,'ground');
+		ledge.anchor.set(0.5);
+		ledge.scale.setTo(0.05, 0.1);
+		ledge.body.immovable = true;
+		var ledge = platforms.create(1300,800,'ground');
+		ledge.anchor.set(0.5);
+		ledge.scale.setTo(0.05, 0.1);
+		ledge.body.immovable = true;
+		var ledge = platforms.create(1500,600,'ground');
+		ledge.anchor.set(0.5);
+		ledge.scale.setTo(0.09, 0.1);
+		ledge.body.immovable = true;
+		var ledge = platforms.create(1700,400,'ground');
+		ledge.anchor.set(0.5);
+		ledge.scale.setTo(0.09, 0.1);
+		ledge.body.immovable = true;
+		var ledge = platforms.create(2000,600,'ground');
+		ledge.anchor.set(0.5);
+		ledge.scale.setTo(0.09, 0.1);
+		ledge.body.immovable = true;
+		var ledge = platforms.create(2200,550,'ground');
+		ledge.anchor.set(0.5);
+		ledge.scale.setTo(0.09, 0.1);
+		ledge.body.immovable = true;
+		var ledge = platforms.create(2500,400,'ground');
+		ledge.anchor.set(0.5);
+		ledge.scale.setTo(0.05, 0.1);
+		ledge.body.immovable = true;
+		var ledge = platforms.create(2800,500,'ground');
+		ledge.anchor.set(0.5);
+		ledge.scale.setTo(0.05, 0.1);
+		ledge.body.immovable = true;
+		var ledge = platforms.create(3100,400,'ground');
+		ledge.anchor.set(0.5);
+		ledge.scale.setTo(0.05, 0.1);
+		ledge.body.immovable = true;
+		var ledge = platforms.create(3350,550,'ground');
+		ledge.anchor.set(0.5);
+		ledge.scale.setTo(0.05, 0.1);
+		ledge.body.immovable = true;
+		var ledge = platforms.create(3650,750,'ground');
+		ledge.anchor.set(0.5);
+		ledge.scale.setTo(0.05, 0.1);
+		ledge.body.immovable = true;
+
+
+
+
+
+
+
+
+
 
 		// The player and its settings
 	    player = new Player(game,'player');
@@ -35,6 +97,15 @@ GameState.prototype = {
     	player.life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(630,50);
+    	candles = game.add.group();
+    	candles.enableBody = true;
+    	var candle = candles.create(3675,700,'player');
+    	candle.anchor.set(0.5);
+    	candle.scale.setTo(0.02,0.02);
+    	var startpoint = game.add.sprite(45,907,'player');
+    	startpoint.enableBody = true;
+    	startpoint.scale.set(0.02);
+
 
 	    // // The player and its settings
 	    // player = game.add.sprite(32, game.world.height - 150, 'candle');
@@ -47,15 +118,18 @@ GameState.prototype = {
 	    // player.body.bounce.y = 0.2;
 	    // player.body.gravity.y = 300;
 	    // player.body.collideWorldBounds = true;
-
+	    //aELand = game.add.group();
+	    //aELand.enableBody = true;
 	    for (var i =0; i <20; i++) {
 	        console.log("a");
-	        aELand=new EnemyLand1(game,"star");
+	        aELand =new EnemyLand1(game,'star');
+	        //eLand[i] = new EnemyLand1(game,'star',500+150*i,800);
 	        game.add.existing(aELand);
 	        aELand.x = 500 + 150*i;
 	        aELand.y = 800;
 	        aELand.scale.setTo(0.1);
 	    }
+
 	    // aEFly=new EnemyFly1(game,"star");
 	    // game.add.existing(aEFly);
 	    // aEFly.x=1000;
@@ -71,9 +145,33 @@ GameState.prototype = {
 	},
 	update: function() {
 		//  Collide the player and the stars with the platforms
-	   
+	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
+	   console.log(player.x,player.y);
 	    if (player.widthLife.width<0){
 	    	player.kill();
+	    	game.state.start('GameOverState');
 	    }
+	    game.physics.arcade.overlap(player,candles,reachCandle,null,this);
+	    /*aELand.forEachAlive(function(m){
+	    	var distance = this.game.math.distance(m.x,m.y,player.x,player.y);
+	    	if(distance<=50){
+				m.kill();
+				
+				
+				player.widthLife.width -= player.totalLife/4;
+
+				
+			//if the distance between any fish with the boy is more than 510, the fish would be killed
+			}
+	    },this);*/
 	}
 }
+function reachCandle(player,candle){
+	game.state.start('GameWinState');
+}
+/*function reachaELand(player,eLand){
+	eLand.kill();
+	player.kill();
+	
+	console.log('kill');
+}*/
