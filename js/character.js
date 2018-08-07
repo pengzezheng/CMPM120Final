@@ -2,14 +2,14 @@ var weapon;
 var fireButton;
 var bglife;
 function Player(game,key){
-	Phaser.Sprite.call(this,game,50,50,key,'stand');
+	Phaser.Sprite.call(this,game,80,908,key,'stand');
 	game.physics.enable(this);
 	this.enableBody = true;
 	this.body.velocity.x = 0;
 	this.scale.setTo(0.05,0.05);
 	this.body.collideWorldBounds = true;
 	this.anchor.setTo(0.5,0.5);
-	this.body.gravity.y=300;
+	this.body.gravity.y=1100;
 	this.animations.add('right',[1,2],10,true);
 	this.animations.add('left',[0,4],10,true);
 	//this.animations.add('up',[8],10,true);
@@ -17,7 +17,7 @@ function Player(game,key){
 	//this.animations.add('leftAttack',[7],10,true);
 	//give candleman a small range of light
 	//refer to the example: https://gamemechanicexplorer.com/#lighting-1
-	this.LIGHT_RADIUS = 400;
+	this.LIGHT_RADIUS = 300;
 	//create shadow texture
 	this.shadowTexture = this.game.add.bitmapData(this.game.world.width,this.game.world.height);
 	//create an object that will use the bitmap as texture
@@ -94,12 +94,12 @@ Player.prototype.update = function(){
 		
 		if(cursors.left.isDown){//if the player chooses to move to the left
 		//Move to the left
-			this.body.velocity.x=-150;
+			this.body.velocity.x=-300;
 			this.animations.play('left');
 		}
 		else if(cursors.right.isDown){//if the player chooses to move to the right
 		//Move to the right
-			this.body.velocity.x=150;
+			this.body.velocity.x=300;
 			this.animations.play('right');
 		}
 		
@@ -112,7 +112,7 @@ Player.prototype.update = function(){
 			this.frame=3;
 		}
 		if(cursors.up.isDown&&this.body.touching.down){
-			this.body.velocity.y=-350;
+			this.body.velocity.y=-680;
 			//this.animations.play('up');
 			//console.log('jump');
 		}

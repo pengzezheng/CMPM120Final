@@ -8,7 +8,8 @@ function EnemyLand1(game, key){
 
 function rush(enemyLand1, player){//kill enemy and do damage to player
 		enemyLand1.kill();
-		hp -=3;
+		player.kill();
+		game.state.start('GameOverState');
 		//bgm.play();//make sounds
 	}
 
