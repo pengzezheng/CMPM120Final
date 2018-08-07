@@ -1,5 +1,6 @@
 var weapon;
 var fireButton;
+var bglife;
 function Player(game,key){
 	Phaser.Sprite.call(this,game,50,50,key,'stand');
 	game.physics.enable(this);
@@ -31,7 +32,7 @@ function Player(game,key){
 	bmd.ctx.rect(0, 0, 200, 80);
 	bmd.ctx.fillStyle = '#00685e';
 	bmd.ctx.fill();
-	var bglife = this.game.add.sprite(630, 50, bmd);
+	bglife = this.game.add.sprite(630, 50, bmd);
     bglife.anchor.set(0.5);
     //add current health bar
     bmd = this.game.add.bitmapData(180, 30);
@@ -148,7 +149,7 @@ Player.prototype.updateShadowTexture = function(){
 }
 Player.prototype.cropLife = function(){
 	if(this.widthLife.width > 0){
-		this.game.add.tween(this.widthLife).to( { width: (this.widthLife.width - (this.totalLife /50)) }, 200, Phaser.Easing.Linear.None, true);
+		this.game.add.tween(this.widthLife).to( { width: (this.widthLife.width - (this.totalLife /100)) }, 200, Phaser.Easing.Linear.None, true);
 	}
 }
 	/*updateShadowTexture:function(){
