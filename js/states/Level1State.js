@@ -41,13 +41,13 @@ Level1State.prototype = {
 			// a new pillar is always generated right of the previous pillar.
 			xCoordinate += game.rnd.integerInRange(150, 220);
 			// a new pillar may be higher or lower than the previous pillar.
-			yCoordinate += game.rnd.integerInRange(-100, 75);
+			yCoordinate += game.rnd.integerInRange(-50, 25);
 			while(yCoordinate <= 300 || yCoordinate >= 650) {
 				if(yCoordinate <= 300) {
-					yCoordinate -= game.rnd.integerInRange(50, 100);
+					yCoordinate += game.rnd.integerInRange(100, 250);
 				}
 				else if (yCoordinate >= 650) {
-					yCoordinate += game.rnd.integerInRange(100, 250);
+					yCoordinate -= game.rnd.integerInRange(100, 250);
 				}
 			}
 		}
