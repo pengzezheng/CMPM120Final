@@ -28,9 +28,9 @@ Level1State.prototype = {
 			var pillar = platforms.create(xCoordinate,yCoordinate,'pillar');
 			pillar.scale.setTo(1, pillarSize);
 			pillar.body.immovable = true;
-			xCoordinate += 200;
+			xCoordinate += game.rnd.integerInRange(150, 250);
 			yCoordinate += game.rnd.integerInRange(-200, 200);
-			pillarSize = 0.25;
+			pillarSize = (game.rnd.integerInRange(5, 45) / 100);
 			while(yCoordinate <= 300 || yCoordinate >= 650) {
 				if(yCoordinate <= 300) {
 					yCoordinate += game.rnd.integerInRange(100, 250);
