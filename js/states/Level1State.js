@@ -22,7 +22,7 @@ Level1State.prototype = {
 	    ground.body.immovable = true;
 
 		var xCoordinate = 200;
-		var yCoordinate = 730
+		var yCoordinate = 745
 		var pillarSize = 0.10;
 		for(var i = 0; i < 17; i++) {
 			var pillar = platforms.create(xCoordinate,yCoordinate,'pillar');
@@ -30,13 +30,13 @@ Level1State.prototype = {
 			pillar.body.immovable = true;
 			pillarSize = (game.rnd.integerInRange(5, 45) / 100);
 			if(i == 5 || i == 8 || i == 12 || i == 16) {
-				var pillar = platforms.create(xCoordinate + 75, yCoordinate + 150,'pillar');
-				pillar.scale.setTo(1, pillarSize);
-				pillar.body.immovable = true;
-				pillarSize = (game.rnd.integerInRange(5, 45) / 100);
+				var ledge = platforms.create(xCoordinate + 75, yCoordinate + 150,'ground');
+				ledge.scale.setTo(0.1, 0.1);
+				ledge.body.immovable = true;
+				//pillarSize = (game.rnd.integerInRange(5, 45) / 100);
 			}
 			xCoordinate += game.rnd.integerInRange(150, 220);
-			yCoordinate += game.rnd.integerInRange(-200, 100);
+			yCoordinate += game.rnd.integerInRange(-50, 25);
 			while(yCoordinate <= 300 || yCoordinate >= 650) {
 				if(yCoordinate <= 300) {
 					yCoordinate += game.rnd.integerInRange(100, 250);
