@@ -1,8 +1,5 @@
-var GameState = function(game) {};
-var candles;
-var eLand={};
-var aELand;
-GameState.prototype = {
+var Level1State = function(game) {};
+Level1State.prototype = {
 	create: function() {
 		scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 		game.world.setBounds(0, 0, 4000, 1000);
@@ -24,61 +21,23 @@ GameState.prototype = {
 	    ground.scale.setTo(3, 0.1);
 	    ground.body.immovable = true;
 
-	   /* for (var i =1; i <20; i++){
-	    	var ledge = platforms.create(400*i, 750, 'ground');
-	    	ledge.body.immovable = true;
-	    	ledge.scale.setTo(0.1, 0.1);
-		}*/
-		var ledge = platforms.create(400,750,'ground');
-		ledge.scale.setTo(0.1, 0.1);
-		ledge.body.immovable = true;
-		var ledge = platforms.create(750,550,'ground');
-		ledge.scale.setTo(0.1, 0.1);
-		ledge.body.immovable = true;
-		var ledge = platforms.create(1050,750,'ground');
-		ledge.anchor.set(0.5);
-		ledge.scale.setTo(0.05, 0.1);
-		ledge.body.immovable = true;
-		var ledge = platforms.create(1300,800,'ground');
-		ledge.anchor.set(0.5);
-		ledge.scale.setTo(0.05, 0.1);
-		ledge.body.immovable = true;
-		var ledge = platforms.create(1500,600,'ground');
-		ledge.anchor.set(0.5);
-		ledge.scale.setTo(0.09, 0.1);
-		ledge.body.immovable = true;
-		var ledge = platforms.create(1700,400,'ground');
-		ledge.anchor.set(0.5);
-		ledge.scale.setTo(0.09, 0.1);
-		ledge.body.immovable = true;
-		var ledge = platforms.create(2000,600,'ground');
-		ledge.anchor.set(0.5);
-		ledge.scale.setTo(0.09, 0.1);
-		ledge.body.immovable = true;
-		var ledge = platforms.create(2200,550,'ground');
-		ledge.anchor.set(0.5);
-		ledge.scale.setTo(0.09, 0.1);
-		ledge.body.immovable = true;
-		var ledge = platforms.create(2500,400,'ground');
-		ledge.anchor.set(0.5);
-		ledge.scale.setTo(0.05, 0.1);
-		ledge.body.immovable = true;
-		var ledge = platforms.create(2800,500,'ground');
-		ledge.anchor.set(0.5);
-		ledge.scale.setTo(0.05, 0.1);
-		ledge.body.immovable = true;
-		var ledge = platforms.create(3100,400,'ground');
-		ledge.anchor.set(0.5);
-		ledge.scale.setTo(0.05, 0.1);
-		ledge.body.immovable = true;
-		var ledge = platforms.create(3350,550,'ground');
-		ledge.anchor.set(0.5);
-		ledge.scale.setTo(0.05, 0.1);
-		ledge.body.immovable = true;
-		var ledge = platforms.create(3650,750,'ground');
-		ledge.anchor.set(0.5);
-		ledge.scale.setTo(0.05, 0.1);
-		ledge.body.immovable = true;
+		var xCoordinate = 200;
+		var yCoordinate = 750;
+		for (var i = 0; i < 17; i++) {
+			var pillar = platforms.create(xCoordinate,yCoordinate,'pillar');
+			//pillar.scale.setTo(0.1, 0.1);
+			pillar.body.immovable = true;
+			xCoordinate += 200;
+			yCoordinate += game.rnd.integerInRange(-200, 200);
+			while(yCoordinate <= 300 || yCoordinate >= 750) {
+				if(yCoordinate <= 300) {
+					yCoordinate += game.rnd.integerInRange(100, 250);
+				}
+				else if (yCoordinate >= 750) {
+					yCoordinate -= game.rnd.integerInRange(100, 250);
+				}
+			}
+		}
 
 
 
@@ -151,7 +110,7 @@ GameState.prototype = {
 	    	player.kill();
 	    	game.state.start('GameOverState');
 	    }
-	    game.physics.arcade.overlap(player,candles,reachCandle,null,this);
+	    game.physics.arcade.overlap(player,candles,reachCandle1,null,this);
 	    /*aELand.forEachAlive(function(m){
 	    	var distance = this.game.math.distance(m.x,m.y,player.x,player.y);
 	    	if(distance<=50){
@@ -166,12 +125,6 @@ GameState.prototype = {
 	    },this);*/
 	}
 }
-function reachCandle(player,candle){
-	game.state.start("Level1State");
+function reachCandle1(player,candle){
+	game.state.start("GameWinState");
 }
-/*function reachaELand(player,eLand){
-	eLand.kill();
-	player.kill();
-	
-	console.log('kill');
-}*/
