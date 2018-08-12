@@ -21,22 +21,33 @@ Level1State.prototype = {
 	    ground.scale.setTo(3, 0.1);
 	    ground.body.immovable = true;
 
+		// Fixed starting x and y coordinates for the pillars
 		var xCoordinate = 200;
-		var yCoordinate = 730
+		var yCoordinate = 745
 		var pillarSize = 0.10;
-		for (var i = 0; i < 17; i++) {
+		// Generates 17 pillars and 4 safety clouds
+		for(var i = 0; i < 17; i++) {
 			var pillar = platforms.create(xCoordinate,yCoordinate,'pillar');
 			pillar.scale.setTo(1, pillarSize);
 			pillar.body.immovable = true;
-			xCoordinate += game.rnd.integerInRange(150, 225);
-			yCoordinate += game.rnd.integerInRange(-200, 200);
 			pillarSize = (game.rnd.integerInRange(5, 45) / 100);
+			if(i == 5 || i == 8 || i == 12 || i == 16) {
+				var ledge = platforms.create(xCoordinate + 75, yCoordinate + 150,'ground');
+				ledge.scale.setTo(0.1, 0.1);
+				ledge.body.immovable = true;
+				//pillarSize = (game.rnd.integerInRange(5, 45) / 100);
+			}
+			// adds a random x and y integer from the previous pillar.
+			// a new pillar is always generated right of the previous pillar.
+			xCoordinate += game.rnd.integerInRange(150, 220);
+			// a new pillar may be higher or lower than the previous pillar.
+			yCoordinate += game.rnd.integerInRange(-100, 75);
 			while(yCoordinate <= 300 || yCoordinate >= 650) {
 				if(yCoordinate <= 300) {
-					yCoordinate += game.rnd.integerInRange(100, 250);
+					yCoordinate -= game.rnd.integerInRange(50, 100);
 				}
 				else if (yCoordinate >= 650) {
-					yCoordinate -= game.rnd.integerInRange(100, 250);
+					yCoordinate += game.rnd.integerInRange(100, 250);
 				}
 			}
 		}
