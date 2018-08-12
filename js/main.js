@@ -9,6 +9,7 @@ window.onload = function() {
     game.state.add("GameState", GameState);
     game.state.add("GameOverState", GameOverState);
     game.state.add("GameWinState", GameWinState);
+    game.state.add("Level1State", Level1State);
     //game.state.add("GameOverState", GameOverState);
     game.state.start("LoadingState");
 }
