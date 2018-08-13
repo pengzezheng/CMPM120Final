@@ -2,7 +2,6 @@ var hit = 0;
 var Level1State = function(game) {};
 Level1State.prototype = {
 	create: function() {
-		scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 		game.world.setBounds(0, 0, 4000, 1000);
 		game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 		// game.camera(800,600);
@@ -53,9 +52,13 @@ Level1State.prototype = {
 				}
 			}
 		}
-
+		pillar = platforms.create(0,300,'pillar');
+		pillar.scale.setTo(1, pillarSize);
+		pillar.body.immovable = true;
 		// The player and its settings
 	    player = new Player(game,'player');
+	    player.x=0;
+	    player.y=250;
     	game.add.existing(player);
     	game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
     	life.fixedToCamera = true;
@@ -120,10 +123,14 @@ Level1State.prototype = {
 	},
 	update: function() {
 		//  Collide the player and the stars with the platforms
+
 	   game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
 	   console.log(player.x,player.y);
 	   console.log(hit);
 	    if (widthLife.width<0){
+
+	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
+	   
 	    	player.kill();
 	    	game.state.start('GameOverState');
 	    }
