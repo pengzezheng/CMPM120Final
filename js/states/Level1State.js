@@ -96,7 +96,7 @@ Level1State.prototype = {
 	        game.add.existing(aELand);
 	        aELand.x = 500 + 150*i;
 	        aELand.y = 800;
-	        aELand.scale.setTo(0.1);
+	        aELand.scale.setTo(0.05);
 	    }
 
 	    for (var i =0; i <10; i++) {
@@ -125,11 +125,15 @@ Level1State.prototype = {
 	update: function() {
 		//  Collide the player and the stars with the platforms
 
+
 	   //game.physics.arcade.overlap(weapon.bullets,aELand,reachaELand,null,this);
 	   console.log(player.x,player.y);
 	   console.log(hit);
 	   life.updateCrop();
 	    if (widthLife.width<=0){
+
+	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
+	   
 
 	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
 	   		player.x = 0;
