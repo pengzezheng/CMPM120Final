@@ -8,9 +8,12 @@ LoadingState.prototype = {
 	    game.load.image('diamond', 'assets/diamond.png');
 	    game.load.image('firstaid', 'assets/firstaid.png');
 	    game.load.image('candle', 'assets/stand.png');
-	    game.load.audio('bgm','audios/Enraged_Zombies-Mike_Koenig-541225828.wav');
+
+
+	    game.load.image('pillar', 'assets/pillar.png');
+
 	},
 	create: function() {
-		game.state.start("TitleState")
+		game.state.start("Level1State")
 	}
 };

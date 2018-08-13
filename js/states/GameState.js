@@ -2,11 +2,11 @@ var GameState = function(game) {};
 var candles;
 var eLand={};
 var aELand;
-var bglife;
-var widthLife;
-var totalLife;
-var life;
-var count = 0;
+//var bglife;
+//var widthLife;
+//var totalLife;
+//var life;
+//var count = 0;
 GameState.prototype = {
 	create: function() {
 		scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
@@ -16,7 +16,7 @@ GameState.prototype = {
 	    game.physics.startSystem(Phaser.Physics.ARCADE);
 
 	    //  A simple background for our game
-	    var sky =game.add.sprite(-100, 0, 'sky');
+	    var sky = game.add.sprite(-100, 0, 'sky');
 	   	sky.scale.setTo(1.5,0.5);
 
 	    platforms = game.add.group();
@@ -107,7 +107,7 @@ GameState.prototype = {
 		bglife = game.add.sprite(630, 50, bmd);
     	bglife.anchor.set(0.5);
     	//add current health bar
-    	bmd = game.add.bitmapData(180, 30);
+    	/*bmd = game.add.bitmapData(180, 30);
     	bmd.ctx.beginPath();
 		bmd.ctx.rect(0, 0, 200, 80);
 		bmd.ctx.fillStyle = '#00f910';
@@ -123,7 +123,7 @@ GameState.prototype = {
     	life.fixedToCamera = true;
     	life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
     	bglife.fixedToCamera = true;
-    	bglife.cameraOffset.setTo(630,50);
+    	bglife.cameraOffset.setTo(630,50);*/
     	candles = game.add.group();
     	candles.enableBody = true;
     	var candle = candles.create(3675,700,'player');
@@ -156,9 +156,9 @@ GameState.prototype = {
 	        aELand.y = 800;
 	        aELand.scale.setTo(0.1);
 	    }
-	    bgmusic = game.sound.add('bgm');
+	    /*bgmusic = game.sound.add('bgm');
 		bgmusic.loop = true;
-		bgmusic.play();
+		bgmusic.play();*/
 
 		/*var bmd = this.game.add.bitmapData(200, 40);
 		bmd.ctx.beginPath();
@@ -196,9 +196,9 @@ GameState.prototype = {
 	},
 	update: function() {
 		//  Collide the player and the stars with the platforms
-	   game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
+	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
 	   console.log(player.x,player.y);
-	    if (widthLife.width<0){
+	    if (this.widthLife.width<0){
 	    	player.kill();
 	    	game.state.start('GameOverState');
 	    }
@@ -219,19 +219,19 @@ GameState.prototype = {
 	}
 }
 function reachCandle(player,candle){
-	game.state.start('GameWinState');
+	game.state.start("Level1State");
 }
-function cropLife(){
+/*function cropLife(){
 	if(widthLife.width > 0 && count == 0){
 		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /100)) }, 200, Phaser.Easing.Linear.None, true);
 	}
 	
-}
-function reachaELand(player,aELand){
+}*/
+/*function reachaELand(player,aELand){
 	count = 1;
 	aELand.kill();
 	widthLife.width = widthLife.width - totalLife/4;
 	count = 0;
 	
 	console.log('kill');
-}
+}*/

@@ -27,7 +27,7 @@ function Player(game,key){
 	//create health bar
 	//refer to https://codepen.io/jdnichollsc/pen/oXXRMz
 	//add total health bar
-	/*var bmd = this.game.add.bitmapData(200, 40);
+	var bmd = this.game.add.bitmapData(200, 40);
 	bmd.ctx.beginPath();
 	bmd.ctx.rect(0, 0, 200, 80);
 	bmd.ctx.fillStyle = '#00685e';
@@ -46,7 +46,9 @@ function Player(game,key){
     this.life.anchor.y = 0.5;
     this.life.cropEnabled = true;
     this.life.crop(this.widthLife);
-    this.game.time.events.loop(0, this.cropLife, this);*/
+
+    this.game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
+
     weapon = game.add.weapon(30,'fire');
     weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
     weapon.bulletSpeed = 600;
@@ -119,7 +121,7 @@ Player.prototype.update = function(){
 		
 		//make light works
 		this.updateShadowTexture();
-		//this.life.updateCrop();
+		this.life.updateCrop();
 	   if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)&&game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
 	   		weapon.bulletSpeed = -600;
 			weapon.fire();
@@ -147,11 +149,11 @@ Player.prototype.updateShadowTexture = function(){
 		//tell the engine it should update the texture
 		this.shadowTexture.dirty = true;
 }
-/*Player.prototype.cropLife = function(){
+Player.prototype.cropLife = function(){
 	if(this.widthLife.width > 0){
 		this.game.add.tween(this.widthLife).to( { width: (this.widthLife.width - (this.totalLife /100)) }, 200, Phaser.Easing.Linear.None, true);
 	}
-}*/
+}
 	/*updateShadowTexture:function(){
 		//create dark texture
 		this.shadowTexture.context.fillStyle = 'rgb(100,100,100)';
