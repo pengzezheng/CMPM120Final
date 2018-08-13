@@ -4,17 +4,21 @@ function EnemyFly1(game, key){
 	game.physics.enable(this);//enable physics
 	this.enableBody=true;
 	this.body.velocity.x = -50;
-	count=0;
+	reloading=false;
 }
 
 EnemyFly1.prototype = Object.create(Phaser.Sprite.prototype);// make prototype
 EnemyFly1.prototype.constructor = EnemyFly1;
 
 EnemyFly1.prototype.update = function() {
-	if(this.body.x>=player.x +100 &&this.body.x<=player.x +102 &&count==0){
+	if(this.body.x>=player.x +100 &&this.body.x<=player.x +102 &&reloading==false){
 		bomb=new Bomb(game, "diamond");
 		bomb.reset(this.body.x,this.body.y);
 		game.add.existing(bomb);
-		count++;
+		reloading=true;
+	}
+
+	if (this.body.x <= player.x -100 & this.body.x>=player.x-102&&reloading==true){
+		reloading=false;
 	}
 }

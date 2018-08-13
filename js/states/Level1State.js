@@ -93,6 +93,16 @@ Level1State.prototype = {
 	        aELand.scale.setTo(0.1);
 	    }
 
+	    for (var i =0; i <10; i++) {
+	        console.log("a");
+	        aEFly =new EnemyFly1(game,'star');
+	        //eLand[i] = new EnemyLand1(game,'star',500+150*i,800);
+	        game.add.existing(aEFly);
+	        aEFly.x = 500 + 300*i;
+	        aEFly.y = 100;
+	        aEFly.scale.setTo(0.1);
+	    }
+
 	    // aEFly=new EnemyFly1(game,"star");
 	    // game.add.existing(aEFly);
 	    // aEFly.x=1000;
