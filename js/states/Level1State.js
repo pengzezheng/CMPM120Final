@@ -1,8 +1,10 @@
+var hit = 0;
 var Level1State = function(game) {};
 Level1State.prototype = {
 	create: function() {
 		scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 		game.world.setBounds(0, 0, 4000, 1000);
+		game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 		// game.camera(800,600);
 	    //  We're going to be using physics, so enable the Arcade Physics system
 	    game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -56,8 +58,8 @@ Level1State.prototype = {
 	    player = new Player(game,'player');
     	game.add.existing(player);
     	game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
-    	player.life.fixedToCamera = true;
-    	player.life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
+    	life.fixedToCamera = true;
+    	life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(630,50);
     	candles = game.add.group();
@@ -118,9 +120,10 @@ Level1State.prototype = {
 	},
 	update: function() {
 		//  Collide the player and the stars with the platforms
-	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
+	   game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
 	   console.log(player.x,player.y);
-	    if (player.widthLife.width<0){
+	   console.log(hit);
+	    if (widthLife.width<0){
 	    	player.kill();
 	    	game.state.start('GameOverState');
 	    }
@@ -139,6 +142,19 @@ Level1State.prototype = {
 	    },this);*/
 	}
 }
+Level1State.prototype.cropLife = function(){
+	if(widthLife.width > 0&&hit == 0){
+		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /100)) }, 200, Phaser.Easing.Linear.None, true);
+	}
+}
 function reachCandle1(player,candle){
 	game.state.start("GameWinState");
+}
+function reachaELand(player,aELand){
+	hit = 1;
+	aELand.kill();
+	widthLife.width = widthLife.width - totalLife/4;
+	hit = 0;
+	
+	console.log('kill');
 }

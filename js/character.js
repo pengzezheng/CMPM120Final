@@ -1,6 +1,11 @@
 var weapon;
 var fireButton;
-//var bglife;
+var bglife;
+var widthLife;
+var totalLife;
+var life;
+//var count = 0;
+var bmd;
 function Player(game,key){
 	Phaser.Sprite.call(this,game,80,908,key,'stand');
 	game.physics.enable(this);
@@ -27,33 +32,34 @@ function Player(game,key){
 	//create health bar
 	//refer to https://codepen.io/jdnichollsc/pen/oXXRMz
 	//add total health bar
-	var bmd = this.game.add.bitmapData(200, 40);
+	bmd = game.add.bitmapData(200, 40);
 	bmd.ctx.beginPath();
 	bmd.ctx.rect(0, 0, 200, 80);
 	bmd.ctx.fillStyle = '#00685e';
 	bmd.ctx.fill();
-	bglife = this.game.add.sprite(630, 50, bmd);
+	bglife = game.add.sprite(630, 50, bmd);
     bglife.anchor.set(0.5);
     //add current health bar
-    bmd = this.game.add.bitmapData(180, 30);
+    bmd = game.add.bitmapData(180, 30);
     bmd.ctx.beginPath();
 	bmd.ctx.rect(0, 0, 200, 80);
 	bmd.ctx.fillStyle = '#00f910';
 	bmd.ctx.fill();
-	this.widthLife = new Phaser.Rectangle(0, 0, bmd.width, bmd.height);
-    this.totalLife = bmd.width;
-    this.life = this.game.add.sprite(630- bglife.width/2 + 10, 50, bmd);
-    this.life.anchor.y = 0.5;
-    this.life.cropEnabled = true;
-    this.life.crop(this.widthLife);
+	widthLife = new Phaser.Rectangle(0, 0, bmd.width, bmd.height);
+    totalLife = bmd.width;
+    life = game.add.sprite(630- bglife.width/2 + 10, 50, bmd);
+    life.anchor.y = 0.5;
+    life.cropEnabled = true;
+    life.crop(widthLife);
 
-    this.game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
+    //game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 
     weapon = game.add.weapon(30,'fire');
     weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
     weapon.bulletSpeed = 600;
     weapon.fireRate = 100;
     weapon.trackSprite(this,0,0,true);
+    
     
 	
 }
@@ -121,7 +127,7 @@ Player.prototype.update = function(){
 		
 		//make light works
 		this.updateShadowTexture();
-		this.life.updateCrop();
+		life.updateCrop();
 	   if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)&&game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
 	   		weapon.bulletSpeed = -600;
 			weapon.fire();
@@ -149,11 +155,11 @@ Player.prototype.updateShadowTexture = function(){
 		//tell the engine it should update the texture
 		this.shadowTexture.dirty = true;
 }
-Player.prototype.cropLife = function(){
-	if(this.widthLife.width > 0){
-		this.game.add.tween(this.widthLife).to( { width: (this.widthLife.width - (this.totalLife /100)) }, 200, Phaser.Easing.Linear.None, true);
+/*Player.prototype.cropLife = function(){
+	if(widthLife.width > 0&&count == 0){
+		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /100)) }, 200, Phaser.Easing.Linear.None, true);
 	}
-}
+}*/
 	/*updateShadowTexture:function(){
 		//create dark texture
 		this.shadowTexture.context.fillStyle = 'rgb(100,100,100)';

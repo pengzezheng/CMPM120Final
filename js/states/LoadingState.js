@@ -14,6 +14,6 @@ LoadingState.prototype = {
 
 	},
 	create: function() {
-		game.state.start("Level1State")
+		game.state.start("TitleState");
 	}
 };
