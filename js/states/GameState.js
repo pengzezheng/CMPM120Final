@@ -2,6 +2,11 @@ var GameState = function(game) {};
 var candles;
 var eLand={};
 var aELand;
+var bglife;
+var widthLife;
+var totalLife;
+var life;
+var count = 0;
 GameState.prototype = {
 	create: function() {
 		scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
@@ -90,11 +95,33 @@ GameState.prototype = {
 
 
 		// The player and its settings
+
 	    player = new Player(game,'player');
     	game.add.existing(player);
     	game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
-    	player.life.fixedToCamera = true;
-    	player.life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
+    	var bmd = game.add.bitmapData(200, 40);
+		bmd.ctx.beginPath();
+		bmd.ctx.rect(0, 0, 200, 80);
+		bmd.ctx.fillStyle = '#00685e';
+		bmd.ctx.fill();
+		bglife = game.add.sprite(630, 50, bmd);
+    	bglife.anchor.set(0.5);
+    	//add current health bar
+    	bmd = game.add.bitmapData(180, 30);
+    	bmd.ctx.beginPath();
+		bmd.ctx.rect(0, 0, 200, 80);
+		bmd.ctx.fillStyle = '#00f910';
+		bmd.ctx.fill();
+		widthLife = new Phaser.Rectangle(0, 0, bmd.width, bmd.height);
+    	
+    	totalLife = bmd.width;
+    	life = game.add.sprite(630- bglife.width/2 + 10, 50, bmd);
+    	life.anchor.y = 0.5;
+    	life.cropEnabled = true;
+    	life.crop(widthLife);
+    	game.time.events.loop(Phaser.Timer.SECOND, cropLife, this);
+    	life.fixedToCamera = true;
+    	life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(630,50);
     	candles = game.add.group();
@@ -129,6 +156,30 @@ GameState.prototype = {
 	        aELand.y = 800;
 	        aELand.scale.setTo(0.1);
 	    }
+	    bgmusic = game.sound.add('bgm');
+		bgmusic.loop = true;
+		bgmusic.play();
+
+		/*var bmd = this.game.add.bitmapData(200, 40);
+		bmd.ctx.beginPath();
+		bmd.ctx.rect(0, 0, 200, 80);
+		bmd.ctx.fillStyle = '#00685e';
+		bmd.ctx.fill();
+		bglife = this.game.add.sprite(630, 50, bmd);
+    	bglife.anchor.set(0.5);
+    	//add current health bar
+    	bmd = this.game.add.bitmapData(180, 30);
+    	bmd.ctx.beginPath();
+		bmd.ctx.rect(0, 0, 200, 80);
+		bmd.ctx.fillStyle = '#00f910';
+		bmd.ctx.fill();
+		this.widthLife = new Phaser.Rectangle(0, 0, bmd.width, bmd.height);
+    	this.totalLife = bmd.width;
+    	this.life = this.game.add.sprite(630- bglife.width/2 + 10, 50, bmd);
+    	this.life.anchor.y = 0.5;
+    	this.life.cropEnabled = true;
+    	this.life.crop(this.widthLife);
+    	this.game.time.events.loop(0, this.cropLife, this);*/
 
 	    // aEFly=new EnemyFly1(game,"star");
 	    // game.add.existing(aEFly);
@@ -145,13 +196,14 @@ GameState.prototype = {
 	},
 	update: function() {
 		//  Collide the player and the stars with the platforms
-	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
+	   game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
 	   console.log(player.x,player.y);
-	    if (player.widthLife.width<0){
+	    if (widthLife.width<0){
 	    	player.kill();
 	    	game.state.start('GameOverState');
 	    }
 	    game.physics.arcade.overlap(player,candles,reachCandle,null,this);
+	    life.updateCrop();
 	    /*aELand.forEachAlive(function(m){
 	    	var distance = this.game.math.distance(m.x,m.y,player.x,player.y);
 	    	if(distance<=50){
@@ -169,9 +221,17 @@ GameState.prototype = {
 function reachCandle(player,candle){
 	game.state.start('GameWinState');
 }
-/*function reachaELand(player,eLand){
-	eLand.kill();
-	player.kill();
+function cropLife(){
+	if(widthLife.width > 0 && count == 0){
+		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /100)) }, 200, Phaser.Easing.Linear.None, true);
+	}
+	
+}
+function reachaELand(player,aELand){
+	count = 1;
+	aELand.kill();
+	widthLife.width = widthLife.width - totalLife/4;
+	count = 0;
 	
 	console.log('kill');
-}*/
+}
