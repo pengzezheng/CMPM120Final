@@ -20,7 +20,7 @@ Bomb.prototype.constructor = Bomb;
 Bomb.prototype.update = function() {
 	game.physics.arcade.collide(this,platforms);
 	if(count <2){
-	 	game.time.events.add(Phaser.Timer.SECOND * 5, explo, this);
+	 	game.time.events.add(Phaser.Timer.SECOND * 4, explo, this);
 	 	count++;
 	}
 }	
