@@ -5,6 +5,7 @@ function EnemyFly1(game, key){
 	this.enableBody=true;
 	this.body.velocity.x = -50;
 	reloading=false;
+	this.body.setSize(100,50,50,25);
 }
 
 EnemyFly1.prototype = Object.create(Phaser.Sprite.prototype);// make prototype
@@ -18,7 +19,7 @@ EnemyFly1.prototype.update = function() {
 		reloading=true;
 	}
 
-	if (this.body.x <= player.x -100 & this.body.x>=player.x-102&&reloading==true){
+	if (this.body.x <= player.x -100 && this.body.x>=player.x-102&&reloading==true){
 		reloading=false;
 	}
 }
