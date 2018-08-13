@@ -52,15 +52,6 @@ Level1State.prototype = {
 			}
 		}
 
-
-
-
-
-
-
-
-
-
 		// The player and its settings
 	    player = new Player(game,'player');
     	game.add.existing(player);
