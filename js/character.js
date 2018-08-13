@@ -46,7 +46,7 @@ function Player(game,key){
     this.life.anchor.y = 0.5;
     this.life.cropEnabled = true;
     this.life.crop(this.widthLife);
-    this.game.time.events.loop(0, this.cropLife, this);
+    this.game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
     weapon = game.add.weapon(30,'fire');
     weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
     weapon.bulletSpeed = 600;
