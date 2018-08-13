@@ -9,7 +9,7 @@ LoadingState.prototype = {
 	    game.load.image('firstaid', 'assets/firstaid.png');
 	    game.load.image('candle', 'assets/stand.png');
 
-
+	    game.load.image('fire','assets/fire.png');
 	    game.load.image('pillar', 'assets/pillar.png');
 
 	},

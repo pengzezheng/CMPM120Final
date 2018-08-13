@@ -14,7 +14,7 @@ function Player(game,key){
 	this.scale.setTo(0.05,0.05);
 	this.body.collideWorldBounds = true;
 	this.anchor.setTo(0.5,0.5);
-	this.body.gravity.y=1100;
+	this.body.gravity.y=2000;
 	this.animations.add('right',[1,2],10,true);
 	this.animations.add('left',[0,4],10,true);
 	//this.animations.add('up',[8],10,true);
@@ -22,7 +22,7 @@ function Player(game,key){
 	//this.animations.add('leftAttack',[7],10,true);
 	//give candleman a small range of light
 	//refer to the example: https://gamemechanicexplorer.com/#lighting-1
-	this.LIGHT_RADIUS = 300;
+	this.LIGHT_RADIUS = 200;
 	//create shadow texture
 	this.shadowTexture = this.game.add.bitmapData(this.game.world.width,this.game.world.height);
 	//create an object that will use the bitmap as texture
@@ -120,7 +120,7 @@ Player.prototype.update = function(){
 			this.frame=3;
 		}
 		if(cursors.up.isDown&&this.body.touching.down){
-			this.body.velocity.y=-680;
+			this.body.velocity.y=-900;
 			//this.animations.play('up');
 			//console.log('jump');
 		}
@@ -131,12 +131,14 @@ Player.prototype.update = function(){
 	   if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)&&game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
 	   		weapon.bulletSpeed = -600;
 			weapon.fire();
+			widthLife.width -= totalLife/10;
 		
 		
 		}
 		else if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)&&game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
 	   		weapon.bulletSpeed =600;
 			weapon.fire();
+			widthLife.width -= totalLife/10;
 		
 		
 		}

@@ -3,7 +3,8 @@ var Level1State = function(game) {};
 Level1State.prototype = {
 	create: function() {
 		game.world.setBounds(0, 0, 4000, 1000);
-		game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
+
+		game.time.events.loop(2000, this.cropLife, this);
 		// game.camera(800,600);
 	    //  We're going to be using physics, so enable the Arcade Physics system
 	    game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -124,15 +125,18 @@ Level1State.prototype = {
 	update: function() {
 		//  Collide the player and the stars with the platforms
 
-	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
+	   //game.physics.arcade.overlap(weapon.bullets,aELand,reachaELand,null,this);
 	   console.log(player.x,player.y);
 	   console.log(hit);
-	    if (widthLife.width<0){
+	   life.updateCrop();
+	    if (widthLife.width<=0){
 
 	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
-	   
-	    	player.kill();
-	    	game.state.start('GameOverState');
+	   		player.x = 0;
+	   		player.y = 250;
+	   		widthLife.width = totalLife;
+	    	//player.kill();
+	    	//game.state.start('GameOverState');
 	    }
 	    game.physics.arcade.overlap(player,candles,reachCandle1,null,this);
 	    /*aELand.forEachAlive(function(m){
@@ -150,8 +154,8 @@ Level1State.prototype = {
 	}
 }
 Level1State.prototype.cropLife = function(){
-	if(widthLife.width > 0&&hit == 0){
-		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /100)) }, 200, Phaser.Easing.Linear.None, true);
+	if(widthLife.width > 0 &&hit == 0){
+		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /30)) },0.1, Phaser.Easing.Linear.None, true);
 	}
 }
 function reachCandle1(player,candle){

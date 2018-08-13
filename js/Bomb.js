@@ -2,7 +2,7 @@ function Bomb(game, key){
 	Phaser.Sprite.call(this, game, 400, 85, key);// call phaser sprite
 	game.physics.enable(this, Phaser.Physics.ARCADE);//enable physics
 	this.enableBody=true;
-	this.body.gravity.y=200;
+	this.body.gravity.y=600;
 	count=0;
 }
 
@@ -20,7 +20,7 @@ Bomb.prototype.constructor = Bomb;
 Bomb.prototype.update = function() {
 	game.physics.arcade.collide(this,platforms);
 	if(count <2){
-	 	game.time.events.add(Phaser.Timer.SECOND * 5, explo, this);
+	 	game.time.events.add(Phaser.Timer.SECOND * 2, explo, this);
 	 	count++;
 	}
 }	
