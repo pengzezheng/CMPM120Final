@@ -23,7 +23,7 @@ Level1State.prototype = {
 
 		// Fixed starting x and y coordinates for the pillars
 		var xCoordinate = 200;
-		var yCoordinate = 745
+		var yCoordinate = 750
 		var pillarSize = 0.10;
 		// Generates 17 pillars and 4 safety clouds
 		for(var i = 0; i < 17; i++) {
@@ -41,12 +41,12 @@ Level1State.prototype = {
 			// a new pillar is always generated right of the previous pillar.
 			xCoordinate += game.rnd.integerInRange(150, 220);
 			// a new pillar may be higher or lower than the previous pillar.
-			yCoordinate += game.rnd.integerInRange(-50, 25);
-			while(yCoordinate <= 300 || yCoordinate >= 650) {
+			yCoordinate += game.rnd.integerInRange(-150, 50);
+			while(yCoordinate <= 300 || yCoordinate > 750) {
 				if(yCoordinate <= 300) {
 					yCoordinate += game.rnd.integerInRange(100, 250);
 				}
-				else if (yCoordinate >= 650) {
+				else if (yCoordinate > 750) {
 					yCoordinate -= game.rnd.integerInRange(100, 250);
 				}
 			}
