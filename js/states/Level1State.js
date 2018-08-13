@@ -124,7 +124,7 @@ Level1State.prototype = {
 	update: function() {
 		//  Collide the player and the stars with the platforms
 
-	   game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
+	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
 	   console.log(player.x,player.y);
 	   console.log(hit);
 	    if (widthLife.width<0){
@@ -157,11 +157,11 @@ Level1State.prototype.cropLife = function(){
 function reachCandle1(player,candle){
 	game.state.start("GameWinState");
 }
-function reachaELand(player,aELand){
+/*unction reachaELand(player,aELand){
 	hit = 1;
 	aELand.kill();
 	widthLife.width = widthLife.width - totalLife/4;
 	hit = 0;
 	
 	console.log('kill');
-}
+}*/
