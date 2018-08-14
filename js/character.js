@@ -4,6 +4,7 @@ var bglife;
 var widthLife;
 var totalLife;
 var life;
+var fireSound;
 //var count = 0;
 var bmd;
 function Player(game,key){
@@ -63,6 +64,10 @@ function Player(game,key){
     weapon.bulletSpeed = 600;
     weapon.fireRate = 100;
     weapon.trackSprite(this,0,0,true);
+
+    //add sound for fire weapon
+    fireSound = game.sound.add('fireSound');
+	fireSound.allowMultiple = true;
     
     
 	
@@ -104,7 +109,8 @@ Player.prototype.update = function(){
 
 		//fireButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 		this.body.velocity.x=0;
-		
+
+		//if(ifRestart ==0){
 		if(cursors.left.isDown){//if the player chooses to move to the left
 		//Move to the left
 			this.body.velocity.x=-300;
@@ -151,11 +157,13 @@ Player.prototype.update = function(){
 			//this.animations.play('up');
 			//console.log('jump');
 		}
+	
+
 		
 		//make light works
-		this.updateShadowTexture();
-		life.updateCrop();
+		
 	   if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
+	   		fireSound.play();
 	   		if(this.facing == 'left'){
 	   			weapon.bulletSpeed = -600;
 				weapon.fire();
@@ -170,7 +178,11 @@ Player.prototype.update = function(){
 		
 		
 			}
-		}
+		//}
+	}
+		this.updateShadowTexture();
+		life.updateCrop();
+	
 	}
 Player.prototype.updateShadowTexture = function(){
 	//create dark texture

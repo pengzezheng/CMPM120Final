@@ -9,12 +9,16 @@ LoadingState.prototype = {
 	    game.load.image('candle', 'assets/stand.png');
 	    game.load.spritesheet('bom', 'assets/FlyingEnemybullet.png', 32, 32);
 	    game.load.spritesheet('ex', 'assets/explosionspritesheet.png', 32, 32);
-	    game.load.image('fire','assets/fire.png');
+	    game.load.image('fire','assets/candle bullet.png');
 	    game.load.image('pillar', 'assets/pillar.png');
 	    game.load.audio('BGM1', 'audios/BGMLVL1.wav');
 	    game.load.audio('EXPLO', 'audios/Explosion.wav');
 	    game.load.audio('EA', 'audios/EAttack.wav');
+
 	    game.load.image('checkpoint', 'assets/checkpoint.png');
+
+	    game.load.audio('fireSound', 'audios/fire.wav');
+
 
 	},
 	create: function() {

@@ -1,4 +1,7 @@
 var hit = 0;
+var timer;
+var ifRestart = 0;
+
 var Level1State = function(game) {};
 Level1State.prototype = {
 	create: function() {
@@ -7,6 +10,7 @@ Level1State.prototype = {
 		EAtt=game.add.audio('EA');
 		explSound=game.add.audio('EXPLO');
 		EAtt.allowMultiple=true;
+
 		game.world.setBounds(0, 0, 4000, 1000);
 		game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 		// game.camera(800,600);
@@ -110,6 +114,12 @@ Level1State.prototype = {
 	        aEFly.scale.setTo(1.2);
 	    }
 
+	    //create timer to pause the game if player dies
+	   //timer = game.time.create();
+
+		//create a event 3s from now
+		//timeEvent = timer.add(Phaser.Timer.SECOND*2,this.endTimer,this);
+
 	    // aEFly=new EnemyFly1(game,"star");
 	    // game.add.existing(aEFly);
 	    // aEFly.x=1000;
@@ -126,6 +136,46 @@ Level1State.prototype = {
 	update: function() {
 		//  Collide the player and the stars with the platforms
 
+
+
+	   //game.physics.arcade.overlap(weapon.bullets,aELand,reachaELand,null,this);
+	   console.log(player.x,player.y);
+	   console.log(hit);
+	   life.updateCrop();
+	    
+	    
+	   		//timer.start();
+	    	//if(timer.running){
+	    		//game.time.gamePaused();
+	    	//}
+	    	//else{
+	    		//game.time.gameResumed();
+	    	// ifRestart = 1;
+	    	// game.input.enabled = false;
+	    	// game.add.tween(player).to( { alpha: 0},1000, Phaser.Easing.Linear.None, true);
+	    	
+	    	//player.animations.stop(null,true);
+	    	
+	    	
+
+	    	//game.time.events.add(Phaser.Timer.SECOND*1,changeRestart,this);
+
+	    	// if(ifRestart == 1){
+	    	// player.body.velocity.x = 0;
+	    	// player.body.velocity.y = 0;
+	    	// player.x = 0;
+	   		// player.y = 250;
+	   		// widthLife.width = totalLife;
+	   		// game.input.enabled= true;
+	    	// game.add.tween(player).to( { alpha: 1},0.1, Phaser.Easing.Linear.None, true);
+	   		// ifRestart = 0;
+		   	// }
+
+	   	
+	   	//game.add.tween(player).to( { alpha: 100},0.1, Phaser.Easing.Linear.None, true);
+
+	    	//}
+
 	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
 	    if (widthLife.width<0){
 	    	if(checkpoint.checkpointReached == true) {
@@ -134,11 +184,22 @@ Level1State.prototype = {
 	    		widthLife.width = totalLife;
 	    	}
 
+
 	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
 	   
 	    	player.kill();
 	    	game.state.start('GameOverState');
 	    }
+
+
+	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
+	   		//game.time.events.add(Phaser.Timer.SECOND * 2, pauseGame, this);
+	   		//player.x = 0;
+	   		//player.y = 250;
+	   		//widthLife.width = totalLife;
+	    	//player.kill();
+	    	//game.state.start('GameOverState');
+	    
 
 	    if(player.y >= 750){
 	    	player.body.collideWorldBounds = false;
@@ -148,6 +209,7 @@ Level1State.prototype = {
 	    	player.kill();
 	    	game.state.start('GameOverState');
 	    }
+
 	    game.physics.arcade.overlap(player,candles,reachCandle1,null,this);
 	    /*aELand.forEachAlive(function(m){
 	    	var distance = this.game.math.distance(m.x,m.y,player.x,player.y);
@@ -171,6 +233,28 @@ Level1State.prototype.cropLife = function(){
 function reachCandle1(player,candle){
 	game.state.start("GameWinState");
 }
+// function changeRestart(){
+// 	ifRestart = 0;
+// 	player.x = 0;
+// 	player.y = 250;
+// 	widthLife.width = totalLife;
+// 	game.input.enabled= true;
+// 	game.add.tween(player).to( { alpha: 1},1, Phaser.Easing.Linear.None, true);
+// }
+//function pauseGame() {
+	// toggle game pause
+	
+	
+		//game.paused ? game.paused = false : game.paused = true;
+	
+	
+//}
+/*function endTimer(){
+	timer.stop();
+	player.x = 0;
+	player.y = 250;
+	widthLife.width = totalLife;
+}*/
 /*unction reachaELand(player,aELand){
 	hit = 1;
 	aELand.kill();
