@@ -1,12 +1,16 @@
 var hit = 0;
 var timer;
 var ifRestart = 0;
-
+var tempX;
+var tempY;
+var checkpoint;
+var check;
 var Level1State = function(game) {};
 Level1State.prototype = {
 	create: function() {
 
 		//BGM1=game.add.audio('BGM1');
+		check = 0;
 		EAtt=game.add.audio('EA');
 		explSound=game.add.audio('EXPLO');
 		EAtt.allowMultiple=true;
@@ -44,8 +48,10 @@ Level1State.prototype = {
 				//pillarSize = (game.rnd.integerInRange(5, 45) / 100);
 			}
 			if(i == 4) {
-				checkpoint = new Checkpoint(game, 'checkpoint', xCoordinate, yCoordinate - 50);
-				game.add.existing(checkpoint);
+				// checkpoint = new Checkpoint(game, 'checkpoint', xCoordinate, yCoordinate - 50);
+				// game.add.existing(checkpoint);
+				tempX = xCoordinate;
+				tempY = yCoordinate - 50;
 			}
 			// adds a random x and y integer from the previous pillar.
 			// a new pillar is always generated right of the previous pillar.
@@ -79,6 +85,13 @@ Level1State.prototype = {
     	var candle = candles.create(3675,700,'player');
     	candle.anchor.set(0.5);
     	candle.scale.setTo(0.02,0.02);
+    	ledge = platforms.create(3600,720,'ground');
+    	ledge.scale.setTo(0.1, 0.1);
+		ledge.body.immovable = true;
+		checkpoint = game.add.sprite(tempX,tempY,'checkpoint');
+		checkpoint.enableBody = true;
+		game.physics.arcade.enable(checkpoint);
+		//checkpoint.anchor.set(0.5);
 
 
 	    // // The player and its settings
@@ -136,9 +149,9 @@ Level1State.prototype = {
 	update: function() {
 		//  Collide the player and the stars with the platforms
 
-
-
-	   //game.physics.arcade.overlap(weapon.bullets,aELand,reachaELand,null,this);
+		console.log(player.x,player.y);
+		console.log(check);
+	   game.physics.arcade.overlap(player,checkpoint,reachCheckpoint,null,this);
 	   life.updateCrop();
 	    
 	    
@@ -175,18 +188,24 @@ Level1State.prototype = {
 	    	//}
 
 	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
-	    if (widthLife.width<0){
-	    	if(checkpoint.checkpointReached == true) {
-	    		player.x = checkpoint.x;
-	    		player.y = checkpoint.y - 50;
+	    if (widthLife.width<=0&& check ==1){
+	    	
+	    		player.x = tempX+20;
+	    		player.y = tempY -100;
 	    		widthLife.width = totalLife;
-	    	}
+	    	
 
 
 	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
 	   
-	    	player.kill();
-	    	game.state.start('GameOverState');
+	    	//player.kill();
+	    	//game.state.start('GameOverState');
+	    }
+	    else if (widthLife.width<=0&& check ==0){
+	    	
+	    		player.x = 15;
+	    		player.y = 0;
+	    		widthLife.width = totalLife;
 	    }
 
 
@@ -204,9 +223,10 @@ Level1State.prototype = {
 	    }
 
 	    if(player.y >= 4000){
-	    	player.kill();
-	    	BGM1.stop();
-	    	game.state.start('GameOverState');
+	    	widthLife.width = 0;
+	    	//player.kill();
+	    	//BGM1.stop();
+	    	//game.state.start('GameOverState');
 	    }
 
 	    game.physics.arcade.overlap(player,candles,reachCandle1,null,this);
@@ -226,12 +246,16 @@ Level1State.prototype = {
 }
 Level1State.prototype.cropLife = function(){
 	if(widthLife.width > 0&&hit == 0){
-		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /100)) }, 200, Phaser.Easing.Linear.None, true);
+		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /30)) }, 200, Phaser.Easing.Linear.None, true);
 	}
 }
 function reachCandle1(player,candle){
 	BGM1.stop();
 	game.state.start("GameWinState");
+}
+function reachCheckpoint(player,checkpoint){
+	check = 1;
+	widthLife.width = totalLife;
 }
 // function changeRestart(){
 // 	ifRestart = 0;

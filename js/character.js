@@ -15,7 +15,7 @@ function Player(game,key){
 	this.scale.setTo(0.05,0.05);
 	this.body.collideWorldBounds = true;
 	this.anchor.setTo(0.5,0.5);
-	this.body.gravity.y=2000;
+	this.body.gravity.y=1900;
 	this.animations.add('right',[1,2],10,true);
 	this.animations.add('left',[0,4],10,true);
 	//make the player face the direction they walk to
