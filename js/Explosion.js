@@ -8,6 +8,7 @@ function Explosion(game, key) {
 	this.body.collideWorldBounds = false;
 	//counter 
 	this.count = 0;
+	this.animations.add('ex1', [0, 1, 2, 3], 10, true);
 }
 
 function explos(explosion, player){//kill enemy and do damage to player
@@ -21,6 +22,7 @@ Explosion.prototype.constructor = Explosion;
 Explosion.prototype.update = function() { 
 		//explosion animation/size change
 		game.physics.arcade.overlap(this, player, explos, null, this);
+		this.animations.play('ex1');
 		if(this.count < 40) {
 				if(this.count < 30) {
 					this.scale.setTo(0.1+this.count*0.1, 0.1+this.count*0.1);
