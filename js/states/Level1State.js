@@ -3,15 +3,14 @@ var Level1State = function(game) {};
 Level1State.prototype = {
 	create: function() {
 		game.world.setBounds(0, 0, 4000, 1000);
-
-		game.time.events.loop(2000, this.cropLife, this);
+		game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 		// game.camera(800,600);
 	    //  We're going to be using physics, so enable the Arcade Physics system
 	    game.physics.startSystem(Phaser.Physics.ARCADE);
 
 	    //  A simple background for our game
 	    var sky = game.add.sprite(-100, 0, 'sky');
-	   	sky.scale.setTo(1.5,0.5);
+	   	sky.scale.setTo(1.5, 1);
 
 	    platforms = game.add.group();
 
@@ -95,18 +94,18 @@ Level1State.prototype = {
 	        //eLand[i] = new EnemyLand1(game,'star',500+150*i,800);
 	        game.add.existing(aELand);
 	        aELand.x = 500 + 150*i;
-	        aELand.y = 900;
-	        aELand.scale.setTo(0.05);
+	        aELand.y = 800;
+	        aELand.scale.setTo(0.05 );
 	    }
 
 	    for (var i =0; i <10; i++) {
 	        console.log("a");
-	        aEFly =new EnemyFly1(game,'star');
+	        aEFly =new EnemyFly1(game,'fly');
 	        //eLand[i] = new EnemyLand1(game,'star',500+150*i,800);
 	        game.add.existing(aEFly);
 	        aEFly.x = 500 + 300*i;
 	        aEFly.y = 100;
-	        aEFly.scale.setTo(0.1);
+	        aEFly.scale.setTo(1.2);
 	    }
 
 	    // aEFly=new EnemyFly1(game,"star");
@@ -125,22 +124,13 @@ Level1State.prototype = {
 	update: function() {
 		//  Collide the player and the stars with the platforms
 
-
-	   //game.physics.arcade.overlap(weapon.bullets,aELand,reachaELand,null,this);
-	   console.log(player.x,player.y);
-	   console.log(hit);
-	   life.updateCrop();
-	    if (widthLife.width<=0){
+	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
+	    if (widthLife.width<0){
 
 	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
 	   
-
-	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
-	   		player.x = 0;
-	   		player.y = 250;
-	   		widthLife.width = totalLife;
-	    	//player.kill();
-	    	//game.state.start('GameOverState');
+	    	player.kill();
+	    	game.state.start('GameOverState');
 	    }
 	    game.physics.arcade.overlap(player,candles,reachCandle1,null,this);
 	    /*aELand.forEachAlive(function(m){
@@ -158,8 +148,8 @@ Level1State.prototype = {
 	}
 }
 Level1State.prototype.cropLife = function(){
-	if(widthLife.width > 0 &&hit == 0){
-		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /30)) },0.1, Phaser.Easing.Linear.None, true);
+	if(widthLife.width > 0&&hit == 0){
+		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /100)) }, 200, Phaser.Easing.Linear.None, true);
 	}
 }
 function reachCandle1(player,candle){

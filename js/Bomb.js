@@ -4,10 +4,11 @@ function Bomb(game, key){
 	this.enableBody=true;
 	this.body.gravity.y=600;
 	count=0;
+	this.animations.add('bom1', [0, 1, 2, 3], 10, true);
 }
 
 function explo(bomb, player){//kill bullet and do damage
-	explosion=new Explosion(game, "firstaid");
+	explosion=new Explosion(game, "ex");
 	explosion.reset(this.body.x,this.body.y);
 	game.add.existing(explosion);
 	this.kill();
@@ -19,6 +20,7 @@ Bomb.prototype.constructor = Bomb;
 
 Bomb.prototype.update = function() {
 	game.physics.arcade.collide(this,platforms);
+	this.animations.play('bom1');
 	if(count <2){
 
 	 	game.time.events.add(Phaser.Timer.SECOND * 2, explo, this);
