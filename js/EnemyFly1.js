@@ -15,6 +15,7 @@ EnemyFly1.prototype.update = function() {
 	if(this.body.x>=player.x +100 &&this.body.x<=player.x +102 &&reloading==false){
 		bomb=new Bomb(game, "bom");
 		bomb.reset(this.body.x,this.body.y);
+		bomb.scale.setTo(1.5);
 		game.add.existing(bomb);
 		reloading=true;
 	}

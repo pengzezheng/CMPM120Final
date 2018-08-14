@@ -16,15 +16,9 @@ Level1State.prototype = {
 
 	    platforms.enableBody = true;
 
-	    // Here we create the ground.
-	    var ground = platforms.create(0, game.world.height - 64, 'ground');
-
-	    ground.scale.setTo(3, 0.1);
-	    ground.body.immovable = true;
-
 		// Fixed starting x and y coordinates for the pillars
 		var xCoordinate = 200;
-		var yCoordinate = 750
+		var yCoordinate = 750;
 		var pillarSize = 0.10;
 		// Generates 17 pillars and 4 safety clouds
 		for(var i = 0; i < 17; i++) {
@@ -70,9 +64,6 @@ Level1State.prototype = {
     	var candle = candles.create(3675,700,'player');
     	candle.anchor.set(0.5);
     	candle.scale.setTo(0.02,0.02);
-    	var startpoint = game.add.sprite(45,907,'player');
-    	startpoint.enableBody = true;
-    	startpoint.scale.set(0.02);
 
 
 	    // // The player and its settings
@@ -88,14 +79,14 @@ Level1State.prototype = {
 	    // player.body.collideWorldBounds = true;
 	    //aELand = game.add.group();
 	    //aELand.enableBody = true;
-	    for (var i =0; i <20; i++) {
-	        console.log("a");
-	        aELand =new EnemyLand1(game,'star');
+	    for (var i =0; i <10; i++) {
+	        console.log("b");
+	        aELand =new EnemyGrab(game,'star');
 	        //eLand[i] = new EnemyLand1(game,'star',500+150*i,800);
+	        aELand.y = game.rnd.integerInRange(400,700);
+	        aELand.x = 500 + 300*i;
 	        game.add.existing(aELand);
-	        aELand.x = 500 + 150*i;
-	        aELand.y = 800;
-	        aELand.scale.setTo(0.05 );
+	        //aELand.scale.setTo(0.05);
 	    }
 
 	    for (var i =0; i <10; i++) {
@@ -129,6 +120,15 @@ Level1State.prototype = {
 
 	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
 	   
+	    	player.kill();
+	    	game.state.start('GameOverState');
+	    }
+
+	    if(player.y >= 750){
+	    	player.body.collideWorldBounds = false;
+	    }
+
+	    if(player.y >= 4000){
 	    	player.kill();
 	    	game.state.start('GameOverState');
 	    }
