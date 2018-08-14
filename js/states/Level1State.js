@@ -192,6 +192,7 @@ Level1State.prototype = {
 	    	
 	    		player.x = tempX+20;
 	    		player.y = tempY -100;
+	    		player.body.gravity.y=1900;
 	    		widthLife.width = totalLife;
 	    	
 
@@ -205,6 +206,7 @@ Level1State.prototype = {
 	    	
 	    		player.x = 15;
 	    		player.y = 0;
+	    		player.body.gravity.y=1900;
 	    		widthLife.width = totalLife;
 	    }
 
