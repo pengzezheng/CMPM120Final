@@ -7,7 +7,7 @@ LoadingState.prototype = {
 	    game.load.image('star', 'assets/mob.png');
 	    game.load.image('fly', 'assets/flyingenemy.png');
 	    game.load.image('candle', 'assets/stand.png');
-	    game.load.spritesheet('bom', 'assets/BulletspriteSheet.png', 32, 32);
+	    game.load.spritesheet('bom', 'assets/FlyingEnemybullet.png', 32, 32);
 	    game.load.spritesheet('ex', 'assets/explosionspritesheet.png', 32, 32);
 	    game.load.image('fire','assets/fire.png');
 	    game.load.image('pillar', 'assets/pillar.png');

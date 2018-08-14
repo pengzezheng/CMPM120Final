@@ -2,7 +2,7 @@ function Bomb(game, key){
 	Phaser.Sprite.call(this, game, 400, 85, key);// call phaser sprite
 	game.physics.enable(this, Phaser.Physics.ARCADE);//enable physics
 	this.enableBody=true;
-	this.body.gravity.y=600;
+	this.body.gravity.y=400;
 	count=0;
 	this.animations.add('bom1', [0, 1, 2, 3], 10, true);
 }
