@@ -30,7 +30,7 @@ Level1State.prototype = {
 		// Generates 17 pillars and 4 safety clouds
 		for(var i = 0; i < 17; i++) {
 			var pillar = platforms.create(xCoordinate,yCoordinate,'pillar');
-			pillar.scale.setTo(1, pillarSize);
+			pillar.scale.setTo(1.5, pillarSize);
 			pillar.body.immovable = true;
 			pillarSize = (game.rnd.integerInRange(5, 45) / 100);
 			if(i == 5 || i == 8 || i == 12 || i == 16) {
@@ -38,6 +38,10 @@ Level1State.prototype = {
 				ledge.scale.setTo(0.1, 0.1);
 				ledge.body.immovable = true;
 				//pillarSize = (game.rnd.integerInRange(5, 45) / 100);
+			}
+			if(i == 4) {
+				checkpoint = new Checkpoint(game, 'checkpoint', xCoordinate, yCoordinate - 50);
+				game.add.existing(checkpoint);
 			}
 			// adds a random x and y integer from the previous pillar.
 			// a new pillar is always generated right of the previous pillar.
@@ -124,6 +128,11 @@ Level1State.prototype = {
 
 	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
 	    if (widthLife.width<0){
+	    	if(checkpoint.checkpointReached == true) {
+	    		player.x = checkpoint.x;
+	    		player.y = checkpoint.y - 50;
+	    		widthLife.width = totalLife;
+	    	}
 
 	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
 	   

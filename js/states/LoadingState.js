@@ -14,6 +14,7 @@ LoadingState.prototype = {
 	    game.load.audio('BGM1', 'audios/BGMLVL1.wav');
 	    game.load.audio('EXPLO', 'audios/Explosion.wav');
 	    game.load.audio('EA', 'audios/EAttack.wav');
+	    game.load.image('checkpoint', 'assets/checkpoint.png');
 
 	},
 	create: function() {
