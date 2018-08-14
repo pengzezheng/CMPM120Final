@@ -26,7 +26,7 @@ function Player(game,key){
 	//this.animations.add('leftAttack',[7],10,true);
 	//give candleman a small range of light
 	//refer to the example: https://gamemechanicexplorer.com/#lighting-1
-	this.LIGHT_RADIUS = 200;
+	this.LIGHT_RADIUS = 300;
 	//create shadow texture
 	this.shadowTexture = this.game.add.bitmapData(this.game.world.width,this.game.world.height);
 	//create an object that will use the bitmap as texture

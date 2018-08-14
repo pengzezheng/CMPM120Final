@@ -11,6 +11,7 @@ function explo(bomb, player){//kill bullet and do damage
 	explosion=new Explosion(game, "ex");
 	explosion.reset(this.body.x,this.body.y);
 	game.add.existing(explosion);
+	explSound.play();
 	this.kill();
 		//bgm.play();//make sounds
 	}

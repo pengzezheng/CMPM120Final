@@ -10,6 +10,7 @@ function EnemyGrab(game, key){
 
 function grab(explosion, player){//kill enemy and do damage to player
 		player.body.gravity.y +=200;
+		EAtt.play();
 		this.kill();
 	}
 
