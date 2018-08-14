@@ -98,7 +98,7 @@ Level1State.prototype = {
 	        console.log("b");
 	        aELand =new EnemyGrab(game,'star');
 	        //eLand[i] = new EnemyLand1(game,'star',500+150*i,800);
-	        aELand.y = game.rnd.integerInRange(400,700);
+	        aELand.y = game.rnd.integerInRange(200,700);
 	        aELand.x = 500 + 300*i;
 	        game.add.existing(aELand);
 	        //aELand.scale.setTo(0.05);
@@ -139,8 +139,6 @@ Level1State.prototype = {
 
 
 	   //game.physics.arcade.overlap(weapon.bullets,aELand,reachaELand,null,this);
-	   console.log(player.x,player.y);
-	   console.log(hit);
 	   life.updateCrop();
 	    
 	    
@@ -207,6 +205,7 @@ Level1State.prototype = {
 
 	    if(player.y >= 4000){
 	    	player.kill();
+	    	BGM1.stop();
 	    	game.state.start('GameOverState');
 	    }
 
@@ -231,6 +230,7 @@ Level1State.prototype.cropLife = function(){
 	}
 }
 function reachCandle1(player,candle){
+	BGM1.stop();
 	game.state.start("GameWinState");
 }
 // function changeRestart(){
