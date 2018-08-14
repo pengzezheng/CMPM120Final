@@ -4,12 +4,19 @@ var ifRestart = 0;
 var Level1State = function(game) {};
 Level1State.prototype = {
 	create: function() {
+
+		//BGM1=game.add.audio('BGM1');
+		EAtt=game.add.audio('EA');
+		explSound=game.add.audio('EXPLO');
+		EAtt.allowMultiple=true;
 		game.world.setBounds(0, 0, 4000, 1000);
 		game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 		// game.camera(800,600);
 	    //  We're going to be using physics, so enable the Arcade Physics system
 	    game.physics.startSystem(Phaser.Physics.ARCADE);
-
+	    BGM1=new Phaser.Sound(game,'BGM1',1,true);
+	    BGM1.allowMultiple=true;
+	    BGM1.play();
 	    //  A simple background for our game
 	    var sky = game.add.sprite(-100, 0, 'sky');
 	   	sky.scale.setTo(1.5, 1);
