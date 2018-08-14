@@ -104,7 +104,8 @@ Player.prototype.update = function(){
 
 		//fireButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 		this.body.velocity.x=0;
-		
+
+		//if(ifRestart ==0){
 		if(cursors.left.isDown){//if the player chooses to move to the left
 		//Move to the left
 			this.body.velocity.x=-300;
@@ -151,10 +152,11 @@ Player.prototype.update = function(){
 			//this.animations.play('up');
 			//console.log('jump');
 		}
+	
+
 		
 		//make light works
-		this.updateShadowTexture();
-		life.updateCrop();
+		
 	   if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
 	   		if(this.facing == 'left'){
 	   			weapon.bulletSpeed = -600;
@@ -170,7 +172,11 @@ Player.prototype.update = function(){
 		
 		
 			}
-		}
+		//}
+	}
+		this.updateShadowTexture();
+		life.updateCrop();
+	
 	}
 Player.prototype.updateShadowTexture = function(){
 	//create dark texture

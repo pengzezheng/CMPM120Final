@@ -1,4 +1,6 @@
 var hit = 0;
+var timer;
+var ifRestart = 0;
 var Level1State = function(game) {};
 Level1State.prototype = {
 	create: function() {
@@ -109,6 +111,12 @@ Level1State.prototype = {
 	        aEFly.scale.setTo(0.1);
 	    }
 
+	    //create timer to pause the game if player dies
+	   //timer = game.time.create();
+
+		//create a event 3s from now
+		//timeEvent = timer.add(Phaser.Timer.SECOND*2,this.endTimer,this);
+
 	    // aEFly=new EnemyFly1(game,"star");
 	    // game.add.existing(aEFly);
 	    // aEFly.x=1000;
@@ -131,17 +139,52 @@ Level1State.prototype = {
 	   console.log(hit);
 	   life.updateCrop();
 	    if (widthLife.width<=0){
+	    	widthLife.width = 0;
+	    	player.kill();
+	    	game.state.start('GameOverState');
+	    
+	   		//timer.start();
+	    	//if(timer.running){
+	    		//game.time.gamePaused();
+	    	//}
+	    	//else{
+	    		//game.time.gameResumed();
+	    	// ifRestart = 1;
+	    	// game.input.enabled = false;
+	    	// game.add.tween(player).to( { alpha: 0},1000, Phaser.Easing.Linear.None, true);
+	    	
+	    	//player.animations.stop(null,true);
+	    	
+	    	
 
+	    	//game.time.events.add(Phaser.Timer.SECOND*1,changeRestart,this);
+
+	    	// if(ifRestart == 1){
+	    	// player.body.velocity.x = 0;
+	    	// player.body.velocity.y = 0;
+	    	// player.x = 0;
+	   		// player.y = 250;
+	   		// widthLife.width = totalLife;
+	   		// game.input.enabled= true;
+	    	// game.add.tween(player).to( { alpha: 1},0.1, Phaser.Easing.Linear.None, true);
+	   		// ifRestart = 0;
+		   	// }
+
+	   	}
+	   	//game.add.tween(player).to( { alpha: 100},0.1, Phaser.Easing.Linear.None, true);
+
+	    	//}
 	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
 	   
 
 	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
-	   		player.x = 0;
-	   		player.y = 250;
-	   		widthLife.width = totalLife;
+	   		//game.time.events.add(Phaser.Timer.SECOND * 2, pauseGame, this);
+	   		//player.x = 0;
+	   		//player.y = 250;
+	   		//widthLife.width = totalLife;
 	    	//player.kill();
 	    	//game.state.start('GameOverState');
-	    }
+	    
 	    game.physics.arcade.overlap(player,candles,reachCandle1,null,this);
 	    /*aELand.forEachAlive(function(m){
 	    	var distance = this.game.math.distance(m.x,m.y,player.x,player.y);
@@ -165,6 +208,28 @@ Level1State.prototype.cropLife = function(){
 function reachCandle1(player,candle){
 	game.state.start("GameWinState");
 }
+// function changeRestart(){
+// 	ifRestart = 0;
+// 	player.x = 0;
+// 	player.y = 250;
+// 	widthLife.width = totalLife;
+// 	game.input.enabled= true;
+// 	game.add.tween(player).to( { alpha: 1},1, Phaser.Easing.Linear.None, true);
+// }
+//function pauseGame() {
+	// toggle game pause
+	
+	
+		//game.paused ? game.paused = false : game.paused = true;
+	
+	
+//}
+/*function endTimer(){
+	timer.stop();
+	player.x = 0;
+	player.y = 250;
+	widthLife.width = totalLife;
+}*/
 /*unction reachaELand(player,aELand){
 	hit = 1;
 	aELand.kill();
