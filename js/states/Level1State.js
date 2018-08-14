@@ -1,6 +1,7 @@
 var hit = 0;
 var timer;
 var ifRestart = 0;
+
 var Level1State = function(game) {};
 Level1State.prototype = {
 	create: function() {
@@ -9,6 +10,7 @@ Level1State.prototype = {
 		EAtt=game.add.audio('EA');
 		explSound=game.add.audio('EXPLO');
 		EAtt.allowMultiple=true;
+
 		game.world.setBounds(0, 0, 4000, 1000);
 		game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 		// game.camera(800,600);

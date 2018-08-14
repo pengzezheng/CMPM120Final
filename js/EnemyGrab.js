@@ -13,12 +13,18 @@ function grab(explosion, player){//kill enemy and do damage to player
 		EAtt.play();
 		this.kill();
 	}
+//player could kill the enemy who would grab the candle man
+function hitEnemyGrab(EnemyGrab,bullet){
+	EnemyGrab.kill();
+	bullet.kill();
+}
 
 EnemyGrab.prototype = Object.create(Phaser.Sprite.prototype);// make prototype
 EnemyGrab.prototype.constructor = EnemyGrab;
 
 EnemyGrab.prototype.update = function() {
 	game.physics.arcade.overlap(this, player, grab, null, this);
+	game.physics.arcade.overlap(this, weapon.bullets, hitEnemyGrab, null, this);
 	/*if(this.count < 100) {
 				if(this.count < 90) {
 					this.scale.setTo(0.1, 0.1+this.count*0.1);

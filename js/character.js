@@ -4,6 +4,7 @@ var bglife;
 var widthLife;
 var totalLife;
 var life;
+var fireSound;
 //var count = 0;
 var bmd;
 function Player(game,key){
@@ -63,6 +64,10 @@ function Player(game,key){
     weapon.bulletSpeed = 600;
     weapon.fireRate = 100;
     weapon.trackSprite(this,0,0,true);
+
+    //add sound for fire weapon
+    fireSound = game.sound.add('fireSound');
+	fireSound.allowMultiple = true;
     
     
 	
@@ -158,6 +163,7 @@ Player.prototype.update = function(){
 		//make light works
 		
 	   if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
+	   		fireSound.play();
 	   		if(this.facing == 'left'){
 	   			weapon.bulletSpeed = -600;
 				weapon.fire();
