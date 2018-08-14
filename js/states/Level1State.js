@@ -123,7 +123,7 @@ Level1State.prototype = {
 	update: function() {
 		//  Collide the player and the stars with the platforms
 
-<<<<<<< HEAD
+
 
 	   //game.physics.arcade.overlap(weapon.bullets,aELand,reachaELand,null,this);
 	   console.log(player.x,player.y);
