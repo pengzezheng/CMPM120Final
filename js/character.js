@@ -17,6 +17,10 @@ function Player(game,key){
 	this.body.gravity.y=2000;
 	this.animations.add('right',[1,2],10,true);
 	this.animations.add('left',[0,4],10,true);
+	//make the player face the direction they walk to
+	this.facing = 'left';
+	//this.body.setSize(18,36,18,15);
+
 	//this.animations.add('up',[8],10,true);
 	//this.animations.add('rightAttack',[6],10,true);
 	//this.animations.add('leftAttack',[7],10,true);
@@ -97,6 +101,7 @@ Player.prototype.update = function(){
 		game.physics.arcade.collide(this,platforms);
     	var hitPlatform = game.physics.arcade.collide(this, platforms);
     	cursors = game.input.keyboard.createCursorKeys();
+
 		//fireButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 		this.body.velocity.x=0;
 		
@@ -104,20 +109,42 @@ Player.prototype.update = function(){
 		//Move to the left
 			this.body.velocity.x=-300;
 			this.animations.play('left');
+			//make the player face the direction they walk to
+			if(this.facing != 'left'){
+			
+				this.facing = 'left';
+			//this.scale.x = -0.05;
+			}
 		}
 		else if(cursors.right.isDown){//if the player chooses to move to the right
 		//Move to the right
-			this.body.velocity.x=300;
 			this.animations.play('right');
+			this.body.velocity.x=300;
+			if(this.facing != 'right'){
+			
+				this.facing = 'right';
+			//this.scale.x = 0.05;
+			}
 		}
 		
 		else{
 		//Stand still
-			this.animations.stop();
+			//this.animations.stop();
+			if(this.facing != 'idle'){
+				this.animations.stop();
+				if(this.facing == 'left'){
+					this.frame = 0;
+				}
+				else{
+					this.frame = 1;
+				}
+				//this.facing = 'idle';
+
 		//this.body.velocity.x = 0;
 		//this.body.velocity.y = 0;
 
-			this.frame=3;
+			//this.frame=3;
+			}
 		}
 		if(cursors.up.isDown&&this.body.touching.down){
 			this.body.velocity.y=-900;
@@ -128,19 +155,21 @@ Player.prototype.update = function(){
 		//make light works
 		this.updateShadowTexture();
 		life.updateCrop();
-	   if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)&&game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
-	   		weapon.bulletSpeed = -600;
-			weapon.fire();
-			widthLife.width -= totalLife/10;
+	   if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
+	   		if(this.facing == 'left'){
+	   			weapon.bulletSpeed = -600;
+				weapon.fire();
+				widthLife.width -= totalLife/10;
+			}
 		
 		
-		}
-		else if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)&&game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
-	   		weapon.bulletSpeed =600;
-			weapon.fire();
-			widthLife.width -= totalLife/10;
+			else if(this.facing == 'right'){
+	   			weapon.bulletSpeed =600;
+				weapon.fire();
+				widthLife.width -= totalLife/10;
 		
 		
+			}
 		}
 	}
 Player.prototype.updateShadowTexture = function(){

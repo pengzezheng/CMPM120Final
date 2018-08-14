@@ -95,7 +95,7 @@ Level1State.prototype = {
 	        //eLand[i] = new EnemyLand1(game,'star',500+150*i,800);
 	        game.add.existing(aELand);
 	        aELand.x = 500 + 150*i;
-	        aELand.y = 800;
+	        aELand.y = 900;
 	        aELand.scale.setTo(0.05);
 	    }
 

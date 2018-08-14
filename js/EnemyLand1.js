@@ -14,12 +14,17 @@ function rush(enemyLand1, player){//kill enemy and do damage to player
 		//widthLife.width -= totalLife/4;
 		//bgm.play();//make sounds
 	}
+function hitEnemyLand(enemyLand1,bullet){
+	enemyLand1.kill();
+	bullet.kill();
+}
 
 EnemyLand1.prototype = Object.create(Phaser.Sprite.prototype);// make prototype
 EnemyLand1.prototype.constructor = EnemyLand1;
 
 EnemyLand1.prototype.update = function() {
 	game.physics.arcade.overlap(this, player, rush, null, this);
+	game.physics.arcade.overlap(this, weapon.bullets, hitEnemyLand, null, this);
 	if (player.y >= 750){
 		game.physics.arcade.moveToObject(this,player);
 	}
