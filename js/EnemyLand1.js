@@ -11,8 +11,7 @@ function rush(enemyLand1, player){//kill enemy and do damage to player
 		enemyLand1.kill();
 		widthLife.width = widthLife.width - totalLife/4;
 		hit=0;
-		//widthLife.width -= totalLife/4;
-		//bgm.play();//make sounds
+
 	}
 function hitEnemyLand(enemyLand1,bullet){
 	enemyLand1.kill();
@@ -25,12 +24,13 @@ EnemyLand1.prototype.constructor = EnemyLand1;
 EnemyLand1.prototype.update = function() {
 	game.physics.arcade.overlap(this, player, rush, null, this);
 	game.physics.arcade.overlap(this, weapon.bullets, hitEnemyLand, null, this);
-	if (player.y >= 750){
-		game.physics.arcade.moveToObject(this,player);
+	if(this.body.x > player.x){
+		if(this.body.x< player.x+250){
+			game.physics.arcade.moveToObject(this,player);
+		}
+	}else{
+		if(player.x< this.body.x+250){
+			game.physics.arcade.moveToObject(this,player);
+		}
 	}
-	if(this.y >800 || this.y <790){
-		this.y=800;
-	}
-	game.world.wrap(this, 0, true);
-
 } 
