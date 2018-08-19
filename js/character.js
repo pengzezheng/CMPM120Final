@@ -104,13 +104,20 @@ Player.prototype.constructor = Player;
 Player.prototype.update = function(){
 		//this.updateShadowTexture();
 		game.physics.arcade.collide(this,platforms);
-    	var hitPlatform = game.physics.arcade.collide(this, platforms);
+		var hitPlatform=game.physics.arcade.collide(this,platforms);
+		//game.physics.arcade.collide(this,platforms);
+    	
     	cursors = game.input.keyboard.createCursorKeys();
 
 		//fireButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 		this.body.velocity.x=0;
 
 		//if(ifRestart ==0){
+		if(cursors.up.justDown&&this.body.touching.down){
+			this.body.velocity.y=-900;
+			//this.animations.play('up');
+			//console.log('jump');
+		}
 		if(cursors.left.isDown){//if the player chooses to move to the left
 		//Move to the left
 			this.body.velocity.x=-300;
@@ -152,11 +159,7 @@ Player.prototype.update = function(){
 			//this.frame=3;
 			}
 		}
-		if(cursors.up.isDown&&this.body.touching.down){
-			this.body.velocity.y=-900;
-			//this.animations.play('up');
-			//console.log('jump');
-		}
+		
 	
 
 		
@@ -189,10 +192,18 @@ Player.prototype.updateShadowTexture = function(){
 		this.shadowTexture.context.fillStyle = 'rgb(0,0,0)';
 		this.shadowTexture.context.fillRect(0,0,game.world.width,game.world.height);
 
+		//randomly change the radius each frame
+		var radius = this.LIGHT_RADIUS + this.game.rnd.integerInRange(1,10);
+
+		//draw circle of light with a soft edge
+		var gradient = this.shadowTexture.context.createRadialGradient(this.x,this.y,this.LIGHT_RADIUS*0.75,this.x,this.y,radius);
+		gradient.addColorStop(0,'rgba(255,255,255,1.0)');
+		gradient.addColorStop(1,'rgba(255,255,255,0.0)');
+
 		//draw the circle of light
 		this.shadowTexture.context.beginPath();
-		this.shadowTexture.context.fillStyle = 'rgb(255,255,255)';
-		this.shadowTexture.context.arc(this.x,this.y,this.LIGHT_RADIUS,0,Math.PI*2);
+		this.shadowTexture.context.fillStyle = gradient;
+		this.shadowTexture.context.arc(this.x,this.y,radius,0,Math.PI*2);
 		this.shadowTexture.context.fill();
 
 		//tell the engine it should update the texture

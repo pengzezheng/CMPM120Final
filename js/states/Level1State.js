@@ -5,6 +5,7 @@ var tempX;
 var tempY;
 var checkpoint;
 var check;
+var platforms;
 var Level1State = function(game) {};
 Level1State.prototype = {
 	create: function() {
@@ -247,7 +248,7 @@ Level1State.prototype = {
 	}
 }
 Level1State.prototype.cropLife = function(){
-	if(widthLife.width > 0&&hit == 0){
+	if(widthLife.width > 0){
 		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /30)) }, 200, Phaser.Easing.Linear.None, true);
 	}
 }
