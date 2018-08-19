@@ -3,6 +3,7 @@ var timer;
 var ifRestart = 0;
 var tempX;
 var tempY;
+//var temps;spring
 var checkpoint;
 var check;
 var platforms;
@@ -71,6 +72,15 @@ Level1State.prototype = {
 		pillar = platforms.create(0,300,'pillar');
 		pillar.scale.setTo(1, pillarSize);
 		pillar.body.immovable = true;
+
+		pillar = platforms.create(0,800,'pillar');
+		pillar.scale.setTo(20, pillarSize);
+		pillar.body.immovable = true;
+
+		/*pillar1 = game.add.sprite(0,750,'fire');
+		game.physics.enable(pillar1, Phaser.Physics.ARCADE);
+		pillar1.scale.setTo(2, pillarSize);
+		pillar1.body.immovable = true;Spring*/ 
 		// The player and its settings
 	    player = new Player(game,'player');
 	    player.x=0;
@@ -149,10 +159,14 @@ Level1State.prototype = {
 	},
 	update: function() {
 		//  Collide the player and the stars with the platforms
-
-		console.log(player.x,player.y);
-		console.log(check);
 	   game.physics.arcade.overlap(player,checkpoint,reachCheckpoint,null,this);
+	   var spring=game.physics.arcade.collide(player,pillar1);
+	   /*if(game.input.keyboard.isDown(Phaser.Keyboard.UP)&&spring){ Spring
+	   		temp=player.body.gravity.y;
+			player.body.gravity.y=200;
+			//this.animations.play('up');
+			game.time.events.add(Phaser.Timer.SECOND * 2, springDone, this);
+	   }*/
 	   life.updateCrop();
 	    
 	    
@@ -260,6 +274,11 @@ function reachCheckpoint(player,checkpoint){
 	check = 1;
 	widthLife.width = totalLife;
 }
+
+/*function springDone(){ Spring
+	player.body.gravity.y=temp;
+	temp=0;
+}*/
 // function changeRestart(){
 // 	ifRestart = 0;
 // 	player.x = 0;
