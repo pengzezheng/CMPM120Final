@@ -15,9 +15,10 @@ LoadingState.prototype = {
 	    game.load.audio('EXPLO', 'audios/Explosion.wav');
 	    game.load.audio('EA', 'audios/EAttack.wav');
 
-	    game.load.image('checkpoint', 'assets/checkpoint.png');
+	    game.load.image('checkpoint', 'assets/dead candle man.png');
+	    game.load.image('checkpoint1', 'assets/dead candle man lit.png');
 
-	    game.load.audio('fireSound', 'audios/fire.wav');
+	    //game.load.audio('fireSound', 'audios/fire.wav');
 
 
 	},

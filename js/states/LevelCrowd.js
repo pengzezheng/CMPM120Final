@@ -1,3 +1,4 @@
+var checkpoint;
 var LevelCrowd = function(game) {};
 LevelCrowd.prototype = {
 	create: function() {
@@ -19,15 +20,43 @@ LevelCrowd.prototype = {
 	    var land = platforms.create(-2500, 950, 'ground');
 	    land.scale.setTo(10, 0.1);
 	    land.body.immovable = true;
+	    checkpoint = game.add.sprite(100,900,'checkpoint');
+	    game.physics.arcade.enable(checkpoint);
+		checkpoint.enableBody = true;
 	},
 
 	update: function() {
+		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
+		/*if (widthLife.width<=0&& check ==1){
+	    	
+	    		player.x = tempX+20;
+	    		player.y = tempY -100;
+	    		player.body.gravity.y=1900;
+	    		widthLife.width = totalLife;
+	    	
 
-		//var hitPlatform = game.physics.arcade.collide(this, platforms);
-    	//cursors = game.input.keyboard.createCursorKeys();
-		/*if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
-			game.state.start("Level1State");
-		}*/
 
+	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
+	   
+	    	//player.kill();
+	    	//game.state.start('GameOverState');
+	    }
+	    else if (widthLife.width<=0&& check ==0){
+	    	
+	    		player.x = 15;
+	    		player.y = 0;
+	    		player.body.gravity.y=1900;
+	    		*widthLife.width = totalLife;
+	    }*/
+
+	},
+
+	reachCheckpoint: function(player,checkpoint){
+		console.log("a");
+		check = 1;
+		widthLife.width = totalLife;
+		var saved=game.add.sprite(checkpoint.body.x,checkpoint.body.y,'checkpoint1');
+	//saved.enableBody = true;
+		checkpoint.kill();
 	}
 };
