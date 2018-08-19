@@ -4,8 +4,8 @@ LevelCrowd.prototype = {
 	create: function() {
 		game.world.setBounds(0, 0, 8000, 1000);
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		var sky = game.add.sprite(-100, 0, 'sky');
-	   	sky.scale.setTo(1.5, 1);
+		var sky = game.add.sprite(-100, 0, 'bgCrowd');
+	   	sky.scale.setTo(1.01, 0.8);
 	   	player = new Player(game,'player');
 	    player.x=0;
 	    player.y=250;
@@ -20,9 +20,22 @@ LevelCrowd.prototype = {
 	    var land = platforms.create(-2500, 950, 'ground');
 	    land.scale.setTo(10, 0.1);
 	    land.body.immovable = true;
+	    var land = platforms.create(-500, 750, 'ground');
+	    land.scale.setTo(8, 0.1);
+	    land.body.immovable = true;
 	    checkpoint = game.add.sprite(100,900,'checkpoint');
 	    game.physics.arcade.enable(checkpoint);
 		checkpoint.enableBody = true;
+
+		for (var i =0; i <10; i++) {
+	        console.log("a");
+	        aELand =new EnemyLand1(game,'CrowdLand');
+	        //eLand[i] = new EnemyLand1(game,'star',500+150*i,800);
+	        game.add.existing(aELand);
+	        aELand.x = 500 + 300*i;
+	        aELand.y = 800;
+	        aELand.scale.setTo(0.5);
+	    }
 	},
 
 	update: function() {
