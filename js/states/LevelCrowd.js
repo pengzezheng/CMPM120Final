@@ -17,16 +17,18 @@ LevelCrowd.prototype = {
     	bglife.cameraOffset.setTo(630,50);
     	platforms = game.add.group();
 	    platforms.enableBody = true;
-	    var land = platforms.create(-2500, 950, 'ground');
+	    var land = platforms.create(0, 950, 'pillar');
 	    land.scale.setTo(10, 0.1);
-	    land.body.immovable = true;
-	    var land = platforms.create(-500, 750, 'ground');
-	    land.scale.setTo(8, 0.1);
 	    land.body.immovable = true;
 	    checkpoint = game.add.sprite(100,900,'checkpoint');
 	    game.physics.arcade.enable(checkpoint);
 		checkpoint.enableBody = true;
 
+		for (var i=0; i<10; i++){
+			var land = platforms.create(i*350, 750, 'pillar');
+	    	land.scale.setTo(8, 0.1);
+	    	land.body.immovable = true;
+		}
 		for (var i =0; i <10; i++) {
 	        console.log("a");
 	        aELand =new EnemyLand1(game,'CrowdLand');
