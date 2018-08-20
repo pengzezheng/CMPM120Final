@@ -1,4 +1,5 @@
 var checkpoint;
+var temps;
 var LevelCrowd = function(game) {};
 LevelCrowd.prototype = {
 	create: function() {
@@ -13,13 +14,13 @@ LevelCrowd.prototype = {
 		checkpoint.enableBody = true;
 		bgLands = game.add.group();
 		for (var i=0; i<10; i++){
-			var land = platforms.create(i*350, 750, 'pillar');
+			var land = platforms.create(i*350, 650, 'pillar');
 	    	land.scale.setTo(8, 0.1);
 	    	land.body.immovable = true;
 		}
 
 		for (var i=0; i<10; i++){
-			var land = platforms.create(50+i*350, 550, 'pillar');
+			var land = platforms.create(50+i*350, 250, 'pillar');
 	    	land.scale.setTo(8, 0.1);
 	    	land.body.immovable = true;
 		}
@@ -38,12 +39,17 @@ LevelCrowd.prototype = {
 	        aELand.x = 500 + 300*i;
 	        aELand.y = 800;
 	        aELand.scale.setTo(0.5);
-	        
+
 	        var bgLand=bgLands.create(300*i, 825, 'CrowdLand');
 	        bgLand.scale.setTo(0.5);
 	        var bgLand=bgLands.create(50+300*i, 825, 'CrowdLand');
 	        bgLand.scale.setTo(0.5);
 	    }*/
+
+	    sp = game.add.sprite(50,650,'fire');
+		game.physics.enable(sp, Phaser.Physics.ARCADE);
+		sp.scale.setTo(2, 2);
+		sp.body.immovable = true;
 
 	    player = new Player(game,'player');
 	    player.x=0;
@@ -58,6 +64,13 @@ LevelCrowd.prototype = {
 
 	update: function() {
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
+		var spring=game.physics.arcade.collide(player,sp);
+	   	if(game.input.keyboard.isDown(Phaser.Keyboard.UP)&&spring){ 
+	   		temp=player.body.gravity.y;
+			player.body.gravity.y=1000;
+			//this.animations.play('up');
+			game.time.events.add(Phaser.Timer.SECOND * 2, this.springDone, this);
+		}
 		/*if (widthLife.width<=0&& check ==1){
 	    	
 	    		player.x = tempX+20;
@@ -89,5 +102,10 @@ LevelCrowd.prototype = {
 		var saved=game.add.sprite(checkpoint.body.x,checkpoint.body.y,'checkpoint1');
 	//saved.enableBody = true;
 		checkpoint.kill();
-	}
+	},
+
+	springDone: function(){ 
+		player.body.gravity.y=temp;
+		temp=0;
+	},
 };
