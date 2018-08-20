@@ -11,9 +11,15 @@ LevelCrowd.prototype = {
 	    checkpoint = game.add.sprite(100,900,'checkpoint');
 	    game.physics.arcade.enable(checkpoint);
 		checkpoint.enableBody = true;
-
+		bgLands = game.add.group();
 		for (var i=0; i<10; i++){
 			var land = platforms.create(i*350, 750, 'pillar');
+	    	land.scale.setTo(8, 0.1);
+	    	land.body.immovable = true;
+		}
+
+		for (var i=0; i<10; i++){
+			var land = platforms.create(50+i*350, 550, 'pillar');
 	    	land.scale.setTo(8, 0.1);
 	    	land.body.immovable = true;
 		}
@@ -24,15 +30,20 @@ LevelCrowd.prototype = {
 	    	land.body.immovable = true;
 		}
 
-		for (var i =0; i <10; i++) {
+		/*for (var i =0; i <15; i++) {
 	        console.log("a");
-	        aELand =new EnemyLand1(game,'CrowdLand');
+	        /*aELand =new EnemyLand1(game,'CrowdLand');
 	        //eLand[i] = new EnemyLand1(game,'star',500+150*i,800);
 	        game.add.existing(aELand);
 	        aELand.x = 500 + 300*i;
 	        aELand.y = 800;
 	        aELand.scale.setTo(0.5);
-	    }
+	        
+	        var bgLand=bgLands.create(300*i, 825, 'CrowdLand');
+	        bgLand.scale.setTo(0.5);
+	        var bgLand=bgLands.create(50+300*i, 825, 'CrowdLand');
+	        bgLand.scale.setTo(0.5);
+	    }*/
 
 	    player = new Player(game,'player');
 	    player.x=0;
