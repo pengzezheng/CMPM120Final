@@ -8,7 +8,7 @@ function EnemyTorrent(game, key){
 }
 
 function shootBullet(){
-	bullet=new Bullet(game, "diamond");
+	bullet=new Bullet(game, "fire");
 	bullet.reset(this.body.x,this.body.y);
 	if(this.body.x > player.x){
 		if(this.body.x< player.x+250){

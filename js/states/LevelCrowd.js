@@ -21,6 +21,10 @@ LevelCrowd.prototype = {
 			var land = platforms.create(50+i*350, 250, 'pillar');
 	    	land.scale.setTo(8, 0.1);
 	    	land.body.immovable = true;
+	    	aETorrent =new EnemyTorrent(game,'fly');
+	    	aETorrent.x = 100+i*350;
+	    	aETorrent.y=225;
+	    	game.add.existing(aETorrent);
 		}
 
 		for (var i=0; i<10; i++){
