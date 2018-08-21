@@ -9,9 +9,7 @@ LevelCrowd.prototype = {
 	   	sky.scale.setTo(1.01, 0.8);
     	platforms = game.add.group();
 	    platforms.enableBody = true;
-	    checkpoint = game.add.sprite(100,900,'checkpoint');
-	    game.physics.arcade.enable(checkpoint);
-		checkpoint.enableBody = true;
+	 
 		bgLands = game.add.group();
 		for (var i=0; i<10; i++){
 			var land = platforms.create(i*350, 650, 'pillar');
@@ -31,26 +29,28 @@ LevelCrowd.prototype = {
 	    	land.body.immovable = true;
 		}
 
-		/*for (var i =0; i <15; i++) {
+		for (var i =0; i <15; i++) {
 	        console.log("a");
-	        /*aELand =new EnemyLand1(game,'CrowdLand');
+	        aELand =new EnemyLand1(game,'ELand');
 	        //eLand[i] = new EnemyLand1(game,'star',500+150*i,800);
 	        game.add.existing(aELand);
 	        aELand.x = 500 + 300*i;
 	        aELand.y = 800;
 	        aELand.scale.setTo(0.5);
 
-	        var bgLand=bgLands.create(300*i, 825, 'CrowdLand');
-	        bgLand.scale.setTo(0.5);
-	        var bgLand=bgLands.create(50+300*i, 825, 'CrowdLand');
-	        bgLand.scale.setTo(0.5);
-	    }*/
+	        //var bgLand=bgLands.create(300*i, 825, 'CrowdLand');
+	        //bgLand.scale.setTo(0.5);
+	       // var bgLand=bgLands.create(50+300*i, 825, 'CrowdLand');
+	        //bgLand.scale.setTo(0.5);
+	    }
 
 	    sp = game.add.sprite(50,650,'fire');
 		game.physics.enable(sp, Phaser.Physics.ARCADE);
 		sp.scale.setTo(2, 2);
 		sp.body.immovable = true;
-
+		checkpoint = game.add.sprite(100,900,'checkpoint');
+	    game.physics.arcade.enable(checkpoint);
+		checkpoint.enableBody = true;
 	    player = new Player(game,'player');
 	    player.x=0;
 	    player.y=250;
@@ -60,6 +60,7 @@ LevelCrowd.prototype = {
     	life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(630,50);
+
 	},
 
 	update: function() {
