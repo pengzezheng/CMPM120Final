@@ -5,6 +5,8 @@ var widthLife;
 var totalLife;
 var life;
 var fireSound;
+var radius;
+var decreasingLight;
 //var count = 0;
 var bmd;
 function Player(game,key){
@@ -69,6 +71,9 @@ function Player(game,key){
     fireSound = game.sound.add('fireSound');
 	fireSound.allowMultiple = true;
     
+    if(widthLife.width > 0){
+		decreasingLight = game.add.tween(this).to( {LIGHT_RADIUS: (2*this.LIGHT_RADIUS/3) }, 10000, Phaser.Easing.Linear.None, true);
+	}
     
 	
 }
@@ -185,7 +190,9 @@ Player.prototype.update = function(){
 	}
 		this.updateShadowTexture();
 		life.updateCrop();
-	
+		//light decreases by time passes
+		
+		
 	}
 Player.prototype.updateShadowTexture = function(){
 	//create dark texture
@@ -193,7 +200,7 @@ Player.prototype.updateShadowTexture = function(){
 		this.shadowTexture.context.fillRect(0,0,game.world.width,game.world.height);
 
 		//randomly change the radius each frame
-		var radius = this.LIGHT_RADIUS + this.game.rnd.integerInRange(1,10);
+		radius = this.LIGHT_RADIUS + this.game.rnd.integerInRange(1,10);
 
 		//draw circle of light with a soft edge
 		var gradient = this.shadowTexture.context.createRadialGradient(this.x,this.y,this.LIGHT_RADIUS*0.75,this.x,this.y,radius);
