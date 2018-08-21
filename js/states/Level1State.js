@@ -160,7 +160,7 @@ Level1State.prototype = {
 	update: function() {
 		//  Collide the player and the stars with the platforms
 	   game.physics.arcade.overlap(player,checkpoint,reachCheckpoint,null,this);
-	   var spring=game.physics.arcade.collide(player,pillar1);
+	  // var spring=game.physics.arcade.collide(player,pillar1);
 	   /*if(game.input.keyboard.isDown(Phaser.Keyboard.UP)&&spring){ Spring
 	   		temp=player.body.gravity.y;
 			player.body.gravity.y=200;
@@ -204,12 +204,14 @@ Level1State.prototype = {
 
 	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
 	    if (widthLife.width<=0&& check ==1){
-	    	
+	    		decreasingLight.pause();
 	    		player.x = tempX+20;
 	    		player.y = tempY -100;
 	    		player.body.gravity.y=1900;
 	    		widthLife.width = totalLife;
-	    	
+	    		player.LIGHT_RADIUS = 300;
+	    		//decreasingLight.resume();
+	    		decreasingLight = game.add.tween(player).to( {LIGHT_RADIUS: (2*player.LIGHT_RADIUS/3) }, 10000, Phaser.Easing.Linear.None, true);
 
 
 	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
@@ -218,11 +220,14 @@ Level1State.prototype = {
 	    	//game.state.start('GameOverState');
 	    }
 	    else if (widthLife.width<=0&& check ==0){
-	    	
+	    		decreasingLight.pause();
 	    		player.x = 15;
 	    		player.y = 0;
 	    		player.body.gravity.y=1900;
 	    		widthLife.width = totalLife;
+	    		player.LIGHT_RADIUS = 300;
+	    		//decreasingLight.resume();
+	    		decreasingLight = game.add.tween(player).to( {LIGHT_RADIUS: (2*player.LIGHT_RADIUS/3) }, 10000, Phaser.Easing.Linear.None, true);
 	    }
 
 
@@ -247,6 +252,8 @@ Level1State.prototype = {
 	    }
 
 	    game.physics.arcade.overlap(player,candles,reachCandle1,null,this);
+
+
 	    /*aELand.forEachAlive(function(m){
 	    	var distance = this.game.math.distance(m.x,m.y,player.x,player.y);
 	    	if(distance<=50){
