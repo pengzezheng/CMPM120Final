@@ -12,6 +12,7 @@ LevelCrowd.prototype = {
 	 
 		bgLands = game.add.group();
 		for (var i=0; i<20; i++){
+			console.log("b");
 			var land = platforms.create(i*350, 650, 'pillar');
 	    	land.scale.setTo(8, 0.1);
 	    	land.body.immovable = true;
