@@ -9,15 +9,19 @@ LoadingState.prototype = {
 	    game.load.image('candle', 'assets/stand.png');
 	    game.load.spritesheet('bom', 'assets/FlyingEnemybullet.png', 32, 32);
 	    game.load.spritesheet('ex', 'assets/explosionspritesheet.png', 32, 32);
+	    game.load.spritesheet('ELand', 'assets/crowd mob 1.png', 48, 200);
 	    game.load.image('fire','assets/candle bullet.png');
 	    game.load.image('pillar', 'assets/pillar.png');
 	    game.load.audio('BGM1', 'audios/BGMLVL1.wav');
 	    game.load.audio('EXPLO', 'audios/Explosion.wav');
 	    game.load.audio('EA', 'audios/EAttack.wav');
 
-	    game.load.image('checkpoint', 'assets/checkpoint.png');
+	    game.load.image('checkpoint', 'assets/dead candle man.png');
+	    game.load.image('checkpoint1', 'assets/dead candle man lit.png');
+	    game.load.image('bgCrowd', 'assets/c Background.png');
+	    game.load.image('CrowdLand', 'assets/crowd mob 1.png');
 
-	    game.load.audio('fireSound', 'audios/fire.wav');
+	    //game.load.audio('fireSound', 'audios/fire.wav');
 
 
 	},

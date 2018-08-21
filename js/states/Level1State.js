@@ -160,7 +160,11 @@ Level1State.prototype = {
 	update: function() {
 		//  Collide the player and the stars with the platforms
 	   game.physics.arcade.overlap(player,checkpoint,reachCheckpoint,null,this);
+
 	  // var spring=game.physics.arcade.collide(player,pillar1);
+
+	   //var spring=game.physics.arcade.collide(player,pillar1); SPring
+
 	   /*if(game.input.keyboard.isDown(Phaser.Keyboard.UP)&&spring){ Spring
 	   		temp=player.body.gravity.y;
 			player.body.gravity.y=200;
