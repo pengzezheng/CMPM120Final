@@ -11,13 +11,13 @@ LevelCrowd.prototype = {
 	    platforms.enableBody = true;
 	 
 		bgLands = game.add.group();
-		for (var i=0; i<10; i++){
+		for (var i=0; i<20; i++){
 			var land = platforms.create(i*350, 650, 'pillar');
 	    	land.scale.setTo(8, 0.1);
 	    	land.body.immovable = true;
 		}
 
-		for (var i=0; i<10; i++){
+		for (var i=0; i<20; i++){
 			var land = platforms.create(50+i*350, 250, 'pillar');
 	    	land.scale.setTo(8, 0.1);
 	    	land.body.immovable = true;
@@ -27,13 +27,13 @@ LevelCrowd.prototype = {
 	    	game.add.existing(aETorrent);
 		}
 
-		for (var i=0; i<10; i++){
+		for (var i=0; i<20; i++){
 			var land = platforms.create(400*i, 950, 'pillar');
 	    	land.scale.setTo(12, 0.1);
 	    	land.body.immovable = true;
 		}
 
-		for (var i =0; i <15; i++) {
+		for (var i =0; i <30; i++) {
 	        console.log("a");
 	        aELand =new EnemyLand1(game,'ELand');
 	        //eLand[i] = new EnemyLand1(game,'star',500+150*i,800);
@@ -46,6 +46,15 @@ LevelCrowd.prototype = {
 	        //bgLand.scale.setTo(0.5);
 	       // var bgLand=bgLands.create(50+300*i, 825, 'CrowdLand');
 	        //bgLand.scale.setTo(0.5);
+	    }
+
+	    for (var i =0; i <30; i++) {
+	        console.log("a");
+
+	        var bgLand=bgLands.create(300*i, 825, 'CrowdLand');
+	        bgLand.scale.setTo(0.5);
+	        var bgLand=bgLands.create(50+300*i, 825, 'CrowdLand');
+	        bgLand.scale.setTo(0.5);
 	    }
 
 	    sp = game.add.sprite(50,650,'fire');
