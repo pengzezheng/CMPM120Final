@@ -2,6 +2,8 @@ var checkpoint;
 var temps;
 var checkpointRadius;
 var check;
+var TempX;
+var TempY;
 var LevelCrowd = function(game) {};
 LevelCrowd.prototype = {
 	create: function() {
@@ -77,6 +79,8 @@ LevelCrowd.prototype = {
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(630,50);
 
+
+
 	},
 
 	update: function() {
@@ -89,6 +93,7 @@ LevelCrowd.prototype = {
 			game.time.events.add(Phaser.Timer.SECOND * 2, this.springDone, this);
 
 		}
+		//console.log(player.x,player.y);
 		/*if (widthLife.width<=0&& check ==1){
 	    	
 	    		player.x = tempX+20;
@@ -115,9 +120,12 @@ LevelCrowd.prototype = {
 
 	reachCheckpoint: function(player,checkpoint){
 		console.log("a");
+		TempX = checkpoint.x;
+    	TempY = checkpoint.y;
 		check = 1;
 		widthLife.width = totalLife;
-		var saved=game.add.sprite(checkpoint.body.x,checkpoint.body.y,'checkpoint1');
+		var saved=new Checkpoint(game,'checkpoint1');
+		game.add.existing(saved);
 	//saved.enableBody = true;
 		checkpoint.kill();
 		//refer to the example: https://gamemechanicexplorer.com/#lighting-1
