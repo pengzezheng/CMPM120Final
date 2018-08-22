@@ -5,6 +5,7 @@ function EnemyLand1(game, key){
 	this.enableBody=true;
 	//this.body.gravity.y=100;
 	this.animations.add('ELand', [0, 1, 2], 10, true);
+	this.anchor.setTo(0.6);
 
 }
 
@@ -31,10 +32,12 @@ EnemyLand1.prototype.update = function() {
 	if(this.body.x > player.x){
 		if(this.body.x< player.x+250){
 			game.physics.arcade.moveToObject(this,player);
+			this.scale.setTo(0.5,0.5);
 		}
 	}else{
 		if(player.x< this.body.x+250){
 			game.physics.arcade.moveToObject(this,player);
+			this.scale.setTo(-0.5,0.5);
 		}
 	}
 } 
