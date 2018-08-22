@@ -108,8 +108,8 @@ Player.prototype.constructor = Player;
 	
 Player.prototype.update = function(){
 		//this.updateShadowTexture();
-		game.physics.arcade.collide(this,platforms);
-		var hitPlatform=game.physics.arcade.collide(this,platforms);
+		//game.physics.arcade.collide(this,layer1);
+		//var hitPlatform=game.physics.arcade.collide(this,layer1);
 		//game.physics.arcade.collide(this,platforms);
     	
     	cursors = game.input.keyboard.createCursorKeys();
@@ -118,7 +118,7 @@ Player.prototype.update = function(){
 		this.body.velocity.x=0;
 
 		//if(ifRestart ==0){
-		if(cursors.up.justDown&&this.body.touching.down){
+		if(cursors.up.justDown&&this.body.onFloor()){
 			this.body.velocity.y=-900;
 			//this.animations.play('up');
 			//console.log('jump');
