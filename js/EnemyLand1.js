@@ -4,7 +4,7 @@ function EnemyLand1(game, key){
 	game.physics.enable(this);//enable physics
 	this.enableBody=true;
 	//this.body.gravity.y=100;
-	this.animations.add('ELand', [0, 1, 2, 3, 4, 5, 6, 7, 8], 10, true);
+	this.animations.add('ELand', [0, 1, 2], 10, true);
 
 }
 
@@ -24,7 +24,7 @@ EnemyLand1.prototype = Object.create(Phaser.Sprite.prototype);// make prototype
 EnemyLand1.prototype.constructor = EnemyLand1;
 
 EnemyLand1.prototype.update = function() {
-	game.physics.arcade.collide(this,platforms);
+	game.physics.arcade.collide(this,layer1);
 	game.physics.arcade.overlap(this, player, rush, null, this);
 	game.physics.arcade.overlap(this, weapon.bullets, hitEnemyLand, null, this);
 	this.animations.play('ELand');

@@ -12,7 +12,7 @@ LoadingState.prototype = {
 	    game.load.image('tileset2', 'assets/tilemap2.png', 32, 32);
 	    game.load.spritesheet('bom', 'assets/FlyingEnemybullet.png', 32, 32);
 	    game.load.spritesheet('ex', 'assets/explosionspritesheet.png', 32, 32);
-	    game.load.spritesheet('ELand', 'assets/crowd mob 1.png', 48, 200);
+	    game.load.spritesheet('ELand', 'assets/c Mob.png', 61, 200);
 	    game.load.image('fire','assets/candle bullet.png');
 	    game.load.image('pillar', 'assets/pillar.png');
 	    game.load.audio('BGM1', 'audios/BGMLVL1.wav');
