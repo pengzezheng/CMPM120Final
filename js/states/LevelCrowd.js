@@ -74,7 +74,7 @@ LevelCrowd.prototype = {
 
 	    sp = game.add.sprite(100,650,'jumppad');
 		game.physics.enable(sp, Phaser.Physics.ARCADE);
-		sp.scale.setTo(2, 2);
+		sp.scale.setTo(0.15);
 		sp.body.immovable = true;
 		checkpoint = game.add.sprite(100,900,'checkpoint');
 	    game.physics.arcade.enable(checkpoint);
@@ -96,10 +96,10 @@ LevelCrowd.prototype = {
 	update: function() {
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.collide(player,layer1);
-		game.physics.arcade.collide(ELand,layer1);
+		game.physics.arcade.collide(aELand,layer1);
 		var spring=game.physics.arcade.collide(player,sp);
 	   	if(spring==true){ 
-			player.body.velocity.y=-1500;
+			player.body.velocity.y=-1200;
 			//this.animations.play('up');
 			//game.time.events.add(Phaser.Timer.SECOND * 2, this.springDone, this);
 
