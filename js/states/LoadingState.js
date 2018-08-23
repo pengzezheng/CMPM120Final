@@ -1,7 +1,7 @@
 var LoadingState = function(game) {};
 LoadingState.prototype = {
 	preload: function() {
-		game.load.atlas('player','assets/candleman.png','assets/candleman.json');
+		game.load.spritesheet('player','assets/CandlemanSpritesheet.png',32,42);
 		game.load.image('sky', 'assets/Hbackground.png');
 	    game.load.image('ground', 'assets/platform.png');
 	    game.load.image('star', 'assets/mob.png');
@@ -23,6 +23,7 @@ LoadingState.prototype = {
 	    game.load.image('checkpoint1', 'assets/dead candle man lit.png');
 	    game.load.image('bgCrowd', 'assets/c Background.png');
 	    game.load.image('CrowdLand', 'assets/crowd mob 1.png');
+
 
 	    //game.load.audio('fireSound', 'audios/fire.wav');
 

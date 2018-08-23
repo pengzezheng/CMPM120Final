@@ -1,6 +1,13 @@
 var checkpoint;
 var temps;
+
+var checkpointRadius;
+var check;
+var TempX;
+var TempY;
+
 var layer1;
+
 var LevelCrowd = function(game) {};
 LevelCrowd.prototype = {
 	create: function() {
@@ -74,13 +81,15 @@ LevelCrowd.prototype = {
 		checkpoint.enableBody = true;
 	    player = new Player(game,'player');
 	    player.x=0;
-	    player.y=250;
+	    player.y=500;
     	game.add.existing(player);
     	game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
     	life.fixedToCamera = true;
     	life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(630,50);
+
+
 
 	},
 
@@ -94,7 +103,9 @@ LevelCrowd.prototype = {
 			player.body.gravity.y=1000;
 			//this.animations.play('up');
 			game.time.events.add(Phaser.Timer.SECOND * 2, this.springDone, this);
+
 		}
+		//console.log(player.x,player.y);
 		/*if (widthLife.width<=0&& check ==1){
 	    	
 	    		player.x = tempX+20;
@@ -121,11 +132,39 @@ LevelCrowd.prototype = {
 
 	reachCheckpoint: function(player,checkpoint){
 		console.log("a");
+		TempX = checkpoint.x;
+    	TempY = checkpoint.y;
 		check = 1;
 		widthLife.width = totalLife;
-		var saved=game.add.sprite(checkpoint.body.x,checkpoint.body.y,'checkpoint1');
+		var saved=new Checkpoint(game,'checkpoint1');
+		game.add.existing(saved);
 	//saved.enableBody = true;
 		checkpoint.kill();
+		//refer to the example: https://gamemechanicexplorer.com/#lighting-1
+		// this.LIGHT_RADIUS = 100;
+		// //create shadow texture
+		// this.shadowTexture = this.game.add.bitmapData(this.game.world.width,this.game.world.height);
+		// //create an object that will use the bitmap as texture
+		// var checkpointLight = this.game.add.image(0,0,this.shadowTexture);
+		// //dark everything below the light
+		// checkpointLight.blendMode = Phaser.blendModes.MULTIPLY;
+		// checkpointRadius = this.LIGHT_RADIUS + this.game.rnd.integerInRange(1,10);
+
+		// var checkpointGradient = player.shadowTexture.context.createRadialGradient(saved.x,saved.y,player.LIGHT_RADIUS*0.75,saved.x,saved.y,checkpointRadius);
+		
+		
+		// checkpointGradient.addColorStop(0,'rgba(255,255,255,1.0)');
+		// checkpointGradient.addColorStop(1,'rgba(255,255,255,0.0)');
+
+		// //draw the circle of light
+		// saved.shadowTexture.context.beginPath();
+		// saved.shadowTexture.context.fillStyle = gradient;
+		// saved.shadowTexture.context.arc(this.x,this.y,radius,0,Math.PI*2);
+		// saved.shadowTexture.context.fill();
+
+		// //tell the engine it should update the texture
+		// saved.shadowTexture.dirty = true;
+
 	},
 
 	springDone: function(){ 
