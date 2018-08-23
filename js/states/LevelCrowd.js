@@ -87,6 +87,7 @@ LevelCrowd.prototype = {
 	update: function() {
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.collide(player,layer1);
+		game.physics.arcade.collide(ELand,layer1);
 		var spring=game.physics.arcade.collide(player,sp);
 	   	if(game.input.keyboard.isDown(Phaser.Keyboard.UP)&&spring){ 
 	   		temp=player.body.gravity.y;
