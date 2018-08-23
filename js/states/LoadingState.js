@@ -7,6 +7,8 @@ LoadingState.prototype = {
 	    game.load.image('star', 'assets/mob.png');
 	    game.load.image('fly', 'assets/flyingenemy.png');
 	    game.load.image('candle', 'assets/stand.png');
+	    game.load.image('candle', 'assets/stand.png');
+	    game.load.image('jumppad', 'assets/jump pad.png');
 	    //game.load.image('level2bg', 'assets/level2bg.json');
 	    game.load.tilemap('level2bg', 'assets/level2bg.json', null, Phaser.Tilemap.TILED_JSON);
 	    game.load.image('tileset2', 'assets/tilemap2.png', 32, 32);

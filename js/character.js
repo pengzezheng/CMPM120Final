@@ -14,10 +14,10 @@ function Player(game,key){
 	game.physics.enable(this);
 	this.enableBody = true;
 	this.body.velocity.x = 0;
-	this.scale.setTo(2,2);
+	this.scale.setTo(1);
 	this.body.collideWorldBounds = true;
 	this.anchor.setTo(0.5,0.5);
-	this.body.gravity.y=1900;
+	this.body.gravity.y=2400;
 	this.animations.add('left',[0,1,2],10,true);
 	this.animations.add('right',[3,4,5],10,true);
 	//make the player face the direction they walk to

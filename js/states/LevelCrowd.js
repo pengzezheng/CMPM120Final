@@ -72,7 +72,7 @@ LevelCrowd.prototype = {
 	        bgLand.scale.setTo(0.5);
 	    }*/
 
-	    sp = game.add.sprite(50,650,'fire');
+	    sp = game.add.sprite(100,650,'jumppad');
 		game.physics.enable(sp, Phaser.Physics.ARCADE);
 		sp.scale.setTo(2, 2);
 		sp.body.immovable = true;
@@ -98,11 +98,10 @@ LevelCrowd.prototype = {
 		game.physics.arcade.collide(player,layer1);
 		game.physics.arcade.collide(ELand,layer1);
 		var spring=game.physics.arcade.collide(player,sp);
-	   	if(game.input.keyboard.isDown(Phaser.Keyboard.UP)&&spring){ 
-	   		temp=player.body.gravity.y;
-			player.body.gravity.y=1000;
+	   	if(spring==true){ 
+			player.body.velocity.y=-1500;
 			//this.animations.play('up');
-			game.time.events.add(Phaser.Timer.SECOND * 2, this.springDone, this);
+			//game.time.events.add(Phaser.Timer.SECOND * 2, this.springDone, this);
 
 		}
 		//console.log(player.x,player.y);
@@ -167,8 +166,8 @@ LevelCrowd.prototype = {
 
 	},
 
-	springDone: function(){ 
+	/*springDone: function(){ 
 		player.body.gravity.y=temp;
 		temp=0;
-	},
+	},*/
 };
