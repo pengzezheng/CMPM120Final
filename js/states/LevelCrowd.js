@@ -1,6 +1,6 @@
 var checkpoint;
 var temps;
-<<<<<<< HEAD
+
 var checkpointRadius;
 var check;
 var TempX;
@@ -81,7 +81,7 @@ LevelCrowd.prototype = {
 		checkpoint.enableBody = true;
 	    player = new Player(game,'player');
 	    player.x=0;
-	    player.y=250;
+	    player.y=500;
     	game.add.existing(player);
     	game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
     	life.fixedToCamera = true;

@@ -10,16 +10,16 @@ var decreasingLight;
 //var count = 0;
 var bmd;
 function Player(game,key){
-	Phaser.Sprite.call(this,game,80,908,key,'stand');
+	Phaser.Sprite.call(this, game, 80, 800, key);
 	game.physics.enable(this);
 	this.enableBody = true;
 	this.body.velocity.x = 0;
-	this.scale.setTo(0.05,0.05);
+	this.scale.setTo(2,2);
 	this.body.collideWorldBounds = true;
 	this.anchor.setTo(0.5,0.5);
 	this.body.gravity.y=1900;
-	this.animations.add('right',[1,2],10,true);
-	this.animations.add('left',[0,4],10,true);
+	this.animations.add('left',[0,1,2],10,true);
+	this.animations.add('right',[3,4,5],10,true);
 	//make the player face the direction they walk to
 	this.facing = 'left';
 	//this.body.setSize(18,36,18,15);
@@ -154,7 +154,7 @@ Player.prototype.update = function(){
 					this.frame = 0;
 				}
 				else{
-					this.frame = 1;
+					this.frame = 3;
 				}
 				//this.facing = 'idle';
 
@@ -172,10 +172,13 @@ Player.prototype.update = function(){
 		
 	   if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
 	   		fireSound.play();
+	   		//weapon.bulletAngleOffset = 0;
 	   		if(this.facing == 'left'){
 	   			weapon.bulletSpeed = -600;
 				weapon.fire();
 				widthLife.width -= totalLife/10;
+				//weapon.bulletAngleOffset = 180;
+
 			}
 		
 		
