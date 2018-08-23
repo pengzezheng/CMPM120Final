@@ -70,7 +70,8 @@ function Player(game,key){
     //add sound for fire weapon
     fireSound = game.sound.add('fireSound');
 	fireSound.allowMultiple = true;
-    
+    this.body.setSize(16, 26, 8, 16);
+    this.anchor.setTo(0.5,0.5);
     if(widthLife.width > 0){
 		decreasingLight = game.add.tween(this).to( {LIGHT_RADIUS: (2*this.LIGHT_RADIUS/3) }, 10000, Phaser.Easing.Linear.None, true);
 	}

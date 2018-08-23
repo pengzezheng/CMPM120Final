@@ -5,7 +5,7 @@ var checkpointRadius;
 var check;
 var TempX;
 var TempY;
-
+var spring;
 var layer1;
 
 var LevelCrowd = function(game) {};
@@ -54,7 +54,7 @@ LevelCrowd.prototype = {
 	        //eLand[i] = new EnemyLand1(game,'star',500+150*i,800);
 	        game.add.existing(aELand);
 	        aELand.x = 500 + 300*i;
-	        aELand.y = 800;
+	        aELand.y = 300;
 	        aELand.scale.setTo(0.5);
 
 	        //var bgLand=bgLands.create(300*i, 825, 'CrowdLand');
@@ -71,11 +71,12 @@ LevelCrowd.prototype = {
 	        var bgLand=bgLands.create(50+300*i, 825, 'CrowdLand');
 	        bgLand.scale.setTo(0.5);
 	    }*/
-
-	    sp = game.add.sprite(100,650,'jumppad');
-		game.physics.enable(sp, Phaser.Physics.ARCADE);
+	    spring=game.add.group();
+		game.physics.enable(spring, Phaser.Physics.ARCADE);
+		spring.enableBody=true;
+		//spring.body.immovable = true;
+		var sp =spring.create(100,650,'jumppad');
 		sp.scale.setTo(0.15);
-		sp.body.immovable = true;
 		checkpoint = game.add.sprite(100,900,'checkpoint');
 	    game.physics.arcade.enable(checkpoint);
 		checkpoint.enableBody = true;
@@ -97,8 +98,8 @@ LevelCrowd.prototype = {
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.collide(player,layer1);
 		game.physics.arcade.collide(aELand,layer1);
-		var spring=game.physics.arcade.collide(player,sp);
-	   	if(spring==true){ 
+		var onSpring=game.physics.arcade.collide(player,spring);
+	   	if(onSpring==true){ 
 			player.body.velocity.y=-1200;
 			//this.animations.play('up');
 			//game.time.events.add(Phaser.Timer.SECOND * 2, this.springDone, this);
