@@ -5,12 +5,12 @@ var widthLife;
 var totalLife;
 var life;
 var fireSound;
-var radius;
+//var radius;
 var decreasingLight;
 //var count = 0;
 var bmd;
-function Player(game,key){
-	Phaser.Sprite.call(this, game, 80, 800, key);
+function Player(game,key,x,y){
+	Phaser.Sprite.call(this, game, x, y, key);
 	game.physics.enable(this);
 	this.enableBody = true;
 	this.body.velocity.x = 0;
@@ -29,13 +29,13 @@ function Player(game,key){
 	//this.animations.add('leftAttack',[7],10,true);
 	//give candleman a small range of light
 	//refer to the example: https://gamemechanicexplorer.com/#lighting-1
-	this.LIGHT_RADIUS = 300;
-	//create shadow texture
-	this.shadowTexture = this.game.add.bitmapData(this.game.world.width,this.game.world.height);
-	//create an object that will use the bitmap as texture
-	var light = this.game.add.image(0,0,this.shadowTexture);
-	//dark everything below the light
-	light.blendMode = Phaser.blendModes.MULTIPLY;
+	// this.LIGHT_RADIUS = 300;
+	// // //create shadow texture
+	// this.shadowTexture = this.game.add.bitmapData(this.game.world.width,this.game.world.height);
+	// //create an object that will use the bitmap as texture
+	// var light = this.game.add.image(0,0,this.shadowTexture);
+	// //dark everything below the light
+	// light.blendMode = Phaser.blendModes.MULTIPLY;
 	//create health bar
 	//refer to https://codepen.io/jdnichollsc/pen/oXXRMz
 	//add total health bar
@@ -72,9 +72,9 @@ function Player(game,key){
 	fireSound.allowMultiple = true;
     this.body.setSize(16, 26, 8, 16);
     this.anchor.setTo(0.5,0.5);
-    if(widthLife.width > 0){
-		decreasingLight = game.add.tween(this).to( {LIGHT_RADIUS: (2*this.LIGHT_RADIUS/3) }, 10000, Phaser.Easing.Linear.None, true);
-	}
+ //    if(widthLife.width > 0){
+	// 	decreasingLight = game.add.tween(this).to( {LIGHT_RADIUS: (2*this.LIGHT_RADIUS/3) }, 10000, Phaser.Easing.Linear.None, true);
+	// }
     
 	
 }
@@ -192,37 +192,37 @@ Player.prototype.update = function(){
 			}
 		//}
 	}
-		this.updateShadowTexture();
+		//this.updateShadowTexture();
 		life.updateCrop();
 		//light decreases by time passes
 		
 		
 	}
-Player.prototype.updateShadowTexture = function(){
-	//create dark texture
-		this.shadowTexture.context.fillStyle = 'rgb(0,0,0)';
-		this.shadowTexture.context.fillRect(0,0,game.world.width,game.world.height);
+// Player.prototype.updateShadowTexture = function(){
+// 	//create dark texture
+// 		this.shadowTexture.context.fillStyle = 'rgb(0,0,0)';
+// 		this.shadowTexture.context.fillRect(0,0,game.world.width,game.world.height);
 
-		//randomly change the radius each frame
-		radius = this.LIGHT_RADIUS + this.game.rnd.integerInRange(1,10);
+// 		//randomly change the radius each frame
+// 		radius = this.LIGHT_RADIUS + this.game.rnd.integerInRange(1,10);
 
-		//draw circle of light with a soft edge
+// 		//draw circle of light with a soft edge
 		
-		var gradient = this.shadowTexture.context.createRadialGradient(this.x,this.y,this.LIGHT_RADIUS*0.75,this.x,this.y,radius);
+// 		var gradient = this.shadowTexture.context.createRadialGradient(this.x,this.y,this.LIGHT_RADIUS*0.75,this.x,this.y,radius);
 		
 		
-		gradient.addColorStop(0,'rgba(255,255,255,1.0)');
-		gradient.addColorStop(1,'rgba(255,255,255,0.0)');
+// 		gradient.addColorStop(0,'rgba(255,255,255,1.0)');
+// 		gradient.addColorStop(1,'rgba(255,255,255,0.0)');
 
-		//draw the circle of light
-		this.shadowTexture.context.beginPath();
-		this.shadowTexture.context.fillStyle = gradient;
-		this.shadowTexture.context.arc(this.x,this.y,radius,0,Math.PI*2);
-		this.shadowTexture.context.fill();
+// 		//draw the circle of light
+// 		this.shadowTexture.context.beginPath();
+// 		this.shadowTexture.context.fillStyle = gradient;
+// 		this.shadowTexture.context.arc(this.x,this.y,radius,0,Math.PI*2);
+// 		this.shadowTexture.context.fill();
 
-		//tell the engine it should update the texture
-		this.shadowTexture.dirty = true;
-}
+// 		//tell the engine it should update the texture
+// 		this.shadowTexture.dirty = true;
+// }
 /*Player.prototype.cropLife = function(){
 	if(widthLife.width > 0&&count == 0){
 		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /100)) }, 200, Phaser.Easing.Linear.None, true);

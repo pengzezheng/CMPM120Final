@@ -7,7 +7,7 @@ var TempX;
 var TempY;
 var spring;
 var layer1;
-
+var playerLight;
 var LevelCrowd = function(game) {};
 LevelCrowd.prototype = {
 	create: function() {
@@ -19,7 +19,7 @@ LevelCrowd.prototype = {
 	   	map.addTilesetImage('platform', 'tileset2', 32, 32);
 	   	layer1=map.createLayer('layer1');
 	   	game.add.existing(layer1);
-	   	layer1.resizeWorld();
+	   	//layer1.resizeWorld();
 	   	map.setCollisionByExclusion([], true, 'layer1');
     	/*platforms = game.add.group();
 	    platforms.enableBody = true;
@@ -77,24 +77,43 @@ LevelCrowd.prototype = {
 		//spring.body.immovable = true;
 		var sp =spring.create(100,650,'jumppad');
 		sp.scale.setTo(0.15);
-		checkpoint = game.add.sprite(100,900,'checkpoint');
+		checkpoint = game.add.sprite(80,680,'checkpoint');
 	    game.physics.arcade.enable(checkpoint);
 		checkpoint.enableBody = true;
-	    player = new Player(game,'player');
-	    player.x=0;
-	    player.y=500;
+	    // player = new Player(game,'player');
+	    // player.x=0;
+	    // player.y=500;
+    	// game.add.existing(player);
+    	// game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
+    	// life.fixedToCamera = true;
+    	// life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
+    	// bglife.fixedToCamera = true;
+    	// bglife.cameraOffset.setTo(630,50);
+    	//refer to the example: https://gamemechanicexplorer.com/#lighting-1
+		this.LIGHT_RADIUS = 300;
+		//create shadow texture
+		this.shadowTexture = this.game.add.bitmapData(this.game.world.width,this.game.world.height);
+		//create an object that will use the bitmap as texture
+		var lightSprite = game.add.image(0,0,this.shadowTexture);
+		//dark everything below the light
+		lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
+		// Create the lights
+    	this.lights = this.game.add.group();
+    	player = new Player(game,'player',3,500);
+    	
+    	// player.x=0;
+	    // player.y=300;
     	game.add.existing(player);
     	game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
     	life.fixedToCamera = true;
     	life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(630,50);
-
-
-
+    	this.lights.add(player);
 	},
 
 	update: function() {
+		
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.collide(player,layer1);
 		game.physics.arcade.collide(aELand,layer1);
@@ -105,6 +124,7 @@ LevelCrowd.prototype = {
 			//game.time.events.add(Phaser.Timer.SECOND * 2, this.springDone, this);
 
 		}
+		this.updateShadowTexture();
 		//console.log(player.x,player.y);
 		/*if (widthLife.width<=0&& check ==1){
 	    	
@@ -136,10 +156,13 @@ LevelCrowd.prototype = {
     	TempY = checkpoint.y;
 		check = 1;
 		widthLife.width = totalLife;
-		var saved=new Checkpoint(game,'checkpoint1');
+		var saved=new Checkpoint(game,checkpoint.x,checkpoint.y,'checkpoint1');
 		game.add.existing(saved);
+
 	//saved.enableBody = true;
 		checkpoint.kill();
+		this.lights.add(saved);
+		saved.LIGHT_RADIUS = 50;
 		//refer to the example: https://gamemechanicexplorer.com/#lighting-1
 		// this.LIGHT_RADIUS = 100;
 		// //create shadow texture
@@ -165,6 +188,45 @@ LevelCrowd.prototype = {
 		// //tell the engine it should update the texture
 		// saved.shadowTexture.dirty = true;
 
+	},
+	updateShadowTexture:function(){
+		this.shadowTexture.context.fillStyle = 'rgb(0, 0, 0)';
+    	this.shadowTexture.context.fillRect(0, 0, this.game.world.width, this.game.world.height);
+
+    	// Iterate through each of the lights and draw the glow
+    	this.lights.forEach(function(m) {
+    		if(m == player){
+        	// Randomly change the radius each frame
+        	var radius = this.LIGHT_RADIUS + this.game.rnd.integerInRange(1,10);
+
+        	// Draw circle of light with a soft edge
+        	var gradient =this.shadowTexture.context.createRadialGradient(m.x, m.y,this.LIGHT_RADIUS * 0.75,m.x, m.y, radius);
+        	gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+        	gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
+
+        	this.shadowTexture.context.beginPath();
+        	this.shadowTexture.context.fillStyle = gradient;
+        	this.shadowTexture.context.arc(m.x, m.y, radius, 0, Math.PI*2);
+        	this.shadowTexture.context.fill();
+        }else{
+        	// Randomly change the radius each frame
+        	var radius = 100 + this.game.rnd.integerInRange(1,10);
+
+        	// Draw circle of light with a soft edge
+        	var gradient =this.shadowTexture.context.createRadialGradient(m.x, m.y,100 * 0.75,m.x, m.y, radius);
+        	gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+        	gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
+
+        	this.shadowTexture.context.beginPath();
+        	this.shadowTexture.context.fillStyle = gradient;
+        	this.shadowTexture.context.arc(m.x, m.y, radius, 0, Math.PI*2);
+        	this.shadowTexture.context.fill();
+
+        }
+    }, this);
+
+    // This just tells the engine it should update the texture cache
+    this.shadowTexture.dirty = true;
 	},
 
 	/*springDone: function(){ 
