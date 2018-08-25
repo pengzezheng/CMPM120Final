@@ -11,6 +11,7 @@ LoadingState.prototype = {
 	    game.load.image('jumppad', 'assets/jump pad.png');
 	    //game.load.image('level2bg', 'assets/level2bg.json');
 	    game.load.tilemap('level2bg', 'assets/level2bg.json', null, Phaser.Tilemap.TILED_JSON);
+	    game.load.tilemap('levelholebg', 'assets/levelholebg.json', null, Phaser.Tilemap.TILED_JSON);
 	    game.load.image('tileset2', 'assets/tilemap2.png', 32, 32);
 	    game.load.spritesheet('bom', 'assets/FlyingEnemybullet.png', 32, 32);
 	    game.load.spritesheet('ex', 'assets/explosionspritesheet.png', 32, 32);
