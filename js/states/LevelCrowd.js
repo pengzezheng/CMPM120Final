@@ -14,16 +14,20 @@ var CrowdCheck;
 var LevelCrowd = function(game) {};
 LevelCrowd.prototype = {
 	create: function() {
+
 		game.world.setBounds(0, 0, 8000, 960);
 		game.physics.startSystem(Phaser.Physics.ARCADE);
+		 game.time.advancedTiming = true;
 		var sky = game.add.sprite(-100, 0, 'bgCrowd');
 	   	sky.scale.setTo(1.01, 0.8);
 	   	map=game.add.tilemap('level2bg');
 	   	map.addTilesetImage('platform', 'tileset2', 32, 32);
 	   	layer1=map.createLayer('layer1');
-	   	game.add.existing(layer1);
+	   	var a =game.add.existing(layer1);
+	   	a.debug=true;
 	   	//layer1.resizeWorld();
-	   	map.setCollisionByExclusion([], true, 'layer1');
+
+	   	
 	   	game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 	   	CrowdCheck = 0;
     	/*platforms = game.add.group();
@@ -53,7 +57,13 @@ LevelCrowd.prototype = {
 	    	land.body.immovable = true;
 		}*/
 
-		for (var i =0; i <30; i++) {
+		//for (var i =0; i <30; i++) {
+
+	   	map.setCollisionByExclusion([], true, 'layer1', true);
+
+
+		/*for (var i =0; i <30; i++) {
+>>>>>>> 88cc2906952b6b61633dfcb35c4c5d2a5a323429
 	        console.log("a");
 	        aELand =new EnemyLand1(game,'ELand');
 	        //eLand[i] = new EnemyLand1(game,'star',500+150*i,800);
@@ -61,30 +71,32 @@ LevelCrowd.prototype = {
 	        aELand.x = 500 + 300*i;
 	        aELand.y = 300;
 	        aELand.scale.setTo(0.5);
+	    }*/
 
-	        //var bgLand=bgLands.create(300*i, 825, 'CrowdLand');
-	        //bgLand.scale.setTo(0.5);
-	       // var bgLand=bgLands.create(50+300*i, 825, 'CrowdLand');
-	        //bgLand.scale.setTo(0.5);
+	    for (var i =0; i <10; i++) {
+	        console.log("a");
+	        var aBgE=game.add.sprite(300 + 20*i, 850,'ELand');
+	        //eLand[i] = new EnemyLand1(game,'star',500+150*i,800);
+	        aBgE.scale.setTo(0.25);
 	    }
 
-	    /*for (var i =0; i <30; i++) {
-	        console.log("a");
-
-	        var bgLand=bgLands.create(300*i, 825, 'CrowdLand');
-	        bgLand.scale.setTo(0.5);
-	        var bgLand=bgLands.create(50+300*i, 825, 'CrowdLand');
-	        bgLand.scale.setTo(0.5);
-	    }*/
+	    aETorrent =new EnemyTorrent(game,'enemyT');
+	    game.add.existing(aETorrent);
+	    aETorrent.x = 300;
+	    aETorrent.y = 600;
 	    spring=game.add.group();
 		game.physics.enable(spring, Phaser.Physics.ARCADE);
 		spring.enableBody=true;
 		//spring.body.immovable = true;
-		var sp =spring.create(100,650,'jumppad');
+		var sp =spring.create(200,650,'jumppad');
+
 		sp.scale.setTo(0.15);
+		sp.body.immovable=true;
+		sp.body.setSize(256, 100, 0, 175);		
 		checkpoint = game.add.sprite(80,680,'checkpoint');
 	    game.physics.arcade.enable(checkpoint);
 		checkpoint.enableBody = true;
+
 		checkpoint2 = game.add.sprite(1660,580,'checkpoint');
 	    game.physics.arcade.enable(checkpoint2);
 		checkpoint2.enableBody = true;
@@ -97,6 +109,9 @@ LevelCrowd.prototype = {
     	// life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
     	// bglife.fixedToCamera = true;
     	// bglife.cameraOffset.setTo(630,50);
+
+
+
     	//refer to the example: https://gamemechanicexplorer.com/#lighting-1
 		this.LIGHT_RADIUS = 300;
 		//create shadow texture
@@ -287,6 +302,12 @@ LevelCrowd.prototype = {
 		player.body.gravity.y=temp;
 		temp=0;
 	},*/
+	render: function(){
+		// game.debug.body(spring, false);
+		game.debug.body(layer1, "#9090ff", true);
+		game.debug.text('FPS: ' + game.time.fps || 'FPS: --', 40, 40, "#00ff00");
+
+	}
 };
 LevelCrowd.prototype.cropLife = function(){
 	if(widthLife.width > 0){
