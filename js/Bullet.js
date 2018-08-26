@@ -1,5 +1,5 @@
 function Bullet(game, key){
-	Phaser.Sprite.call(this, game, 400, 85, key);// call phaser sprite
+	Phaser.Sprite.call(this, game, 400, 85, 'theBullet');// call phaser sprite
 	game.physics.enable(this, Phaser.Physics.ARCADE);//enable physics
 	this.enableBody=true;
 	//this.tracking=true;
