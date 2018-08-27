@@ -89,10 +89,13 @@ LevelCrowd.prototype = {
 		spring.enableBody=true;
 		//spring.body.immovable = true;
 		var sp =spring.create(200,650,'jumppad');
-
 		sp.scale.setTo(0.15);
 		sp.body.immovable=true;
-		sp.body.setSize(256, 100, 0, 175);		
+		sp.body.setSize(256, 100, 0, 175);
+		var sp =spring.create(440,725,'jumppad');
+		sp.scale.setTo(0.15);
+		sp.body.immovable=true;
+		sp.body.setSize(256, 100, 0, 175);				
 		checkpoint = game.add.sprite(80,680,'checkpoint');
 	    game.physics.arcade.enable(checkpoint);
 		checkpoint.enableBody = true;
@@ -150,8 +153,9 @@ LevelCrowd.prototype = {
 		this.updateShadowTexture();
 		life.updateCrop();
 		if(widthLife.width<=0 && CrowdCheck == 0){
-			player.x = 3;
+			player.x = 10;
 			player.y = 500;
+			widthLife.width = totalLife;
 		}
 		else if (widthLife.width<=0&& CrowdCheck ==1){
 	    	
