@@ -171,27 +171,27 @@ Player.prototype.update = function(){
 		
 		//make light works
 		
-	   if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
-	   		fireSound.play();
-	   		//weapon.bulletAngleOffset = 0;
-	   		if(this.facing == 'left'){
-	   			weapon.bulletSpeed = -600;
-				weapon.fire();
-				widthLife.width -= totalLife/10;
-				//weapon.bulletAngleOffset = 180;
+	//    if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
+	//    		fireSound.play();
+	//    		//weapon.bulletAngleOffset = 0;
+	//    		if(this.facing == 'left'){
+	//    			weapon.bulletSpeed = -600;
+	// 			weapon.fire();
+	// 			widthLife.width -= totalLife/10;
+	// 			//weapon.bulletAngleOffset = 180;
 
-			}
+	// 		}
 		
 		
-			else if(this.facing == 'right'){
-	   			weapon.bulletSpeed =600;
-				weapon.fire();
-				widthLife.width -= totalLife/10;
+	// 		else if(this.facing == 'right'){
+	//    			weapon.bulletSpeed =600;
+	// 			weapon.fire();
+	// 			widthLife.width -= totalLife/10;
 		
 		
-			}
-		//}
-	}
+	// 		}
+	// 	//}
+	// }
 		//this.updateShadowTexture();
 		life.updateCrop();
 		//light decreases by time passes

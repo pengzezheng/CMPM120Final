@@ -11,6 +11,8 @@ var spring;
 var layer1;
 var playerLight;
 var CrowdCheck;
+var playerRadius;
+var blowRadius;
 var LevelCrowd = function(game) {};
 LevelCrowd.prototype = {
 	create: function() {
@@ -136,6 +138,7 @@ LevelCrowd.prototype = {
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(630,50);
     	this.lights.add(player);
+    	player.LIGHT_RADIUS = 100;
 	},
 
 	update: function() {
@@ -143,6 +146,7 @@ LevelCrowd.prototype = {
 		game.physics.arcade.overlap(player,checkpoint2,this.reachCheckpoint2,null,this);
 		game.physics.arcade.collide(player,layer1);
 		game.physics.arcade.collide(aELand,layer1);
+
 		var onSpring=game.physics.arcade.collide(player,spring);
 	   	if(onSpring==true){ 
 			player.body.velocity.y=-1200;
@@ -181,6 +185,11 @@ LevelCrowd.prototype = {
 	    	widthLife.width = totalLife;
 	    	
 	    }
+
+	 //    if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
+	 //    	this.changeLight(player);
+			
+		// }
 		//console.log(player.x,player.y);
 		/*if (widthLife.width<=0&& check ==1){
 	    	
@@ -261,6 +270,11 @@ LevelCrowd.prototype = {
 		
 
 	},
+	changeLight: function(player){
+		player.LIGHT_RADIUS = 0;
+		
+
+	},
 	updateShadowTexture:function(){
 		this.shadowTexture.context.fillStyle = 'rgb(0, 0, 0)';
     	this.shadowTexture.context.fillRect(0, 0, this.game.world.width, this.game.world.height);
@@ -268,30 +282,60 @@ LevelCrowd.prototype = {
     	// Iterate through each of the lights and draw the glow
     	this.lights.forEach(function(m) {
     		if(m == player){
+    			//Randomly change the radius each frame
+        		playerRadius = this.LIGHT_RADIUS + this.game.rnd.integerInRange(1,10);
+
+        		// Draw circle of light with a soft edge
+        		var gradient =this.shadowTexture.context.createRadialGradient(m.x, m.y,this.LIGHT_RADIUS * 0.75,m.x, m.y, playerRadius);
+        		gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+        		gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
+
+        		this.shadowTexture.context.beginPath();
+        		this.shadowTexture.context.fillStyle = gradient;
+        		this.shadowTexture.context.arc(m.x, m.y, playerRadius, 0, Math.PI*2);
+        		this.shadowTexture.context.fill();
+       	 	}
+    			// if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
+       //  			// Randomly change the radius each frame
+       //  			playerRadius = this.LIGHT_RADIUS + this.game.rnd.integerInRange(1,10);
+
+       //  			// Draw circle of light with a soft edge
+       //  			var gradient =this.shadowTexture.context.createRadialGradient(m.x, m.y,this.LIGHT_RADIUS * 0.75,m.x, m.y, playerRadius);
+       //  			gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+       //  			gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
+
+       //  			this.shadowTexture.context.beginPath();
+       //  			this.shadowTexture.context.fillStyle = gradient;
+       //  			this.shadowTexture.context.arc(m.x, m.y, playerRadius, 0, Math.PI*2);
+       //  			this.shadowTexture.context.fill();
+       // 	 		}
+       // 	 		else{
+       // 	 			// Randomly change the radius each frame
+       //  			playerRadius = 20 + this.game.rnd.integerInRange(1,10);
+
+       //  			// Draw circle of light with a soft edge
+       //  			var gradient =this.shadowTexture.context.createRadialGradient(m.x, m.y,20*0.75,m.x, m.y,playerRadius);
+       //  			gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+       //  			gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
+
+       //  			this.shadowTexture.context.beginPath();
+       //  			this.shadowTexture.context.fillStyle = gradient;
+       //  			this.shadowTexture.context.arc(m.x, m.y, playerRadius, 0, Math.PI*2);
+       //  			this.shadowTexture.context.fill();
+       // 	 		}	
+        		
+        else{
         	// Randomly change the radius each frame
-        	var radius = this.LIGHT_RADIUS + this.game.rnd.integerInRange(1,10);
+        	checkpointRadius = 100 + this.game.rnd.integerInRange(1,10);
 
         	// Draw circle of light with a soft edge
-        	var gradient =this.shadowTexture.context.createRadialGradient(m.x, m.y,this.LIGHT_RADIUS * 0.75,m.x, m.y, radius);
+        	var gradient =this.shadowTexture.context.createRadialGradient(m.x, m.y,100 * 0.75,m.x, m.y, checkpointRadius);
         	gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
         	gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
 
         	this.shadowTexture.context.beginPath();
         	this.shadowTexture.context.fillStyle = gradient;
-        	this.shadowTexture.context.arc(m.x, m.y, radius, 0, Math.PI*2);
-        	this.shadowTexture.context.fill();
-        }else{
-        	// Randomly change the radius each frame
-        	var radius = 100 + this.game.rnd.integerInRange(1,10);
-
-        	// Draw circle of light with a soft edge
-        	var gradient =this.shadowTexture.context.createRadialGradient(m.x, m.y,100 * 0.75,m.x, m.y, radius);
-        	gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
-        	gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
-
-        	this.shadowTexture.context.beginPath();
-        	this.shadowTexture.context.fillStyle = gradient;
-        	this.shadowTexture.context.arc(m.x, m.y, radius, 0, Math.PI*2);
+        	this.shadowTexture.context.arc(m.x, m.y, checkpointRadius, 0, Math.PI*2);
         	this.shadowTexture.context.fill();
 
         }
