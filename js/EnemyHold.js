@@ -1,6 +1,6 @@
 function EnemyHold(game, key){
 	Phaser.Sprite.call(this, game, 400, 500, key);// call phaser sprite
-	this.scale.setTo(0.5);
+	this.scale.setTo(0.25);
 	game.physics.enable(this, Phaser.Physics.ARCADE);//enable physics
 	this.enableBody=true;
 	//timer=game.time.create();

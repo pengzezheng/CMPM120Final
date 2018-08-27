@@ -4,8 +4,8 @@ var LevelHole = function(game) {};
 LevelHole.prototype = {
 	create: function() {
 		var sky = game.add.sprite(-100, 0, 'bg3');
-	   	sky.scale.setTo(1, 1.01);
-		game.world.setBounds(0, 0, 8000, 960);
+	   	sky.scale.setTo(1.05, 1);
+		game.world.setBounds(0, 0, 4000, 960);
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		game.time.advancedTiming = true;
 		map=game.add.tilemap('levelholebg');
@@ -15,7 +15,12 @@ LevelHole.prototype = {
 	   	//layer1.resizeWorld();
 	   	map.setCollisionByExclusion([], true, 'layer2', true);
 
-	   	aEDark =new EnemyDark(game,'enemyT');
+	   	aEHold =new EnemyHold(game,'mouthOpen');
+	    game.add.existing(aEHold);
+	    aEHold.x = 200;
+	    aEHold.y = 725;
+
+	   	aEDark =new EnemyDark(game,'enemyDark');
 	    game.add.existing(aEDark);
 	    aEDark.x =200;
 	    aEDark.y = 300;

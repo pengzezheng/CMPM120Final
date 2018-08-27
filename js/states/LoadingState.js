@@ -10,6 +10,7 @@ LoadingState.prototype = {
 	    game.load.spritesheet('enemyT', 'assets/c mob 2 sheet better.png', 256, 256);
 	    game.load.image('theBullet', 'assets/c mob bullet.png');
 	    game.load.image('mouthOpen', 'assets/level 3 trap open.png');
+	    game.load.image('enemyDark', 'assets/boss temp.png');
 	    game.load.image('bg3', 'assets/Holes background.png');
 	    //game.load.image('level2bg', 'assets/level2bg.json');
 	    game.load.tilemap('level2bg', 'assets/level2bg.json', null, Phaser.Tilemap.TILED_JSON);
