@@ -6,7 +6,7 @@ function EnemyTorrent(game, key){
 	//timer=game.time.create();
 	this.animations.add('enemyT', [0, 1, 2, 3], 10, true);
 	this.anchor.setTo(0.5);
-	game.time.events.loop(Phaser.Timer.SECOND*2, shootBullet, this);
+	game.time.events.loop(Phaser.Timer.SECOND*5, shootBullet, this);
 }
 
 function shootBullet(){
@@ -15,13 +15,13 @@ function shootBullet(){
 	if(this.body.x > player.x){
 		this.scale.setTo(0.1,0.1);
 		if(this.body.x< player.x+250){
-			bullet.body.velocity.x=-50;
+			bullet.body.velocity.x=-150;
 			game.add.existing(bullet);
 		}
 	}else{
 		this.scale.setTo(-0.1,0.1);
 		if(player.x< this.body.x+250){
-			bullet.body.velocity.x=50;
+			bullet.body.velocity.x=150;
 			game.add.existing(bullet);
 		}
 	}

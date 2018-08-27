@@ -89,10 +89,13 @@ LevelCrowd.prototype = {
 		spring.enableBody=true;
 		//spring.body.immovable = true;
 		var sp =spring.create(200,650,'jumppad');
-
 		sp.scale.setTo(0.15);
 		sp.body.immovable=true;
-		sp.body.setSize(256, 100, 0, 175);		
+		sp.body.setSize(256, 100, 0, 175);
+		var sp =spring.create(440,725,'jumppad');
+		sp.scale.setTo(0.15);
+		sp.body.immovable=true;
+		sp.body.setSize(256, 100, 0, 175);				
 		checkpoint = game.add.sprite(80,680,'checkpoint');
 	    game.physics.arcade.enable(checkpoint);
 		checkpoint.enableBody = true;
@@ -136,7 +139,6 @@ LevelCrowd.prototype = {
 	},
 
 	update: function() {
-		console.log(player.x,player.y);
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.overlap(player,checkpoint2,this.reachCheckpoint2,null,this);
 		game.physics.arcade.collide(player,layer1);
