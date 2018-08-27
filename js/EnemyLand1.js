@@ -1,11 +1,13 @@
 function EnemyLand1(game, key){
 	Phaser.Sprite.call(this, game, 400, 500, key);// call phaser sprite
-	this.scale.setTo(0.5);
+	this.scale.setTo(0.25);
 	game.physics.enable(this);//enable physics
 	this.enableBody=true;
 	//this.body.gravity.y=100;
 	this.animations.add('ELand', [0, 1, 2], 10, true);
 	this.anchor.setTo(0.6);
+	this.body.gravity.y=10000;
+	this.body.setSize(100, 200, 16, 16);
 
 }
 
@@ -32,12 +34,12 @@ EnemyLand1.prototype.update = function() {
 	if(this.body.x > player.x){
 		if(this.body.x< player.x+250){
 			game.physics.arcade.moveToObject(this,player);
-			this.scale.setTo(0.5,0.5);
+			this.scale.setTo(0.25,0.25);
 		}
 	}else{
 		if(player.x< this.body.x+250){
 			game.physics.arcade.moveToObject(this,player);
-			this.scale.setTo(-0.5,0.5);
+			this.scale.setTo(-0.25,0.25);
 		}
 	}
 } 

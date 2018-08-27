@@ -17,7 +17,7 @@ LevelCrowd.prototype = {
 
 		game.world.setBounds(0, 0, 8000, 960);
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		 game.time.advancedTiming = true;
+		game.time.advancedTiming = true;
 		var sky = game.add.sprite(-100, 0, 'bgCrowd');
 	   	sky.scale.setTo(1.01, 0.8);
 	   	map=game.add.tilemap('level2bg');
@@ -28,7 +28,7 @@ LevelCrowd.prototype = {
 	   	//layer1.resizeWorld();
 
 	   	
-	   	game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
+	   	//game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 	   	CrowdCheck = 0;
     	/*platforms = game.add.group();
 	    platforms.enableBody = true;
@@ -80,6 +80,10 @@ LevelCrowd.prototype = {
 	        aBgE.scale.setTo(0.25);
 	    }
 
+	    aELand =new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = 200;
+	    aELand.y = 250;
 	    aETorrent =new EnemyTorrent(game,'enemyT');
 	    game.add.existing(aETorrent);
 	    aETorrent.x = 300;
@@ -109,6 +113,14 @@ LevelCrowd.prototype = {
 		sp.body.immovable=true;
 		sp.body.setSize(256, 100, 0, 175);
 		var sp =spring.create(440,725,'jumppad');
+		sp.scale.setTo(0.15);
+		sp.body.immovable=true;
+		sp.body.setSize(256, 100, 0, 175);
+		var sp =spring.create(1100,825,'jumppad');
+		sp.scale.setTo(0.15);
+		sp.body.immovable=true;
+		sp.body.setSize(256, 100, 0, 175);	
+		var sp =spring.create(2000,750,'jumppad');
 		sp.scale.setTo(0.15);
 		sp.body.immovable=true;
 		sp.body.setSize(256, 100, 0, 175);				
@@ -324,6 +336,7 @@ LevelCrowd.prototype = {
 	render: function(){
 		// game.debug.body(spring, false);
 		game.debug.body(layer1, "#9090ff", true);
+		//game.debug.body(aELand, "#00ff00", true);
 		game.debug.text('FPS: ' + game.time.fps || 'FPS: --', 40, 40, "#00ff00");
 
 	}
