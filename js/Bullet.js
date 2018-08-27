@@ -2,14 +2,10 @@ function Bullet(game, key){
 	Phaser.Sprite.call(this, game, 400, 85, 'theBullet');// call phaser sprite
 	game.physics.enable(this, Phaser.Physics.ARCADE);//enable physics
 	this.enableBody=true;
+	this.scale.setTo(0.5);
 	//this.tracking=true;
+	game.time.events.loop(Phaser.Timer.SECOND*5, function() {this.destroy();}, this);
 }
-
-function hit(bullet, player){//kill bullet and do damage
-		bullet.kill();
-		hp -=1;
-		//bgm.play();//make sounds
-	}
 
 Bullet.prototype = Object.create(Phaser.Sprite.prototype);// make prototype
 Bullet.prototype.constructor = Bullet;
@@ -17,3 +13,8 @@ Bullet.prototype.constructor = Bullet;
 Bullet.prototype.update = function() {
 	game.physics.arcade.overlap(this, player, hit, null, this);
 }
+
+Bullet.prototype.hit = function(){//kill bullet and do damage
+		this.destroy();
+		//bgm.play();//make sounds
+	}
