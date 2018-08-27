@@ -136,7 +136,6 @@ LevelCrowd.prototype = {
 	},
 
 	update: function() {
-		console.log(player.x,player.y);
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.overlap(player,checkpoint2,this.reachCheckpoint2,null,this);
 		game.physics.arcade.collide(player,layer1);
