@@ -165,8 +165,9 @@ LevelCrowd.prototype = {
 		this.updateShadowTexture();
 		life.updateCrop();
 		if(widthLife.width<=0 && CrowdCheck == 0){
-			player.x = 3;
+			player.x = 10;
 			player.y = 500;
+			widthLife.width = totalLife;
 		}
 		else if (widthLife.width<=0&& CrowdCheck ==1){
 	    	

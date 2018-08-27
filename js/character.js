@@ -120,7 +120,7 @@ Player.prototype.update = function(){
 
 		//if(ifRestart ==0){
 		if(cursors.up.justDown&&this.body.onFloor()){
-			this.body.velocity.y=-900;
+			this.body.velocity.y=-1200;
 			//this.animations.play('up');
 			//console.log('jump');
 		}
