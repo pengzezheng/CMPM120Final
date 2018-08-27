@@ -107,7 +107,29 @@ LevelCrowd.prototype = {
 		var sp =spring.create(2000,750,'jumppad');
 		sp.scale.setTo(0.15);
 		sp.body.immovable=true;
-		sp.body.setSize(256, 100, 0, 175);				
+		sp.body.setSize(256, 100, 0, 175);
+		var sp =spring.create(3000,750,'jumppad');
+		sp.scale.setTo(0.15);
+		sp.body.immovable=true;
+		sp.body.setSize(256, 100, 0, 175);
+		var sp =spring.create(3800,750,'jumppad');
+		sp.scale.setTo(0.15);
+		sp.body.immovable=true;
+		sp.body.setSize(256, 100, 0, 175);
+		var sp =spring.create(5275,500,'jumppad');
+		sp.scale.setTo(0.15);
+		sp.body.immovable=true;
+		sp.body.setSize(256, 100, 0, 175);
+		var sp =spring.create(5000,600,'jumppad');
+		sp.scale.setTo(0.15);
+		sp.body.immovable=true;
+		sp.body.setSize(256, 100, 0, 175);
+		var sp =spring.create(5500,600,'jumppad');
+		sp.scale.setTo(0.15);
+		sp.body.immovable=true;
+		sp.body.setSize(256, 100, 0, 175);
+
+
 		checkpoint = game.add.sprite(80,680,'checkpoint');
 	    game.physics.arcade.enable(checkpoint);
 		checkpoint.enableBody = true;
@@ -137,7 +159,7 @@ LevelCrowd.prototype = {
 		lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
 		// Create the lights
     	this.lights = this.game.add.group();
-    	player = new Player(game,'player',3,500);
+    	player = new Player(game,'player',7000,500);
     	
     	// player.x=0;
 	    // player.y=300;
@@ -151,6 +173,7 @@ LevelCrowd.prototype = {
 	},
 
 	update: function() {
+		console.log(player.x,player.y);
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.overlap(player,checkpoint2,this.reachCheckpoint2,null,this);
 		game.physics.arcade.collide(player,layer1);
