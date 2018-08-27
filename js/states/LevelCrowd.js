@@ -19,7 +19,7 @@ LevelCrowd.prototype = {
 
 		game.world.setBounds(0, 0, 8000, 960);
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		 game.time.advancedTiming = true;
+		game.time.advancedTiming = true;
 		var sky = game.add.sprite(-100, 0, 'bgCrowd');
 	   	sky.scale.setTo(1.01, 0.8);
 	   	map=game.add.tilemap('level2bg');
@@ -30,7 +30,7 @@ LevelCrowd.prototype = {
 	   	//layer1.resizeWorld();
 
 	   	
-	   	game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
+	   	//game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 	   	CrowdCheck = 0;
     	/*platforms = game.add.group();
 	    platforms.enableBody = true;
@@ -82,6 +82,10 @@ LevelCrowd.prototype = {
 	        aBgE.scale.setTo(0.25);
 	    }
 
+	    aELand =new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = 200;
+	    aELand.y = 250;
 	    aETorrent =new EnemyTorrent(game,'enemyT');
 	    game.add.existing(aETorrent);
 	    aETorrent.x = 300;
@@ -97,7 +101,37 @@ LevelCrowd.prototype = {
 		var sp =spring.create(440,725,'jumppad');
 		sp.scale.setTo(0.15);
 		sp.body.immovable=true;
-		sp.body.setSize(256, 100, 0, 175);				
+		sp.body.setSize(256, 100, 0, 175);
+		var sp =spring.create(1100,825,'jumppad');
+		sp.scale.setTo(0.15);
+		sp.body.immovable=true;
+		sp.body.setSize(256, 100, 0, 175);	
+		var sp =spring.create(2000,750,'jumppad');
+		sp.scale.setTo(0.15);
+		sp.body.immovable=true;
+		sp.body.setSize(256, 100, 0, 175);
+		var sp =spring.create(3000,750,'jumppad');
+		sp.scale.setTo(0.15);
+		sp.body.immovable=true;
+		sp.body.setSize(256, 100, 0, 175);
+		var sp =spring.create(3800,750,'jumppad');
+		sp.scale.setTo(0.15);
+		sp.body.immovable=true;
+		sp.body.setSize(256, 100, 0, 175);
+		var sp =spring.create(5275,500,'jumppad');
+		sp.scale.setTo(0.15);
+		sp.body.immovable=true;
+		sp.body.setSize(256, 100, 0, 175);
+		var sp =spring.create(5000,600,'jumppad');
+		sp.scale.setTo(0.15);
+		sp.body.immovable=true;
+		sp.body.setSize(256, 100, 0, 175);
+		var sp =spring.create(5500,600,'jumppad');
+		sp.scale.setTo(0.15);
+		sp.body.immovable=true;
+		sp.body.setSize(256, 100, 0, 175);
+
+
 		checkpoint = game.add.sprite(80,680,'checkpoint');
 	    game.physics.arcade.enable(checkpoint);
 		checkpoint.enableBody = true;
@@ -127,7 +161,7 @@ LevelCrowd.prototype = {
 		lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
 		// Create the lights
     	this.lights = this.game.add.group();
-    	player = new Player(game,'player',3,500);
+    	player = new Player(game,'player',7000,500);
     	
     	// player.x=0;
 	    // player.y=300;
@@ -142,6 +176,7 @@ LevelCrowd.prototype = {
 	},
 
 	update: function() {
+		console.log(player.x,player.y);
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.overlap(player,checkpoint2,this.reachCheckpoint2,null,this);
 		game.physics.arcade.collide(player,layer1);
@@ -352,6 +387,7 @@ LevelCrowd.prototype = {
 	render: function(){
 		// game.debug.body(spring, false);
 		game.debug.body(layer1, "#9090ff", true);
+		//game.debug.body(aELand, "#00ff00", true);
 		game.debug.text('FPS: ' + game.time.fps || 'FPS: --', 40, 40, "#00ff00");
 
 	}
