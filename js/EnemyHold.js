@@ -14,7 +14,7 @@ function holding(enemyHold,player){
 }
 
 function doneHold(enemyHold,player){
-	enemyHold.kill();
+	this.kill();
 }
 
 EnemyHold.prototype = Object.create(Phaser.Sprite.prototype);// make prototype
