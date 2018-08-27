@@ -86,6 +86,10 @@ LevelCrowd.prototype = {
 	    game.add.existing(aELand);
 	    aELand.x = 200;
 	    aELand.y = 250;
+	    aEHold =new EnemyHold(game,'mouthOpen');
+	    game.add.existing(aEHold);
+	    aEHold.x = 200;
+	    aEHold.y = 250;
 	    aETorrent =new EnemyTorrent(game,'enemyT');
 	    game.add.existing(aETorrent);
 	    aETorrent.x = 300;
