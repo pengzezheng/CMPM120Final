@@ -11,7 +11,9 @@ EnemyDark.prototype = Object.create(Phaser.Sprite.prototype);// make prototype
 EnemyDark.prototype.constructor = EnemyDark;
 
 EnemyDark.prototype.update = function() {
-	if (){
+	if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
 		game.physics.arcade.moveToObject(this,player);
+	}else{
+		this.body.stop();
 	}
 } 

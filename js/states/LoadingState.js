@@ -3,7 +3,6 @@ LoadingState.prototype = {
 	preload: function() {
 		game.load.spritesheet('player','assets/CandlemanSpritesheet.png',32,42);
 		game.load.image('sky', 'assets/Hbackground.png');
-	    game.load.image('ground', 'assets/platform.png');
 	    game.load.image('star', 'assets/mob.png');
 	    game.load.image('fly', 'assets/flyingenemy.png');
 	    game.load.image('candle', 'assets/stand.png');
@@ -11,15 +10,16 @@ LoadingState.prototype = {
 	    game.load.spritesheet('enemyT', 'assets/c mob 2 sheet better.png', 256, 256);
 	    game.load.image('theBullet', 'assets/c mob bullet.png');
 	    game.load.image('mouthOpen', 'assets/level 3 trap open.png');
+	    game.load.image('bg3', 'assets/Holes background.png');
 	    //game.load.image('level2bg', 'assets/level2bg.json');
 	    game.load.tilemap('level2bg', 'assets/level2bg.json', null, Phaser.Tilemap.TILED_JSON);
 	    game.load.tilemap('levelholebg', 'assets/levelholebg.json', null, Phaser.Tilemap.TILED_JSON);
 	    game.load.image('tileset2', 'assets/tilemap2.png', 32, 32);
+	    game.load.image('tileset3', 'assets/level 3 tile map.png', 32, 32);
 	    game.load.spritesheet('bom', 'assets/FlyingEnemybullet.png', 32, 32);
 	    game.load.spritesheet('ex', 'assets/explosionspritesheet.png', 32, 32);
 	    game.load.spritesheet('ELand', 'assets/c mob sheet better.png', 144, 200);
 	    game.load.image('fire','assets/candle bullet.png');
-	    game.load.image('pillar', 'assets/pillar.png');
 	    game.load.audio('BGM1', 'audios/BGMLVL1.wav');
 	    game.load.audio('EXPLO', 'audios/Explosion.wav');
 	    game.load.audio('EA', 'audios/EAttack.wav');

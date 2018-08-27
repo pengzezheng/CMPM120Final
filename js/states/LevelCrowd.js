@@ -258,7 +258,7 @@ LevelCrowd.prototype = {
 		lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
 		// Create the lights
     	this.lights = this.game.add.group();
-    	player = new Player(game,'player',10,500);
+    	player = new Player(game,'player',7000,500);
     	
     	// player.x=0;
 	    // player.y=300;
