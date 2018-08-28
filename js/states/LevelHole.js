@@ -22,6 +22,26 @@ LevelHole.prototype = {
 
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
+	    aEHold.x = 448;
+	    aEHold.y = 672 + 24;
+
+	    aEHold = new EnemyHold(game,'mouthOpen');
+	    game.add.existing(aEHold);
+	    aEHold.x = 672;
+	    aEHold.y = 832 + 24;
+
+	    aEHold = new EnemyHold(game,'mouthOpen');
+	    game.add.existing(aEHold);
+	    aEHold.x = 832;
+	    aEHold.y = 704 + 24;
+
+	    aEHold = new EnemyHold(game,'mouthOpen');
+	    game.add.existing(aEHold);
+	    aEHold.x = 1088;
+	    aEHold.y = 576 + 24;
+
+	    aEHold = new EnemyHold(game,'mouthOpen');
+	    game.add.existing(aEHold);
 	    aEHold.x = 1184;
 	    aEHold.y = 832 + 24;
 
@@ -29,6 +49,26 @@ LevelHole.prototype = {
 	    game.add.existing(aEHold);
 	    aEHold.x = 1344;
 	    aEHold.y = 832 + 24;
+
+	    aEHold = new EnemyHold(game,'mouthOpen');
+	    game.add.existing(aEHold);
+	    aEHold.x = 1408;
+	    aEHold.y = 640 + 24;
+
+	    aEHold = new EnemyHold(game,'mouthOpen');
+	    game.add.existing(aEHold);
+	    aEHold.x = 2048;
+	    aEHold.y = 608 + 24;
+
+	    aEHold = new EnemyHold(game,'mouthOpen');
+	    game.add.existing(aEHold);
+	    aEHold.x = 3360;
+	    aEHold.y = 576 + 24;
+
+	    aEHold = new EnemyHold(game,'mouthOpen');
+	    game.add.existing(aEHold);
+	    aEHold.x = 3520;
+	    aEHold.y = 544 + 24;
 
 	   	aEDark = new EnemyDark(game,'enemyDark');
 	    game.add.existing(aEDark);
