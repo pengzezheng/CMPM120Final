@@ -70,6 +70,20 @@ LevelHole.prototype = {
 	    aEHold.x = 3488;
 	    aEHold.y = 544 + 24;
 
+	    aEHold = new EnemyHold(game,'mouthOpen');
+	    game.add.existing(aEHold);
+	    aEHold.x = 1536;
+	    aEHold.y = 128 + 24;
+
+	    for(var i = 0; i < 60; i++) {
+	    	if(i % 4 == 0) {
+	    		aEHold = new EnemyHold(game,'mouthOpen');
+		    	game.add.existing(aEHold);
+		    	aEHold.x = 1696 + (i * 32);
+		    	aEHold.y = 128 + 24;
+	    	}
+	    }
+
 	   	aEDark = new EnemyDark(game,'enemyDark');
 	    game.add.existing(aEDark);
 	    aEDark.x =200;
