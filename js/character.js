@@ -14,12 +14,14 @@ function Player(game,key,x,y){
 	game.physics.enable(this);
 	this.enableBody = true;
 	this.body.velocity.x = 0;
-	this.scale.setTo(1);
+	this.scale.setTo(0.35);
 	this.body.collideWorldBounds = true;
-	this.anchor.setTo(0.5,0.5);
+	this.anchor.setTo(0.6,0.6);
 	this.body.gravity.y=2250;
-	this.animations.add('left',[0,1,2],10,true);
-	this.animations.add('right',[3,4,5],10,true);
+	this.animations.add('left',[0,1,2,3,4,5],10,true);
+	this.animations.add('leftIdle',[6,7,8,9,10],10,true);
+	this.animations.add('right',[16,17,18,19,20,21],10,true);
+	this.animations.add('rightIdle',[11,12,13,14,15],10,true);
 	//make the player face the direction they walk to
 	this.facing = 'left';
 	//this.body.setSize(18,36,18,15);
@@ -70,7 +72,7 @@ function Player(game,key,x,y){
     //add sound for fire weapon
     fireSound = game.sound.add('fireSound');
 	fireSound.allowMultiple = true;
-    this.body.setSize(16, 26, 8, 16);
+    this.body.setSize(60, 90, 30, 35);
     this.anchor.setTo(0.5,0.5);
  //    if(widthLife.width > 0){
 	// 	decreasingLight = game.add.tween(this).to( {LIGHT_RADIUS: (2*this.LIGHT_RADIUS/3) }, 10000, Phaser.Easing.Linear.None, true);
@@ -119,50 +121,84 @@ Player.prototype.update = function(){
 		this.body.velocity.x=0;
 
 		//if(ifRestart ==0){
+
 		if(cursors.up.justDown&&this.body.onFloor()){
 			this.body.velocity.y=-850;
 			//this.animations.play('up');
 			//console.log('jump');
 		}
-		if(cursors.left.isDown){//if the player chooses to move to the left
-		//Move to the left
+		
+
+
+			if(cursors.left.isDown){//if the player chooses to move to the left
+			//Move to the left
 			this.body.velocity.x=-300;
 			this.animations.play('left');
 			//make the player face the direction they walk to
-			if(this.facing != 'left'){
+				if(this.facing != 'left'){
 			
-				this.facing = 'left';
+					this.facing = 'left';
 			//this.scale.x = -0.05;
+				}
 			}
-		}
-		else if(cursors.right.isDown){//if the player chooses to move to the right
-		//Move to the right
-			this.animations.play('right');
-			this.body.velocity.x=300;
-			if(this.facing != 'right'){
 			
-				this.facing = 'right';
-			//this.scale.x = 0.05;
+		
+		
+		
+
+
+			else if(cursors.right.isDown){//if the player chooses to move to the left
+			//Move to the left
+			this.body.velocity.x=300;
+			this.animations.play('right');
+			//make the player face the direction they walk to
+				if(this.facing != 'right'){
+			
+					this.facing = 'right';
+			//this.scale.x = -0.05;
+				}
 			}
-		}
+			else if(this.facing == 'left'){
+				this.animations.play('leftIdle');
+
+			}
+			else if(this.facing == 'right'){
+				this.animations.play('rightIdle');
+				
+			}
+			// else if(this.facing =='right'){
+			// 	this.animations.play('rightIdle');
+			
+			// }
+			
+		
 		
 		else{
 		//Stand still
 			//this.animations.stop();
 			if(this.facing != 'idle'){
 				this.animations.stop();
-				if(this.facing == 'left'){
-					this.frame = 0;
-				}
-				else{
-					this.frame = 3;
-				}
+				// if(this.facing == 'left'){
+				// 	this.animations.play('leftIdle');
+				// }
+				// else{
+				// 	this.animations.play('rightIdle');
+				// }
 				//this.facing = 'idle';
 
 		//this.body.velocity.x = 0;
 		//this.body.velocity.y = 0;
 
 			//this.frame=3;
+			
+			
+			
+				if(this.facing == 'left'){
+					this.frame = 6;
+				}
+				else if(this.facing == 'right'){
+					this.frame = 15;
+				}
 			}
 		}
 		

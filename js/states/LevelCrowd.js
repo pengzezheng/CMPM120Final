@@ -303,6 +303,9 @@ LevelCrowd.prototype = {
 		//lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
 		var lightShadow = game.add.image(0,0,this.shadowTexture);
 		lightShadow.blendMode = Phaser.blendModes.MULTIPLY;
+		//lightShadow.anchor.set(0.5);
+		//lightShadow.fixedToCamera = true;
+		//lightShadow.cameraOffset.setTo(0, -300);
 		// var lightShadow2 = game.add.image(2000,0,this.shadowTexture);
 		// lightShadow2.blendMode = Phaser.blendModes.MULTIPLY;
 		// var lightShadow3 = game.add.image(4000,0,this.shadowTexture);
@@ -573,10 +576,10 @@ LevelCrowd.prototype = {
 	
 	updateShadowTexture:function(){
 		this.shadowTexture.context.fillStyle = 'rgb(0, 0, 0)';
-		this.shadowTexture.context.fillRect(0,0,2000,1200);
-		this.shadowTexture.context.fillRect(2000,0,2000,1200);
-		this.shadowTexture.context.fillRect(4000,0,2000,1200);
-		this.shadowTexture.context.fillRect(6000,0,2000,1200);
+		this.shadowTexture.context.fillRect(0,0,game.world.width,game.world.height);
+		// this.shadowTexture.context.fillRect(2000,0,2000,1200);
+		// this.shadowTexture.context.fillRect(4000,0,2000,1200);
+		// this.shadowTexture.context.fillRect(6000,0,2000,1200);
 
 		
 
@@ -655,7 +658,8 @@ LevelCrowd.prototype = {
 	},*/
 	render: function(){
 		// game.debug.body(spring, false);
-		game.debug.body(layer1, "#9090ff", true);
+		//game.debug.body(layer1, "#9090ff", true);
+		//game.debug.body(player, "#9090ff", true);
 		//game.debug.body(aELand, "#00ff00", true);
 		game.debug.text('FPS: ' + game.time.fps || 'FPS: --', 40, 40, "#00ff00");
 
