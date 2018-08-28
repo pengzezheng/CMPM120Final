@@ -152,10 +152,7 @@ LevelCrowd.prototype = {
 	    game.add.existing(aELand);
 	    aELand.x = 7232;
 	    aELand.y = 512;
-	    aEHold =new EnemyHold(game,'mouthOpen');
-	    game.add.existing(aEHold);
-	    aEHold.x = 7200;
-	    aEHold.y = 520;
+	
 	    aETorrent =new EnemyTorrent(game,'enemyT');
 	    game.add.existing(aETorrent);
 	    aETorrent.x = 300;
@@ -299,7 +296,7 @@ LevelCrowd.prototype = {
 		lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
 		// Create the lights
     	this.lights = this.game.add.group();
-    	player = new Player(game,'player',10,500);
+    	player = new Player(game,'player',7000,500);
     	
     	// player.x=0;
 	    // player.y=300;
