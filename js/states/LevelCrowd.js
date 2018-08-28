@@ -77,10 +77,15 @@ LevelCrowd.prototype = {
 	    }*/
 
 	    for (var i =0; i <10; i++) {
-	        console.log("a");
+	        //console.log("a");
 	        var aBgE=game.add.sprite(300 + 20*i, 850,'ELand');
 	        //eLand[i] = new EnemyLand1(game,'star',500+150*i,800);
 	        aBgE.scale.setTo(0.25);
+	    }
+
+	    for(var i = 0; i < 45; i++) {
+	    	var fakeEnemies = game.add.sprite(5760 + (32 * i), 512 - 16, 'ELand');
+	    	fakeEnemies.scale.setTo(0.25);
 	    }
 
 	    aELand =new EnemyLand1(game,'ELand');
