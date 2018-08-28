@@ -37,27 +37,27 @@ function Player(game,key,x,y){
 	// //dark everything below the light
 	// light.blendMode = Phaser.blendModes.MULTIPLY;
 	//create health bar
-	//refer to https://codepen.io/jdnichollsc/pen/oXXRMz
-	//add total health bar
-	bmd = game.add.bitmapData(200, 40);
-	bmd.ctx.beginPath();
-	bmd.ctx.rect(0, 0, 200, 80);
-	bmd.ctx.fillStyle = '#00685e';
-	bmd.ctx.fill();
-	bglife = game.add.sprite(630, 50, bmd);
-    bglife.anchor.set(0.5);
-    //add current health bar
-    bmd = game.add.bitmapData(180, 30);
-    bmd.ctx.beginPath();
-	bmd.ctx.rect(0, 0, 200, 80);
-	bmd.ctx.fillStyle = '#00f910';
-	bmd.ctx.fill();
-	widthLife = new Phaser.Rectangle(0, 0, bmd.width, bmd.height);
-    totalLife = bmd.width;
-    life = game.add.sprite(630- bglife.width/2 + 10, 50, bmd);
-    life.anchor.y = 0.5;
-    life.cropEnabled = true;
-    life.crop(widthLife);
+	// //refer to https://codepen.io/jdnichollsc/pen/oXXRMz
+	// //add total health bar
+	// bmd = game.add.bitmapData(200, 40);
+	// bmd.ctx.beginPath();
+	// bmd.ctx.rect(0, 0, 200, 80);
+	// bmd.ctx.fillStyle = '#00685e';
+	// bmd.ctx.fill();
+	// bglife = game.add.sprite(630, 50, bmd);
+ //    bglife.anchor.set(0.5);
+ //    //add current health bar
+ //    bmd = game.add.bitmapData(180, 30);
+ //    bmd.ctx.beginPath();
+	// bmd.ctx.rect(0, 0, 200, 80);
+	// bmd.ctx.fillStyle = '#00f910';
+	// bmd.ctx.fill();
+	// widthLife = new Phaser.Rectangle(0, 0, bmd.width, bmd.height);
+ //    totalLife = bmd.width;
+ //    life = game.add.sprite(630- bglife.width/2 + 10, 50, bmd);
+ //    life.anchor.y = 0.5;
+ //    life.cropEnabled = true;
+ //    life.crop(widthLife);
 
     //game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 

@@ -285,33 +285,88 @@ LevelCrowd.prototype = {
     	// bglife.cameraOffset.setTo(630,50);
 
 
-
-    	//refer to the example: https://gamemechanicexplorer.com/#lighting-1
-		this.LIGHT_RADIUS = 300;
-		//create shadow texture
-		this.shadowTexture = this.game.add.bitmapData(this.game.world.width,this.game.world.height);
-		//create an object that will use the bitmap as texture
-		var lightSprite = game.add.image(0,0,this.shadowTexture);
-		//dark everything below the light
-		lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
-		// Create the lights
-    	this.lights = this.game.add.group();
     	player = new Player(game,'player',10,500);
-    	
+    	game.add.existing(player);
     	// player.x=0;
 	    // player.y=300;
-    	game.add.existing(player);
+    	
+    	//refer to the example: https://gamemechanicexplorer.com/#lighting-1
+		this.LIGHT_RADIUS = 300;
+
+		//create shadow texture
+		var graphics = game.add.graphics(100, 100);
+		this.shadowTexture = this.game.add.bitmapData(game.world.width,game.world.height);
+		
+		//create an object that will use the bitmap as texture
+
+		//var lightSprite = game.add.group();
+		//lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
+		var lightShadow = game.add.image(0,0,this.shadowTexture);
+		lightShadow.blendMode = Phaser.blendModes.MULTIPLY;
+		// var lightShadow2 = game.add.image(2000,0,this.shadowTexture);
+		// lightShadow2.blendMode = Phaser.blendModes.MULTIPLY;
+		// var lightShadow3 = game.add.image(4000,0,this.shadowTexture);
+		// lightShadow3.blendMode = Phaser.blendModes.MULTIPLY;
+		// var lightShadow4 = game.add.image(6000,0,this.shadowTexture);
+		// lightShadow4.blendMode = Phaser.blendModes.MULTIPLY;
+		
+		
+    	
+
+		// var lightShadow2 = lightSprite.create(2000,0,this.shadowTexture2);
+		// lightShadow2.blendMode = Phaser.blendModes.MULTIPLY;
+		// var lightShadow3 = lightSprite.create(4000,0,this.shadowTexture3);
+		// lightShadow3.blendMode = Phaser.blendModes.MULTIPLY;
+		// var lightShadow4 = lightSprite.create(6000,0,this.shadowTexture4);
+		// lightShadow4.blendMode = Phaser.blendModes.MULTIPLY;
+		
+		//dark everything below the light
+		//lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
+		// lightShadow2.blendMode = Phaser.blendModes.MULTIPLY;
+		// lightShadow3.blendMode = Phaser.blendModes.MULTIPLY;
+		// lightShadow4.blendMode = Phaser.blendModes.MULTIPLY;
+		
+		// Create the lights
+    	this.lights = this.game.add.group();
+    	// player = new Player(game,'player',10,500);
+    	
+    	// // player.x=0;
+	    // // player.y=300;
+    	// game.add.existing(player);
     	game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
+    	
+    	this.lights.add(player);
+    	player.LIGHT_RADIUS = 100;
+    	//refer to https://codepen.io/jdnichollsc/pen/oXXRMz
+		//add total health bar
+		bmd = game.add.bitmapData(200, 40);
+		bmd.ctx.beginPath();
+		bmd.ctx.rect(0, 0, 200, 80);
+		bmd.ctx.fillStyle = '#00685e';
+		bmd.ctx.fill();
+		bglife = game.add.sprite(630, 50, bmd);
+    	bglife.anchor.set(0.5);
+    	//add current health bar
+    	bmd = game.add.bitmapData(180, 30);
+    	bmd.ctx.beginPath();
+		bmd.ctx.rect(0, 0, 200, 80);
+		bmd.ctx.fillStyle = '#00f910';
+		bmd.ctx.fill();
+		widthLife = new Phaser.Rectangle(0, 0, bmd.width, bmd.height);
+    	totalLife = bmd.width;
+    	life = game.add.sprite(630- bglife.width/2 + 10, 50, bmd);
+    	life.anchor.y = 0.5;
+    	life.cropEnabled = true;
+    	life.crop(widthLife);
     	life.fixedToCamera = true;
     	life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(630,50);
-    	this.lights.add(player);
-    	player.LIGHT_RADIUS = 100;
 	},
 
 	update: function() {
 		console.log(player.x,player.y);
+
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.overlap(player,checkpoint2,this.reachCheckpoint2,null,this);
 		game.physics.arcade.overlap(player,checkpoint3,this.reachCheckpoint3,null,this);
@@ -518,7 +573,12 @@ LevelCrowd.prototype = {
 	
 	updateShadowTexture:function(){
 		this.shadowTexture.context.fillStyle = 'rgb(0, 0, 0)';
-    	this.shadowTexture.context.fillRect(0, 0, this.game.world.width, this.game.world.height);
+		this.shadowTexture.context.fillRect(0,0,2000,1200);
+		this.shadowTexture.context.fillRect(2000,0,2000,1200);
+		this.shadowTexture.context.fillRect(4000,0,2000,1200);
+		this.shadowTexture.context.fillRect(6000,0,2000,1200);
+
+		
 
     	// Iterate through each of the lights and draw the glow
     	this.lights.forEach(function(m) {
@@ -535,6 +595,7 @@ LevelCrowd.prototype = {
         		this.shadowTexture.context.fillStyle = gradient;
         		this.shadowTexture.context.arc(m.x, m.y, playerRadius, 0, Math.PI*2);
         		this.shadowTexture.context.fill();
+        		
        	 	}
     			// if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
        //  			// Randomly change the radius each frame
@@ -584,6 +645,8 @@ LevelCrowd.prototype = {
 
     // This just tells the engine it should update the texture cache
     this.shadowTexture.dirty = true;
+    
+
 	},
 
 	/*springDone: function(){ 
