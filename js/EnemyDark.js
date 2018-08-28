@@ -1,6 +1,6 @@
 function EnemyDark(game, key){
 	Phaser.Sprite.call(this, game, 400, 500, key);// call phaser sprite
-	this.scale.setTo(0.5);
+	this.scale.setTo(0.1);
 	game.physics.enable(this, Phaser.Physics.ARCADE);//enable physics
 	this.enableBody=true;
 	//timer=game.time.create();
@@ -11,7 +11,9 @@ EnemyDark.prototype = Object.create(Phaser.Sprite.prototype);// make prototype
 EnemyDark.prototype.constructor = EnemyDark;
 
 EnemyDark.prototype.update = function() {
-	if (){
-		game.physics.arcade.moveToObject(this,player);
+	if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
+		game.physics.arcade.moveToObject(this,player,500);
+	}else{
+		this.body.stop();
 	}
 } 

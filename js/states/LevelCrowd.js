@@ -77,10 +77,15 @@ LevelCrowd.prototype = {
 	    }*/
 
 	    for (var i =0; i <10; i++) {
-	        console.log("a");
+	        //console.log("a");
 	        var aBgE=game.add.sprite(300 + 20*i, 850,'ELand');
 	        //eLand[i] = new EnemyLand1(game,'star',500+150*i,800);
 	        aBgE.scale.setTo(0.25);
+	    }
+
+	    for(var i = 0; i < 45; i++) {
+	    	var fakeEnemies = game.add.sprite(5760 + (32 * i), 512 - 16, 'ELand');
+	    	fakeEnemies.scale.setTo(0.25);
 	    }
 
 	    aELand =new EnemyLand1(game,'ELand');
@@ -111,10 +116,43 @@ LevelCrowd.prototype = {
 	    game.add.existing(aELand);
 	    aELand.x = 2816;
 	    aELand.y = 864;
-	    aEHold =new EnemyHold(game,'mouthOpen');
-	    game.add.existing(aEHold);
-	    aEHold.x = 7200;
-	    aEHold.y = 520;
+	    aELand =new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = 5856;
+	    aELand.y = 512;
+	    aELand =new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = 6016;
+	    aELand.y = 512;
+	    aELand =new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = 6048;
+	    aELand.y = 512;
+	    aELand =new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = 6176;
+	    aELand.y = 512;
+	    aELand =new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = 6336;
+	    aELand.y = 512;
+	    aELand =new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = 5856;
+	    aELand.y = 512;
+	    aELand =new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = 6727;
+	    aELand.y = 512;
+	    aELand =new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = 6944;
+	    aELand.y = 512;
+	    aELand =new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = 7232;
+	    aELand.y = 512;
+	
 	    aETorrent =new EnemyTorrent(game,'enemyT');
 	    game.add.existing(aETorrent);
 	    aETorrent.x = 300;
