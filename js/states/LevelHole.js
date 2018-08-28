@@ -15,15 +15,37 @@ LevelHole.prototype = {
 	   	//layer1.resizeWorld();
 	   	map.setCollisionByExclusion([], true, 'layer2', true);
 
-	   	aEHold =new EnemyHold(game,'mouthOpen');
+	   	aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
 	    aEHold.x = 200;
 	    aEHold.y = 725;
 
-	   	aEDark =new EnemyDark(game,'enemyDark');
+	   	aEDark = new EnemyDark(game,'enemyDark');
 	    game.add.existing(aEDark);
 	    aEDark.x =200;
 	    aEDark.y = 300;
+	   	player = new Player(game,'player',3,500);
+
+	   	aEDark = new EnemyDark(game,'enemyDark');
+	    game.add.existing(aEDark);
+	    aEDark.x = 832;
+	    aEDark.y = 352;
+
+	    aEDark = new EnemyDark(game,'enemyDark');
+	    game.add.existing(aEDark);
+	    aEDark.x = 2656;
+	    aEDark.y = 384;
+
+	    aEDark = new EnemyDark(game,'enemyDark');
+	    game.add.existing(aEDark);
+	    aEDark.x = 3168;
+	    aEDark.y = 320;
+
+	    aEDark = new EnemyDark(game,'enemyDark');
+	    game.add.existing(aEDark);
+	    aEDark.x = 3168;
+	    aEDark.y = 32;
+
 	   	player = new Player(game,'player',3,500);
     	
     	// player.x=0;
