@@ -23,7 +23,7 @@ LevelHole.prototype = {
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
 	    aEHold.x = 448;
-	    aEHold.y = 672 + 24;
+	    aEHold.y = 704 + 24;
 
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
@@ -67,7 +67,7 @@ LevelHole.prototype = {
 
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
-	    aEHold.x = 3520;
+	    aEHold.x = 3488;
 	    aEHold.y = 544 + 24;
 
 	   	aEDark = new EnemyDark(game,'enemyDark');
@@ -102,6 +102,32 @@ LevelHole.prototype = {
 	    // player.y=300;
     	game.add.existing(player);
     	game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
+
+    	//refer to https://codepen.io/jdnichollsc/pen/oXXRMz
+		//add total health bar
+		bmd = game.add.bitmapData(200, 40);
+		bmd.ctx.beginPath();
+		bmd.ctx.rect(0, 0, 200, 80);
+		bmd.ctx.fillStyle = '#00685e';
+		bmd.ctx.fill();
+		bglife = game.add.sprite(630, 50, bmd);
+    	bglife.anchor.set(0.5);
+    	//add current health bar
+    	bmd = game.add.bitmapData(180, 30);
+    	bmd.ctx.beginPath();
+		bmd.ctx.rect(0, 0, 200, 80);
+		bmd.ctx.fillStyle = '#00f910';
+		bmd.ctx.fill();
+		widthLife = new Phaser.Rectangle(0, 0, bmd.width, bmd.height);
+    	totalLife = bmd.width;
+    	life = game.add.sprite(630- bglife.width/2 + 10, 50, bmd);
+    	life.anchor.y = 0.5;
+    	life.cropEnabled = true;
+    	life.crop(widthLife);
+    	life.fixedToCamera = true;
+    	life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
+    	bglife.fixedToCamera = true;
+    	bglife.cameraOffset.setTo(630,50);
 	},
 
 	update: function() {
