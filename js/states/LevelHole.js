@@ -70,6 +70,20 @@ LevelHole.prototype = {
 	    aEHold.x = 3488;
 	    aEHold.y = 544 + 24;
 
+	    aEHold = new EnemyHold(game,'mouthOpen');
+	    game.add.existing(aEHold);
+	    aEHold.x = 1536;
+	    aEHold.y = 128 + 24;
+
+	    for(var i = 0; i < 60; i++) {
+	    	if(i % 4 == 0) {
+	    		aEHold = new EnemyHold(game,'mouthOpen');
+		    	game.add.existing(aEHold);
+		    	aEHold.x = 1696 + (i * 32);
+		    	aEHold.y = 128 + 24;
+	    	}
+	    }
+
 	   	aEDark = new EnemyDark(game,'enemyDark');
 	    game.add.existing(aEDark);
 	    aEDark.x =200;
@@ -103,6 +117,23 @@ LevelHole.prototype = {
     	game.add.existing(player);
     	game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
 
+    	//refer to the example: https://gamemechanicexplorer.com/#lighting-1
+		this.LIGHT_RADIUS = 300;
+
+		//create shadow texture
+		//var graphics = game.add.graphics(100, 100);
+		this.shadowTexture = this.game.add.bitmapData(game.world.width,game.world.height);
+		
+		//create an object that will use the bitmap as texture
+
+		//var lightSprite = game.add.group();
+		//lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
+		var lightShadow = game.add.image(0,0,this.shadowTexture);
+		lightShadow.blendMode = Phaser.blendModes.MULTIPLY;
+		this.lights = this.game.add.group();
+		this.lights.add(player);
+    	player.LIGHT_RADIUS = 100;
+
     	//refer to https://codepen.io/jdnichollsc/pen/oXXRMz
 		//add total health bar
 		bmd = game.add.bitmapData(200, 40);
@@ -132,6 +163,75 @@ LevelHole.prototype = {
 
 	update: function() {
 		game.physics.arcade.collide(player,layer2);
+		this.updateShadowTexture();
+	},
+	updateShadowTexture:function(){
+		this.shadowTexture.context.fillStyle = 'rgb(0, 0, 0)';
+		this.shadowTexture.context.fillRect(0,0,game.world.width,game.world.height);
+		// this.shadowTexture.context.fillRect(2000,0,2000,1200);
+		// this.shadowTexture.context.fillRect(4000,0,2000,1200);
+		// this.shadowTexture.context.fillRect(6000,0,2000,1200);
+
+		
+
+    	// Iterate through each of the lights and draw the glow
+    	this.lights.forEach(function(m) {
+    		if(m == player){
+    			
+        		
+       	 
+    			if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
+        			// Randomly change the radius each frame
+        			playerRadius = this.LIGHT_RADIUS + this.game.rnd.integerInRange(1,10);
+
+        			// Draw circle of light with a soft edge
+        			var gradient =this.shadowTexture.context.createRadialGradient(m.x, m.y,this.LIGHT_RADIUS * 0.75,m.x, m.y, playerRadius);
+        			gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+        			gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
+
+        			this.shadowTexture.context.beginPath();
+        			this.shadowTexture.context.fillStyle = gradient;
+        			this.shadowTexture.context.arc(m.x, m.y, playerRadius, 0, Math.PI*2);
+        			this.shadowTexture.context.fill();
+       	 		}
+       	 		else{
+       	 			// Randomly change the radius each frame
+        			playerRadius = 20 + this.game.rnd.integerInRange(1,10);
+
+        			// Draw circle of light with a soft edge
+        			var gradient =this.shadowTexture.context.createRadialGradient(m.x, m.y,20*0.75,m.x, m.y,playerRadius);
+        			gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+        			gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
+
+        			this.shadowTexture.context.beginPath();
+        			this.shadowTexture.context.fillStyle = gradient;
+        			this.shadowTexture.context.arc(m.x, m.y, playerRadius, 0, Math.PI*2);
+        			this.shadowTexture.context.fill();
+       	 		}	
+       	 	}
+        		
+        else{
+        	// Randomly change the radius each frame
+        	checkpointRadius = 100 + this.game.rnd.integerInRange(1,10);
+
+        	// Draw circle of light with a soft edge
+        	var gradient =this.shadowTexture.context.createRadialGradient(m.x, m.y,100 * 0.75,m.x, m.y, checkpointRadius);
+        	gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+        	gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
+
+        	this.shadowTexture.context.beginPath();
+        	this.shadowTexture.context.fillStyle = gradient;
+        	this.shadowTexture.context.arc(m.x, m.y, checkpointRadius, 0, Math.PI*2);
+        	this.shadowTexture.context.fill();
+
+        }
+    
+    }, this);
+
+    // This just tells the engine it should update the texture cache
+    this.shadowTexture.dirty = true;
+    
+
 	},
 
 	render: function(){

@@ -1,7 +1,7 @@
 var LoadingState = function(game) {};
 LoadingState.prototype = {
 	preload: function() {
-		game.load.spritesheet('player','assets/CandlemanSpritesheet.png',32,42);
+		game.load.spritesheet('player','assets/master candleman sprite sheet.png',128,128);
 		game.load.image('sky', 'assets/Hbackground.png');
 	    game.load.image('star', 'assets/mob.png');
 	    game.load.image('fly', 'assets/flyingenemy.png');
