@@ -47,6 +47,14 @@ LevelHeight.prototype = {
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(630,50);
     	game.time.events.loop(Phaser.Timer.SECOND, this.createBombs, this);
+
+    	/*ives=game.add.group();//make a group for life
+		l1 = lives.create(75, 12.5, 'lives');//create sprite life
+		l1.scale.setTo(0.5);//set scale
+		l2 = lives.create(105, 12.5, 'lives'); //create sprite life
+		l2.scale.setTo(0.5);//set scale
+		l3 = lives.create(135, 12.5, 'lives');//create sprite life
+		l3.scale.setTo(0.5);*/
 	},
 
 	update: function() {

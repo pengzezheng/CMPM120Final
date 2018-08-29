@@ -12,7 +12,7 @@ LoadingState.prototype = {
 	    game.load.image('enemyDark', 'assets/boss temp.png');
 	    game.load.image('bg3', 'assets/Holes background.png');
 	    //game.load.image('level2bg', 'assets/level2bg.json');
-	    game.load.tilemap('level2bg', 'assets/level2bg.json', null, Phaser.Tilemap.TILED_JSON);
+	    game.load.tilemap('level2bg', 'assets/untitled.json', null, Phaser.Tilemap.TILED_JSON);
 	    game.load.tilemap('levelholebg', 'assets/levelholebg.json', null, Phaser.Tilemap.TILED_JSON);
 	    game.load.tilemap('levelHeight', 'assets/lvl1remake.json', null, Phaser.Tilemap.TILED_JSON);
 	    game.load.image('tileset2', 'assets/tilemap2.png', 32, 32);
