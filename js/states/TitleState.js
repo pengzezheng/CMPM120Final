@@ -1,5 +1,8 @@
 var TitleState = function(game) {};
 TitleState.prototype = {
+	/**
+	 * The create function.
+	 */
 	create: function() {
 		var titleText = game.add.text(game.width/2, game.height/2, 'LAST LIGHT', {font: 'Helvetica', fontSize: '48px', fill: '#fff'});
 		titleText.anchor.set(0.5);
@@ -10,9 +13,12 @@ TitleState.prototype = {
 		var playText = game.add.text(game.width/2, game.height*.8, 'Press the SPACE BAR to Start', {font: 'Helvetica', fontSize: '24px', fill: '#fff'});
 		playText.anchor.set(0.5);
 	},
+	/**
+	 * The update function.
+	 */
 	update: function() {
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
-			game.state.start("LevelHeight");
+			game.state.start("LevelHole");
 		}
 	}
 };
