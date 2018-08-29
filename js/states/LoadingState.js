@@ -2,15 +2,20 @@ var LoadingState = function(game) {};
 LoadingState.prototype = {
 	preload: function() {
 		game.load.spritesheet('player','assets/master candleman sprite sheet.png',128,128);
+
 		//game.load.image('sky', 'assets/Hbackground.png');
+
+
 	    game.load.image('star', 'assets/flyingenemy.png');
 	    game.load.image('candle', 'assets/stand.png');
 	    game.load.image('jumppad', 'assets/jump pad.png');
 	    game.load.spritesheet('enemyT', 'assets/c mob 2 sheet better.png', 256, 256);
+	    game.load.spritesheet('enemyDark', 'assets/level 3 boss.png', 512, 512);
 	    game.load.image('theBullet', 'assets/c mob bullet.png');
 	    game.load.image('mouthOpen', 'assets/level 3 trap open.png');
-	    game.load.image('enemyDark', 'assets/boss temp.png');
+	    //game.load.image('enemyDark', 'assets/boss temp.png');
 	    game.load.image('bg3', 'assets/Holes background.png');
+	    game.load.image('lives', 'assets/ui.png');
 	    //game.load.image('level2bg', 'assets/level2bg.json');
 	    game.load.tilemap('level2bg', 'assets/untitled.json', null, Phaser.Tilemap.TILED_JSON);
 	    game.load.tilemap('levelholebg', 'assets/levelholebg.json', null, Phaser.Tilemap.TILED_JSON);

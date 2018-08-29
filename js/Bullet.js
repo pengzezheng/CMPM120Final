@@ -4,6 +4,7 @@ function Bullet(game, key){
 	this.enableBody=true;
 	this.scale.setTo(0.5);
 	//this.tracking=true;
+	game.debug.body(this);
 	game.time.events.loop(Phaser.Timer.SECOND*5, function() {this.destroy();}, this);
 }
 

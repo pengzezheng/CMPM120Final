@@ -6,6 +6,7 @@ var checkpoint3;
 var checkpoint4;
 var CrowdCheck = 0;
 var dead = false;
+var counter=3;
 var LevelHole = function(game) {};
 LevelHole.prototype = {
 	create: function() {
@@ -29,71 +30,76 @@ LevelHole.prototype = {
 
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
-	    aEHold.x = 448;
-	    aEHold.y = 704 + 24;
+	    aEHold.x = (14 * 32);
+	    aEHold.y = (21 * 32) + 24;
 
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
-	    aEHold.x = 672;
-	    aEHold.y = 832 + 24;
+	    aEHold.x = (21 * 32);
+	    aEHold.y = (26 * 32) + 24;
 
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
-	    aEHold.x = 832;
-	    aEHold.y = 704 + 24;
+	    aEHold.x = (26 * 32);
+	    aEHold.y = (22 * 32) + 24;
 
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
-	    aEHold.x = 1088;
-	    aEHold.y = 576 + 24;
+	    aEHold.x = (34 * 32);
+	    aEHold.y = (18 * 32) + 24;
 
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
-	    aEHold.x = 1184;
-	    aEHold.y = 832 + 24;
+	    aEHold.x = (37 * 32);
+	    aEHold.y = (26 * 32) + 24;
 
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
-	    aEHold.x = 1344;
-	    aEHold.y = 832 + 24;
+	    aEHold.x = (42 * 32);
+	    aEHold.y = (26 * 32) + 24;
 
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
-	    aEHold.x = 1408;
-	    aEHold.y = 640 + 24;
+	    aEHold.x = (44 * 32);
+	    aEHold.y = (20 * 32) + 24;
 
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
-	    aEHold.x = 2048;
-	    aEHold.y = 608 + 24;
+	    aEHold.x = (47 * 32);
+	    aEHold.y = (25 * 32) + 24;
 
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
-	    aEHold.x = 3360;
-	    aEHold.y = 576 + 24;
+	    aEHold.x = (64 * 32);
+	    aEHold.y = (19 * 32) + 24;
 
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
-	    aEHold.x = 3488;
-	    aEHold.y = 544 + 24;
+	    aEHold.x = (105 * 32);
+	    aEHold.y = (18 * 32) + 24;
 
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
-	    aEHold.x = 1536;
-	    aEHold.y = 128 + 24;
+	    aEHold.x = (109 * 32);
+	    aEHold.y = (17 * 32) + 24;
+
+	    aEHold = new EnemyHold(game,'mouthOpen');
+	    game.add.existing(aEHold);
+	    aEHold.x = (48 * 32);
+	    aEHold.y = (4 * 32) + 24;
 
 	    for(var i = 0; i < 60; i++) {
 	    	if(i % 4 == 0) {
 	    		aEHold = new EnemyHold(game,'mouthOpen');
 		    	game.add.existing(aEHold);
-		    	aEHold.x = 1696 + (i * 32);
-		    	aEHold.y = 128 + 24;
+		    	aEHold.x = (53 * 32) + (i * 32);
+		    	aEHold.y = (4 * 32) + 24;
 	    	}
 	    }
 
 	   	aEDark = new EnemyDark(game,'enemyDark');
 	    game.add.existing(aEDark);
-	    aEDark.x =200;
+	    aEDark.x = 200;
 	    aEDark.y = 300;
 	   	player = new Player(game,'player',3,500);
 
@@ -183,6 +189,16 @@ LevelHole.prototype = {
     	life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(630,50);
+
+    	lives=game.add.group();
+    	lives.fixedToCamera = true;
+    	lives.cameraOffset.setTo(50,50);
+    	l1 = lives.create(75, 12.5, 'lives');//create sprite life
+		l1.scale.setTo(0.075);//set scale
+		l2 = lives.create(105, 12.5, 'lives'); //create sprite life
+		l2.scale.setTo(0.075);//set scale
+		l3 = lives.create(135, 12.5, 'lives');//create sprite life
+		l3.scale.setTo(0.075);//set scale
 	},
 
 	update: function() {
@@ -209,8 +225,13 @@ LevelHole.prototype = {
 				//create a event 3s from now
 			timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
 			timer.start();
-			
+		}
 
+		if(counter==2){
+			l3.destroy();
+		}
+		if(counter==1){
+			l2.destroy();
 		}
 	},
 	reachCheckpoint: function(player,checkpoint){
@@ -366,7 +387,7 @@ LevelHole.prototype.endTimer = function(){
 
 		timer.stop();
 		widthLife.width = totalLife;
-	
+		counter--;
 		player.alpha = 1;
 		player.facing = 'right';
 		this.lights.add(player);
