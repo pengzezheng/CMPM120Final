@@ -18,16 +18,16 @@ var LevelCrowd = function(game) {};
 LevelCrowd.prototype = {
 	create: function() {
 
-		game.world.setBounds(0, 0, 8000, 960);
+		game.world.setBounds(0, 0, 4000, 960);
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		game.time.advancedTiming = true;
+		// game.time.advancedTiming = true;
 		var sky = game.add.sprite(-100, 0, 'bgCrowd');
 	   	sky.scale.setTo(1.01, 0.8);
 	   	map=game.add.tilemap('level2bg');
-	   	map.addTilesetImage('platform', 'tileset2', 32, 32);
+	   	map.addTilesetImage('tilemap2', 'tileset2', 32, 32);
 	   	layer1=map.createLayer('layer1');
-	   	var a =game.add.existing(layer1);
-	   	a.debug=true;
+	   	//var a =game.add.existing(layer1);
+	   	//a.debug=true;
 	   	//layer1.resizeWorld();
 
 	   	
@@ -661,7 +661,7 @@ LevelCrowd.prototype = {
 		//game.debug.body(layer1, "#9090ff", true);
 		//game.debug.body(player, "#9090ff", true);
 		//game.debug.body(aELand, "#00ff00", true);
-		game.debug.text('FPS: ' + game.time.fps || 'FPS: --', 40, 40, "#00ff00");
+		//game.debug.text('FPS: ' + game.time.fps || 'FPS: --', 40, 40, "#00ff00");
 
 	}
 };
