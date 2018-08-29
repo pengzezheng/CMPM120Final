@@ -19,7 +19,7 @@ function hitDark(enemyDark, player){//kill enemy and do damage to player
 			widthLife.width = 0;
 		}
 
-		widthLife.width = widthLife.width - totalLife*3/4;
+		widthLife.width = widthLife.width - totalLife/4;
 
 		
 

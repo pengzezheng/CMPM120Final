@@ -7,6 +7,7 @@ var checkpoint4;
 var CrowdCheck = 0;
 var dead = false;
 var counter=3;
+var healthFire;
 var LevelHole = function(game) {};
 LevelHole.prototype = {
 	create: function() {
@@ -135,9 +136,7 @@ LevelHole.prototype = {
 	    game.physics.arcade.enable(checkpoint3);
 		checkpoint3.enableBody = true;
 
-		checkpoint4 = game.add.sprite(3889,840,'checkpoint');
-	    game.physics.arcade.enable(checkpoint4);
-		checkpoint4.enableBody = true;
+		
 
 
 	   	player = new Player(game,'player',3,500);
@@ -164,52 +163,60 @@ LevelHole.prototype = {
 		this.lights.add(player);
     	player.LIGHT_RADIUS = 100;
 
+    	checkpoint4 = game.add.sprite(3889,840,'checkpoint1');
+	    game.physics.arcade.enable(checkpoint4);
+		checkpoint4.enableBody = true;
+		this.lights.add(checkpoint4);
     	//refer to https://codepen.io/jdnichollsc/pen/oXXRMz
 		//add total health bar
 		bmd = game.add.bitmapData(200, 40);
 		bmd.ctx.beginPath();
 		bmd.ctx.rect(0, 0, 200, 80);
-		bmd.ctx.fillStyle = '#00685e';
+		bmd.ctx.fillStyle = '#A0522D';
 		bmd.ctx.fill();
-		bglife = game.add.sprite(630, 50, bmd);
+		bglife = game.add.sprite(50, 20, bmd);
     	bglife.anchor.set(0.5);
     	//add current health bar
     	bmd = game.add.bitmapData(180, 30);
     	bmd.ctx.beginPath();
 		bmd.ctx.rect(0, 0, 200, 80);
-		bmd.ctx.fillStyle = '#00f910';
+		bmd.ctx.fillStyle = '#FFF68F';
 		bmd.ctx.fill();
 		widthLife = new Phaser.Rectangle(0, 0, bmd.width, bmd.height);
+		widthLife.enableBody = true;
     	totalLife = bmd.width;
-    	life = game.add.sprite(630- bglife.width/2 + 10, 50, bmd);
+    	life = game.add.sprite(170- bglife.width/2 + 10, 30, bmd);
     	life.anchor.y = 0.5;
+    	life.enableBody = true;
     	life.cropEnabled = true;
     	life.crop(widthLife);
     	life.fixedToCamera = true;
-    	life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
+    	life.cameraOffset.setTo(170-bglife.width/2 + 10,30);
     	bglife.fixedToCamera = true;
-    	bglife.cameraOffset.setTo(630,50);
-
+    	bglife.cameraOffset.setTo(170,30);
+    	
     	lives=game.add.group();
     	lives.fixedToCamera = true;
     	lives.cameraOffset.setTo(50,50);
-    	l1 = lives.create(75, 12.5, 'lives');//create sprite life
+    	l1 = lives.create(15, 12.5, 'lives');//create sprite life
 		l1.scale.setTo(0.075);//set scale
-		l2 = lives.create(105, 12.5, 'lives'); //create sprite life
+		l2 = lives.create(45, 12.5, 'lives'); //create sprite life
 		l2.scale.setTo(0.075);//set scale
-		l3 = lives.create(135, 12.5, 'lives');//create sprite life
+		l3 = lives.create(75, 12.5, 'lives');//create sprite life
 		l3.scale.setTo(0.075);//set scale
 	},
 
 	update: function() {
+		
+		
 		game.physics.arcade.collide(player,layer2);
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.overlap(player,checkpoint2,this.reachCheckpoint2,null,this);
 		game.physics.arcade.overlap(player,checkpoint3,this.reachCheckpoint3,null,this);
-		game.physics.arcade.overlap(player,checkpoint4,this.reachCheckpoint4,null,this);
+		//game.physics.arcade.overlap(player,checkpoint4,this.reachCheckpoint4,null,this);
 		this.updateShadowTexture();
 		//life.updateCrop();
-		console.log(player.x,player.y);
+		//console.log(healthFire.x,healthFire.y);
 		if(widthLife.width<0 ){
 			widthLife.width = 0;
 			dead = true;
@@ -282,22 +289,22 @@ LevelHole.prototype = {
 		
 
 	},
-	reachCheckpoint4: function(player,checkpoint4){
-		console.log("a");
-		//TempX = checkpoint2.x;
-    	//TempY = checkpoint2.y;
-		CrowdCheck = 4;
-		widthLife.width = totalLife;
-		var saved4=new Checkpoint(game,checkpoint4.x,checkpoint4.y-5,'checkpoint1');
-		game.add.existing(saved4);
+	// reachCheckpoint4: function(player,checkpoint4){
+	// 	console.log("a");
+	// 	//TempX = checkpoint2.x;
+ //    	//TempY = checkpoint2.y;
+	// 	CrowdCheck = 4;
+	// 	widthLife.width = totalLife;
+	// 	var saved4=new Checkpoint(game,checkpoint4.x,checkpoint4.y-5,'checkpoint1');
+	// 	game.add.existing(saved4);
 
-	//saved.enableBody = true;
-		checkpoint4.kill();
-		this.lights.add(saved4);
-		saved4.LIGHT_RADIUS = 50;
+	// //saved.enableBody = true;
+	// 	checkpoint4.kill();
+	// 	this.lights.add(saved4);
+	// 	saved4.LIGHT_RADIUS = 50;
 		
 
-	},
+	// },
 
 	updateShadowTexture:function(){
 		this.shadowTexture.context.fillStyle = 'rgb(0, 0, 0)';
