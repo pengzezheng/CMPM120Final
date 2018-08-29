@@ -1,7 +1,7 @@
 var TitleState = function(game) {};
 TitleState.prototype = {
 	create: function() {
-		var titleText = game.add.text(game.width/2, game.height/2, 'CANDLE MAN', {font: 'Helvetica', fontSize: '48px', fill: '#fff'});
+		var titleText = game.add.text(game.width/2, game.height/2, 'LAST LIGHT', {font: 'Helvetica', fontSize: '48px', fill: '#fff'});
 		titleText.anchor.set(0.5);
 
 		var instructText = game.add.text(game.width/2, game.height/2 + 48, 'Use the Arrow Keys to move around.', {font: 'Helvetica', fontSize: '24px', fill: '#fff'});
@@ -12,7 +12,7 @@ TitleState.prototype = {
 	},
 	update: function() {
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
-			game.state.start("LevelHole");
+			game.state.start("LevelHeight");
 		}
 	}
 };

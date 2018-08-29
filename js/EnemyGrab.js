@@ -6,11 +6,13 @@ function EnemyGrab(game, key){
 	//this.body.x = game.rnd.integerInRange(150,3800);
 	this.count=0;
 	this.body.gravity.y=0;
+
 }
 
 function grab(explosion, player){//kill enemy and do damage to player
 		player.body.gravity.y +=100;
 		this.kill();
+		EAtt.play();
 	}
 //player could kill the enemy who would grab the candle man
 
