@@ -192,9 +192,9 @@ LevelHole.prototype = {
 		game.physics.arcade.overlap(player,checkpoint3,this.reachCheckpoint3,null,this);
 		game.physics.arcade.overlap(player,checkpoint4,this.reachCheckpoint4,null,this);
 		this.updateShadowTexture();
-		life.updateCrop();
+		//life.updateCrop();
 		console.log(player.x,player.y);
-		if(widthLife.width<=0 ){
+		if(widthLife.width<0 ){
 			widthLife.width = 0;
 			dead = true;
 			player.animations.stop(null,true);
@@ -356,7 +356,7 @@ LevelHole.prototype = {
 
 };
 LevelHole.prototype.cropLife = function(){
-	if(widthLife.width > 0){
+	if(widthLife.width >= 0){
 		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /30)) }, 1, Phaser.Easing.Linear.None, true);
 	}
 }
