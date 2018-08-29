@@ -27,7 +27,7 @@ LevelCrowd.prototype = {
 	   	map.addTilesetImage('platform', 'tileset2', 32, 32);
 	   	layer1=map.createLayer('layer1');
 	   	var a =game.add.existing(layer1);
-	   	a.debug=true;
+	   	//a.debug=true;
 	   	//layer1.resizeWorld();
 
 	   	
@@ -656,6 +656,7 @@ LevelCrowd.prototype = {
 		player.body.gravity.y=temp;
 		temp=0;
 	},*/
+	/*
 	render: function(){
 		// game.debug.body(spring, false);
 		//game.debug.body(layer1, "#9090ff", true);
@@ -664,6 +665,7 @@ LevelCrowd.prototype = {
 		game.debug.text('FPS: ' + game.time.fps || 'FPS: --', 40, 40, "#00ff00");
 
 	}
+	*/
 };
 LevelCrowd.prototype.cropLife = function(){
 	if(widthLife.width > 0){
