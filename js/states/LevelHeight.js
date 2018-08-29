@@ -11,10 +11,15 @@ LevelHeight.prototype = {
 	   	layer3=map.createLayer('layer3');
 	   	var a =game.add.existing(layer3);
 	   	a.debug=true;
-
 	   	map.setCollisionByExclusion([], true, 'layer3', true);
 
+	   	aEGrab =new EnemyGrab(game,'star');
+	    aEGrab.y = 3700;
+	    aEGrab.x = 450;
+	    game.add.existing(aEGrab);
+
 	   	player = new Player(game,'player',450,3900);
+	   	player.body.gravity.y=1750;
     	game.add.existing(player);
     	game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
 
@@ -41,10 +46,19 @@ LevelHeight.prototype = {
     	life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(630,50);
+    	game.time.events.loop(Phaser.Timer.SECOND, this.createBombs, this);
 	},
 
 	update: function() {
 		game.physics.arcade.collide(player,layer3);
+
+	},
+
+	createBombs: function() {
+		bomb=new Bomb(game, "bom");
+		bomb.reset(game.rnd.integerInRange(100,900),player.y-600);
+		bomb.scale.setTo(1.5);
+		game.add.existing(bomb);
 	},
 
 	render: function(){

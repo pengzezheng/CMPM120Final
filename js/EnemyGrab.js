@@ -1,6 +1,6 @@
 function EnemyGrab(game, key){
 	Phaser.Sprite.call(this, game, 400, 85, key);// call phaser sprite
-	this.scale.setTo(0.08);
+	this.scale.setTo(1);
 	game.physics.enable(this);//enable physics
 	this.enableBody=true;
 	//this.body.x = game.rnd.integerInRange(150,3800);
@@ -9,8 +9,7 @@ function EnemyGrab(game, key){
 }
 
 function grab(explosion, player){//kill enemy and do damage to player
-		player.body.gravity.y +=200;
-		EAtt.play();
+		player.body.gravity.y +=100;
 		this.kill();
 	}
 //player could kill the enemy who would grab the candle man

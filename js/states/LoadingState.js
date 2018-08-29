@@ -3,8 +3,7 @@ LoadingState.prototype = {
 	preload: function() {
 		game.load.spritesheet('player','assets/master candleman sprite sheet.png',128,128);
 		game.load.image('sky', 'assets/Hbackground.png');
-	    game.load.image('star', 'assets/mob.png');
-	    game.load.image('fly', 'assets/flyingenemy.png');
+	    game.load.image('star', 'assets/flyingenemy.png');
 	    game.load.image('candle', 'assets/stand.png');
 	    game.load.image('jumppad', 'assets/jump pad.png');
 	    game.load.spritesheet('enemyT', 'assets/c mob 2 sheet better.png', 256, 256);
