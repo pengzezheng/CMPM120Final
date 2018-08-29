@@ -14,10 +14,18 @@ var playerLight;
 var CrowdCheck;
 var playerRadius;
 var blowRadius;
-var LevelCrowd = function(game) {};
+
+var timer;
+var timeEvent;
+var dead = false;
+var LevelCrowd = function(game) {this.deathText;};
 LevelCrowd.prototype = {
 	create: function() {
+		// //create a custom timer
+		// timer = game.time.create();
 
+		// //create a event 3s from now
+		// timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
 		game.world.setBounds(0, 0, 8000, 960);
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		game.time.advancedTiming = true;
@@ -387,59 +395,77 @@ LevelCrowd.prototype = {
 		}
 		this.updateShadowTexture();
 		life.updateCrop();
-		if(widthLife.width<=0 && CrowdCheck == 0){
-			player.x = 10;
-			player.y = 500;
-			widthLife.width = totalLife;
+		if(widthLife.width<=0 ){
+			widthLife.width = 0;
+			dead = true;
+			player.animations.stop(null,true);
+			
+			this.lights.remove(player);
+			player.alpha = 0;
+	
+			//create a custom timer
+
+
+			timer = game.time.create();
+				//create a event 3s from now
+			timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
+			timer.start();
+			
+
 		}
-		else if (widthLife.width<=0&& CrowdCheck ==1){
+		// if(widthLife.width<=0 && CrowdCheck == 0){
+		// 	player.x = 10;
+		// 	player.y = 500;
+		// 	widthLife.width = totalLife;
+		// }
+		// else if (widthLife.width<=0&& CrowdCheck ==1){
 	    	
-	    	player.x = checkpoint.x+5;
-	    	player.y = checkpoint.y;
-	    	//player.body.gravity.y=1900;
-	    	widthLife.width = totalLife;
-	    	//player.LIGHT_RADIUS = 300;
+	 //    	player.x = checkpoint.x+5;
+	 //    	player.y = checkpoint.y;
+	 //    	//player.body.gravity.y=1900;
+	 //    	widthLife.width = totalLife;
+	 //    	//player.LIGHT_RADIUS = 300;
 	    		
-	    	//decreasingLight = game.add.tween(player).to( {LIGHT_RADIUS: (2*player.LIGHT_RADIUS/3) }, 10000, Phaser.Easing.Linear.None, true);
+	 //    	//decreasingLight = game.add.tween(player).to( {LIGHT_RADIUS: (2*player.LIGHT_RADIUS/3) }, 10000, Phaser.Easing.Linear.None, true);
 
 
-	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
+	 //   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
 	   
-	    	//player.kill();
-	    	//game.state.start('GameOverState');
-	    }
-	    else if(widthLife.width<=0&& CrowdCheck ==2){
+	 //    	//player.kill();
+	 //    	//game.state.start('GameOverState');
+	 //    }
+	 //    else if(widthLife.width<=0&& CrowdCheck ==2){
 	    	
-	    	player.x = checkpoint2.x+5;
-	    	player.y = checkpoint2.y;
-	    	//player.body.gravity.y=1900;
-	    	widthLife.width = totalLife;
+	 //    	player.x = checkpoint2.x+5;
+	 //    	player.y = checkpoint2.y;
+	 //    	//player.body.gravity.y=1900;
+	 //    	widthLife.width = totalLife;
 	    	
-	    }
-	    else if(widthLife.width<=0&& CrowdCheck ==3){
+	 //    }
+	 //    else if(widthLife.width<=0&& CrowdCheck ==3){
 	    	
-	    	player.x = checkpoint3.x+5;
-	    	player.y = checkpoint3.y;
-	    	//player.body.gravity.y=1900;
-	    	widthLife.width = totalLife;
+	 //    	player.x = checkpoint3.x+5;
+	 //    	player.y = checkpoint3.y;
+	 //    	//player.body.gravity.y=1900;
+	 //    	widthLife.width = totalLife;
 	    	
-	    }
-	    else if(widthLife.width<=0&& CrowdCheck ==4){
+	 //    }
+	 //    else if(widthLife.width<=0&& CrowdCheck ==4){
 	    	
-	    	player.x = checkpoint4.x+5;
-	    	player.y = checkpoint4.y;
-	    	//player.body.gravity.y=1900;
-	    	widthLife.width = totalLife;
+	 //    	player.x = checkpoint4.x+5;
+	 //    	player.y = checkpoint4.y;
+	 //    	//player.body.gravity.y=1900;
+	 //    	widthLife.width = totalLife;
 	    	
-	    }
-	    else if(widthLife.width<=0&& CrowdCheck ==5){
+	 //    }
+	 //    else if(widthLife.width<=0&& CrowdCheck ==5){
 	    	
-	    	player.x = checkpoint5.x+5;
-	    	player.y = checkpoint5.y;
-	    	//player.body.gravity.y=1900;
-	    	widthLife.width = totalLife;
+	 //    	player.x = checkpoint5.x+5;
+	 //    	player.y = checkpoint5.y;
+	 //    	//player.body.gravity.y=1900;
+	 //    	widthLife.width = totalLife;
 	    	
-	    }
+	 //    }
 
 	 //    if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
 	 //    	this.changeLight(player);
@@ -667,6 +693,33 @@ LevelCrowd.prototype = {
 };
 LevelCrowd.prototype.cropLife = function(){
 	if(widthLife.width > 0){
-		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /30)) }, 200, Phaser.Easing.Linear.None, true);
+		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /30)) }, 1, Phaser.Easing.Linear.None, true);
 	}
+}
+// LevelCrowd.prototype.deathTitle = function(){
+// 	this.lights.remove(player);
+// 	player.alpha = 0;
+// 	this.deathText = game.add.text(player.x,player.y,'Game Starts in 3 Seconds',{font:'Helvetica',fontSize:'48px',fill:'#fff'});
+// 	this.deathText.anchor.set(0.5);
+// 	//create a custom timer
+
+// 		timer = game.time.create();
+// 				//create a event 3s from now
+// 		timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
+// 		timer.start();
+
+// }
+LevelCrowd.prototype.endTimer = function(){
+	
+	if(dead == true){
+		timer.stop();
+		widthLife.width = totalLife;
+	
+		player.alpha = 1;
+		player.facing = 'right';
+    	player.x = checkpoint.x;
+    	player.y = checkpoint.y-20;
+    	this.lights.add(player);
+	}
+	dead = false;
 }

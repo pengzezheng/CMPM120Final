@@ -21,6 +21,7 @@ function Player(game,key,x,y){
 	this.animations.add('left',[0,1,2,3,4,5],10,true);
 	this.animations.add('leftIdle',[6,7,8,9,10],10,true);
 	this.animations.add('right',[16,17,18,19,20,21],10,true);
+	
 	this.animations.add('rightIdle',[11,12,13,14,15],10,true);
 	//make the player face the direction they walk to
 	this.facing = 'left';
@@ -119,6 +120,8 @@ Player.prototype.update = function(){
 
 		//fireButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 		this.body.velocity.x=0;
+
+
 
 		//if(ifRestart ==0){
 
