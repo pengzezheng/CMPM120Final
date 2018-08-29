@@ -36,6 +36,6 @@ EnemyTorrent.prototype = Object.create(Phaser.Sprite.prototype);// make prototyp
 EnemyTorrent.prototype.constructor = EnemyTorrent;
 
 EnemyTorrent.prototype.update = function() {
-	game.physics.arcade.overlap(Bullet, player, hitBullet, null, this);
+	game.physics.arcade.overlap(this, player, hitBullet, null, this);
 	this.animations.play('enemyT');
 } 

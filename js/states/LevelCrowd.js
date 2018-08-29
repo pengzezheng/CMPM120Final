@@ -701,14 +701,14 @@ LevelCrowd.prototype = {
 		temp=0;
 	},*/
 	
-	render: function(){
+	/*render: function(){
 		// game.debug.body(spring, false);
 		//game.debug.body(layer1, "#9090ff", true);
 		//game.debug.body(player, "#9090ff", true);
 		//game.debug.body(aELand, "#00ff00", true);
 		game.debug.text('FPS: ' + game.time.fps || 'FPS: --', 40, 40, "#00ff00");
 
-	}
+	}*/
 	
 };
 LevelCrowd.prototype.cropLife = function(){
