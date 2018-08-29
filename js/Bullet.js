@@ -1,5 +1,5 @@
 function Bullet(game, key){
-	Phaser.Sprite.call(this, game, 400, 85, 'theBullet');// call phaser sprite
+	Phaser.Sprite.call(this, game, 400, 85, key);// call phaser sprite
 	game.physics.enable(this, Phaser.Physics.ARCADE);//enable physics
 	this.enableBody=true;
 	this.scale.setTo(0.5);
@@ -16,5 +16,6 @@ Bullet.prototype.update = function() {
 
 Bullet.prototype.hit = function(){//kill bullet and do damage
 		this.destroy();
+		
 		//bgm.play();//make sounds
 	}

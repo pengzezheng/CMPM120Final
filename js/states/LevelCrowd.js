@@ -255,7 +255,11 @@ LevelCrowd.prototype = {
 		sp.scale.setTo(0.15);
 		sp.body.immovable=true;
 		sp.body.setSize(256, 100, 0, 175);
-		var sp =spring.create(3000,750,'jumppad');
+		var sp =spring.create(2740,670,'jumppad');
+		sp.scale.setTo(0.15);
+		sp.body.immovable=true;
+		sp.body.setSize(256, 100, 0, 175);
+		var sp =spring.create(2960,750,'jumppad');
 		sp.scale.setTo(0.15);
 		sp.body.immovable=true;
 		sp.body.setSize(256, 100, 0, 175);
@@ -285,17 +289,17 @@ LevelCrowd.prototype = {
 	    game.physics.arcade.enable(checkpoint2);
 		checkpoint2.enableBody = true;
 
-		checkpoint3 = game.add.sprite(2830,650,'checkpoint');
+		checkpoint3 = game.add.sprite(3040,777,'checkpoint');
 	    game.physics.arcade.enable(checkpoint3);
 		checkpoint3.enableBody = true;
 
-		checkpoint4 = game.add.sprite(4325,779,'checkpoint');
+		checkpoint4 = game.add.sprite(3959,522,'checkpoint');
 	    game.physics.arcade.enable(checkpoint4);
 		checkpoint4.enableBody = true;
 
-		checkpoint5 = game.add.sprite(5738,427,'checkpoint');
-	    game.physics.arcade.enable(checkpoint5);
-		checkpoint5.enableBody = true;
+		// checkpoint5 = game.add.sprite(5738,427,'checkpoint');
+	 //    game.physics.arcade.enable(checkpoint5);
+		// checkpoint5.enableBody = true;
 	    // player = new Player(game,'player');
 	    // player.x=0;
 	    // player.y=500;
@@ -396,10 +400,10 @@ LevelCrowd.prototype = {
 		game.physics.arcade.overlap(player,checkpoint2,this.reachCheckpoint2,null,this);
 		game.physics.arcade.overlap(player,checkpoint3,this.reachCheckpoint3,null,this);
 		game.physics.arcade.overlap(player,checkpoint4,this.reachCheckpoint4,null,this);
-		game.physics.arcade.overlap(player,checkpoint5,this.reachCheckpoint5,null,this);
+		//game.physics.arcade.overlap(player,checkpoint5,this.reachCheckpoint5,null,this);
 		game.physics.arcade.collide(player,layer1);
 		game.physics.arcade.collide(aELand,layer1);
-
+		
 		var onSpring=game.physics.arcade.collide(player,spring);
 	   	if(onSpring==true){ 
 			player.body.velocity.y=-1200;
@@ -597,22 +601,22 @@ LevelCrowd.prototype = {
 		
 
 	},
-	reachCheckpoint5: function(player,checkpoint5){
-		console.log("a");
-		//TempX = checkpoint2.x;
-    	//TempY = checkpoint2.y;
-		CrowdCheck = 5;
-		widthLife.width = totalLife;
-		var saved5=new Checkpoint(game,checkpoint5.x,checkpoint5.y-5,'checkpoint1');
-		game.add.existing(saved5);
+	// reachCheckpoint5: function(player,checkpoint5){
+	// 	console.log("a");
+	// 	//TempX = checkpoint2.x;
+ //    	//TempY = checkpoint2.y;
+	// 	CrowdCheck = 5;
+	// 	widthLife.width = totalLife;
+	// 	var saved5=new Checkpoint(game,checkpoint5.x,checkpoint5.y-5,'checkpoint1');
+	// 	game.add.existing(saved5);
 
-	//saved.enableBody = true;
-		checkpoint5.kill();
-		this.lights.add(saved5);
-		saved5.LIGHT_RADIUS = 50;
+	// //saved.enableBody = true;
+	// 	checkpoint5.kill();
+	// 	this.lights.add(saved5);
+	// 	saved5.LIGHT_RADIUS = 50;
 		
 
-	},
+	// },
 	
 	updateShadowTexture:function(){
 		this.shadowTexture.context.fillStyle = 'rgb(0, 0, 0)';
@@ -728,14 +732,30 @@ LevelCrowd.prototype.cropLife = function(){
 LevelCrowd.prototype.endTimer = function(){
 	
 	if(dead == true){
+
 		timer.stop();
 		widthLife.width = totalLife;
 	
 		player.alpha = 1;
 		player.facing = 'right';
-    	player.x = checkpoint.x;
-    	player.y = checkpoint.y-20;
-    	this.lights.add(player);
+		this.lights.add(player);
+		if(CrowdCheck == 0){
+    		player.x = 10;
+    		player.y = 500;
+    	}else if(CrowdCheck == 1){
+    		player.x = checkpoint.x;
+    		player.y = checkpoint.y - 30;
+    	}else if(CrowdCheck == 2){
+    		player.x = checkpoint2.x;
+    		player.y = checkpoint2.y - 30;
+    	}else if(CrowdCheck == 3){
+    		player.x = checkpoint3.x;
+    		player.y = checkpoint3.y - 30;
+    	}else if(CrowdCheck == 4){
+    		player.x = checkpoint4.x;
+    		player.y = checkpoint4.y - 30;
+    	}
+
 	}
 	dead = false;
 }

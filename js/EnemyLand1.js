@@ -20,7 +20,7 @@ function rush(enemyLand1, player){//kill enemy and do damage to player
 	}
 function hitEnemyLand(enemyLand1,bullet){
 	enemyLand1.kill();
-	bullet.kill();
+	//bullet.kill();
 }
 
 EnemyLand1.prototype = Object.create(Phaser.Sprite.prototype);// make prototype
@@ -29,7 +29,7 @@ EnemyLand1.prototype.constructor = EnemyLand1;
 EnemyLand1.prototype.update = function() {
 	game.physics.arcade.collide(this,layer1);
 	game.physics.arcade.overlap(this, player, rush, null, this);
-	game.physics.arcade.overlap(this, weapon.bullets, hitEnemyLand, null, this);
+	//game.physics.arcade.overlap(this, weapon.bullets, hitEnemyLand, null, this);
 	this.animations.play('ELand');
 	if(this.body.x > player.x){
 		if(this.body.x< player.x+250){

@@ -1,4 +1,4 @@
-var weapon;
+//var weapon;
 var fireButton;
 var bglife;
 var widthLife;
@@ -64,15 +64,15 @@ function Player(game,key,x,y){
 
     //game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 
-    weapon = game.add.weapon(30,'fire');
-    weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
-    weapon.bulletSpeed = 600;
-    weapon.fireRate = 100;
-    weapon.trackSprite(this,0,0,true);
+ //    weapon = game.add.weapon(30,'fire');
+ //    weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
+ //    weapon.bulletSpeed = 600;
+ //    weapon.fireRate = 100;
+ //    weapon.trackSprite(this,0,0,true);
 
-    //add sound for fire weapon
-    fireSound = game.sound.add('fireSound');
-	fireSound.allowMultiple = true;
+ //    //add sound for fire weapon
+ //    fireSound = game.sound.add('fireSound');
+	// fireSound.allowMultiple = true;
     this.body.setSize(60, 90, 30, 35);
     this.anchor.setTo(0.5,0.5);
  //    if(widthLife.width > 0){

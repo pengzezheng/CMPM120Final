@@ -1,3 +1,4 @@
+var bullet;
 function EnemyTorrent(game, key){
 	Phaser.Sprite.call(this, game, 400, 500, key);// call phaser sprite
 	this.scale.setTo(0.1);
@@ -10,7 +11,7 @@ function EnemyTorrent(game, key){
 }
 
 function shootBullet(){
-	bullet=new Bullet(game, "fire");
+	bullet=new Bullet(game, "theBullet");
 	bullet.reset(this.body.x,this.body.y);
 	if(this.body.x > player.x){
 		this.scale.setTo(0.1,0.1);
@@ -26,10 +27,15 @@ function shootBullet(){
 		}
 	}
 }
+function hitBullet(bullet,player){
+	bullet.kill();
+	widthLife.width = widthLife.width - totalLife/5;
+}
 
 EnemyTorrent.prototype = Object.create(Phaser.Sprite.prototype);// make prototype
 EnemyTorrent.prototype.constructor = EnemyTorrent;
 
 EnemyTorrent.prototype.update = function() {
+	game.physics.arcade.overlap(Bullet, player, hitBullet, null, this);
 	this.animations.play('enemyT');
 } 
