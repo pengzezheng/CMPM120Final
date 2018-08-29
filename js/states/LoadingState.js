@@ -15,8 +15,10 @@ LoadingState.prototype = {
 	    //game.load.image('level2bg', 'assets/level2bg.json');
 	    game.load.tilemap('level2bg', 'assets/level2bg.json', null, Phaser.Tilemap.TILED_JSON);
 	    game.load.tilemap('levelholebg', 'assets/levelholebg.json', null, Phaser.Tilemap.TILED_JSON);
+	    game.load.tilemap('levelHeight', 'assets/lvl1remake.json', null, Phaser.Tilemap.TILED_JSON);
 	    game.load.image('tileset2', 'assets/tilemap2.png', 32, 32);
 	    game.load.image('tileset3', 'assets/level 3 tile map.png', 32, 32);
+	    game.load.image('tileset1', 'assets/level 1 tilemap.png', 32, 32);
 	    game.load.spritesheet('bom', 'assets/FlyingEnemybullet.png', 32, 32);
 	    game.load.spritesheet('ex', 'assets/explosionspritesheet.png', 32, 32);
 	    game.load.spritesheet('ELand', 'assets/c mob sheet better.png', 144, 200);
@@ -27,6 +29,7 @@ LoadingState.prototype = {
 	    game.load.image('checkpoint', 'assets/dead candle man.png');
 	    game.load.image('checkpoint1', 'assets/dead candle man lit.png');
 	    game.load.image('bgCrowd', 'assets/c Background.png');
+	    game.load.image('bg1', 'assets/H background.png');
 
 
 	    //game.load.audio('fireSound', 'audios/fire.wav');
