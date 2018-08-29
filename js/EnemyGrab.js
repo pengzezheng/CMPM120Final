@@ -21,14 +21,10 @@ EnemyGrab.prototype.constructor = EnemyGrab;
 
 EnemyGrab.prototype.update = function() {
 	game.physics.arcade.overlap(this, player, grab, null, this);
-	/*if(this.count < 100) {
-				if(this.count < 90) {
-					this.scale.setTo(0.1, 0.1+this.count*0.1);
-				}
-				this.count++;
-		}
-		//kill it 
-		/*else {
-				this.kill();
-		}*/
+
+	if(this.body.x > player.x){
+		this.scale.setTo(1,1);
+	}else{
+		this.scale.setTo(-1,1);
+	}
 }

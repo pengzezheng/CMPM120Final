@@ -7,6 +7,7 @@ LoadingState.prototype = {
 
 
 	    game.load.image('star', 'assets/flyingenemy.png');
+		game.load.spritesheet('healthFire', 'assets/healthfire.png');
 	    game.load.image('candle', 'assets/stand.png');
 	    game.load.image('jumppad', 'assets/jump pad.png');
 	    game.load.spritesheet('enemyT', 'assets/c mob 2 sheet better.png', 256, 256);
@@ -29,6 +30,8 @@ LoadingState.prototype = {
 	    game.load.audio('BGM1', 'audios/BGMLVL1.wav');
 	    game.load.audio('EXPLO', 'audios/Explosion.wav');
 	    game.load.audio('EA', 'audios/EAttack.wav');
+	    game.load.audio('Die', 'audios/die.wav');
+	    game.load.audio('pad', 'audios/pad.wav');
 
 	    game.load.image('checkpoint', 'assets/dead candle man.png');
 	    game.load.image('checkpoint1', 'assets/dead candle man lit.png');
