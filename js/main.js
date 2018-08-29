@@ -12,6 +12,7 @@ window.onload = function() {
     game.state.add("Level1State", Level1State);
     game.state.add("LevelCrowd", LevelCrowd);
     game.state.add("LevelHole", LevelHole);
+    game.state.add("LevelHeight", LevelHeight);
     //game.state.add("GameOverState", GameOverState);
     game.state.start("LoadingState");
 }

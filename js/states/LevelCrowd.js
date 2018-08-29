@@ -24,18 +24,22 @@ LevelCrowd.prototype = {
 		// //create a custom timer
 		// timer = game.time.create();
 
+
 		// //create a event 3s from now
 		// timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
-		game.world.setBounds(0, 0, 8000, 960);
+		
+		game.world.setBounds(0, 0, 4000, 960);
+
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		game.time.advancedTiming = true;
+		// game.time.advancedTiming = true;
 		var sky = game.add.sprite(-100, 0, 'bgCrowd');
 	   	sky.scale.setTo(1.01, 0.8);
 	   	map=game.add.tilemap('level2bg');
-	   	map.addTilesetImage('platform', 'tileset2', 32, 32);
+	   	map.addTilesetImage('tilemap2', 'tileset2', 32, 32);
 	   	layer1=map.createLayer('layer1');
 	   	var a =game.add.existing(layer1);
-	   	a.debug=true;
+	   	//var a =game.add.existing(layer1);
+	   	//a.debug=true;
 	   	//layer1.resizeWorld();
 
 	   	
@@ -91,136 +95,146 @@ LevelCrowd.prototype = {
 	        aBgE.scale.setTo(0.25);
 	    }
 
-	    for(var i = 0; i < 45; i++) {
-	    	var fakeEnemies = game.add.sprite(5760 + (32 * i), 512 - 16, 'ELand');
+	    for(var i = 0; i < 34; i++) {
+	    	var fakeEnemies = game.add.sprite(1920 + (16 * i), 864 - 16, 'ELand');
 	    	fakeEnemies.scale.setTo(0.25);
 	    }
 
-	    aELand =new EnemyLand1(game,'ELand');
-	    game.add.existing(aELand);
-	    aELand.x = 200;
-	    aELand.y = 250;
-	    aELand =new EnemyLand1(game,'ELand');
+	    aELand = new EnemyLand1(game,'ELand');
 	    game.add.existing(aELand);
 	    aELand.x = 320;
 	    aELand.y = 672;
-	    aELand =new EnemyLand1(game,'ELand');
+	    aELand = new EnemyLand1(game,'ELand');
 	    game.add.existing(aELand);
-	    aELand.x = 864;
-	    aELand.y = 672;
-	    aELand =new EnemyLand1(game,'ELand');
+	    aELand.x = (28 * 32);
+	    aELand.y = (21 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
 	    game.add.existing(aELand);
-	    aELand.x = 1504;
-	    aELand.y = 576;
-	    aELand =new EnemyLand1(game,'ELand');
+	    aELand.x = (38 * 32);
+	    aELand.y = (14 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
 	    game.add.existing(aELand);
-	    aELand.x = 2496;
-	    aELand.y = 384;
-	    aELand =new EnemyLand1(game,'ELand');
+	    aELand.x = (46 * 32);
+	    aELand.y = (18 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
 	    game.add.existing(aELand);
-	    aELand.x = 2112;
-	    aELand.y = 864;
-	    aELand =new EnemyLand1(game,'ELand');
+	    aELand.x = (49 * 32);
+	    aELand.y = (18 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
 	    game.add.existing(aELand);
-	    aELand.x = 2816;
-	    aELand.y = 864;
-	    aELand =new EnemyLand1(game,'ELand');
+	    aELand.x = (68 * 32);
+	    aELand.y = (13 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
 	    game.add.existing(aELand);
-	    aELand.x = 5856;
-	    aELand.y = 512;
-	    aELand =new EnemyLand1(game,'ELand');
+	    aELand.x = (73 * 32);
+	    aELand.y = (11 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
 	    game.add.existing(aELand);
-	    aELand.x = 6016;
-	    aELand.y = 512;
-	    aELand =new EnemyLand1(game,'ELand');
+	    aELand.x = (76 * 32);
+	    aELand.y = (11 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
 	    game.add.existing(aELand);
-	    aELand.x = 6048;
-	    aELand.y = 512;
-	    aELand =new EnemyLand1(game,'ELand');
+	    aELand.x = (84 * 32);
+	    aELand.y = (11 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
 	    game.add.existing(aELand);
-	    aELand.x = 6176;
-	    aELand.y = 512;
-	    aELand =new EnemyLand1(game,'ELand');
+	    aELand.x = (97 * 32);
+	    aELand.y = (13 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
 	    game.add.existing(aELand);
-	    aELand.x = 6336;
-	    aELand.y = 512;
-	    aELand =new EnemyLand1(game,'ELand');
+	    aELand.x = (100 * 32);
+	    aELand.y = (13 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
 	    game.add.existing(aELand);
-	    aELand.x = 5856;
-	    aELand.y = 512;
-	    aELand =new EnemyLand1(game,'ELand');
+	    aELand.x = (63 * 32);
+	    aELand.y = (27 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
 	    game.add.existing(aELand);
-	    aELand.x = 6727;
-	    aELand.y = 512;
-	    aELand =new EnemyLand1(game,'ELand');
+	    aELand.x = (66 * 32);
+	    aELand.y = (27 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
 	    game.add.existing(aELand);
-	    aELand.x = 6944;
-	    aELand.y = 512;
-	    aELand =new EnemyLand1(game,'ELand');
+	    aELand.x = (69 * 32);
+	    aELand.y = (27 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
 	    game.add.existing(aELand);
-	    aELand.x = 7232;
-	    aELand.y = 512;
-	
-	    aETorrent =new EnemyTorrent(game,'enemyT');
-	    game.add.existing(aETorrent);
-	    aETorrent.x = 300;
-	    aETorrent.y = 600;
-	    aETorrent =new EnemyTorrent(game,'enemyT');
+	    aELand.x = (72 * 32);
+	    aELand.y = (27 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = (28 * 32);
+	    aELand.y = (27 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = (30 * 32);
+	    aELand.y = (27 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = (32 * 32);
+	    aELand.y = (27 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = (34 * 32);
+	    aELand.y = (27 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = (36 * 32);
+	    aELand.y = (27 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = (38 * 32);
+	    aELand.y = (27 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = (40 * 32);
+	    aELand.y = (27 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = (42 * 32);
+	    aELand.y = (27 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = (82 * 32);
+	    aELand.y = (27 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = (84 * 32);
+	    aELand.y = (27 * 32);
+	    aELand = new EnemyLand1(game,'ELand');
+	    game.add.existing(aELand);
+	    aELand.x = (86 * 32);
+	    aELand.y = (27 * 32);
+
+	    	
+	    aETorrent = new EnemyTorrent(game,'enemyT');
 	    game.add.existing(aETorrent);
 	    aETorrent.x = 1024;
 	    aETorrent.y = 608 + 18;
-	    aETorrent =new EnemyTorrent(game,'enemyT');
+	    aETorrent = new EnemyTorrent(game,'enemyT');
 	    game.add.existing(aETorrent);
-	    aETorrent.x = 1248;
-	    aETorrent.y = 448 + 18;
-	    aETorrent =new EnemyTorrent(game,'enemyT');
+	    aETorrent.x = (18 * 32);
+	    aETorrent.y = (21 * 32) + 18;
+	    aETorrent = new EnemyTorrent(game,'enemyT');
 	    game.add.existing(aETorrent);
-	    aETorrent.x = 2208;
-	    aETorrent.y = 416 + 18;
-	    aETorrent =new EnemyTorrent(game,'enemyT');
+	    aETorrent.x = (23 * 32);
+	    aETorrent.y = (17 * 32) + 18;
+	    aETorrent = new EnemyTorrent(game,'enemyT');
 	    game.add.existing(aETorrent);
-	    aETorrent.x = 2528;
-	    aETorrent.y = 384 + 18;
-	    aETorrent =new EnemyTorrent(game,'enemyT');
+	    aETorrent.x = (33 * 32);
+	    aETorrent.y = (19 * 32) + 18;
+	    aETorrent = new EnemyTorrent(game,'enemyT');
 	    game.add.existing(aETorrent);
-	    aETorrent.x = 3296;
-	    aETorrent.y = 352 + 18;
-	    aETorrent =new EnemyTorrent(game,'enemyT');
+	    aETorrent.x = (44 * 32);
+	    aETorrent.y = (18 * 32) + 18;
+	    aETorrent = new EnemyTorrent(game,'enemyT');
 	    game.add.existing(aETorrent);
-	    aETorrent.x = 3456;
-	    aETorrent.y = 320 + 18;
-	    aETorrent =new EnemyTorrent(game,'enemyT');
+	    aETorrent.x = (80 * 32);
+	    aETorrent.y = (10 * 32) + 18;
+	    aETorrent = new EnemyTorrent(game,'enemyT');
 	    game.add.existing(aETorrent);
-	    aETorrent.x = 4096;
-	    aETorrent.y = 256 + 18;
-	    aETorrent =new EnemyTorrent(game,'enemyT');
-	    game.add.existing(aETorrent);
-	    aETorrent.x = 4544;
-	    aETorrent.y = 416 + 18;
-	    aETorrent =new EnemyTorrent(game,'enemyT');
-	    game.add.existing(aETorrent);
-	    aETorrent.x = 6080;
-	    aETorrent.y = 512 + 18;
-	    aETorrent =new EnemyTorrent(game,'enemyT');
-	    game.add.existing(aETorrent);
-	    aETorrent.x = 6336;
-	    aETorrent.y = 512 + 18;
-	    aETorrent =new EnemyTorrent(game,'enemyT');
-	    game.add.existing(aETorrent);
-	    aETorrent.x = 6400;
-	    aETorrent.y = 512 + 18;
-	    aETorrent =new EnemyTorrent(game,'enemyT');
-	    game.add.existing(aETorrent);
-	    aETorrent.x = 6656;
-	    aETorrent.y = 512 + 18;
-	    aETorrent =new EnemyTorrent(game,'enemyT');
-	    game.add.existing(aETorrent);
-	    aETorrent.x = 6656;
-	    aETorrent.y = 512 + 18;
-	    aETorrent =new EnemyTorrent(game,'enemyT');
-	    game.add.existing(aETorrent);
-	    aETorrent.x = 6912;
-	    aETorrent.y = 512 + 18;
+	    aETorrent.x = (113 * 32);
+	    aETorrent.y = (14 * 32) + 18;
+
 	    spring=game.add.group();
 		game.physics.enable(spring, Phaser.Physics.ARCADE);
 		spring.enableBody=true;
@@ -682,14 +696,16 @@ LevelCrowd.prototype = {
 		player.body.gravity.y=temp;
 		temp=0;
 	},*/
+	/*
 	render: function(){
 		// game.debug.body(spring, false);
 		//game.debug.body(layer1, "#9090ff", true);
 		//game.debug.body(player, "#9090ff", true);
 		//game.debug.body(aELand, "#00ff00", true);
-		game.debug.text('FPS: ' + game.time.fps || 'FPS: --', 40, 40, "#00ff00");
+		//game.debug.text('FPS: ' + game.time.fps || 'FPS: --', 40, 40, "#00ff00");
 
 	}
+	*/
 };
 LevelCrowd.prototype.cropLife = function(){
 	if(widthLife.width > 0){
