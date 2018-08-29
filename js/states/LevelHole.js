@@ -31,7 +31,7 @@ LevelHole.prototype = {
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
 	    aEHold.x = (14 * 32);
-	    aEHold.y = (21 * 32) + 24;
+	    aEHold.y = (22 * 32) + 24;
 
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
