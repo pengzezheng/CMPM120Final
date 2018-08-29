@@ -31,7 +31,7 @@ LevelCrowd.prototype = {
 		game.world.setBounds(0, 0, 4000, 960);
 
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		// game.time.advancedTiming = true;
+		 game.time.advancedTiming = true;
 		var sky = game.add.sprite(-100, 0, 'bgCrowd');
 	   	sky.scale.setTo(1.01, 0.8);
 	   	map=game.add.tilemap('level2bg');
@@ -700,16 +700,16 @@ LevelCrowd.prototype = {
 		player.body.gravity.y=temp;
 		temp=0;
 	},*/
-	/*
+	
 	render: function(){
 		// game.debug.body(spring, false);
 		//game.debug.body(layer1, "#9090ff", true);
 		//game.debug.body(player, "#9090ff", true);
 		//game.debug.body(aELand, "#00ff00", true);
-		//game.debug.text('FPS: ' + game.time.fps || 'FPS: --', 40, 40, "#00ff00");
+		game.debug.text('FPS: ' + game.time.fps || 'FPS: --', 40, 40, "#00ff00");
 
 	}
-	*/
+	
 };
 LevelCrowd.prototype.cropLife = function(){
 	if(widthLife.width > 0){

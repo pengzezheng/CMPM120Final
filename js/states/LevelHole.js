@@ -6,6 +6,7 @@ var checkpoint3;
 var checkpoint4;
 var CrowdCheck = 0;
 var dead = false;
+var counter=3;
 var LevelHole = function(game) {};
 LevelHole.prototype = {
 	create: function() {
@@ -183,6 +184,16 @@ LevelHole.prototype = {
     	life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(630,50);
+
+    	lives=game.add.group();
+    	lives.fixedToCamera = true;
+    	lives.cameraOffset.setTo(50,50);
+    	l1 = lives.create(75, 12.5, 'lives');//create sprite life
+		l1.scale.setTo(0.075);//set scale
+		l2 = lives.create(105, 12.5, 'lives'); //create sprite life
+		l2.scale.setTo(0.075);//set scale
+		l3 = lives.create(135, 12.5, 'lives');//create sprite life
+		l3.scale.setTo(0.075);//set scale
 	},
 
 	update: function() {
@@ -209,8 +220,13 @@ LevelHole.prototype = {
 				//create a event 3s from now
 			timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
 			timer.start();
-			
+		}
 
+		if(counter==2){
+			l3.destroy();
+		}
+		if(counter==1){
+			l2.destroy();
 		}
 	},
 	reachCheckpoint: function(player,checkpoint){
@@ -366,7 +382,7 @@ LevelHole.prototype.endTimer = function(){
 
 		timer.stop();
 		widthLife.width = totalLife;
-	
+		counter--;
 		player.alpha = 1;
 		player.facing = 'right';
 		this.lights.add(player);
