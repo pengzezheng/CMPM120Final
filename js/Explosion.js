@@ -9,7 +9,7 @@ function Explosion(game, key) {
 	//counter 
 	this.count = 0;
 	this.animations.add('ex1', [0, 1, 2, 3], 10, true);
-	explSound.play();
+	//explSound.play();
 }
 
 function explos(explosion, player){//kill enemy and do damage to player
