@@ -24,6 +24,7 @@ LevelHole.prototype = {
 	   	map.setCollisionByExclusion([], true, 'layer2', true);
 
 	   	game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
+	   
 	   	aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
 	    aEHold.x = 200;
@@ -195,6 +196,8 @@ LevelHole.prototype = {
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(170,30);
     	
+    	
+    	
     	lives=game.add.group();
     	lives.fixedToCamera = true;
     	lives.cameraOffset.setTo(50,50);
@@ -208,7 +211,7 @@ LevelHole.prototype = {
 
 	update: function() {
 		
-		
+		//this.resethealthFire();
 		game.physics.arcade.collide(player,layer2);
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.overlap(player,checkpoint2,this.reachCheckpoint2,null,this);
@@ -241,6 +244,7 @@ LevelHole.prototype = {
 			l2.destroy();
 		}
 	},
+	
 	reachCheckpoint: function(player,checkpoint){
 		console.log("a");
 		//TempX = checkpoint.x;
@@ -385,7 +389,7 @@ LevelHole.prototype = {
 };
 LevelHole.prototype.cropLife = function(){
 	if(widthLife.width >= 0){
-		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /30)) }, 1, Phaser.Easing.Linear.None, true);
+		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /30)) }, 0.1, Phaser.Easing.Linear.None, true);
 	}
 }
 LevelHole.prototype.endTimer = function(){
