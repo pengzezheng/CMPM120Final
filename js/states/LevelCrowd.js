@@ -14,7 +14,7 @@ var playerLight;
 var CrowdCheck;
 var playerRadius;
 var blowRadius;
-
+var deathbg=false;
 var timer;
 var timeEvent;
 var dead = false;
@@ -24,18 +24,10 @@ LevelCrowd.prototype = {
 		// //create a custom timer
 		// timer = game.time.create();
 
-		EAtt=game.add.audio('EA');
-		explSound=game.add.audio('EXPLO');
-		EAtt.allowMultiple=true;
-		// game.camera(800,600);
-	    //  We're going to be using physics, so enable the Arcade Physics system
-	    game.physics.startSystem(Phaser.Physics.ARCADE);
-	    BGM1=new Phaser.Sound(game,'BGM1',1,true);
-	    BGM1.allowMultiple=true;
-	    BGM1.play();
 		// //create a event 3s from now
 		// timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
-		
+		Died=game.add.audio('Die');
+		//Died.allowMultiple=true;
 		game.world.setBounds(0, 0, 4000, 960);
 
 		game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -422,6 +414,7 @@ LevelCrowd.prototype = {
 		this.updateShadowTexture();
 		life.updateCrop();
 		if(widthLife.width<=0 ){
+			//deathbg=true;
 			widthLife.width = 0;
 			dead = true;
 			player.animations.stop(null,true);
@@ -430,7 +423,10 @@ LevelCrowd.prototype = {
 			player.alpha = 0;
 	
 			//create a custom timer
-
+			//if (deathbg==true){
+		
+				//deathbg=false;
+			//}
 
 			timer = game.time.create();
 				//create a event 3s from now
@@ -738,12 +734,9 @@ LevelCrowd.prototype.cropLife = function(){
 
 // }
 LevelCrowd.prototype.endTimer = function(){
-	
 	if(dead == true){
-
 		timer.stop();
 		widthLife.width = totalLife;
-	
 		player.alpha = 1;
 		player.facing = 'right';
 		this.lights.add(player);

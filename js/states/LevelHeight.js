@@ -3,8 +3,10 @@ LevelHeight.prototype = {
 	create: function() {
 
 		EAtt=game.add.audio('EA');
+		Died=game.add.audio('Die');
 		explSound=game.add.audio('EXPLO', 0.25);
 		EAtt.allowMultiple=true;
+		Died.allowMultiple=true;
 		// game.camera(800,600);
 	    //  We're going to be using physics, so enable the Arcade Physics system
 	    game.physics.startSystem(Phaser.Physics.ARCADE);
