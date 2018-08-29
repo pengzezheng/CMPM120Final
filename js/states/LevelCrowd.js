@@ -14,7 +14,7 @@ var playerLight;
 var CrowdCheck;
 var playerRadius;
 var blowRadius;
-var deathbg=false;
+var deathbg=0;
 var timer;
 var timeEvent;
 var dead = false;
@@ -27,7 +27,9 @@ LevelCrowd.prototype = {
 		// //create a event 3s from now
 		// timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
 		Died=game.add.audio('Die');
-		//Died.allowMultiple=true;
+		Pad=game.add.audio('pad');
+		Pad.allowMultiple=true;
+		Died.allowMultiple=true;
 		game.world.setBounds(0, 0, 4000, 960);
 
 		game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -318,7 +320,7 @@ LevelCrowd.prototype = {
 	},
 
 	update: function() {
-		console.log(player.x,player.y);
+		///console.log(player.x,player.y);
 
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.overlap(player,checkpoint2,this.reachCheckpoint2,null,this);
@@ -329,32 +331,31 @@ LevelCrowd.prototype = {
 		game.physics.arcade.collide(aELand,layer1);
 		
 		var onSpring=game.physics.arcade.collide(player,spring);
+
 	   	if(onSpring==true){ 
 			player.body.velocity.y=-1200;
-			//this.animations.play('up');
-			//game.time.events.add(Phaser.Timer.SECOND * 2, this.springDone, this);
-
+			Pad.play();
 		}
 		this.updateShadowTexture();
 		life.updateCrop();
 		if(widthLife.width<=0 ){
 			//deathbg=true;
+			console.log(dead);
+			// if(dead=false){
+			// }
 			widthLife.width = 0;
 			dead = true;
+			// Died.play();
 			player.animations.stop(null,true);
-			Died.play();
+			//Died.play();
 			this.lights.remove(player);
 			player.alpha = 0;
 	
-			//create a custom timer
-			//if (deathbg==true){
-		
-				//deathbg=false;
-			//}
+			//create a custom tim
 
 			timer = game.time.create();
 				//create a event 3s from now
-			timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
+			timeEvent = timer.add(Phaser.Timer.SECOND*3, this.endTimer, this);
 			timer.start();
 		}
 	},

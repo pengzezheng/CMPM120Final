@@ -30,6 +30,7 @@ LoadingState.prototype = {
 	    game.load.audio('EXPLO', 'audios/Explosion.wav');
 	    game.load.audio('EA', 'audios/EAttack.wav');
 	    game.load.audio('Die', 'audios/die.wav');
+	    game.load.audio('pad', 'audios/pad.wav');
 
 	    game.load.image('checkpoint', 'assets/dead candle man.png');
 	    game.load.image('checkpoint1', 'assets/dead candle man lit.png');
