@@ -51,7 +51,13 @@ LevelHeight.prototype = {
 
 	update: function() {
 		game.physics.arcade.collide(player,layer3);
+		if(player.y >= 3950){
+	    	player.body.collideWorldBounds = false;
+	    }
 
+	    if(player.y >= 5000){
+	    	widthLife.width = 0;
+	    }
 	},
 
 	createBombs: function() {
