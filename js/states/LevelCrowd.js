@@ -24,7 +24,15 @@ LevelCrowd.prototype = {
 		// //create a custom timer
 		// timer = game.time.create();
 
-
+		EAtt=game.add.audio('EA');
+		explSound=game.add.audio('EXPLO');
+		EAtt.allowMultiple=true;
+		// game.camera(800,600);
+	    //  We're going to be using physics, so enable the Arcade Physics system
+	    game.physics.startSystem(Phaser.Physics.ARCADE);
+	    BGM1=new Phaser.Sound(game,'BGM1',1,true);
+	    BGM1.allowMultiple=true;
+	    BGM1.play();
 		// //create a event 3s from now
 		// timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
 		
