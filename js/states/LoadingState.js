@@ -6,9 +6,10 @@ LoadingState.prototype = {
 	    game.load.image('candle', 'assets/stand.png');
 	    game.load.image('jumppad', 'assets/jump pad.png');
 	    game.load.spritesheet('enemyT', 'assets/c mob 2 sheet better.png', 256, 256);
+	    game.load.spritesheet('enemyDark', 'assets/level 3 boss.png', 512, 512);
 	    game.load.image('theBullet', 'assets/c mob bullet.png');
 	    game.load.image('mouthOpen', 'assets/level 3 trap open.png');
-	    game.load.image('enemyDark', 'assets/boss temp.png');
+	    //game.load.image('enemyDark', 'assets/boss temp.png');
 	    game.load.image('bg3', 'assets/Holes background.png');
 	    game.load.image('lives', 'assets/ui.png');
 	    //game.load.image('level2bg', 'assets/level2bg.json');
