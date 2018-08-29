@@ -8,29 +8,29 @@ function EnemyLand1(game, key){
 	this.anchor.setTo(0.6);
 	this.body.gravity.y=10000;
 	this.body.setSize(100, 200, 16, 16);
-
+	Died.allowMultiple=true;
+	counter=0;
 }
 
 function rush(enemyLand1, player){//kill enemy and do damage to player
-		hit=1;
-		enemyLand1.kill();
-		widthLife.width = widthLife.width - totalLife/4;
-		hit=0;
-
-	}
-function hitEnemyLand(enemyLand1,bullet){
+	hit=1;
 	enemyLand1.kill();
-	//bullet.kill();
-}
+	widthLife.width = widthLife.width - totalLife/4;
+	hit=0;
+	}
 
 EnemyLand1.prototype = Object.create(Phaser.Sprite.prototype);// make prototype
 EnemyLand1.prototype.constructor = EnemyLand1;
 
 EnemyLand1.prototype.update = function() {
 	game.physics.arcade.collide(this,layer1);
-	game.physics.arcade.overlap(this, player, rush, null, this);
+	var hurt=game.physics.arcade.overlap(this, player, rush, null, this);
 	//game.physics.arcade.overlap(this, weapon.bullets, hitEnemyLand, null, this);
 	this.animations.play('ELand');
+
+	if(hurt==true){ 
+		Died.play();
+	}
 	if(this.body.x > player.x){
 		if(this.body.x< player.x+250){
 			game.physics.arcade.moveToObject(this,player);

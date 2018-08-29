@@ -14,7 +14,7 @@ var playerLight;
 var CrowdCheck;
 var playerRadius;
 var blowRadius;
-
+var deathbg=0;
 var timer;
 var timeEvent;
 var dead = false;
@@ -24,18 +24,12 @@ LevelCrowd.prototype = {
 		// //create a custom timer
 		// timer = game.time.create();
 
-		EAtt=game.add.audio('EA');
-		explSound=game.add.audio('EXPLO');
-		EAtt.allowMultiple=true;
-		// game.camera(800,600);
-	    //  We're going to be using physics, so enable the Arcade Physics system
-	    game.physics.startSystem(Phaser.Physics.ARCADE);
-	    BGM1=new Phaser.Sound(game,'BGM1',1,true);
-	    BGM1.allowMultiple=true;
-	    BGM1.play();
 		// //create a event 3s from now
 		// timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
-		
+		Died=game.add.audio('Die');
+		Pad=game.add.audio('pad');
+		Pad.allowMultiple=true;
+		Died.allowMultiple=true;
 		game.world.setBounds(0, 0, 4000, 960);
 
 		game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -53,48 +47,10 @@ LevelCrowd.prototype = {
 	   	
 	   	game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 	   	CrowdCheck = 0;
-    	/*platforms = game.add.group();
-	    platforms.enableBody = true;
-	 	
-		bgLands = game.add.group();*/
-		/*for (var i=0; i<20; i++){
-			console.log("b");
-			var land = platforms.create(i*350, 650, 'pillar');
-	    	land.scale.setTo(8, 0.1);
-	    	land.body.immovable = true;
-		}*/
 
-		/*for (var i=0; i<20; i++){
-			var land = platforms.create(50+i*350, 250, 'pillar');
-	    	land.scale.setTo(8, 0.1);
-	    	land.body.immovable = true;
-	    	aETorrent =new EnemyTorrent(game,'fly');
-	    	aETorrent.x = 100+i*350;
-	    	aETorrent.y=225;
-	    	game.add.existing(aETorrent);
-		}*/
-
-		/*for (var i=0; i<20; i++){
-			var land = platforms.create(400*i, 950, 'pillar');
-	    	land.scale.setTo(12, 0.1);
-	    	land.body.immovable = true;
-		}*/
-
-		//for (var i =0; i <30; i++) {
 
 	   	map.setCollisionByExclusion([], true, 'layer1', true);
 
-
-		/*for (var i =0; i <30; i++) {
->>>>>>> 88cc2906952b6b61633dfcb35c4c5d2a5a323429
-	        console.log("a");
-	        aELand =new EnemyLand1(game,'ELand');
-	        //eLand[i] = new EnemyLand1(game,'star',500+150*i,800);
-	        game.add.existing(aELand);
-	        aELand.x = 500 + 300*i;
-	        aELand.y = 300;
-	        aELand.scale.setTo(0.5);
-	    }*/
 
 	    for (var i =0; i <10; i++) {
 	        //console.log("a");
@@ -305,20 +261,6 @@ LevelCrowd.prototype = {
 	    game.physics.arcade.enable(checkpoint4);
 		checkpoint4.enableBody = true;
 
-		// checkpoint5 = game.add.sprite(5738,427,'checkpoint');
-	 //    game.physics.arcade.enable(checkpoint5);
-		// checkpoint5.enableBody = true;
-	    // player = new Player(game,'player');
-	    // player.x=0;
-	    // player.y=500;
-    	// game.add.existing(player);
-    	// game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
-    	// life.fixedToCamera = true;
-    	// life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
-    	// bglife.fixedToCamera = true;
-    	// bglife.cameraOffset.setTo(630,50);
-
-
     	player = new Player(game,'player',10,500);
     	game.add.existing(player);
     	// player.x=0;
@@ -337,31 +279,7 @@ LevelCrowd.prototype = {
 		//lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
 		var lightShadow = game.add.image(0,0,this.shadowTexture);
 		lightShadow.blendMode = Phaser.blendModes.MULTIPLY;
-		//lightShadow.anchor.set(0.5);
-		//lightShadow.fixedToCamera = true;
-		//lightShadow.cameraOffset.setTo(0, -300);
-		// var lightShadow2 = game.add.image(2000,0,this.shadowTexture);
-		// lightShadow2.blendMode = Phaser.blendModes.MULTIPLY;
-		// var lightShadow3 = game.add.image(4000,0,this.shadowTexture);
-		// lightShadow3.blendMode = Phaser.blendModes.MULTIPLY;
-		// var lightShadow4 = game.add.image(6000,0,this.shadowTexture);
-		// lightShadow4.blendMode = Phaser.blendModes.MULTIPLY;
-		
-		
-    	
 
-		// var lightShadow2 = lightSprite.create(2000,0,this.shadowTexture2);
-		// lightShadow2.blendMode = Phaser.blendModes.MULTIPLY;
-		// var lightShadow3 = lightSprite.create(4000,0,this.shadowTexture3);
-		// lightShadow3.blendMode = Phaser.blendModes.MULTIPLY;
-		// var lightShadow4 = lightSprite.create(6000,0,this.shadowTexture4);
-		// lightShadow4.blendMode = Phaser.blendModes.MULTIPLY;
-		
-		//dark everything below the light
-		//lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
-		// lightShadow2.blendMode = Phaser.blendModes.MULTIPLY;
-		// lightShadow3.blendMode = Phaser.blendModes.MULTIPLY;
-		// lightShadow4.blendMode = Phaser.blendModes.MULTIPLY;
 		
 		// Create the lights
     	this.lights = this.game.add.group();
@@ -402,7 +320,7 @@ LevelCrowd.prototype = {
 	},
 
 	update: function() {
-		console.log(player.x,player.y);
+		///console.log(player.x,player.y);
 
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.overlap(player,checkpoint2,this.reachCheckpoint2,null,this);
@@ -413,113 +331,33 @@ LevelCrowd.prototype = {
 		game.physics.arcade.collide(aELand,layer1);
 		
 		var onSpring=game.physics.arcade.collide(player,spring);
+
 	   	if(onSpring==true){ 
 			player.body.velocity.y=-1200;
-			//this.animations.play('up');
-			//game.time.events.add(Phaser.Timer.SECOND * 2, this.springDone, this);
-
+			Pad.play();
 		}
 		this.updateShadowTexture();
 		life.updateCrop();
 		if(widthLife.width<=0 ){
+			//deathbg=true;
+			console.log(dead);
+			// if(dead=false){
+			// }
 			widthLife.width = 0;
 			dead = true;
+			// Died.play();
 			player.animations.stop(null,true);
-			
+			//Died.play();
 			this.lights.remove(player);
 			player.alpha = 0;
 	
-			//create a custom timer
-
+			//create a custom tim
 
 			timer = game.time.create();
 				//create a event 3s from now
-			timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
+			timeEvent = timer.add(Phaser.Timer.SECOND*3, this.endTimer, this);
 			timer.start();
-			
-
 		}
-		// if(widthLife.width<=0 && CrowdCheck == 0){
-		// 	player.x = 10;
-		// 	player.y = 500;
-		// 	widthLife.width = totalLife;
-		// }
-		// else if (widthLife.width<=0&& CrowdCheck ==1){
-	    	
-	 //    	player.x = checkpoint.x+5;
-	 //    	player.y = checkpoint.y;
-	 //    	//player.body.gravity.y=1900;
-	 //    	widthLife.width = totalLife;
-	 //    	//player.LIGHT_RADIUS = 300;
-	    		
-	 //    	//decreasingLight = game.add.tween(player).to( {LIGHT_RADIUS: (2*player.LIGHT_RADIUS/3) }, 10000, Phaser.Easing.Linear.None, true);
-
-
-	 //   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
-	   
-	 //    	//player.kill();
-	 //    	//game.state.start('GameOverState');
-	 //    }
-	 //    else if(widthLife.width<=0&& CrowdCheck ==2){
-	    	
-	 //    	player.x = checkpoint2.x+5;
-	 //    	player.y = checkpoint2.y;
-	 //    	//player.body.gravity.y=1900;
-	 //    	widthLife.width = totalLife;
-	    	
-	 //    }
-	 //    else if(widthLife.width<=0&& CrowdCheck ==3){
-	    	
-	 //    	player.x = checkpoint3.x+5;
-	 //    	player.y = checkpoint3.y;
-	 //    	//player.body.gravity.y=1900;
-	 //    	widthLife.width = totalLife;
-	    	
-	 //    }
-	 //    else if(widthLife.width<=0&& CrowdCheck ==4){
-	    	
-	 //    	player.x = checkpoint4.x+5;
-	 //    	player.y = checkpoint4.y;
-	 //    	//player.body.gravity.y=1900;
-	 //    	widthLife.width = totalLife;
-	    	
-	 //    }
-	 //    else if(widthLife.width<=0&& CrowdCheck ==5){
-	    	
-	 //    	player.x = checkpoint5.x+5;
-	 //    	player.y = checkpoint5.y;
-	 //    	//player.body.gravity.y=1900;
-	 //    	widthLife.width = totalLife;
-	    	
-	 //    }
-
-	 //    if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
-	 //    	this.changeLight(player);
-			
-		// }
-		//console.log(player.x,player.y);
-		/*if (widthLife.width<=0&& check ==1){
-	    	
-	    		player.x = tempX+20;
-	    		player.y = tempY -100;
-	    		player.body.gravity.y=1900;
-	    		widthLife.width = totalLife;
-	    	
-
-
-	   //game.physics.arcade.overlap(player,aELand,reachaELand,null,this);
-	   
-	    	//player.kill();
-	    	//game.state.start('GameOverState');
-	    }
-	    else if (widthLife.width<=0&& check ==0){
-	    	
-	    		player.x = 15;
-	    		player.y = 0;
-	    		player.body.gravity.y=1900;
-	    		*widthLife.width = totalLife;
-	    }*/
-
 	},
 
 	reachCheckpoint: function(player,checkpoint){
@@ -535,30 +373,6 @@ LevelCrowd.prototype = {
 		checkpoint.kill();
 		this.lights.add(saved);
 		saved.LIGHT_RADIUS = 50;
-		//refer to the example: https://gamemechanicexplorer.com/#lighting-1
-		// this.LIGHT_RADIUS = 100;
-		// //create shadow texture
-		// this.shadowTexture = this.game.add.bitmapData(this.game.world.width,this.game.world.height);
-		// //create an object that will use the bitmap as texture
-		// var checkpointLight = this.game.add.image(0,0,this.shadowTexture);
-		// //dark everything below the light
-		// checkpointLight.blendMode = Phaser.blendModes.MULTIPLY;
-		// checkpointRadius = this.LIGHT_RADIUS + this.game.rnd.integerInRange(1,10);
-
-		// var checkpointGradient = player.shadowTexture.context.createRadialGradient(saved.x,saved.y,player.LIGHT_RADIUS*0.75,saved.x,saved.y,checkpointRadius);
-		
-		
-		// checkpointGradient.addColorStop(0,'rgba(255,255,255,1.0)');
-		// checkpointGradient.addColorStop(1,'rgba(255,255,255,0.0)');
-
-		// //draw the circle of light
-		// saved.shadowTexture.context.beginPath();
-		// saved.shadowTexture.context.fillStyle = gradient;
-		// saved.shadowTexture.context.arc(this.x,this.y,radius,0,Math.PI*2);
-		// saved.shadowTexture.context.fill();
-
-		// //tell the engine it should update the texture
-		// saved.shadowTexture.dirty = true;
 
 	},
 	reachCheckpoint2: function(player,checkpoint2){
@@ -609,22 +423,7 @@ LevelCrowd.prototype = {
 		
 
 	},
-	// reachCheckpoint5: function(player,checkpoint5){
-	// 	console.log("a");
-	// 	//TempX = checkpoint2.x;
- //    	//TempY = checkpoint2.y;
-	// 	CrowdCheck = 5;
-	// 	widthLife.width = totalLife;
-	// 	var saved5=new Checkpoint(game,checkpoint5.x,checkpoint5.y-5,'checkpoint1');
-	// 	game.add.existing(saved5);
 
-	// //saved.enableBody = true;
-	// 	checkpoint5.kill();
-	// 	this.lights.add(saved5);
-	// 	saved5.LIGHT_RADIUS = 50;
-		
-
-	// },
 	
 	updateShadowTexture:function(){
 		this.shadowTexture.context.fillStyle = 'rgb(0, 0, 0)';
@@ -652,35 +451,7 @@ LevelCrowd.prototype = {
         		this.shadowTexture.context.fill();
         		
        	 	}
-    			// if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
-       //  			// Randomly change the radius each frame
-       //  			playerRadius = this.LIGHT_RADIUS + this.game.rnd.integerInRange(1,10);
-
-       //  			// Draw circle of light with a soft edge
-       //  			var gradient =this.shadowTexture.context.createRadialGradient(m.x, m.y,this.LIGHT_RADIUS * 0.75,m.x, m.y, playerRadius);
-       //  			gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
-       //  			gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
-
-       //  			this.shadowTexture.context.beginPath();
-       //  			this.shadowTexture.context.fillStyle = gradient;
-       //  			this.shadowTexture.context.arc(m.x, m.y, playerRadius, 0, Math.PI*2);
-       //  			this.shadowTexture.context.fill();
-       // 	 		}
-       // 	 		else{
-       // 	 			// Randomly change the radius each frame
-       //  			playerRadius = 20 + this.game.rnd.integerInRange(1,10);
-
-       //  			// Draw circle of light with a soft edge
-       //  			var gradient =this.shadowTexture.context.createRadialGradient(m.x, m.y,20*0.75,m.x, m.y,playerRadius);
-       //  			gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
-       //  			gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
-
-       //  			this.shadowTexture.context.beginPath();
-       //  			this.shadowTexture.context.fillStyle = gradient;
-       //  			this.shadowTexture.context.arc(m.x, m.y, playerRadius, 0, Math.PI*2);
-       //  			this.shadowTexture.context.fill();
-       // 	 		}	
-        		
+    
         else{
         	// Randomly change the radius each frame
         	checkpointRadius = 100 + this.game.rnd.integerInRange(1,10);
@@ -704,19 +475,6 @@ LevelCrowd.prototype = {
 
 	},
 
-	/*springDone: function(){ 
-		player.body.gravity.y=temp;
-		temp=0;
-	},*/
-	
-	/*render: function(){
-		// game.debug.body(spring, false);
-		//game.debug.body(layer1, "#9090ff", true);
-		//game.debug.body(player, "#9090ff", true);
-		//game.debug.body(aELand, "#00ff00", true);
-		game.debug.text('FPS: ' + game.time.fps || 'FPS: --', 40, 40, "#00ff00");
-
-	}*/
 	
 };
 LevelCrowd.prototype.cropLife = function(){
@@ -724,26 +482,11 @@ LevelCrowd.prototype.cropLife = function(){
 		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /30)) }, 1, Phaser.Easing.Linear.None, true);
 	}
 }
-// LevelCrowd.prototype.deathTitle = function(){
-// 	this.lights.remove(player);
-// 	player.alpha = 0;
-// 	this.deathText = game.add.text(player.x,player.y,'Game Starts in 3 Seconds',{font:'Helvetica',fontSize:'48px',fill:'#fff'});
-// 	this.deathText.anchor.set(0.5);
-// 	//create a custom timer
 
-// 		timer = game.time.create();
-// 				//create a event 3s from now
-// 		timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
-// 		timer.start();
-
-// }
 LevelCrowd.prototype.endTimer = function(){
-	
 	if(dead == true){
-
 		timer.stop();
 		widthLife.width = totalLife;
-	
 		player.alpha = 1;
 		player.facing = 'right';
 		this.lights.add(player);
