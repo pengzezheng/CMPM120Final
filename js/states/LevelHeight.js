@@ -1,6 +1,17 @@
 var LevelHeight = function(game) {};
 LevelHeight.prototype = {
 	create: function() {
+
+		EAtt=game.add.audio('EA');
+		explSound=game.add.audio('EXPLO', 0.25);
+		EAtt.allowMultiple=true;
+		// game.camera(800,600);
+	    //  We're going to be using physics, so enable the Arcade Physics system
+	    game.physics.startSystem(Phaser.Physics.ARCADE);
+	    BGM1=new Phaser.Sound(game,'BGM1',1,true);
+	    BGM1.allowMultiple=true;
+	    BGM1.play();
+
 		game.time.advancedTiming = true;
 		var sky = game.add.sprite(-100, 0, 'bg1');
 	   	sky.scale.setTo(1.1, 1);
@@ -66,7 +77,7 @@ LevelHeight.prototype = {
     	life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(630,50);
-    	game.time.events.loop(Phaser.Timer.SECOND, this.createBombs, this);
+    	game.time.events.loop(Phaser.Timer.SECOND*3, this.createBombs, this);
 
     	/*ives=game.add.group();//make a group for life
 		l1 = lives.create(75, 12.5, 'lives');//create sprite life
