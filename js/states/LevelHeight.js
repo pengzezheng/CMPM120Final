@@ -14,8 +14,28 @@ LevelHeight.prototype = {
 	   	map.setCollisionByExclusion([], true, 'layer3', true);
 
 	   	aEGrab =new EnemyGrab(game,'star');
-	    aEGrab.y = 3700;
-	    aEGrab.x = 450;
+	    aEGrab.x = (14 * 32);
+	    aEGrab.y = (115 * 32);
+	    game.add.existing(aEGrab);
+	    aEGrab =new EnemyGrab(game,'star');
+	    aEGrab.x = (22 * 32);
+	    aEGrab.y = (115 * 32);
+	    game.add.existing(aEGrab);
+	    aEGrab =new EnemyGrab(game,'star');
+	    aEGrab.x = (10 * 32);
+	    aEGrab.y = (111 * 32);
+	    game.add.existing(aEGrab);
+	    aEGrab =new EnemyGrab(game,'star');
+	    aEGrab.x = (27 * 32);
+	    aEGrab.y = (110 * 32);
+	    game.add.existing(aEGrab);
+	    aEGrab =new EnemyGrab(game,'star');
+	    aEGrab.x = (14 * 32);
+	    aEGrab.y = (103 * 32);
+	    game.add.existing(aEGrab);
+	    aEGrab =new EnemyGrab(game,'star');
+	    aEGrab.x = (4 * 32);
+	    aEGrab.y = (99 * 32);
 	    game.add.existing(aEGrab);
 
 	   	player = new Player(game,'player',450,3900);
