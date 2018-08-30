@@ -13,6 +13,7 @@ EnemyDark.prototype.constructor = EnemyDark;
 
 function hitDark(enemyDark, player){//kill enemy and do damage to player
 		enemyDark.kill();
+
 		if(widthLife.width < 0){
 			widthLife.width = 0;
 		}
