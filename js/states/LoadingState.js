@@ -45,9 +45,11 @@ LoadingState.prototype = {
 	    game.load.audio('hit', 'audios/hit.wav');
 	    game.load.audio('ignite', 'audios/ignite.wav');
 	    game.load.audio('lvl2bgm', 'audios/lvl2bgm.wav');
+	    game.load.audio('lvl3bgm', 'audios/lvl3bgm.mp3');
 	    game.load.audio('chewing', 'audios/chewing.wav');
 	    game.load.audio('monster', 'audios/monster.wav');
-
+	    game.load.audio('titleMusic', 'audios/titleMusic.wav');
+	    game.load.audio('horror', 'audios/horror.wav');
 	    game.load.image('checkpoint', 'assets/dead candle man.png');
 	    game.load.image('checkpoint1', 'assets/dead candle man lit.png');
 	    game.load.image('bgCrowd', 'assets/c Background.png');
@@ -58,6 +60,8 @@ LoadingState.prototype = {
 	 * The create function. This begins the beginning state after assets are loaded.
 	 */
 	create: function() {
+		var loadText = game.add.text(600,100,'Loading...',{font:'Helvetica',fontSize:'24px',fill:'#fff'});
+		loadText.anchor.set(0.5);
 		game.state.start("TitleState");
 	}
 	

@@ -21,6 +21,7 @@ LevelHeight.prototype = {
 	 * The create function adds and displays objects in the game screen for the player to see.
 	 */
 	create: function() {
+		HeightCheck = 0;
 		counterh = 5;
 		EAtt=game.add.audio('EA');
 		//Died=game.add.audio('Die');
@@ -408,7 +409,7 @@ LevelHeight.prototype = {
 	},
 
 
-		game.state.start('HeightToCrowd');
+		
 
 	/**
 	 * The reachCheckpoint4 function starts the player at the fourth checkpoint when the player and 
@@ -419,7 +420,7 @@ LevelHeight.prototype = {
 	reachCheckpoint4: function(player,checkpoint4) {
 		
 		game.state.start('HeightToCrowd');
-		
+		BGM1.stop();
 
 	},
 

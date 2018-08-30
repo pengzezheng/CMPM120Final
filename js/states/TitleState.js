@@ -12,11 +12,14 @@ TitleState.prototype = {
 		playText.anchor.set(0.5);*/
 		var sky = game.add.sprite(0, 0, 'title screen');
 		sky.scale.setTo(1.2,1.08);
+		titleMusic=new Phaser.Sound(game,'titleMusic',1,true);
+	    titleMusic.allowMultiple=true;
+	    titleMusic.play();
 
 	},
 	update: function() {
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
-
+			titleMusic.stop();
 			game.state.start("Start");
 
 		}

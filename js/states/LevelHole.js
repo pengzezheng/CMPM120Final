@@ -18,6 +18,7 @@ LevelHole.prototype = {
 	 * The create function adds and displays objects in the game screen for the player to see.
 	 */
 	create: function() {
+		CrowdCheck = 0;
 		countero=5;
 		var sky = game.add.sprite(-100, 0, 'bg3');
 	   	sky.scale.setTo(1.05, 1);
@@ -374,6 +375,7 @@ LevelHole.prototype = {
 	 */
 	reachCheckpoint4: function(player,checkpoint4) {
 		game.state.start('GameWin');
+		BGM3.stop();
 	},
 
 	updateShadowTexture:function(){

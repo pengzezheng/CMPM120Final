@@ -35,7 +35,7 @@ LevelCrowd.prototype = {
 
 		// create a event 3s from now
 		// timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
-		
+		CrowdCheck = 0;
 		counters=5;
 		Died = game.add.audio('Die');
 		Pad = game.add.audio('pad');
@@ -512,6 +512,7 @@ LevelCrowd.prototype = {
 	 */
 	reachCheckpoint4: function(player,checkpoint4){
 		game.state.start('CrowdToHole');
+		BGM2.stop();
 	},
 
 	
