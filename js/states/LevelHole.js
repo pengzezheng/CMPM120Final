@@ -27,7 +27,7 @@ LevelHole.prototype = {
 		Ignite=game.add.audio('ignite');
 		Ignite.allowMultiple=true;
 		
-		Monster=game.add.audio('monster', 0.1);
+		Monster=game.add.audio('monster', 0.5);
 		Monster.allowMultiple=true;
 
 		BGM3=new Phaser.Sound(game,'lvl3bgm', 1,true);

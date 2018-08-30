@@ -13,7 +13,6 @@ LoadingState.prototype = {
 		game.load.spritesheet('player','assets/master candleman sprite sheet.png',128,128);
 	    game.load.image('star', 'assets/flyingenemy.png');
 	    game.load.image('heart', 'assets/heart_life.png');
-	    game.load.image('lifeCount', 'assets/lifeCount.png');
 	    game.load.image('title screen', 'assets/title screen.png');
 	    game.load.image('Panel 1', 'assets/Panel 1.png');
 	    game.load.image('Panel 2', 'assets/panel 2.png');
