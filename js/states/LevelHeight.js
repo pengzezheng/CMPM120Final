@@ -1,7 +1,14 @@
+/**
+ * This is the height level which is the first level of the game.
+ * @param loads the Phaser game framework.
+ */
 var LevelHeight = function(game) {};
 LevelHeight.prototype = {
+	
+	/**
+	 * The create function adds and displays objects in the game screen for the player to see.
+	 */
 	create: function() {
-
 		EAtt=game.add.audio('EA');
 		//Died=game.add.audio('Die');
 		explSound=game.add.audio('EXPLO', 0.25);
@@ -70,17 +77,25 @@ LevelHeight.prototype = {
 		l3.scale.setTo(0.5);*/
 	},
 
+	/**
+	 * The update function adds and displays objects in the game screen for the player to see.
+	 */
 	update: function() {
+		// allows the player to fall off the map.
 		game.physics.arcade.collide(player,layer3);
 		if(player.y >= 3950){
 	    	player.body.collideWorldBounds = false;
 	    }
 
+	    // kills the player when they fall.
 	    if(player.y >= 5000){
 	    	widthLife.width = 0;
 	    }
 	},
 
+	/**
+	 * The createBombs function uses the Bomb prefab to create the bombs in the game world.
+	 */
 	createBombs: function() {
 		bomb=new Bomb(game, "bom");
 		bomb.reset(game.rnd.integerInRange(100,900),player.y-600);
@@ -88,10 +103,10 @@ LevelHeight.prototype = {
 		game.add.existing(bomb);
 	},
 
-	render: function(){
-		// game.debug.body(spring, false);
-		//game.debug.body(aELand, "#00ff00", true);
+	/**
+	 * Development function used to debug the game.
+	 */
+	render: function() {
 		game.debug.text('FPS: ' + game.time.fps || 'FPS: --', 40, 40, "#00ff00");
-
 	}
 };
