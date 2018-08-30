@@ -1,7 +1,7 @@
 var GameWin = function(game) {};
 GameWin.prototype = {
 	create: function() {
-		var sky = game.add.sprite(0, 0, 'game over');
+		var sky = game.add.sprite(0, 0, 'last panel');
 		sky.scale.setTo(1.2,1.08);
 	},
 	update: function() {
