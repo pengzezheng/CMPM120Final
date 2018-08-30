@@ -5,7 +5,7 @@ var checkpoint3;
 var checkpoint4;
 var CrowdCheck = 0;
 var dead = false;
-var counter=5;
+var countero=5;
 var healthFire;
 var StateCheck = 3;
 /**
@@ -23,9 +23,15 @@ LevelHole.prototype = {
 	   	sky.scale.setTo(1.05, 1);
 	   	Chewing=game.add.audio('chewing');
 		Chewing.allowMultiple=true;
+		Ignite=game.add.audio('ignite');
+		Ignite.allowMultiple=true;
+		
+		Monster=game.add.audio('monster', 0.1);
+		Monster.allowMultiple=true;
 
-		monster=game.add.audio('monster');
-		monster.allowMultiple=true;
+		BGM3=new Phaser.Sound(game,'lvl3bgm', 1,true);
+	    BGM3.allowMultiple=true;
+	    BGM3.play();
 		game.world.setBounds(0, 0, 4000, 960);
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		game.time.advancedTiming = true;
@@ -34,7 +40,6 @@ LevelHole.prototype = {
 	   	layer2=map.createLayer('layer2');
 	   	game.add.existing(layer2);
 	   	map.setCollisionByExclusion([], true, 'layer2', true);
-
 	   	game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 
 	   	// constructs obstacles that are placed in specific coordinates of the map.
@@ -131,6 +136,21 @@ LevelHole.prototype = {
 	    aEDark.x = 3168;
 	    aEDark.y = 32;
 
+	    aEDark = new EnemyDark(game,'enemyDark');
+	    game.add.existing(aEDark);
+	    aEDark.x = 2500;
+	    aEDark.y = 100;
+
+	     aEDark = new EnemyDark(game,'enemyDark');
+	    game.add.existing(aEDark);
+	    aEDark.x = 1500;
+	    aEDark.y = 400;
+
+	     aEDark = new EnemyDark(game,'enemyDark');
+	    game.add.existing(aEDark);
+	    aEDark.x = 1000;
+	    aEDark.y = 600;
+
 	    // constructs the checkpoints at specific places of the map.
 	    checkpoint = game.add.sprite(80,845,'checkpoint');
 	    // enables arcade physics for the checkpoint.
@@ -204,8 +224,8 @@ LevelHole.prototype = {
     	heart.scale.setTo(0.3,0.3);
     	heart.anchor.setTo(0.5,0.5);
     	heart.fixedToCamera = true;
-    	var lifeCount = game.add.image(34,75,'lifeCount');
-    	lifeCount.scale.setTo(0.5,0.3);
+    	var lifeCount = game.add.image(34,75,'candle');
+    	lifeCount.scale.setTo(0.045);
     	lifeCount.anchor.setTo(0.5,0.5);
     	lifeCount.fixedToCamera = true;
     	
@@ -257,21 +277,22 @@ LevelHole.prototype = {
 			timer.start();
 		}
 
-		if(counter == 4){
+		if(countero == 4){
 			l5.destroy();
 		}
-		if(counter == 3){
+		if(countero == 3){
 			l4.destroy();
 		}
-		if(counter == 2){
+		if(countero == 2){
 			l3.destroy();
 		}
-		if(counter == 1){
+		if(countero == 1){
 			l2.destroy();
 		}
-		if(counter == 0){
+		if(countero == 0){
 			l1.destroy();
-
+			BGM3.stop();
+			game.state.start("GameOver");
 		}
 	},
 	
@@ -285,6 +306,7 @@ LevelHole.prototype = {
 		console.log("a");
 		//TempX = checkpoint.x;
     	//TempY = checkpoint.y;
+    	Ignite.play();
 		CrowdCheck = 1;
 		widthLife.width = totalLife;
 		var saved=new Checkpoint(game,checkpoint.x,checkpoint.y-5,'checkpoint1');
@@ -307,6 +329,7 @@ LevelHole.prototype = {
 		console.log("a");
 		//TempX = checkpoint2.x;
     	//TempY = checkpoint2.y;
+    	Ignite.play();
 		CrowdCheck = 2;
 		widthLife.width = totalLife;
 		var saved2=new Checkpoint(game,checkpoint2.x,checkpoint2.y-5,'checkpoint1');
@@ -330,6 +353,7 @@ LevelHole.prototype = {
 		console.log("a");
 		//TempX = checkpoint2.x;
     	//TempY = checkpoint2.y;
+    	Ignite.play();
 		CrowdCheck = 3;
 		widthLife.width = totalLife;
 		var saved3=new Checkpoint(game,checkpoint3.x,checkpoint3.y-5,'checkpoint1');
@@ -342,7 +366,6 @@ LevelHole.prototype = {
 		
 
 	},
-
 	/**
 	 * The reachCheckpoint4 function starts the player at the fourth checkpoint when the player and 
 	 * the checkpoint collides.
@@ -440,7 +463,8 @@ LevelHole.prototype.endTimer = function() {
 	if(dead == true) {
 		timer.stop();
 		widthLife.width = totalLife;
-		counter--;
+		player.body.velocity.y=0;
+		countero--;
 		player.alpha = 1;
 		player.facing = 'right';
 		this.lights.add(player);

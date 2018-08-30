@@ -2,6 +2,7 @@
  * This is the loading state that begins before the player sees the title screen. This loads the necessary assets.
  * @param loads the Phaser game framework.
  */
+
 var LoadingState = function(game) {};
 LoadingState.prototype = {
 	
@@ -13,12 +14,12 @@ LoadingState.prototype = {
 	    game.load.image('star', 'assets/flyingenemy.png');
 	    game.load.image('heart', 'assets/heart_life.png');
 	    game.load.image('lifeCount', 'assets/lifeCount.png');
-	    game.load.image('title', 'assets/title screen.png');
-	    game.load.image('titleToLevel1', 'assets/Panel 1.png');
-	    game.load.image('level1ToLevel2', 'assets/panel 2.png');
-	    game.load.image('level2ToLevel3', 'assets/panel 3.png');
-	    game.load.image('gameOver', 'assets/game over.png');
-	    game.load.image('gameWin', 'assets/last panel.png');
+	    game.load.image('title screen', 'assets/title screen.png');
+	    game.load.image('Panel 1', 'assets/Panel 1.png');
+	    game.load.image('Panel 2', 'assets/panel 2.png');
+	    game.load.image('Panel 3', 'assets/panel 3.png');
+	    game.load.image('game over', 'assets/game over.png');
+	    game.load.image('last panel', 'assets/last panel.png');
 	    game.load.image('candle', 'assets/stand.png');
 	    game.load.image('jumppad', 'assets/jump pad.png');
 	    game.load.spritesheet('enemyT', 'assets/c mob 2 sheet better.png', 256, 256);

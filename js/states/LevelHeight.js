@@ -7,7 +7,7 @@ var HeightCheck = 0;
 var dead = false;
 var StateCheck = 1;
 
-var counter=5;
+var counterh=5;
 
 /**
  * This is the height level which is the first level of the game.
@@ -33,6 +33,9 @@ LevelHeight.prototype = {
 	    BGM1.allowMultiple=true;
 	    BGM1.play();
 
+	    Ignite=game.add.audio('ignite');
+		Ignite.allowMultiple=true;
+
 		game.time.advancedTiming = true;
 		game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 		var sky = game.add.sprite(-100, 0, 'bg1');
@@ -42,14 +45,9 @@ LevelHeight.prototype = {
 		map=game.add.tilemap('levelHeight');
 	   	map.addTilesetImage('level 1 tilemap', 'tileset1', 32, 32);
 	   	layer3=map.createLayer('layer3');
-	   	var a =game.add.existing(layer3);
-	   	a.debug=true;
+	   	//var a =game.add.existing(layer3);
+	   	//a.debug=true;
 	   	map.setCollisionByExclusion([], true, 'layer3', true);
-
-	   	aEGrab =new EnemyGrab(game,'star');
-	    aEGrab.y = 3700;
-	    aEGrab.x = 450;
-	    game.add.existing(aEGrab);
 
 	    aEGrab =new EnemyGrab(game,'star');
 	    aEGrab.x = (14 * 32);
@@ -252,8 +250,8 @@ LevelHeight.prototype = {
     	heart.scale.setTo(0.3,0.3);
     	heart.anchor.setTo(0.5,0.5);
     	heart.fixedToCamera = true;
-    	var lifeCount = game.add.image(34,75,'lifeCount');
-    	lifeCount.scale.setTo(0.5,0.3);
+    	var lifeCount = game.add.image(34,75,'candle');
+    	lifeCount.scale.setTo(0.045);
     	lifeCount.anchor.setTo(0.5,0.5);
     	lifeCount.fixedToCamera = true;
     	game.time.events.loop(Phaser.Timer.SECOND*3, this.createBombs, this);
@@ -293,11 +291,11 @@ LevelHeight.prototype = {
 	    }
 
 	    // kills the player when they fall.
-	    if(player.y >= 5000){
-	    	widthLife.width = 0;
+	    if(player.y >= 4100){
+	    	widthLife.width = -1;
+	    	player.body.velocity.y=0;
 	    }
 
-	    console.log(player.x,player.y);
 	    if(widthLife.width<=0 ){
 			widthLife.width = 0;
 			dead = true;
@@ -315,22 +313,25 @@ LevelHeight.prototype = {
 			timer.start();
 
 
-	    if(counter==4){
+	    if(counterh==4){
 			l5.destroy();
 		}
-		if(counter==3){
+		if(counterh==3){
 			l4.destroy();
 		}
-		if(counter==2){
+		if(counterh==2){
 			l3.destroy();
 		}
-		if(counter==1){
+		if(counterh==1){
 			l2.destroy();
 		}
-		if(counter==0){
+		if(counterh==0){
 			l1.destroy();
-			game.state.start('GameOverState');
-			//BGM1.stop();
+
+
+
+			BGM1.stop();
+			game.state.start("GameOver");
 
 		}
 	}
@@ -339,6 +340,7 @@ LevelHeight.prototype = {
 		console.log("a");
 		//TempX = checkpoint.x;
     	//TempY = checkpoint.y;
+    	Ignite.play();
 		HeightCheck = 1;
 		widthLife.width = totalLife;
 		var saved=new Checkpoint(game,checkpoint.x,checkpoint.y-5,'checkpoint1');
@@ -354,6 +356,7 @@ LevelHeight.prototype = {
 		console.log("a");
 		//TempX = checkpoint2.x;
     	//TempY = checkpoint2.y;
+    	Ignite.play();
 		HeightCheck = 2;
 		widthLife.width = totalLife;
 		var saved2=new Checkpoint(game,checkpoint2.x,checkpoint2.y-5,'checkpoint1');
@@ -368,6 +371,7 @@ LevelHeight.prototype = {
 	},
 	reachCheckpoint3: function(player,checkpoint3){
 		console.log("a");
+		Ignite.play();
 		//TempX = checkpoint2.x;
     	//TempY = checkpoint2.y;
 		HeightCheck = 3;
@@ -383,7 +387,21 @@ LevelHeight.prototype = {
 
 	},
 	reachCheckpoint4: function(player,checkpoint4){
-		game.state.start('HeightToCrowd');
+
+		console.log("a");
+		Ignite.play();
+		//TempX = checkpoint2.x;
+    	//TempY = checkpoint2.y;
+		HeightCheck = 4;
+		widthLife.width = totalLife;
+		var saved4=new Checkpoint(game,checkpoint4.x,checkpoint4.y-5,'checkpoint1');
+		game.add.existing(saved4);
+
+	//saved.enableBody = true;
+		checkpoint4.kill();
+		this.lights.add(saved4);
+		saved4.LIGHT_RADIUS = 50;
+
 		
 
 	},
@@ -443,7 +461,7 @@ LevelHeight.prototype = {
 		//player.body.collideWorldBounds = true;
 		timer.stop();
 		widthLife.width = totalLife;
-		counter--;
+		counterh--;
 		player.alpha = 1;
 		player.facing = 'right';
 		this.lights.add(player);
@@ -493,7 +511,7 @@ LevelHeight.prototype = {
 	/**
 	 * Development function used to debug the game.
 	 */
-	render: function() {
+	/*render: function() {
 		game.debug.text('FPS: ' + game.time.fps || 'FPS: --', 40, 40, "#00ff00");
-	}
+	}*/
 };
