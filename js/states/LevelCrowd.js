@@ -35,6 +35,8 @@ LevelCrowd.prototype = {
 
 		// create a event 3s from now
 		// timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
+		
+
 		Died = game.add.audio('Die');
 		Pad = game.add.audio('pad');
 		Pad.allowMultiple=true;
@@ -285,9 +287,7 @@ LevelCrowd.prototype = {
 		checkpoint3 = game.add.sprite(3040,777,'checkpoint');
 	    game.physics.arcade.enable(checkpoint3);
 		checkpoint3.enableBody = true;
-		checkpoint4 = game.add.sprite(3959,522,'checkpoint');
-	    game.physics.arcade.enable(checkpoint4);
-		checkpoint4.enableBody = true;
+		
 
     	// adds the player in the game
     	player = new Player(game,'player',10,500);
@@ -340,6 +340,11 @@ LevelCrowd.prototype = {
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(170,30);
 
+    	checkpoint4 = game.add.sprite(3959,522,'checkpoint');
+	    game.physics.arcade.enable(checkpoint4);
+		checkpoint4.enableBody = true;
+		this.lights.add(checkpoint4);
+
     	var heart = game.add.image(34,30,'heart');
     	heart.scale.setTo(0.3,0.3);
     	heart.anchor.setTo(0.5,0.5);
@@ -374,7 +379,7 @@ LevelCrowd.prototype = {
 		game.physics.arcade.overlap(player,checkpoint2,this.reachCheckpoint2,null,this);
 		game.physics.arcade.overlap(player,checkpoint3,this.reachCheckpoint3,null,this);
 		game.physics.arcade.overlap(player,checkpoint4,this.reachCheckpoint4,null,this);
-		//game.physics.arcade.overlap(player,checkpoint5,this.reachCheckpoint5,null,this);
+		
 		game.physics.arcade.collide(player,layer1);
 		game.physics.arcade.collide(aELand,layer1);
 		
@@ -421,6 +426,7 @@ LevelCrowd.prototype = {
 		}
 		if(counters==0){
 			l1.destroy();
+			game.state.start('crowdOverState');
 
 		}
 	},
@@ -503,19 +509,7 @@ LevelCrowd.prototype = {
 	 * @param checkpoint: the checkpoint object
 	 */
 	reachCheckpoint4: function(player,checkpoint4){
-		console.log("a");
-		Ignite.play();
-		//TempX = checkpoint2.x;
-    	//TempY = checkpoint2.y;
-		CrowdCheck = 4;
-		widthLife.width = totalLife;
-		var saved4=new Checkpoint(game,checkpoint4.x,checkpoint4.y-5,'checkpoint1');
-		game.add.existing(saved4);
-
-		//saved.enableBody = true;
-		checkpoint4.kill();
-		this.lights.add(saved4);
-		saved4.LIGHT_RADIUS = 50;
+		game.state.start('CrowdToHole');
 	},
 
 	

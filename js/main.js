@@ -13,6 +13,12 @@ window.onload = function() {
     game.state.add("LevelCrowd", LevelCrowd);
     game.state.add("LevelHole", LevelHole);
     game.state.add("LevelHeight", LevelHeight);
+	game.state.add("Instruction", Instruction);
+	game.state.add("HeightToCrowd", HeightToCrowd);
+	game.state.add("crowdOverState",crowdOverState);
+	game.state.add("holeOverState", holeOverState);
+	game.state.add("CrowdToHole", CrowdToHole);
+	
     //game.state.add("GameOverState", GameOverState);
     game.state.start("LoadingState");
 }

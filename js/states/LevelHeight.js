@@ -5,7 +5,7 @@ var checkpoint3;
 var checkpoint4;
 var HeightCheck = 0;
 var dead = false;
-
+var StateCheck = 1;
 
 var counter=5;
 
@@ -21,6 +21,7 @@ LevelHeight.prototype = {
 	 * The create function adds and displays objects in the game screen for the player to see.
 	 */
 	create: function() {
+		
 		EAtt=game.add.audio('EA');
 		//Died=game.add.audio('Die');
 		explSound=game.add.audio('EXPLO', 0.25);
@@ -281,7 +282,7 @@ LevelHeight.prototype = {
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.overlap(player,checkpoint2,this.reachCheckpoint2,null,this);
 		game.physics.arcade.overlap(player,checkpoint3,this.reachCheckpoint3,null,this);
-		//game.physics.arcade.overlap(player,checkpoint4,this.reachCheckpoint4,null,this);
+		game.physics.arcade.overlap(player,checkpoint4,this.reachCheckpoint4,null,this);
 
 		// allows the player to fall off the map.
 
@@ -328,6 +329,7 @@ LevelHeight.prototype = {
 		}
 		if(counter==0){
 			l1.destroy();
+			game.state.start('GameOverState');
 			//BGM1.stop();
 
 		}
@@ -381,18 +383,7 @@ LevelHeight.prototype = {
 
 	},
 	reachCheckpoint4: function(player,checkpoint4){
-		console.log("a");
-		//TempX = checkpoint2.x;
-    	//TempY = checkpoint2.y;
-		HeightCheck = 4;
-		widthLife.width = totalLife;
-		var saved4=new Checkpoint(game,checkpoint4.x,checkpoint4.y-5,'checkpoint1');
-		game.add.existing(saved4);
-
-	//saved.enableBody = true;
-		checkpoint4.kill();
-		this.lights.add(saved4);
-		saved4.LIGHT_RADIUS = 50;
+		game.state.start('HeightToCrowd');
 		
 
 	},
