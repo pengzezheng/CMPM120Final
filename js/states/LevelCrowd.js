@@ -36,7 +36,7 @@ LevelCrowd.prototype = {
 		// create a event 3s from now
 		// timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
 		
-
+		counters=5;
 		Died = game.add.audio('Die');
 		Pad = game.add.audio('pad');
 		Pad.allowMultiple=true;

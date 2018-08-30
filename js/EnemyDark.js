@@ -16,7 +16,7 @@ function hitDark(enemyDark, player){//kill enemy and do damage to player
 		if(widthLife.width < 0){//adjust hp of player
 			widthLife.width = 0;
 		}
-		widthLife.width = widthLife.width - totalLife/3;// do damage to player
+		widthLife.width = widthLife.width - totalLife/4;// do damage to player
 }
 
 EnemyDark.prototype.update = function() {
