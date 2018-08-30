@@ -204,6 +204,10 @@ LevelHeight.prototype = {
 		checkpoint3 = game.add.sprite(503,711,'checkpoint');
 	    game.physics.arcade.enable(checkpoint3);
 		checkpoint3.enableBody = true;
+		checkpoint4 = game.add.sprite(475,135,'checkpoint1');
+	    game.physics.arcade.enable(checkpoint4);
+		checkpoint4.enableBody = true;
+		this.lights.add(checkpoint4);
 
     	//refer to the example: https://gamemechanicexplorer.com/#lighting-1
 		this.LIGHT_RADIUS = 300;
@@ -221,13 +225,6 @@ LevelHeight.prototype = {
 		this.lights = this.game.add.group();
 		this.lights.add(player);
     	player.LIGHT_RADIUS = 100;
-
-    	
-
-		checkpoint4 = game.add.sprite(475,135,'checkpoint1');
-	    game.physics.arcade.enable(checkpoint4);
-		checkpoint4.enableBody = true;
-		this.lights.add(checkpoint4);
 
     	//refer to https://codepen.io/jdnichollsc/pen/oXXRMz
 		//add total health bar
@@ -286,7 +283,6 @@ LevelHeight.prototype = {
 	 * The update function make changes in the game screen when conditions are met.
 	 */
 	update: function() {
-
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.overlap(player,checkpoint2,this.reachCheckpoint2,null,this);
 		game.physics.arcade.overlap(player,checkpoint3,this.reachCheckpoint3,null,this);
@@ -364,6 +360,7 @@ LevelHeight.prototype = {
 		saved.LIGHT_RADIUS = 50;
 
 	},
+
 	/**
 	 * The reachCheckpoint2 function creates a second checkpoint for the player to start in when the 
 	 * player and the checkpoint collides.
@@ -396,21 +393,15 @@ LevelHeight.prototype = {
 	reachCheckpoint3: function(player,checkpoint3) {
 		console.log("a");
 		Ignite.play();
-		//TempX = checkpoint2.x;
-    	//TempY = checkpoint2.y;
 		HeightCheck = 3;
 		life.width = totalLife;
 		var saved3=new Checkpoint(game,checkpoint3.x,checkpoint3.y-5,'checkpoint1');
 		game.add.existing(saved3);
 
-		//saved.enableBody = true;
 		checkpoint3.kill();
 		this.lights.add(saved3);
 		saved3.LIGHT_RADIUS = 50;
 	},
-
-
-		
 
 	/**
 	 * The reachCheckpoint4 function starts the player at the fourth checkpoint when the player and 
