@@ -14,8 +14,10 @@ function shootBullet(){
 	bullet=new Bullet(game, "theBullet");
 	bullet.reset(this.body.x,this.body.y);
 	if(this.body.x > player.x){
-		bullet.body.velocity.x=-150;
-		game.add.existing(bullet);
+		if(player.x+250> this.body.x){
+			bullet.body.velocity.x=-150;
+			game.add.existing(bullet);
+		}
 	}else{
 		this.scale.setTo(-0.1,0.1);
 		if(player.x< this.body.x+250){

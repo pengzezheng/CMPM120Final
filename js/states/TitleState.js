@@ -28,7 +28,9 @@ TitleState.prototype = {
 	update: function() {
 		// begins the first level when the spacebar is pressed.
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
-			game.state.start("LevelCrowd");
+
+			game.state.start("LevelHeight");
+
 		}
 	}
 };

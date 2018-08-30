@@ -21,6 +21,9 @@ LevelHole.prototype = {
 	   	sky.scale.setTo(1.05, 1);
 	   	Chewing=game.add.audio('chewing');
 		Chewing.allowMultiple=true;
+
+		monster=game.add.audio('monster');
+		monster.allowMultiple=true;
 		game.world.setBounds(0, 0, 4000, 960);
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		game.time.advancedTiming = true;
@@ -243,19 +246,19 @@ LevelHole.prototype = {
 			timer.start();
 		}
 
-		if(counter==4){
+		if(counter == 4){
 			l5.destroy();
 		}
-		if(counter==3){
+		if(counter == 3){
 			l4.destroy();
 		}
-		if(counter==2){
+		if(counter == 2){
 			l3.destroy();
 		}
-		if(counter==1){
+		if(counter == 1){
 			l2.destroy();
 		}
-		if(counter==0){
+		if(counter == 0){
 			l1.destroy();
 
 		}
