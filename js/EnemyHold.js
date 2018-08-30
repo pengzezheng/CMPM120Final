@@ -22,12 +22,4 @@ EnemyHold.prototype.constructor = EnemyHold;
 
 EnemyHold.prototype.update = function() {
 	var t=game.physics.arcade.overlap(this, player, holding, null, this);
-
-	if (t==true&&temp==0){
-		console.log('uouo');
-		Chewing.play();
-		temp++;
-	}
-
-	temp=0;
 } 
