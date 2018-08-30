@@ -207,27 +207,28 @@ LevelHeight.prototype = {
 		checkpoint4 = game.add.sprite(475,135,'checkpoint1');
 	    game.physics.arcade.enable(checkpoint4);
 		checkpoint4.enableBody = true;
-		this.lights.add(checkpoint4);
 
-    	//refer to the example: https://gamemechanicexplorer.com/#lighting-1
+    	// refer to the example: https://gamemechanicexplorer.com/#lighting-1
 		this.LIGHT_RADIUS = 300;
 
-		//create shadow texture
-		//var graphics = game.add.graphics(100, 100);
+		// create shadow texture
+		// var graphics = game.add.graphics(100, 100);
 		this.shadowTexture = this.game.add.bitmapData(game.world.width,game.world.height);
 		
-		//create an object that will use the bitmap as texture
+		// create an object that will use the bitmap as texture
 
-		//var lightSprite = game.add.group();
-		//lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
+		// var lightSprite = game.add.group();
+		// lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
 		var lightShadow = game.add.image(0,0,this.shadowTexture);
 		lightShadow.blendMode = Phaser.blendModes.MULTIPLY;
 		this.lights = this.game.add.group();
 		this.lights.add(player);
+		// sends player to the next level
+		this.lights.add(checkpoint4);
     	player.LIGHT_RADIUS = 100;
 
-    	//refer to https://codepen.io/jdnichollsc/pen/oXXRMz
-		//add total health bar
+    	// refer to https://codepen.io/jdnichollsc/pen/oXXRMz
+		// add total health bar
 		bmd = game.add.bitmapData(200, 40);
 		bmd.ctx.beginPath();
 		bmd.ctx.rect(0, 0, 200, 80);
@@ -235,7 +236,7 @@ LevelHeight.prototype = {
 		bmd.ctx.fill();
 		bglife = game.add.sprite(50, 20, bmd);
     	bglife.anchor.set(0.5);
-    	//add current health bar
+    	// add current health bar
     	bmd = game.add.bitmapData(180, 30);
     	bmd.ctx.beginPath();
 		bmd.ctx.rect(0, 0, 200, 80);
@@ -317,25 +318,23 @@ LevelHeight.prototype = {
 			timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
 			timer.start();
 		}
-
-		    if(counterh == 4) {
-				l5.destroy();
-			}
-			if(counterh == 3) {
-				l4.destroy();
-			}
-			if(counterh == 2) {
-				l3.destroy();
-			}
-			if(counterh == 1) {
-				l2.destroy();
-			}
-			if(counterh == 0) {
-				l1.destroy();
-				BGM1.stop();
-				game.state.start("GameOver");
-			}
-		
+		if(counterh == 4) {
+			l5.destroy();
+		}
+		if(counterh == 3) {
+			l4.destroy();
+		}
+		if(counterh == 2) {
+			l3.destroy();
+		}
+		if(counterh == 1) {
+			l2.destroy();
+		}
+		if(counterh == 0) {
+			l1.destroy();
+			BGM1.stop();
+			game.state.start("GameOver");
+		}
 	},
 
 	/**
@@ -346,8 +345,6 @@ LevelHeight.prototype = {
 	 */
 	reachCheckpoint: function(player,checkpoint) {
 		console.log("a");
-		//TempX = checkpoint.x;
-    	//TempY = checkpoint.y;
     	Ignite.play();
 		HeightCheck = 1;
 		life.width = totalLife;
@@ -369,15 +366,12 @@ LevelHeight.prototype = {
 	 */
 	reachCheckpoint2: function(player,checkpoint2) {
 		console.log("a");
-		//TempX = checkpoint2.x;
-    	//TempY = checkpoint2.y;
     	Ignite.play();
 		HeightCheck = 2;
 		life.width = totalLife;
 		var saved2=new Checkpoint(game,checkpoint2.x,checkpoint2.y-5,'checkpoint1');
 		game.add.existing(saved2);
 
-		//saved.enableBody = true;
 		checkpoint2.kill();
 		this.lights.add(saved2);
 		saved2.LIGHT_RADIUS = 50;
@@ -410,10 +404,8 @@ LevelHeight.prototype = {
 	 * @param checkpoint: the checkpoint object
 	 */
 	reachCheckpoint4: function(player,checkpoint4) {
-		
 		game.state.start('HeightToCrowd');
 		BGM1.stop();
-
 	},
 
 	/**
