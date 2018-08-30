@@ -2,6 +2,7 @@
  * This is the loading state that begins before the player sees the title screen. This loads the necessary assets.
  * @param loads the Phaser game framework.
  */
+
 var LoadingState = function(game) {};
 LoadingState.prototype = {
 	
@@ -12,14 +13,15 @@ LoadingState.prototype = {
 		game.load.spritesheet('player','assets/master candleman sprite sheet.png',128,128);
 	    game.load.image('star', 'assets/flyingenemy.png');
 	    game.load.image('heart', 'assets/heart_life.png');
-	    game.load.image('candle', 'assets/stand.png');
-	    game.load.image('jumppad', 'assets/jump pad.png');
+	    game.load.image('lifeCount', 'assets/lifeCount.png');
 	    game.load.image('title screen', 'assets/title screen.png');
 	    game.load.image('Panel 1', 'assets/Panel 1.png');
-	    game.load.image('Panel 2', 'assets/Panel 2.png');
-	    game.load.image('Panel 3', 'assets/Panel 3.png');
-	    game.load.image('last panel', 'assets/last panel.png');
+	    game.load.image('Panel 2', 'assets/panel 2.png');
+	    game.load.image('Panel 3', 'assets/panel 3.png');
 	    game.load.image('game over', 'assets/game over.png');
+	    game.load.image('last panel', 'assets/last panel.png');
+	    game.load.image('candle', 'assets/stand.png');
+	    game.load.image('jumppad', 'assets/jump pad.png');
 	    game.load.spritesheet('enemyT', 'assets/c mob 2 sheet better.png', 256, 256);
 	    game.load.spritesheet('enemyDark', 'assets/level 3 boss.png', 512, 512);
 	    game.load.image('theBullet', 'assets/c mob bullet.png');
@@ -45,7 +47,6 @@ LoadingState.prototype = {
 	    game.load.audio('lvl2bgm', 'audios/lvl2bgm.wav');
 	    game.load.audio('chewing', 'audios/chewing.wav');
 	    game.load.audio('monster', 'audios/monster.wav');
-	    game.load.audio('lvl3bgm', 'audios/lvl3bgm.mp3');
 
 	    game.load.image('checkpoint', 'assets/dead candle man.png');
 	    game.load.image('checkpoint1', 'assets/dead candle man lit.png');

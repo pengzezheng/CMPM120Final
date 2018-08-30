@@ -5,7 +5,7 @@ var checkpoint3;
 var checkpoint4;
 var HeightCheck = 0;
 var dead = false;
-
+var StateCheck = 1;
 
 var counterh=5;
 
@@ -21,6 +21,7 @@ LevelHeight.prototype = {
 	 * The create function adds and displays objects in the game screen for the player to see.
 	 */
 	create: function() {
+		
 		EAtt=game.add.audio('EA');
 		//Died=game.add.audio('Die');
 		explSound=game.add.audio('EXPLO', 0.25);
@@ -279,7 +280,7 @@ LevelHeight.prototype = {
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.overlap(player,checkpoint2,this.reachCheckpoint2,null,this);
 		game.physics.arcade.overlap(player,checkpoint3,this.reachCheckpoint3,null,this);
-		//game.physics.arcade.overlap(player,checkpoint4,this.reachCheckpoint4,null,this);
+		game.physics.arcade.overlap(player,checkpoint4,this.reachCheckpoint4,null,this);
 
 		// allows the player to fall off the map.
 
@@ -326,8 +327,12 @@ LevelHeight.prototype = {
 		}
 		if(counterh==0){
 			l1.destroy();
+
+
+
 			BGM1.stop();
 			game.state.start("GameOver");
+
 		}
 	}
 },
@@ -382,6 +387,7 @@ LevelHeight.prototype = {
 
 	},
 	reachCheckpoint4: function(player,checkpoint4){
+
 		console.log("a");
 		Ignite.play();
 		//TempX = checkpoint2.x;
@@ -395,6 +401,7 @@ LevelHeight.prototype = {
 		checkpoint4.kill();
 		this.lights.add(saved4);
 		saved4.LIGHT_RADIUS = 50;
+
 		
 
 	},

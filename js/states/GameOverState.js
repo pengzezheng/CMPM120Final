@@ -1,13 +1,23 @@
 var GameOverState = function(game) {};
 GameOverState.prototype = {
+	/**
+	 * The create function.
+	 */
 	create: function() {
-		var overText = game.add.text(game.width/3,game.height/3,'Game Over',{font:'Helvetica',fontSize:'48px',fill:'#fff'});
-		var restartText = game.add.text(game.width/2,game.height/2+256,'Press SPACEBAR to Restart',{font:'Helvetica',fontSize:'48px',fill:'#fff'});
-		restartText.anchor.set(0.5);
+		var gameOver = game.add.image(0,0,'gameOver');
+		gameOver.scale.setTo(1.2,1.07);
 	},
+
+	/**
+	 * The update function.
+	 */
 	update: function() {
-		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
-			game.state.start("Level1State");
+		// begins the first level when the spacebar is pressed.
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
+			
+			game.state.start("LevelHeight");
+			
+			
 		}
 	}
 
