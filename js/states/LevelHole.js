@@ -5,7 +5,7 @@ var checkpoint3;
 var checkpoint4;
 var CrowdCheck = 0;
 var dead = false;
-var counter=5;
+var countero=5;
 var healthFire;
 /**
  * This is the hole level which is the third level of the game.
@@ -21,7 +21,8 @@ LevelHole.prototype = {
 	   	sky.scale.setTo(1.05, 1);
 	   	Chewing=game.add.audio('chewing');
 		Chewing.allowMultiple=true;
-
+		Ignite=game.add.audio('ignite');
+		Ignite.allowMultiple=true;
 		
 		Monster=game.add.audio('monster', 0.1);
 		Monster.allowMultiple=true;
@@ -37,7 +38,6 @@ LevelHole.prototype = {
 	   	layer2=map.createLayer('layer2');
 	   	game.add.existing(layer2);
 	   	map.setCollisionByExclusion([], true, 'layer2', true);
-	   	//cgame.time.events.loop(Phaser.Timer.SECOND*game.rnd.integerInRange(10,20), this.yell, this);
 	   	game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 
 	   	// constructs obstacles that are placed in specific coordinates of the map.
@@ -222,8 +222,8 @@ LevelHole.prototype = {
     	heart.scale.setTo(0.3,0.3);
     	heart.anchor.setTo(0.5,0.5);
     	heart.fixedToCamera = true;
-    	var lifeCount = game.add.image(34,75,'lifeCount');
-    	lifeCount.scale.setTo(0.5,0.3);
+    	var lifeCount = game.add.image(34,75,'candle');
+    	lifeCount.scale.setTo(0.045);
     	lifeCount.anchor.setTo(0.5,0.5);
     	lifeCount.fixedToCamera = true;
     	
@@ -275,21 +275,21 @@ LevelHole.prototype = {
 			timer.start();
 		}
 
-		if(counter == 4){
+		if(countero == 4){
 			l5.destroy();
 		}
-		if(counter == 3){
+		if(countero == 3){
 			l4.destroy();
 		}
-		if(counter == 2){
+		if(countero == 2){
 			l3.destroy();
 		}
-		if(counter == 1){
+		if(countero == 1){
 			l2.destroy();
 		}
-		if(counter == 0){
+		if(countero == 0){
 			l1.destroy();
-
+			BGM3.stop();
 		}
 	},
 	
@@ -303,6 +303,7 @@ LevelHole.prototype = {
 		console.log("a");
 		//TempX = checkpoint.x;
     	//TempY = checkpoint.y;
+    	Ignite.play();
 		CrowdCheck = 1;
 		widthLife.width = totalLife;
 		var saved=new Checkpoint(game,checkpoint.x,checkpoint.y-5,'checkpoint1');
@@ -325,6 +326,7 @@ LevelHole.prototype = {
 		console.log("a");
 		//TempX = checkpoint2.x;
     	//TempY = checkpoint2.y;
+    	Ignite.play();
 		CrowdCheck = 2;
 		widthLife.width = totalLife;
 		var saved2=new Checkpoint(game,checkpoint2.x,checkpoint2.y-5,'checkpoint1');
@@ -348,6 +350,7 @@ LevelHole.prototype = {
 		console.log("a");
 		//TempX = checkpoint2.x;
     	//TempY = checkpoint2.y;
+    	Ignite.play();
 		CrowdCheck = 3;
 		widthLife.width = totalLife;
 		var saved3=new Checkpoint(game,checkpoint3.x,checkpoint3.y-5,'checkpoint1');
@@ -360,11 +363,6 @@ LevelHole.prototype = {
 		
 
 	},
-
-	yell: function(){
-		Monster.play();
-	},
-
 	/**
 	 * The reachCheckpoint4 function starts the player at the fourth checkpoint when the player and 
 	 * the checkpoint collides.
@@ -462,7 +460,8 @@ LevelHole.prototype.endTimer = function() {
 	if(dead == true) {
 		timer.stop();
 		widthLife.width = totalLife;
-		counter--;
+		player.body.velocity.y=0;
+		countero--;
 		player.alpha = 1;
 		player.facing = 'right';
 		this.lights.add(player);

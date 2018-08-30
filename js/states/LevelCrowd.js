@@ -344,8 +344,8 @@ LevelCrowd.prototype = {
     	heart.scale.setTo(0.3,0.3);
     	heart.anchor.setTo(0.5,0.5);
     	heart.fixedToCamera = true;
-    	var lifeCount = game.add.image(34,75,'lifeCount');
-    	lifeCount.scale.setTo(0.5,0.3);
+    	var lifeCount = game.add.image(34,75,'candle');
+    	lifeCount.scale.setTo(0.045);
     	lifeCount.anchor.setTo(0.5,0.5);
     	lifeCount.fixedToCamera = true;
 
@@ -421,7 +421,7 @@ LevelCrowd.prototype = {
 		}
 		if(counters==0){
 			l1.destroy();
-
+			BGM2.stop();
 		}
 	},
 
@@ -585,6 +585,7 @@ LevelCrowd.prototype.endTimer = function() {
 		timer.stop();
 		widthLife.width = totalLife;
 		counters--;
+		player.body.velocity.y=0;
 		player.alpha = 1;
 		player.facing = 'right';
 		this.lights.add(player);

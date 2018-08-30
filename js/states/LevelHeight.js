@@ -7,7 +7,7 @@ var HeightCheck = 0;
 var dead = false;
 
 
-var counter=5;
+var counterh=5;
 
 /**
  * This is the height level which is the first level of the game.
@@ -31,6 +31,9 @@ LevelHeight.prototype = {
 	    BGM1=new Phaser.Sound(game,'BGM1',1,true);
 	    BGM1.allowMultiple=true;
 	    BGM1.play();
+
+	    Ignite=game.add.audio('ignite');
+		Ignite.allowMultiple=true;
 
 		game.time.advancedTiming = true;
 		game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
@@ -287,11 +290,12 @@ LevelHeight.prototype = {
 	    }
 
 	    // kills the player when they fall.
-	    if(player.y >= 5000){
-	    	widthLife.width = 10;
+	    if(player.y >= 4000){
+	    	widthLife.width = -1;
+	    	player.body.velocity.y=0;
 	    }
 
-	    if(widthLife.width<=0 ){
+	    if(widthLife.width<0 ){
 			widthLife.width = 0;
 			dead = true;
 			player.animations.stop(null,true);
@@ -308,21 +312,21 @@ LevelHeight.prototype = {
 			timer.start();
 
 
-	    if(counter==4){
+	    if(counterh==4){
 			l5.destroy();
 		}
-		if(counter==3){
+		if(counterh==3){
 			l4.destroy();
 		}
-		if(counter==2){
+		if(counterh==2){
 			l3.destroy();
 		}
-		if(counter==1){
+		if(counterh==1){
 			l2.destroy();
 		}
-		if(counter==0){
+		if(counterh==0){
 			l1.destroy();
-			//BGM1.stop();
+			BGM1.stop();
 
 		}
 	}
@@ -331,6 +335,7 @@ LevelHeight.prototype = {
 		console.log("a");
 		//TempX = checkpoint.x;
     	//TempY = checkpoint.y;
+    	Ignite.play();
 		HeightCheck = 1;
 		widthLife.width = totalLife;
 		var saved=new Checkpoint(game,checkpoint.x,checkpoint.y-5,'checkpoint1');
@@ -346,6 +351,7 @@ LevelHeight.prototype = {
 		console.log("a");
 		//TempX = checkpoint2.x;
     	//TempY = checkpoint2.y;
+    	Ignite.play();
 		HeightCheck = 2;
 		widthLife.width = totalLife;
 		var saved2=new Checkpoint(game,checkpoint2.x,checkpoint2.y-5,'checkpoint1');
@@ -360,6 +366,7 @@ LevelHeight.prototype = {
 	},
 	reachCheckpoint3: function(player,checkpoint3){
 		console.log("a");
+		Ignite.play();
 		//TempX = checkpoint2.x;
     	//TempY = checkpoint2.y;
 		HeightCheck = 3;
@@ -376,6 +383,7 @@ LevelHeight.prototype = {
 	},
 	reachCheckpoint4: function(player,checkpoint4){
 		console.log("a");
+		Ignite.play();
 		//TempX = checkpoint2.x;
     	//TempY = checkpoint2.y;
 		HeightCheck = 4;
@@ -446,7 +454,7 @@ LevelHeight.prototype = {
 		//player.body.collideWorldBounds = true;
 		timer.stop();
 		widthLife.width = totalLife;
-		counter--;
+		counterh--;
 		player.alpha = 1;
 		player.facing = 'right';
 		this.lights.add(player);
