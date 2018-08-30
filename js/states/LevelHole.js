@@ -363,8 +363,6 @@ LevelHole.prototype = {
 		checkpoint3.kill();
 		this.lights.add(saved3);
 		saved3.LIGHT_RADIUS = 50;
-		
-
 	},
 	/**
 	 * The reachCheckpoint4 function starts the player at the fourth checkpoint when the player and 
