@@ -14,11 +14,8 @@ function shootBullet(){
 	bullet=new Bullet(game, "theBullet");
 	bullet.reset(this.body.x,this.body.y);
 	if(this.body.x > player.x){
-		this.scale.setTo(0.1,0.1);
-		if(this.body.x< player.x+250){
-			bullet.body.velocity.x=-150;
-			game.add.existing(bullet);
-		}
+		bullet.body.velocity.x=-150;
+		game.add.existing(bullet);
 	}else{
 		this.scale.setTo(-0.1,0.1);
 		if(player.x< this.body.x+250){
@@ -27,15 +24,15 @@ function shootBullet(){
 		}
 	}
 }
-function hitBullet(bullet,player){
+/*function hitBullet(bullet,player){
 	bullet.kill();
 	widthLife.width = widthLife.width - totalLife/5;
-}
+}*/
 
 EnemyTorrent.prototype = Object.create(Phaser.Sprite.prototype);// make prototype
 EnemyTorrent.prototype.constructor = EnemyTorrent;
 
 EnemyTorrent.prototype.update = function() {
-	game.physics.arcade.overlap(this, player, hitBullet, null, this);
+	//game.physics.arcade.overlap(this, player, hitBullet, null, this);
 	this.animations.play('enemyT');
 } 

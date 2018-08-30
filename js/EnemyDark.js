@@ -13,13 +13,11 @@ EnemyDark.prototype.constructor = EnemyDark;
 
 function hitDark(enemyDark, player){//kill enemy and do damage to player
 		enemyDark.kill();
-
-		
 		if(widthLife.width < 0){
 			widthLife.width = 0;
 		}
 
-		widthLife.width = widthLife.width - totalLife/4;
+		widthLife.width = widthLife.width - totalLife/2;
 
 		
 
@@ -28,7 +26,7 @@ function hitDark(enemyDark, player){//kill enemy and do damage to player
 EnemyDark.prototype.update = function() {
 	this.animations.play('dark');
 	if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
-		game.physics.arcade.moveToObject(this,player,500);
+		game.physics.arcade.moveToObject(this,player,400);
 	}else{
 		this.body.stop();
 	}

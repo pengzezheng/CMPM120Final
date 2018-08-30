@@ -6,13 +6,15 @@ var checkpoint3;
 var checkpoint4;
 var CrowdCheck = 0;
 var dead = false;
-var counter=3;
+var counter=5;
 var healthFire;
 var LevelHole = function(game) {};
 LevelHole.prototype = {
 	create: function() {
 		var sky = game.add.sprite(-100, 0, 'bg3');
 	   	sky.scale.setTo(1.05, 1);
+	   	Chewing=game.add.audio('chewing');
+		Chewing.allowMultiple=true;
 		game.world.setBounds(0, 0, 4000, 960);
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		game.time.advancedTiming = true;
@@ -200,10 +202,14 @@ LevelHole.prototype = {
     	lives.cameraOffset.setTo(50,50);
     	l1 = lives.create(15, 12.5, 'lives');//create sprite life
 		l1.scale.setTo(0.075);//set scale
-		l2 = lives.create(45, 12.5, 'lives'); //create sprite life
+		l2 = lives.create(35, 12.5, 'lives'); //create sprite life
 		l2.scale.setTo(0.075);//set scale
-		l3 = lives.create(75, 12.5, 'lives');//create sprite life
+		l3 = lives.create(55, 12.5, 'lives');//create sprite life
 		l3.scale.setTo(0.075);//set scale
+		l4 = lives.create(75, 12.5, 'lives');//create sprite life
+		l4.scale.setTo(0.075);
+		l5 = lives.create(95, 12.5, 'lives');//create sprite life
+		l5.scale.setTo(0.075);
 	},
 
 	update: function() {
@@ -234,11 +240,21 @@ LevelHole.prototype = {
 			timer.start();
 		}
 
+		if(counter==4){
+			l5.destroy();
+		}
+		if(counter==3){
+			l4.destroy();
+		}
 		if(counter==2){
 			l3.destroy();
 		}
 		if(counter==1){
 			l2.destroy();
+		}
+		if(counter==0){
+			l1.destroy();
+
 		}
 	},
 	reachCheckpoint: function(player,checkpoint){
@@ -375,12 +391,12 @@ LevelHole.prototype = {
 
 	},
 
-	render: function(){
+	/*render: function(){
 		// game.debug.body(spring, false);
 		//game.debug.body(aELand, "#00ff00", true);
 		game.debug.text('FPS: ' + game.time.fps || 'FPS: --', 40, 40, "#00ff00");
 
-	},
+	},*/
 
 };
 LevelHole.prototype.cropLife = function(){
