@@ -7,14 +7,10 @@ window.onload = function() {
     game.state.add("LoadingState", LoadingState);
     game.state.add("TitleState", TitleState);
     game.state.add("Start", Start);
-    game.state.add("GameState", GameState);
     game.state.add("GameOver", GameOver);
-    game.state.add("GameWinState", GameWinState);
-    game.state.add("Level1State", Level1State);
     game.state.add("LevelCrowd", LevelCrowd);
     game.state.add("LevelHole", LevelHole);
     game.state.add("LevelHeight", LevelHeight);
-
     game.state.add("HeightToCrowd", HeightToCrowd);
     game.state.add("CrowdToHole", CrowdToHole);
     game.state.add("GameWin", GameWin);

@@ -14,7 +14,7 @@ function EnemyLand1(game, key){
 function rush(enemyLand1, player){//kill enemy and do damage to player
 	hit=1;//debug to make sure the rush works
 	enemyLand1.kill();// kill it
-	widthLife.width = widthLife.width - totalLife/4;//do damage
+	life.width = life.width - totalLife/4;//do damage
 	hit=0;//reset the debugging
 	}
 

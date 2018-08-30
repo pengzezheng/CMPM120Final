@@ -22,6 +22,9 @@ TitleState.prototype = {
 		// adds and sets the title screen image.
 		var sky = game.add.sprite(0, 0, 'title screen');
 		sky.scale.setTo(1.2,1.08);
+		titleMusic=new Phaser.Sound(game,'titleMusic',1,true);
+	    titleMusic.allowMultiple=true;
+	    titleMusic.play();
 
 	},
 
@@ -32,6 +35,8 @@ TitleState.prototype = {
 	update: function() {
 		// sends the player to the next state when spacebar is pressed.
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
+
+			titleMusic.stop();
 			game.state.start("Start");
 		}
 	}

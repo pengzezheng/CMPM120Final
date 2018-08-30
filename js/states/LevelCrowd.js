@@ -35,7 +35,7 @@ LevelCrowd.prototype = {
 
 		// create a event 3s from now
 		// timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
-		
+		CrowdCheck = 0;
 		counters=5;
 		Died = game.add.audio('Die');
 		Pad = game.add.audio('pad');
@@ -391,12 +391,12 @@ LevelCrowd.prototype = {
 		}
 		this.updateShadowTexture();
 		life.updateCrop();
-		if(widthLife.width<=0 ){
+		if(life.width<=0 ){
 			//deathbg=true;
 			console.log(dead);
 			// if(dead=false){
 			// }
-			widthLife.width = 0;
+			life.width = 0;
 			dead = true;
 			// Died.play();
 			player.animations.stop(null,true);
@@ -445,7 +445,7 @@ LevelCrowd.prototype = {
 		//TempX = checkpoint.x;
     	//TempY = checkpoint.y;
 		CrowdCheck = 1;
-		widthLife.width = totalLife;
+		life.width = totalLife;
 		var saved=new Checkpoint(game,checkpoint.x,checkpoint.y-5,'checkpoint1');
 		game.add.existing(saved);
 
@@ -468,7 +468,7 @@ LevelCrowd.prototype = {
 		//TempX = checkpoint2.x;
     	//TempY = checkpoint2.y;
 		CrowdCheck = 2;
-		widthLife.width = totalLife;
+		life.width = totalLife;
 		var saved2=new Checkpoint(game,checkpoint2.x,checkpoint2.y-5,'checkpoint1');
 		game.add.existing(saved2);
 
@@ -492,7 +492,7 @@ LevelCrowd.prototype = {
 		//TempX = checkpoint2.x;
     	//TempY = checkpoint2.y;
 		CrowdCheck = 3;
-		widthLife.width = totalLife;
+		life.width = totalLife;
 		var saved3=new Checkpoint(game,checkpoint3.x,checkpoint3.y-5,'checkpoint1');
 		game.add.existing(saved3);
 
@@ -512,6 +512,7 @@ LevelCrowd.prototype = {
 	 */
 	reachCheckpoint4: function(player,checkpoint4){
 		game.state.start('CrowdToHole');
+		BGM2.stop();
 	},
 
 	
@@ -568,8 +569,8 @@ LevelCrowd.prototype = {
  * The cropLife function reduces the size of the lifebar.
  */
 LevelCrowd.prototype.cropLife = function() {
-	if(widthLife.width > 0){
-		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife / 30)) }, 1, Phaser.Easing.Linear.None, true);
+	if(life.width > 0){
+		game.add.tween(life).to( { width: (life.width - (totalLife / 30)) }, 1, Phaser.Easing.Linear.None, true);
 	}
 }
 
@@ -579,7 +580,7 @@ LevelCrowd.prototype.cropLife = function() {
 LevelCrowd.prototype.endTimer = function() {
 	if(dead == true) {
 		timer.stop();
-		widthLife.width = totalLife;
+		life.width = totalLife;
 		counters--;
 		player.body.velocity.y=0;
 		player.alpha = 1;

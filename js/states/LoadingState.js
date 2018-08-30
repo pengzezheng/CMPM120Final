@@ -13,7 +13,6 @@ LoadingState.prototype = {
 		game.load.spritesheet('player','assets/master candleman sprite sheet.png',128,128);
 	    game.load.image('star', 'assets/flyingenemy.png');
 	    game.load.image('heart', 'assets/heart_life.png');
-	    game.load.image('lifeCount', 'assets/lifeCount.png');
 	    game.load.image('title screen', 'assets/title screen.png');
 	    game.load.image('Panel 1', 'assets/Panel 1.png');
 	    game.load.image('Panel 2', 'assets/panel 2.png');
@@ -45,9 +44,12 @@ LoadingState.prototype = {
 	    game.load.audio('hit', 'audios/hit.wav');
 	    game.load.audio('ignite', 'audios/ignite.wav');
 	    game.load.audio('lvl2bgm', 'audios/lvl2bgm.wav');
+	    game.load.audio('lvl3bgm', 'audios/lvl3bgm.mp3');
 	    game.load.audio('chewing', 'audios/chewing.wav');
 	    game.load.audio('monster', 'audios/monster.wav');
-
+	    game.load.audio('titleMusic', 'audios/titleMusic.mp3');
+	    game.load.audio('horror', 'audios/horror.mp3');
+	    game.load.audio('gameWin', 'audios/kanon.wav');
 	    game.load.image('checkpoint', 'assets/dead candle man.png');
 	    game.load.image('checkpoint1', 'assets/dead candle man lit.png');
 	    game.load.image('bgCrowd', 'assets/c Background.png');
@@ -58,6 +60,8 @@ LoadingState.prototype = {
 	 * The create function. This begins the beginning state after assets are loaded.
 	 */
 	create: function() {
+		var loadText = game.add.text(600,100,'Loading...',{font:'Helvetica',fontSize:'24px',fill:'#fff'});
+		loadText.anchor.set(0.5);
 		game.state.start("TitleState");
 	}
 	

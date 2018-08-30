@@ -18,6 +18,7 @@ LevelHole.prototype = {
 	 * The create function adds and displays objects in the game screen for the player to see.
 	 */
 	create: function() {
+		CrowdCheck = 0;
 		countero=5;
 		var sky = game.add.sprite(-100, 0, 'bg3');
 	   	sky.scale.setTo(1.05, 1);
@@ -26,7 +27,7 @@ LevelHole.prototype = {
 		Ignite=game.add.audio('ignite');
 		Ignite.allowMultiple=true;
 		
-		Monster=game.add.audio('monster', 0.1);
+		Monster=game.add.audio('monster', 0.5);
 		Monster.allowMultiple=true;
 
 		BGM3=new Phaser.Sound(game,'lvl3bgm', 1,true);
@@ -260,8 +261,8 @@ LevelHole.prototype = {
 		this.updateShadowTexture();
 		//life.updateCrop();
 		//console.log(healthFire.x,healthFire.y);
-		if(widthLife.width<0 ){
-			widthLife.width = 0;
+		if(life.width<0 ){
+			life.width = 0;
 			dead = true;
 			player.animations.stop(null,true);
 			
@@ -308,7 +309,7 @@ LevelHole.prototype = {
     	//TempY = checkpoint.y;
     	Ignite.play();
 		CrowdCheck = 1;
-		widthLife.width = totalLife;
+		life.width = totalLife;
 		var saved=new Checkpoint(game,checkpoint.x,checkpoint.y-5,'checkpoint1');
 		game.add.existing(saved);
 
@@ -331,7 +332,7 @@ LevelHole.prototype = {
     	//TempY = checkpoint2.y;
     	Ignite.play();
 		CrowdCheck = 2;
-		widthLife.width = totalLife;
+		life.width = totalLife;
 		var saved2=new Checkpoint(game,checkpoint2.x,checkpoint2.y-5,'checkpoint1');
 		game.add.existing(saved2);
 
@@ -355,7 +356,7 @@ LevelHole.prototype = {
     	//TempY = checkpoint2.y;
     	Ignite.play();
 		CrowdCheck = 3;
-		widthLife.width = totalLife;
+		life.width = totalLife;
 		var saved3=new Checkpoint(game,checkpoint3.x,checkpoint3.y-5,'checkpoint1');
 		game.add.existing(saved3);
 
@@ -372,6 +373,7 @@ LevelHole.prototype = {
 	 */
 	reachCheckpoint4: function(player,checkpoint4) {
 		game.state.start('GameWin');
+		BGM3.stop();
 	},
 
 	updateShadowTexture:function(){
@@ -439,8 +441,8 @@ LevelHole.prototype = {
  * The crop life function reduces the size of the lifebar.
  */
 LevelHole.prototype.cropLife = function(){
-	if(widthLife.width >= 0){
-		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /30)) }, 0.1, Phaser.Easing.Linear.None, true);
+	if(life.width >= 0){
+		game.add.tween(life).to( { width: (life.width - (totalLife /30)) }, 0.1, Phaser.Easing.Linear.None, true);
 	}
 }
 
@@ -450,7 +452,7 @@ LevelHole.prototype.cropLife = function(){
 LevelHole.prototype.endTimer = function() {
 	if(dead == true) {
 		timer.stop();
-		widthLife.width = totalLife;
+		life.width = totalLife;
 		player.body.velocity.y=0;
 		countero--;
 		player.alpha = 1;

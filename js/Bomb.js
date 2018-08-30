@@ -5,6 +5,7 @@ function Bomb(game, key){
 	this.body.gravity.y=200;
 	count=0;
 	this.animations.add('bom1', [0, 1, 2, 3], 10, true);// give animation to Bombs
+	explSound.allowMultiple = true;
 }
 
 function explo(bomb, player){//function to make explosion from bombs
