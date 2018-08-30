@@ -3,26 +3,22 @@ function EnemyGrab(game, key){
 	this.scale.setTo(1);
 	game.physics.enable(this);//enable physics
 	this.enableBody=true;
-	//this.body.x = game.rnd.integerInRange(150,3800);
-	this.count=0;
-	this.body.gravity.y=0;
+	this.body.gravity.y=0;// make it stay in the air
 
 }
 
-function grab(explosion, player){//kill enemy and do damage to player
-		player.body.gravity.y +=100;
-		this.kill();
-		EAtt.play();
+function grab(explosion, player){//kill enemy and increase gravity of player
+		player.body.gravity.y +=100;// make player heavier
+		this.kill();//kill it
+		EAtt.play();// sound effect
 	}
-//player could kill the enemy who would grab the candle man
 
 EnemyGrab.prototype = Object.create(Phaser.Sprite.prototype);// make prototype
 EnemyGrab.prototype.constructor = EnemyGrab;
 
 EnemyGrab.prototype.update = function() {
-	game.physics.arcade.overlap(this, player, grab, null, this);
-
-	if(this.body.x > player.x){
+	game.physics.arcade.overlap(this, player, grab, null, this);//enable overlapping
+	if(this.body.x > player.x){// reset scale if player is moving
 		this.scale.setTo(1,1);
 	}else{
 		this.scale.setTo(-1,1);
