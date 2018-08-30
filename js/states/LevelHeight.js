@@ -212,7 +212,6 @@ LevelHeight.prototype = {
 		this.LIGHT_RADIUS = 300;
 
 		// create shadow texture
-		// var graphics = game.add.graphics(100, 100);
 		this.shadowTexture = this.game.add.bitmapData(game.world.width,game.world.height);
 		
 		// create an object that will use the bitmap as texture
