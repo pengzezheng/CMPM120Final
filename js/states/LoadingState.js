@@ -38,6 +38,7 @@ LoadingState.prototype = {
 	    game.load.audio('lvl2bgm', 'audios/lvl2bgm.wav');
 	    game.load.audio('chewing', 'audios/chewing.wav');
 	    game.load.audio('monster', 'audios/monster.wav');
+	    game.load.audio('lvl3bgm', 'audios/lvl3bgm.mp3');
 
 	    game.load.image('checkpoint', 'assets/dead candle man.png');
 	    game.load.image('checkpoint1', 'assets/dead candle man lit.png');

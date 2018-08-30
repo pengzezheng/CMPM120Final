@@ -22,8 +22,13 @@ LevelHole.prototype = {
 	   	Chewing=game.add.audio('chewing');
 		Chewing.allowMultiple=true;
 
-		monster=game.add.audio('monster');
-		monster.allowMultiple=true;
+		
+		Monster=game.add.audio('monster', 0.1);
+		Monster.allowMultiple=true;
+
+		BGM3=new Phaser.Sound(game,'lvl3bgm', 1,true);
+	    BGM3.allowMultiple=true;
+	    BGM3.play();
 		game.world.setBounds(0, 0, 4000, 960);
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		game.time.advancedTiming = true;
@@ -32,7 +37,7 @@ LevelHole.prototype = {
 	   	layer2=map.createLayer('layer2');
 	   	game.add.existing(layer2);
 	   	map.setCollisionByExclusion([], true, 'layer2', true);
-
+	   	//cgame.time.events.loop(Phaser.Timer.SECOND*game.rnd.integerInRange(10,20), this.yell, this);
 	   	game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 
 	   	// constructs obstacles that are placed in specific coordinates of the map.
@@ -128,6 +133,21 @@ LevelHole.prototype = {
 	    game.add.existing(aEDark);
 	    aEDark.x = 3168;
 	    aEDark.y = 32;
+
+	    aEDark = new EnemyDark(game,'enemyDark');
+	    game.add.existing(aEDark);
+	    aEDark.x = 2500;
+	    aEDark.y = 100;
+
+	     aEDark = new EnemyDark(game,'enemyDark');
+	    game.add.existing(aEDark);
+	    aEDark.x = 1500;
+	    aEDark.y = 400;
+
+	     aEDark = new EnemyDark(game,'enemyDark');
+	    game.add.existing(aEDark);
+	    aEDark.x = 1000;
+	    aEDark.y = 600;
 
 	    // constructs the checkpoints at specific places of the map.
 	    checkpoint = game.add.sprite(80,845,'checkpoint');
@@ -330,6 +350,10 @@ LevelHole.prototype = {
 		saved3.LIGHT_RADIUS = 50;
 		
 
+	},
+
+	yell: function(){
+		Monster.play();
 	},
 
 	/**

@@ -3,8 +3,9 @@ function EnemyHold(game, key){
 	this.scale.setTo(0.25);
 	game.physics.enable(this, Phaser.Physics.ARCADE);//enable physics
 	this.enableBody=true;
+	this.body.immovable=true;
 	//timer=game.time.create();
-	temp=0;
+	this.temp=0;
 }
 
 function holding(enemyHold,player){
@@ -15,11 +16,17 @@ function holding(enemyHold,player){
 
 function doneHold(enemyHold,player){
 	this.kill();
+	this.temp=0;
 }
 
 EnemyHold.prototype = Object.create(Phaser.Sprite.prototype);// make prototype
 EnemyHold.prototype.constructor = EnemyHold;
 
 EnemyHold.prototype.update = function() {
-	var t=game.physics.arcade.overlap(this, player, holding, null, this);
+	game.physics.arcade.overlap(this, player, holding, null, this);
+	var t=game.physics.arcade.collide(this,player);
+	if (t==true&&this.temp==0){
+		Chewing.play();
+		this.temp=1;
+	}
 } 
