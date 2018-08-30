@@ -61,6 +61,7 @@ LevelCrowd.prototype = {
 
 	   	map.setCollisionByExclusion([], true, 'layer1', true);
 
+	    // generates fake enemies in the map to confuse the player.
 	    for (var i =0; i <10; i++) {
 	        //console.log("a");
 	        var aBgE=game.add.sprite(300 + 20*i, 850,'ELand');
@@ -68,15 +69,21 @@ LevelCrowd.prototype = {
 	        aBgE.scale.setTo(0.25);
 	    }
 
+	    // generates fake enemies in the map to confuse the player.
 	    for(var i = 0; i < 34; i++) {
 	    	var fakeEnemies = game.add.sprite(1920 + (16 * i), 864 - 16, 'ELand');
 	    	fakeEnemies.scale.setTo(0.25);
 	    }
 
+	    // constructs land enemies that are placed in specific coordiantes of the map.
 	    aELand = new EnemyLand1(game,'ELand');
+	    // adds the existing land enemy object.
 	    game.add.existing(aELand);
+	    // specifies the x coordinate.
 	    aELand.x = 320;
+	    // specifies the y coordinate.
 	    aELand.y = 672;
+	    // constructs more of the above objets.
 	    aELand = new EnemyLand1(game,'ELand');
 	    game.add.existing(aELand);
 	    aELand.x = (28 * 32);
@@ -177,12 +184,16 @@ LevelCrowd.prototype = {
 	    game.add.existing(aELand);
 	    aELand.x = (86 * 32);
 	    aELand.y = (27 * 32);
-
-	    	
+	
+	    // constructs turret(typo) enemies that are placed in specific coordinates of the map. 
 	    aETorrent = new EnemyTorrent(game,'enemyT');
+	    // adds the existing turret enemy object.
 	    game.add.existing(aETorrent);
+	    // specifies the x coordinate.
 	    aETorrent.x = 1024;
+	    // specifies the y coordinate.
 	    aETorrent.y = 608 + 18;
+	    // constructs more of the above objects.
 	    aETorrent = new EnemyTorrent(game,'enemyT');
 	    game.add.existing(aETorrent);
 	    aETorrent.x = (18 * 32);
@@ -208,72 +219,79 @@ LevelCrowd.prototype = {
 	    aETorrent.x = (113 * 32);
 	    aETorrent.y = (14 * 32) + 18;
 
-	    spring=game.add.group();
+	    // adds a spring object into the game map.
+	    spring = game.add.group();
+	    // enables the spring physics.
 		game.physics.enable(spring, Phaser.Physics.ARCADE);
-		spring.enableBody=true;
-		//spring.body.immovable = true;
-		var sp =spring.create(200,650,'jumppad');
+		// enables the spring body.
+		spring.enableBody = true;
+		// constructs a new spring into the map.
+		var sp = spring.create(200,650,'jumppad');
+		// scales the spring image
 		sp.scale.setTo(0.15);
-		sp.body.immovable=true;
+		// set the spring object as immovable.
+		sp.body.immovable = true;
+		// set the size of the body
 		sp.body.setSize(256, 100, 0, 175);
-		var sp =spring.create(440,725,'jumppad');
+		// constructs more of the above objects.
+		var sp = spring.create(440,725,'jumppad');
 		sp.scale.setTo(0.15);
-		sp.body.immovable=true;
+		sp.body.immovable = true;
 		sp.body.setSize(256, 100, 0, 175);
-		var sp =spring.create(1100,825,'jumppad');
+		var sp = spring.create(1100,825,'jumppad');
 		sp.scale.setTo(0.15);
-		sp.body.immovable=true;
+		sp.body.immovable = true;
 		sp.body.setSize(256, 100, 0, 175);	
-		var sp =spring.create(2000,750,'jumppad');
+		var sp = spring.create(2000,750,'jumppad');
 		sp.scale.setTo(0.15);
-		sp.body.immovable=true;
+		sp.body.immovable = true;
 		sp.body.setSize(256, 100, 0, 175);
-		var sp =spring.create(2740,670,'jumppad');
+		var sp = spring.create(2740,670,'jumppad');
 		sp.scale.setTo(0.15);
-		sp.body.immovable=true;
+		sp.body.immovable = true;
 		sp.body.setSize(256, 100, 0, 175);
-		var sp =spring.create(2960,750,'jumppad');
+		var sp = spring.create(2960,750,'jumppad');
 		sp.scale.setTo(0.15);
-		sp.body.immovable=true;
+		sp.body.immovable = true;
 		sp.body.setSize(256, 100, 0, 175);
-		var sp =spring.create(3800,750,'jumppad');
+		var sp = spring.create(3800,750,'jumppad');
 		sp.scale.setTo(0.15);
-		sp.body.immovable=true;
+		sp.body.immovable = true;
 		sp.body.setSize(256, 100, 0, 175);
-		var sp =spring.create(5275,500,'jumppad');
+		var sp = spring.create(5275,500,'jumppad');
 		sp.scale.setTo(0.15);
-		sp.body.immovable=true;
+		sp.body.immovable = true;
 		sp.body.setSize(256, 100, 0, 175);
-		var sp =spring.create(5000,600,'jumppad');
+		var sp = spring.create(5000,600,'jumppad');
 		sp.scale.setTo(0.15);
-		sp.body.immovable=true;
+		sp.body.immovable = true;
 		sp.body.setSize(256, 100, 0, 175);
-		var sp =spring.create(5500,600,'jumppad');
+		var sp = spring.create(5500,600,'jumppad');
 		sp.scale.setTo(0.15);
-		sp.body.immovable=true;
+		sp.body.immovable = true;
 		sp.body.setSize(256, 100, 0, 175);
 
 
+		// constructs the checkpoints at specific places of the map.
 		checkpoint = game.add.sprite(80,680,'checkpoint');
+		// enables arcade physics for the checkpoint.
 	    game.physics.arcade.enable(checkpoint);
+	    // enables the checkpoint body.
 		checkpoint.enableBody = true;
-
+		//constructs more of the above object.
 		checkpoint2 = game.add.sprite(1660,580,'checkpoint');
 	    game.physics.arcade.enable(checkpoint2);
 		checkpoint2.enableBody = true;
-
 		checkpoint3 = game.add.sprite(3040,777,'checkpoint');
 	    game.physics.arcade.enable(checkpoint3);
 		checkpoint3.enableBody = true;
-
 		checkpoint4 = game.add.sprite(3959,522,'checkpoint');
 	    game.physics.arcade.enable(checkpoint4);
 		checkpoint4.enableBody = true;
 
+    	// adds the player in the game
     	player = new Player(game,'player',10,500);
     	game.add.existing(player);
-    	// player.x=0;
-	    // player.y=300;
     	
     	//refer to the example: https://gamemechanicexplorer.com/#lighting-1
 		this.LIGHT_RADIUS = 300;
