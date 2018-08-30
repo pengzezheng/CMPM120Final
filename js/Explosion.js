@@ -3,13 +3,12 @@ function Explosion(game, key) {
 	Phaser.Sprite.call(this, game, 400, 85, key);
 	this.anchor.set(0.5);
 	//enable physics
-	game.physics.enable(this, Phaser.Physics.ARCADE);
+	game.physics.enable(this, Phaser.Physics.ARCADE);//enable physics
 	this.enableBody = true;
 	this.body.collideWorldBounds = false;
 	//counter 
 	this.count = 0;
-	this.animations.add('ex1', [0, 1, 2, 3], 10, true);
-	//explSound.play();
+	this.animations.add('ex1', [0, 1, 2, 3], 10, true);//set animation
 }
 
 function explos(explosion, player){//kill enemy and do damage to player
@@ -22,11 +21,11 @@ Explosion.prototype.constructor = Explosion;
 
 Explosion.prototype.update = function() { 
 		//explosion animation/size change
-		game.physics.arcade.overlap(this, player, explos, null, this);
-		this.animations.play('ex1');
-		if(this.count < 40) {
+		game.physics.arcade.overlap(this, player, explos, null, this);//enable overplapping
+		this.animations.play('ex1');//play animation
+		if(this.count < 40) {//explosion effects
 				if(this.count < 30) {
-					this.scale.setTo(0.1+this.count*0.1, 0.1+this.count*0.1);
+					this.scale.setTo(0.1+this.count*0.1, 0.1+this.count*0.1);//increase range
 				}
 				this.count++;
 		}
