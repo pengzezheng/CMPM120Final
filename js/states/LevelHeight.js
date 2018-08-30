@@ -13,7 +13,6 @@ var counterh=5;
  * This is the height level which is the first level of the game.
  * @param loads the Phaser game framework.
  */
-
 var LevelHeight = function(game) {};
 LevelHeight.prototype = {
 	
