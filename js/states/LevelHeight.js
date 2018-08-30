@@ -301,7 +301,7 @@ LevelHeight.prototype = {
 
 	    // kills the player when they fall.
 	    if(player.y >= 4100) {
-	    	widthLife.width = -1;
+	    	widthLife.width = 0;
 	    	player.body.velocity.y=0;
 	    }
 
@@ -318,6 +318,7 @@ LevelHeight.prototype = {
 			//create a event 3s from now
 			timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
 			timer.start();
+		}
 
 		    if(counterh == 4) {
 				l5.destroy();
@@ -336,7 +337,7 @@ LevelHeight.prototype = {
 				BGM1.stop();
 				game.state.start("GameOver");
 			}
-		}
+		
 	},
 
 	/**
