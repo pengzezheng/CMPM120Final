@@ -6,8 +6,9 @@ window.onload = function() {
     game = new Phaser.Game(960, 640, Phaser.AUTO, 'myGame');
     game.state.add("LoadingState", LoadingState);
     game.state.add("TitleState", TitleState);
+    game.state.add("Start", Start);
     game.state.add("GameState", GameState);
-    game.state.add("GameOverState", GameOverState);
+    game.state.add("GameOver", GameOver);
     game.state.add("GameWinState", GameWinState);
     game.state.add("Level1State", Level1State);
     game.state.add("LevelCrowd", LevelCrowd);

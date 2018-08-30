@@ -317,26 +317,37 @@ LevelCrowd.prototype = {
 		bmd = game.add.bitmapData(200, 40);
 		bmd.ctx.beginPath();
 		bmd.ctx.rect(0, 0, 200, 80);
-		bmd.ctx.fillStyle = '#00685e';
+		bmd.ctx.fillStyle = '#A0522D';
 		bmd.ctx.fill();
-		bglife = game.add.sprite(630, 50, bmd);
+		bglife = game.add.sprite(50, 20, bmd);
     	bglife.anchor.set(0.5);
     	//add current health bar
     	bmd = game.add.bitmapData(180, 30);
     	bmd.ctx.beginPath();
 		bmd.ctx.rect(0, 0, 200, 80);
-		bmd.ctx.fillStyle = '#00f910';
+		bmd.ctx.fillStyle = '#FFF68F';
 		bmd.ctx.fill();
 		widthLife = new Phaser.Rectangle(0, 0, bmd.width, bmd.height);
+		widthLife.enableBody = true;
     	totalLife = bmd.width;
-    	life = game.add.sprite(630- bglife.width/2 + 10, 50, bmd);
+    	life = game.add.sprite(170- bglife.width/2 + 10, 30, bmd);
     	life.anchor.y = 0.5;
+    	life.enableBody = true;
     	life.cropEnabled = true;
     	life.crop(widthLife);
     	life.fixedToCamera = true;
-    	life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
+    	life.cameraOffset.setTo(170-bglife.width/2 + 10,30);
     	bglife.fixedToCamera = true;
-    	bglife.cameraOffset.setTo(630,50);
+    	bglife.cameraOffset.setTo(170,30);
+
+    	var heart = game.add.image(34,30,'heart');
+    	heart.scale.setTo(0.3,0.3);
+    	heart.anchor.setTo(0.5,0.5);
+    	heart.fixedToCamera = true;
+    	var lifeCount = game.add.image(34,75,'candle');
+    	lifeCount.scale.setTo(0.045);
+    	lifeCount.anchor.setTo(0.5,0.5);
+    	lifeCount.fixedToCamera = true;
 
     	lives=game.add.group();
     	lives.fixedToCamera = true;
@@ -410,7 +421,7 @@ LevelCrowd.prototype = {
 		}
 		if(counters==0){
 			l1.destroy();
-
+			BGM2.stop();
 		}
 	},
 
@@ -574,6 +585,7 @@ LevelCrowd.prototype.endTimer = function() {
 		timer.stop();
 		widthLife.width = totalLife;
 		counters--;
+		player.body.velocity.y=0;
 		player.alpha = 1;
 		player.facing = 'right';
 		this.lights.add(player);
