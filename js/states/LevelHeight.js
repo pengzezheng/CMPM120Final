@@ -41,8 +41,8 @@ LevelHeight.prototype = {
 		map=game.add.tilemap('levelHeight');
 	   	map.addTilesetImage('level 1 tilemap', 'tileset1', 32, 32);
 	   	layer3=map.createLayer('layer3');
-	   	var a =game.add.existing(layer3);
-	   	a.debug=true;
+	   	//var a =game.add.existing(layer3);
+	   	//a.debug=true;
 	   	map.setCollisionByExclusion([], true, 'layer3', true);
 
 	    aEGrab =new EnemyGrab(game,'star');
@@ -246,8 +246,8 @@ LevelHeight.prototype = {
     	heart.scale.setTo(0.3,0.3);
     	heart.anchor.setTo(0.5,0.5);
     	heart.fixedToCamera = true;
-    	var lifeCount = game.add.image(34,75,'lifeCount');
-    	lifeCount.scale.setTo(0.5,0.3);
+    	var lifeCount = game.add.image(34,75,'candle');
+    	lifeCount.scale.setTo(0.045);
     	lifeCount.anchor.setTo(0.5,0.5);
     	lifeCount.fixedToCamera = true;
     	game.time.events.loop(Phaser.Timer.SECOND*3, this.createBombs, this);
@@ -288,10 +288,9 @@ LevelHeight.prototype = {
 
 	    // kills the player when they fall.
 	    if(player.y >= 5000){
-	    	widthLife.width = 0;
+	    	widthLife.width = 10;
 	    }
 
-	    console.log(player.x,player.y);
 	    if(widthLife.width<=0 ){
 			widthLife.width = 0;
 			dead = true;
@@ -497,7 +496,7 @@ LevelHeight.prototype = {
 	/**
 	 * Development function used to debug the game.
 	 */
-	render: function() {
+	/*render: function() {
 		game.debug.text('FPS: ' + game.time.fps || 'FPS: --', 40, 40, "#00ff00");
-	}
+	}*/
 };
