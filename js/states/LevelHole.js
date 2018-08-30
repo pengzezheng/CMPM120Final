@@ -232,6 +232,7 @@ LevelHole.prototype = {
 			l2.destroy();
 		}
 	},
+	
 	reachCheckpoint: function(player,checkpoint){
 		console.log("a");
 		//TempX = checkpoint.x;
@@ -376,7 +377,7 @@ LevelHole.prototype = {
 };
 LevelHole.prototype.cropLife = function(){
 	if(widthLife.width >= 0){
-		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /30)) }, 1, Phaser.Easing.Linear.None, true);
+		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /30)) }, 0.1, Phaser.Easing.Linear.None, true);
 	}
 }
 LevelHole.prototype.endTimer = function(){
