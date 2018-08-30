@@ -13,10 +13,10 @@ EnemyDark.prototype.constructor = EnemyDark;
 function hitDark(enemyDark, player){//kill enemy and do damage to player
 		enemyDark.kill();//kill enemy
 		Monster.play();//sound effect
-		if(widthLife.width < 0){//adjust hp of player
-			widthLife.width = 0;
+		if(life.width < 0){//adjust hp of player
+			life.width = 0;
 		}
-		widthLife.width = widthLife.width - totalLife/4;// do damage to player
+		life.width = life.width - totalLife/4;// do damage to player
 }
 
 EnemyDark.prototype.update = function() {

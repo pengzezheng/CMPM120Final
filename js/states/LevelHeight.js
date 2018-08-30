@@ -301,12 +301,14 @@ LevelHeight.prototype = {
 
 	    // kills the player when they fall.
 	    if(player.y >= 4100) {
-	    	widthLife.width = 0;
+	    	life.width = 0;
+	    	life.width = 0;
+	    	console.log('fall down');
 	    	player.body.velocity.y=0;
 	    }
 
-	    if(widthLife.width<=0 ) {
-			widthLife.width = 0;
+	    if(life.width<=0 ) {
+			life.width = 0;
 			dead = true;
 			player.animations.stop(null,true);
 			//player.body.collideWorldBounds = true;
@@ -352,7 +354,7 @@ LevelHeight.prototype = {
     	//TempY = checkpoint.y;
     	Ignite.play();
 		HeightCheck = 1;
-		widthLife.width = totalLife;
+		life.width = totalLife;
 		var saved=new Checkpoint(game,checkpoint.x,checkpoint.y-5,'checkpoint1');
 		game.add.existing(saved);
 
@@ -374,7 +376,7 @@ LevelHeight.prototype = {
     	//TempY = checkpoint2.y;
     	Ignite.play();
 		HeightCheck = 2;
-		widthLife.width = totalLife;
+		life.width = totalLife;
 		var saved2=new Checkpoint(game,checkpoint2.x,checkpoint2.y-5,'checkpoint1');
 		game.add.existing(saved2);
 
@@ -397,7 +399,7 @@ LevelHeight.prototype = {
 		//TempX = checkpoint2.x;
     	//TempY = checkpoint2.y;
 		HeightCheck = 3;
-		widthLife.width = totalLife;
+		life.width = totalLife;
 		var saved3=new Checkpoint(game,checkpoint3.x,checkpoint3.y-5,'checkpoint1');
 		game.add.existing(saved3);
 
@@ -478,7 +480,7 @@ LevelHeight.prototype = {
 		if(dead == true) {
 			//player.body.collideWorldBounds = true;
 			timer.stop();
-			widthLife.width = totalLife;
+			life.width = totalLife;
 			counterh--;
 			player.alpha = 1;
 			player.facing = 'right';
@@ -487,7 +489,7 @@ LevelHeight.prototype = {
 			if(HeightCheck == 0) {
 				player.body.gravity.y=2250;
 	    		player.x = 450;
-	    		player.y = 3800;
+	    		player.y = 3850;
 	    	} else if(HeightCheck == 1) {
 	    		player.x = checkpoint.x;
 	    		player.y = checkpoint.y - 50;
@@ -520,8 +522,8 @@ LevelHeight.prototype = {
 		game.add.existing(bomb);
 	},
 	cropLife:function(){
-		if(widthLife.width > 0){
-			game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /30)) }, 0.1, Phaser.Easing.Linear.None, true);
+		if(life.width > 0){
+			game.add.tween(life).to( { width: (life.width - (totalLife /30)) }, 0.1, Phaser.Easing.Linear.None, true);
 		}
 	},
 

@@ -12,7 +12,7 @@ function Explosion(game, key) {
 }
 
 function explos(explosion, player){//kill enemy and do damage to player
-		widthLife.width = widthLife.width - totalLife/100;
+		life.width = life.width - totalLife/100;
 	}
 
 //explicitly define prefab's prototype (Phaser.Sprite) and constructor 
