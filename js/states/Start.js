@@ -10,7 +10,7 @@ Start.prototype = {
 	update: function() {
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
 			startMusic.stop();
-			game.state.start("CrowdToHole");
+			game.state.start("LevelHeight");
 		}
 	}
 };
