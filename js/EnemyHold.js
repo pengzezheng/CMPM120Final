@@ -4,13 +4,13 @@ function EnemyHold(game, key){
 	game.physics.enable(this, Phaser.Physics.ARCADE);//enable physics
 	this.enableBody=true;
 	//timer=game.time.create();
-	var temp=0;
+	temp=0;
 }
 
 function holding(enemyHold,player){
 	player.body.velocity.x=0;
 	player.body.velocity.y=0;
-	game.time.events.loop(Phaser.Timer.SECOND*2, doneHold, this);
+	game.time.events.add(Phaser.Timer.SECOND*2, doneHold, this);
 }
 
 function doneHold(enemyHold,player){
@@ -21,5 +21,13 @@ EnemyHold.prototype = Object.create(Phaser.Sprite.prototype);// make prototype
 EnemyHold.prototype.constructor = EnemyHold;
 
 EnemyHold.prototype.update = function() {
-	game.physics.arcade.overlap(this, player, holding, null, this);
+	var t=game.physics.arcade.overlap(this, player, holding, null, this);
+
+	if (t==true&&temp==0){
+		console.log('uouo');
+		Chewing.play();
+		temp++;
+	}
+
+	temp=0;
 } 

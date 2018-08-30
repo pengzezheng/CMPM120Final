@@ -11,7 +11,6 @@ LoadingState.prototype = {
 	preload: function() {
 		game.load.spritesheet('player','assets/master candleman sprite sheet.png',128,128);
 	    game.load.image('star', 'assets/flyingenemy.png');
-		game.load.image('healthFire', 'assets/healthfire.png');
 	    game.load.image('candle', 'assets/stand.png');
 	    game.load.image('jumppad', 'assets/jump pad.png');
 	    game.load.spritesheet('enemyT', 'assets/c mob 2 sheet better.png', 256, 256);
@@ -34,6 +33,11 @@ LoadingState.prototype = {
 	    game.load.audio('EA', 'audios/EAttack.wav');
 	    game.load.audio('Die', 'audios/die.wav');
 	    game.load.audio('pad', 'audios/pad.wav');
+	    game.load.audio('hit', 'audios/hit.wav');
+	    game.load.audio('ignite', 'audios/ignite.wav');
+	    game.load.audio('lvl2bgm', 'audios/lvl2bgm.wav');
+	    game.load.audio('chewing', 'audios/chewing.wav');
+
 	    game.load.image('checkpoint', 'assets/dead candle man.png');
 	    game.load.image('checkpoint1', 'assets/dead candle man lit.png');
 	    game.load.image('bgCrowd', 'assets/c Background.png');

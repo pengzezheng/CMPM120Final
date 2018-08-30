@@ -17,6 +17,7 @@ var blowRadius;
 var deathbg=0;
 var timer;
 var timeEvent;
+var counters=5;
 var dead = false;
 var LevelCrowd = function(game) {this.deathText;};
 LevelCrowd.prototype = {
@@ -30,7 +31,14 @@ LevelCrowd.prototype = {
 		Pad=game.add.audio('pad');
 		Pad.allowMultiple=true;
 		Died.allowMultiple=true;
+		Hit=game.add.audio('hit');
+		Hit.allowMultiple=true;
+		Ignite=game.add.audio('ignite');
+		Ignite.allowMultiple=true;
 		game.world.setBounds(0, 0, 4000, 960);
+		BGM2=new Phaser.Sound(game,'lvl2bgm',1,true);
+	    BGM2.allowMultiple=true;
+	    BGM2.play();
 
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		 game.time.advancedTiming = true;
@@ -40,11 +48,6 @@ LevelCrowd.prototype = {
 	   	map.addTilesetImage('tilemap2', 'tileset2', 32, 32);
 	   	layer1=map.createLayer('layer1');
 	   	var a =game.add.existing(layer1);
-	   	//var a =game.add.existing(layer1);
-	   	//a.debug=true;
-	   	//layer1.resizeWorld();
-
-	   	
 	   	game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 	   	CrowdCheck = 0;
 
@@ -317,6 +320,20 @@ LevelCrowd.prototype = {
     	life.cameraOffset.setTo(630-bglife.width/2 + 10,50);
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(630,50);
+
+    	lives=game.add.group();
+    	lives.fixedToCamera = true;
+    	lives.cameraOffset.setTo(50,50);
+    	l1 = lives.create(15, 12.5, 'lives');//create sprite life
+		l1.scale.setTo(0.075);//set scale
+		l2 = lives.create(35, 12.5, 'lives'); //create sprite life
+		l2.scale.setTo(0.075);//set scale
+		l3 = lives.create(55, 12.5, 'lives');//create sprite life
+		l3.scale.setTo(0.075);//set scale
+		l4 = lives.create(75, 12.5, 'lives');//create sprite life
+		l4.scale.setTo(0.075);
+		l5 = lives.create(95, 12.5, 'lives');//create sprite life
+		l5.scale.setTo(0.075);
 	},
 
 	update: function() {
@@ -358,10 +375,28 @@ LevelCrowd.prototype = {
 			timeEvent = timer.add(Phaser.Timer.SECOND*3, this.endTimer, this);
 			timer.start();
 		}
+
+		if(counters==4){
+			l5.destroy();
+		}
+		if(counters==3){
+			l4.destroy();
+		}
+		if(counters==2){
+			l3.destroy();
+		}
+		if(counters==1){
+			l2.destroy();
+		}
+		if(counters==0){
+			l1.destroy();
+
+		}
 	},
 
 	reachCheckpoint: function(player,checkpoint){
 		console.log("a");
+		Ignite.play();
 		//TempX = checkpoint.x;
     	//TempY = checkpoint.y;
 		CrowdCheck = 1;
@@ -377,6 +412,7 @@ LevelCrowd.prototype = {
 	},
 	reachCheckpoint2: function(player,checkpoint2){
 		console.log("a");
+		Ignite.play();
 		//TempX = checkpoint2.x;
     	//TempY = checkpoint2.y;
 		CrowdCheck = 2;
@@ -393,6 +429,7 @@ LevelCrowd.prototype = {
 	},
 	reachCheckpoint3: function(player,checkpoint3){
 		console.log("a");
+		Ignite.play();
 		//TempX = checkpoint2.x;
     	//TempY = checkpoint2.y;
 		CrowdCheck = 3;
@@ -409,6 +446,7 @@ LevelCrowd.prototype = {
 	},
 	reachCheckpoint4: function(player,checkpoint4){
 		console.log("a");
+		Ignite.play();
 		//TempX = checkpoint2.x;
     	//TempY = checkpoint2.y;
 		CrowdCheck = 4;
@@ -487,6 +525,7 @@ LevelCrowd.prototype.endTimer = function(){
 	if(dead == true){
 		timer.stop();
 		widthLife.width = totalLife;
+		counters--;
 		player.alpha = 1;
 		player.facing = 'right';
 		this.lights.add(player);
