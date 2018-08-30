@@ -290,12 +290,12 @@ LevelHeight.prototype = {
 	    }
 
 	    // kills the player when they fall.
-	    if(player.y >= 4000){
+	    if(player.y >= 4100){
 	    	widthLife.width = -1;
 	    	player.body.velocity.y=0;
 	    }
 
-	    if(widthLife.width<0 ){
+	    if(widthLife.width<=0 ){
 			widthLife.width = 0;
 			dead = true;
 			player.animations.stop(null,true);
@@ -327,7 +327,7 @@ LevelHeight.prototype = {
 		if(counterh==0){
 			l1.destroy();
 			BGM1.stop();
-
+			game.state.start("GameOver");
 		}
 	}
 },
