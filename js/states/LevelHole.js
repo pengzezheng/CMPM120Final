@@ -290,6 +290,7 @@ LevelHole.prototype = {
 		if(countero == 0){
 			l1.destroy();
 			BGM3.stop();
+			game.state.start("GameOver");
 		}
 	},
 	

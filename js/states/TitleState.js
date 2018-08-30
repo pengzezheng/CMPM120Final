@@ -14,7 +14,7 @@ TitleState.prototype = {
 	},
 	update: function() {
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
-			game.state.start("Start");
+			game.state.start("LevelCrowd");
 		}
 	}
 };

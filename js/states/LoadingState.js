@@ -16,6 +16,9 @@ LoadingState.prototype = {
 	    game.load.image('jumppad', 'assets/jump pad.png');
 	    game.load.image('title screen', 'assets/title screen.png');
 	    game.load.image('Panel 1', 'assets/Panel 1.png');
+	    game.load.image('Panel 2', 'assets/Panel 2.png');
+	    game.load.image('Panel 3', 'assets/Panel 3.png');
+	    game.load.image('last panel', 'assets/last panel.png');
 	    game.load.image('game over', 'assets/game over.png');
 	    game.load.spritesheet('enemyT', 'assets/c mob 2 sheet better.png', 256, 256);
 	    game.load.spritesheet('enemyDark', 'assets/level 3 boss.png', 512, 512);
