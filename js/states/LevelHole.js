@@ -7,6 +7,7 @@ var CrowdCheck = 0;
 var dead = false;
 var countero=5;
 var healthFire;
+var StateCheck = 3;
 /**
  * This is the hole level which is the third level of the game.
  * @param loads the Phaser game framework.
@@ -17,6 +18,7 @@ LevelHole.prototype = {
 	 * The create function adds and displays objects in the game screen for the player to see.
 	 */
 	create: function() {
+		
 		var sky = game.add.sprite(-100, 0, 'bg3');
 	   	sky.scale.setTo(1.05, 1);
 	   	Chewing=game.add.audio('chewing');
@@ -290,6 +292,7 @@ LevelHole.prototype = {
 		if(countero == 0){
 			l1.destroy();
 			BGM3.stop();
+			game.state.start("GameOver");
 		}
 	},
 	
