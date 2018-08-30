@@ -1,4 +1,3 @@
-
 var layer1;
 var checkpoint;
 var checkpoint2;
@@ -6,13 +5,22 @@ var checkpoint3;
 var checkpoint4;
 var CrowdCheck = 0;
 var dead = false;
-var counter=3;
+var counter=5;
 var healthFire;
+/**
+ * This is the hole level which is the third level of the game.
+ * @param loads the Phaser game framework.
+ */
 var LevelHole = function(game) {};
 LevelHole.prototype = {
+	/**
+	 * The create function adds and displays objects in the game screen for the player to see.
+	 */
 	create: function() {
 		var sky = game.add.sprite(-100, 0, 'bg3');
 	   	sky.scale.setTo(1.05, 1);
+	   	Chewing=game.add.audio('chewing');
+		Chewing.allowMultiple=true;
 		game.world.setBounds(0, 0, 4000, 960);
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		game.time.advancedTiming = true;
@@ -20,76 +28,68 @@ LevelHole.prototype = {
 	   	map.addTilesetImage('level3', 'tileset3', 32, 32);
 	   	layer2=map.createLayer('layer2');
 	   	game.add.existing(layer2);
-	   	//layer1.resizeWorld();
 	   	map.setCollisionByExclusion([], true, 'layer2', true);
 
 	   	game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
-	   
-	   	aEHold = new EnemyHold(game,'mouthOpen');
-	    game.add.existing(aEHold);
-	    aEHold.x = 200;
-	    aEHold.y = 725;
 
+	   	// constructs obstacles that are placed in specific coordinates of the map.
+	   	aEHold = new EnemyHold(game,'mouthOpen');
+	   	// adds the existing obstacle object.
+	    game.add.existing(aEHold);
+	    // specifies the x coordinate.
+	    aEHold.x = 200;
+	    // specifies the y coordinate.
+	    aEHold.y = 725;
+	    // constructs more of the above objext.
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
 	    aEHold.x = (14 * 32);
 	    aEHold.y = (22 * 32) + 24;
-
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
 	    aEHold.x = (21 * 32);
 	    aEHold.y = (26 * 32) + 24;
-
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
 	    aEHold.x = (26 * 32);
 	    aEHold.y = (22 * 32) + 24;
-
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
 	    aEHold.x = (34 * 32);
 	    aEHold.y = (18 * 32) + 24;
-
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
 	    aEHold.x = (37 * 32);
 	    aEHold.y = (26 * 32) + 24;
-
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
 	    aEHold.x = (42 * 32);
 	    aEHold.y = (26 * 32) + 24;
-
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
 	    aEHold.x = (44 * 32);
 	    aEHold.y = (20 * 32) + 24;
-
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
 	    aEHold.x = (47 * 32);
 	    aEHold.y = (25 * 32) + 24;
-
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
 	    aEHold.x = (64 * 32);
 	    aEHold.y = (19 * 32) + 24;
-
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
 	    aEHold.x = (105 * 32);
 	    aEHold.y = (18 * 32) + 24;
-
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
 	    aEHold.x = (109 * 32);
 	    aEHold.y = (17 * 32) + 24;
-
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
 	    aEHold.x = (48 * 32);
 	    aEHold.y = (4 * 32) + 24;
-
+	    // this loop does the same as the above but generates obstacles at a specific area.
 	    for(var i = 0; i < 60; i++) {
 	    	if(i % 4 == 0) {
 	    		aEHold = new EnemyHold(game,'mouthOpen');
@@ -99,51 +99,49 @@ LevelHole.prototype = {
 	    	}
 	    }
 
+	   	// constructs strong enemies that are placed in specific areas of the map.
 	   	aEDark = new EnemyDark(game,'enemyDark');
+	   	// adds the existing enemy object.
 	    game.add.existing(aEDark);
+	    // specifies the x coordinate of the enemy.
 	    aEDark.x = 200;
+	    // specifies the y coordinate of the enemy.
 	    aEDark.y = 300;
+	    // constructs more of the above object.
 	   	player = new Player(game,'player',3,500);
-
 	   	aEDark = new EnemyDark(game,'enemyDark');
 	    game.add.existing(aEDark);
 	    aEDark.x = 832;
 	    aEDark.y = 352;
-
 	    aEDark = new EnemyDark(game,'enemyDark');
 	    game.add.existing(aEDark);
 	    aEDark.x = 2656;
 	    aEDark.y = 384;
-
 	    aEDark = new EnemyDark(game,'enemyDark');
 	    game.add.existing(aEDark);
 	    aEDark.x = 3168;
 	    aEDark.y = 320;
-
 	    aEDark = new EnemyDark(game,'enemyDark');
 	    game.add.existing(aEDark);
 	    aEDark.x = 3168;
 	    aEDark.y = 32;
 
+	    // constructs the checkpoints at specific places of the map.
 	    checkpoint = game.add.sprite(80,845,'checkpoint');
+	    // enables arcade physics for the checkpoint.
 	    game.physics.arcade.enable(checkpoint);
+	    // enables the checkpoint body.
 		checkpoint.enableBody = true;
-
+		// constructs more of the above objects.
 		checkpoint2 = game.add.sprite(1060,585,'checkpoint');
 	    game.physics.arcade.enable(checkpoint2);
 		checkpoint2.enableBody = true;
-
 		checkpoint3 = game.add.sprite(2248,775,'checkpoint');
 	    game.physics.arcade.enable(checkpoint3);
 		checkpoint3.enableBody = true;
 
-		
-
-
+	   	// adds the player and camera following it in the game.
 	   	player = new Player(game,'player',3,500);
-    	
-    	// player.x=0;
-	    // player.y=300;
     	game.add.existing(player);
     	game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
 
@@ -168,6 +166,7 @@ LevelHole.prototype = {
 	    game.physics.arcade.enable(checkpoint4);
 		checkpoint4.enableBody = true;
 		this.lights.add(checkpoint4);
+    	
     	//refer to https://codepen.io/jdnichollsc/pen/oXXRMz
 		//add total health bar
 		bmd = game.add.bitmapData(200, 40);
@@ -196,23 +195,30 @@ LevelHole.prototype = {
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(170,30);
     	
-    	
-    	
+    	// add lives in the game.
     	lives=game.add.group();
     	lives.fixedToCamera = true;
     	lives.cameraOffset.setTo(50,50);
     	l1 = lives.create(15, 12.5, 'lives');//create sprite life
 		l1.scale.setTo(0.075);//set scale
-		l2 = lives.create(45, 12.5, 'lives'); //create sprite life
+		l2 = lives.create(35, 12.5, 'lives'); //create sprite life
 		l2.scale.setTo(0.075);//set scale
-		l3 = lives.create(75, 12.5, 'lives');//create sprite life
+		l3 = lives.create(55, 12.5, 'lives');//create sprite life
 		l3.scale.setTo(0.075);//set scale
+		l4 = lives.create(75, 12.5, 'lives');//create sprite life
+		l4.scale.setTo(0.075);
+		l5 = lives.create(95, 12.5, 'lives');//create sprite life
+		l5.scale.setTo(0.075);
 	},
 
+	/**
+	 * The update function make changes in the game screen when conditions are met.
+	 */
 	update: function() {
-		
-		//this.resethealthFire();
+		// layer collision.
 		game.physics.arcade.collide(player,layer2);
+
+		// adds overlap conditions with the checkpoints.
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.overlap(player,checkpoint2,this.reachCheckpoint2,null,this);
 		game.physics.arcade.overlap(player,checkpoint3,this.reachCheckpoint3,null,this);
@@ -237,14 +243,30 @@ LevelHole.prototype = {
 			timer.start();
 		}
 
+		if(counter==4){
+			l5.destroy();
+		}
+		if(counter==3){
+			l4.destroy();
+		}
 		if(counter==2){
 			l3.destroy();
 		}
 		if(counter==1){
 			l2.destroy();
 		}
+		if(counter==0){
+			l1.destroy();
+
+		}
 	},
 	
+	/**
+	 * The reachCheckpoint function creates a new checkpoint for the player to start in when player
+	 * and checkpoint collides.
+	 * @param player: the player object
+	 * @param checkpoint: the checkpoint object
+	 */
 	reachCheckpoint: function(player,checkpoint){
 		console.log("a");
 		//TempX = checkpoint.x;
@@ -254,13 +276,19 @@ LevelHole.prototype = {
 		var saved=new Checkpoint(game,checkpoint.x,checkpoint.y-5,'checkpoint1');
 		game.add.existing(saved);
 
-	//saved.enableBody = true;
+		//saved.enableBody = true;
 		checkpoint.kill();
 		this.lights.add(saved);
 		saved.LIGHT_RADIUS = 50;
 		
-
 	},
+
+	/**
+	 * The reachCheckpoint2 function starts the player at the second checkpoint when the player and
+	 * the checkpoint collides.
+	 * @param player: the player object
+	 * @param checkpoint: the checkpoint object
+	 */
 	reachCheckpoint2: function(player,checkpoint2){
 		console.log("a");
 		//TempX = checkpoint2.x;
@@ -270,13 +298,20 @@ LevelHole.prototype = {
 		var saved2=new Checkpoint(game,checkpoint2.x,checkpoint2.y-5,'checkpoint1');
 		game.add.existing(saved2);
 
-	//saved.enableBody = true;
+		//saved.enableBody = true;
 		checkpoint2.kill();
 		this.lights.add(saved2);
 		saved2.LIGHT_RADIUS = 50;
 		
 
 	},
+
+	/**
+	 * The reachCheckpoint3 function starts the player at the third checkpoint when the player and the 
+	 * checkpoint collides.
+	 * @param player: the player object
+	 * @param checkpoint: the checkpoint object
+	 */
 	reachCheckpoint3: function(player,checkpoint3){
 		console.log("a");
 		//TempX = checkpoint2.x;
@@ -286,29 +321,33 @@ LevelHole.prototype = {
 		var saved3=new Checkpoint(game,checkpoint3.x,checkpoint3.y-5,'checkpoint1');
 		game.add.existing(saved3);
 
-	//saved.enableBody = true;
+		//saved.enableBody = true;
 		checkpoint3.kill();
 		this.lights.add(saved3);
 		saved3.LIGHT_RADIUS = 50;
 		
 
 	},
-	// reachCheckpoint4: function(player,checkpoint4){
-	// 	console.log("a");
-	// 	//TempX = checkpoint2.x;
- //    	//TempY = checkpoint2.y;
-	// 	CrowdCheck = 4;
-	// 	widthLife.width = totalLife;
-	// 	var saved4=new Checkpoint(game,checkpoint4.x,checkpoint4.y-5,'checkpoint1');
-	// 	game.add.existing(saved4);
 
-	// //saved.enableBody = true;
-	// 	checkpoint4.kill();
-	// 	this.lights.add(saved4);
-	// 	saved4.LIGHT_RADIUS = 50;
-		
-
-	// },
+	/**
+	 * The reachCheckpoint4 function starts the player at the fourth checkpoint when the player and 
+	 * the checkpoint collides.
+	 * @param player: the player object
+	 * @param checkpoint: the checkpoint object
+	 */
+	//reachCheckpoint4: function(player,checkpoint4) {
+	//	console.log("a");
+	//	TempX = checkpoint2.x;
+	//	TempY = checkpoint2.y;
+	//	CrowdCheck = 4;
+	//	widthLife.width = totalLife;
+	//	var saved4=new Checkpoint(game,checkpoint4.x,checkpoint4.y-5,'checkpoint1');
+	//	game.add.existing(saved4);
+	//	saved.enableBody = true;
+	//	checkpoint4.kill();
+	//	this.lights.add(saved4);
+	//	saved4.LIGHT_RADIUS = 50;
+	//},
 
 	updateShadowTexture:function(){
 		this.shadowTexture.context.fillStyle = 'rgb(0, 0, 0)';
@@ -317,16 +356,11 @@ LevelHole.prototype = {
 		// this.shadowTexture.context.fillRect(4000,0,2000,1200);
 		// this.shadowTexture.context.fillRect(6000,0,2000,1200);
 
-		
-
     	// Iterate through each of the lights and draw the glow
     	this.lights.forEach(function(m) {
-    		if(m == player){
-    			
-        		
-       	 
-    			if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
-        			// Randomly change the radius each frame
+    		if(m == player) {
+    			if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+    				// Randomly change the radius each frame
         			playerRadius = this.LIGHT_RADIUS + this.game.rnd.integerInRange(1,10);
 
         			// Draw circle of light with a soft edge
@@ -339,7 +373,7 @@ LevelHole.prototype = {
         			this.shadowTexture.context.arc(m.x, m.y, playerRadius, 0, Math.PI*2);
         			this.shadowTexture.context.fill();
        	 		}
-       	 		else{
+       	 		else {
        	 			// Randomly change the radius each frame
         			playerRadius = 20 + this.game.rnd.integerInRange(1,10);
 
@@ -354,71 +388,64 @@ LevelHole.prototype = {
         			this.shadowTexture.context.fill();
        	 		}	
        	 	}
-        		
-        else{
-        	// Randomly change the radius each frame
-        	checkpointRadius = 100 + this.game.rnd.integerInRange(1,10);
+       	 	else {
+       	 		// Randomly change the radius each frame
+       	 		checkpointRadius = 100 + this.game.rnd.integerInRange(1,10);
+       	 		// Draw circle of light with a soft edge
+       	 		var gradient =this.shadowTexture.context.createRadialGradient(m.x, m.y,100 * 0.75,m.x, m.y, checkpointRadius);
+       	 		gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+       	 		gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
 
-        	// Draw circle of light with a soft edge
-        	var gradient =this.shadowTexture.context.createRadialGradient(m.x, m.y,100 * 0.75,m.x, m.y, checkpointRadius);
-        	gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
-        	gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
+       	 		this.shadowTexture.context.beginPath();
+       	 		this.shadowTexture.context.fillStyle = gradient;
+       	 		this.shadowTexture.context.arc(m.x, m.y, checkpointRadius, 0, Math.PI*2);
+       	 		this.shadowTexture.context.fill();
+       	 	}
+       	 }, this);
 
-        	this.shadowTexture.context.beginPath();
-        	this.shadowTexture.context.fillStyle = gradient;
-        	this.shadowTexture.context.arc(m.x, m.y, checkpointRadius, 0, Math.PI*2);
-        	this.shadowTexture.context.fill();
-
-        }
-    
-    }, this);
-
-    // This just tells the engine it should update the texture cache
-    this.shadowTexture.dirty = true;
-    
-
-	},
-
-	render: function(){
-		// game.debug.body(spring, false);
-		//game.debug.body(aELand, "#00ff00", true);
-		game.debug.text('FPS: ' + game.time.fps || 'FPS: --', 40, 40, "#00ff00");
+    	// This just tells the engine it should update the texture cache
+    	this.shadowTexture.dirty = true;
 
 	},
 
 };
+
+/**
+ * The crop life function reduces the size of the lifebar.
+ */
 LevelHole.prototype.cropLife = function(){
 	if(widthLife.width >= 0){
 		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /30)) }, 0.1, Phaser.Easing.Linear.None, true);
 	}
 }
-LevelHole.prototype.endTimer = function(){
-	
-	if(dead == true){
 
+/**
+ * Sets where the player respawns depending on the checkpoint reached.
+ */
+LevelHole.prototype.endTimer = function() {
+	if(dead == true) {
 		timer.stop();
 		widthLife.width = totalLife;
 		counter--;
 		player.alpha = 1;
 		player.facing = 'right';
 		this.lights.add(player);
-		if(CrowdCheck == 0){
+		if(CrowdCheck == 0) {
     		player.x = 10;
     		player.y = 500;
-    	}else if(CrowdCheck == 1){
+    	} else if(CrowdCheck == 1) {
     		player.x = checkpoint.x;
     		player.y = checkpoint.y - 30;
-    	}else if(CrowdCheck == 2){
+    	} else if(CrowdCheck == 2) {
     		player.x = checkpoint2.x;
     		player.y = checkpoint2.y - 30;
-    	}else if(CrowdCheck == 3){
+    	} else if(CrowdCheck == 3) {
     		player.x = checkpoint3.x;
     		player.y = checkpoint3.y - 30;
-    	}else if(CrowdCheck == 4){
+    	} else if(CrowdCheck == 4) {
     		player.x = checkpoint4.x;
     		player.y = checkpoint4.y - 30;
     	}
-
 	}
 	dead = false;
 }

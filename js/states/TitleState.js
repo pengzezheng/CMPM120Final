@@ -1,5 +1,10 @@
+/**
+ * This is the title state that the player first sees when starting the game.
+ * @param loads the Phaser game framework.
+ */
 var TitleState = function(game) {};
 TitleState.prototype = {
+	
 	/**
 	 * The create function.
 	 */
@@ -23,7 +28,7 @@ TitleState.prototype = {
 	update: function() {
 		// begins the first level when the spacebar is pressed.
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
-			game.state.start("LevelHeight");
+			game.state.start("LevelCrowd");
 		}
 	}
 };

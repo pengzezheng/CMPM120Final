@@ -9,7 +9,8 @@ function Bullet(game, key){
 }
 
 function hitBullet(bullet,player){
-	bullet.kill();
+	Hit.play();
+	this.kill();
 	widthLife.width = widthLife.width - totalLife/5;
 }
 

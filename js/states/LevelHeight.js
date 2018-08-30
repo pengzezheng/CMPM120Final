@@ -1,13 +1,26 @@
+
 var checkpoint;
 var checkpoint2;
 var checkpoint3;
 var checkpoint4;
 var HeightCheck = 0;
 var dead = false;
+
+
+var counter=5;
+
+/**
+ * This is the height level which is the first level of the game.
+ * @param loads the Phaser game framework.
+ */
+
 var LevelHeight = function(game) {};
 LevelHeight.prototype = {
+	
+	/**
+	 * The create function adds and displays objects in the game screen for the player to see.
+	 */
 	create: function() {
-
 		EAtt=game.add.audio('EA');
 		//Died=game.add.audio('Die');
 		explSound=game.add.audio('EXPLO', 0.25);
@@ -15,7 +28,6 @@ LevelHeight.prototype = {
 		//Died.allowMultiple=true;
 		// game.camera(800,600);
 	    //  We're going to be using physics, so enable the Arcade Physics system
-	    game.physics.startSystem(Phaser.Physics.ARCADE);
 	    BGM1=new Phaser.Sound(game,'BGM1',1,true);
 	    BGM1.allowMultiple=true;
 	    BGM1.play();
@@ -108,29 +120,44 @@ LevelHeight.prototype = {
     	bglife.cameraOffset.setTo(170,30);
     	game.time.events.loop(Phaser.Timer.SECOND*3, this.createBombs, this);
 
-    	/*ives=game.add.group();//make a group for life
-		l1 = lives.create(75, 12.5, 'lives');//create sprite life
-		l1.scale.setTo(0.5);//set scale
-		l2 = lives.create(105, 12.5, 'lives'); //create sprite life
-		l2.scale.setTo(0.5);//set scale
-		l3 = lives.create(135, 12.5, 'lives');//create sprite life
-		l3.scale.setTo(0.5);*/
+    	lives=game.add.group();
+    	lives.fixedToCamera = true;
+    	lives.cameraOffset.setTo(50,50);
+    	l1 = lives.create(15, 12.5, 'lives');//create sprite life
+		l1.scale.setTo(0.075);//set scale
+		l2 = lives.create(35, 12.5, 'lives'); //create sprite life
+		l2.scale.setTo(0.075);//set scale
+		l3 = lives.create(55, 12.5, 'lives');//create sprite life
+		l3.scale.setTo(0.075);//set scale
+		l4 = lives.create(75, 12.5, 'lives');//create sprite life
+		l4.scale.setTo(0.075);
+		l5 = lives.create(95, 12.5, 'lives');//create sprite life
+		l5.scale.setTo(0.075);
 	},
 
+	/**
+	 * The update function make changes in the game screen when conditions are met.
+	 */
 	update: function() {
+
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.overlap(player,checkpoint2,this.reachCheckpoint2,null,this);
 		game.physics.arcade.overlap(player,checkpoint3,this.reachCheckpoint3,null,this);
 		//game.physics.arcade.overlap(player,checkpoint4,this.reachCheckpoint4,null,this);
+
+		// allows the player to fall off the map.
+
 		game.physics.arcade.collide(player,layer3);
 		this.updateShadowTexture();
 		if(player.y >= 3950){
 	    	player.body.collideWorldBounds = false;
 	    }
 
+	    // kills the player when they fall.
 	    if(player.y >= 5000){
 	    	widthLife.width = 0;
 	    }
+
 	    console.log(player.x,player.y);
 	    if(widthLife.width<=0 ){
 			widthLife.width = 0;
@@ -147,8 +174,27 @@ LevelHeight.prototype = {
 				//create a event 3s from now
 			timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
 			timer.start();
+
+
+	    if(counter==4){
+			l5.destroy();
 		}
-	},
+		if(counter==3){
+			l4.destroy();
+		}
+		if(counter==2){
+			l3.destroy();
+		}
+		if(counter==1){
+			l2.destroy();
+		}
+		if(counter==0){
+			l1.destroy();
+			//BGM1.stop();
+
+		}
+	}
+},
 	reachCheckpoint: function(player,checkpoint){
 		console.log("a");
 		//TempX = checkpoint.x;
@@ -300,6 +346,9 @@ LevelHeight.prototype = {
 	},
 
 
+	/**
+	 * The createBombs function uses the Bomb prefab to create the bombs in the game world.
+	 */
 	createBombs: function() {
 		bomb=new Bomb(game, "bom");
 		bomb.reset(game.rnd.integerInRange(100,900),player.y-600);
@@ -312,10 +361,10 @@ LevelHeight.prototype = {
 		}
 	},
 
-	render: function(){
-		// game.debug.body(spring, false);
-		//game.debug.body(aELand, "#00ff00", true);
+	/**
+	 * Development function used to debug the game.
+	 */
+	render: function() {
 		game.debug.text('FPS: ' + game.time.fps || 'FPS: --', 40, 40, "#00ff00");
-
 	}
 };
