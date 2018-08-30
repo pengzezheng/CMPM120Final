@@ -340,6 +340,15 @@ LevelCrowd.prototype = {
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(170,30);
 
+    	var heart = game.add.image(34,30,'heart');
+    	heart.scale.setTo(0.3,0.3);
+    	heart.anchor.setTo(0.5,0.5);
+    	heart.fixedToCamera = true;
+    	var lifeCount = game.add.image(34,75,'lifeCount');
+    	lifeCount.scale.setTo(0.5,0.3);
+    	lifeCount.anchor.setTo(0.5,0.5);
+    	lifeCount.fixedToCamera = true;
+
     	lives=game.add.group();
     	lives.fixedToCamera = true;
     	lives.cameraOffset.setTo(50,50);

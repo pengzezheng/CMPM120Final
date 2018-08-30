@@ -247,7 +247,16 @@ LevelHeight.prototype = {
     	life.cameraOffset.setTo(170-bglife.width/2 + 10,30);
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(170,30);
+    	var heart = game.add.image(34,30,'heart');
+    	heart.scale.setTo(0.3,0.3);
+    	heart.anchor.setTo(0.5,0.5);
+    	heart.fixedToCamera = true;
+    	var lifeCount = game.add.image(34,75,'lifeCount');
+    	lifeCount.scale.setTo(0.5,0.3);
+    	lifeCount.anchor.setTo(0.5,0.5);
+    	lifeCount.fixedToCamera = true;
     	game.time.events.loop(Phaser.Timer.SECOND*3, this.createBombs, this);
+
 
     	lives=game.add.group();
     	lives.fixedToCamera = true;
