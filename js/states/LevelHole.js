@@ -243,19 +243,19 @@ LevelHole.prototype = {
 			timer.start();
 		}
 
-		if(counter==4){
+		if(counter == 4){
 			l5.destroy();
 		}
-		if(counter==3){
+		if(counter == 3){
 			l4.destroy();
 		}
-		if(counter==2){
+		if(counter == 2){
 			l3.destroy();
 		}
-		if(counter==1){
+		if(counter == 1){
 			l2.destroy();
 		}
-		if(counter==0){
+		if(counter == 0){
 			l1.destroy();
 
 		}

@@ -301,20 +301,13 @@ LevelCrowd.prototype = {
 		this.shadowTexture = this.game.add.bitmapData(game.world.width,game.world.height);
 		
 		//create an object that will use the bitmap as texture
-
-		//var lightSprite = game.add.group();
-		//lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
 		var lightShadow = game.add.image(0,0,this.shadowTexture);
 		lightShadow.blendMode = Phaser.blendModes.MULTIPLY;
 
 		
 		// Create the lights
     	this.lights = this.game.add.group();
-    	// player = new Player(game,'player',10,500);
     	
-    	// // player.x=0;
-	    // // player.y=300;
-    	// game.add.existing(player);
     	game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
     	
     	this.lights.add(player);
