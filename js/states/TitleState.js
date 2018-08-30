@@ -30,6 +30,7 @@ TitleState.prototype = {
 	 * In this case, pressing the spacebar sends the player to the next state.
 	 */
 	update: function() {
+		// sends the player to the next state when spacebar is pressed.
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
 			game.state.start("Start");
 		}
