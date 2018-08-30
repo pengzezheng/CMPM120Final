@@ -5,7 +5,6 @@ var counter=5;
  * This is the height level which is the first level of the game.
  * @param loads the Phaser game framework.
  */
-
 var LevelHeight = function(game) {};
 LevelHeight.prototype = {
 	
@@ -87,7 +86,7 @@ LevelHeight.prototype = {
 	},
 
 	/**
-	 * The update function adds and displays objects in the game screen for the player to see.
+	 * The update function make changes in the game screen when conditions are met.
 	 */
 	update: function() {
 		// allows the player to fall off the map.

@@ -32,11 +32,15 @@ LevelHole.prototype = {
 
 	   	game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 
-	   	// obstacles placed at specific coordinates.
+	   	// constructs obstacles that are placed in specific coordinates of the map.
 	   	aEHold = new EnemyHold(game,'mouthOpen');
+	   	// adds the existing obstacle object.
 	    game.add.existing(aEHold);
+	    // specifies the x coordinate.
 	    aEHold.x = 200;
+	    // specifies the y coordinate.
 	    aEHold.y = 725;
+	    // constructs more of the above objext.
 	    aEHold = new EnemyHold(game,'mouthOpen');
 	    game.add.existing(aEHold);
 	    aEHold.x = (14 * 32);
@@ -85,6 +89,7 @@ LevelHole.prototype = {
 	    game.add.existing(aEHold);
 	    aEHold.x = (48 * 32);
 	    aEHold.y = (4 * 32) + 24;
+	    // this loop does the same as the above but generates obstacles at a specific area.
 	    for(var i = 0; i < 60; i++) {
 	    	if(i % 4 == 0) {
 	    		aEHold = new EnemyHold(game,'mouthOpen');
@@ -94,11 +99,15 @@ LevelHole.prototype = {
 	    	}
 	    }
 
-	   	// strong enemies that are placed in specific areas of the map.
+	   	// constructs strong enemies that are placed in specific areas of the map.
 	   	aEDark = new EnemyDark(game,'enemyDark');
+	   	// adds the existing enemy object.
 	    game.add.existing(aEDark);
+	    // specifies the x coordinate of the enemy.
 	    aEDark.x = 200;
+	    // specifies the y coordinate of the enemy.
 	    aEDark.y = 300;
+	    // constructs more of the above object.
 	   	player = new Player(game,'player',3,500);
 	   	aEDark = new EnemyDark(game,'enemyDark');
 	    game.add.existing(aEDark);
@@ -117,10 +126,13 @@ LevelHole.prototype = {
 	    aEDark.x = 3168;
 	    aEDark.y = 32;
 
-	    // the checkpoints at specific places of the map.
+	    // constructs the checkpoints at specific places of the map.
 	    checkpoint = game.add.sprite(80,845,'checkpoint');
+	    // enables arcade physics for the checkpoint.
 	    game.physics.arcade.enable(checkpoint);
+	    // enables the checkpoint body.
 		checkpoint.enableBody = true;
+		// constructs more of the above objects.
 		checkpoint2 = game.add.sprite(1060,585,'checkpoint');
 	    game.physics.arcade.enable(checkpoint2);
 		checkpoint2.enableBody = true;
@@ -318,8 +330,8 @@ LevelHole.prototype = {
 	},
 
 	/**
-	 * The reachCheckpoint3 function starts the player at the third checkpoint when the player and the 
-	 * checkpoint collides.
+	 * The reachCheckpoint4 function starts the player at the fourth checkpoint when the player and 
+	 * the checkpoint collides.
 	 * @param player: the player object
 	 * @param checkpoint: the checkpoint object
 	 */
@@ -399,7 +411,7 @@ LevelHole.prototype = {
 };
 
 /**
- * The crop life function reduces the life of the player.
+ * The crop life function reduces the size of the lifebar.
  */
 LevelHole.prototype.cropLife = function(){
 	if(widthLife.width >= 0){
@@ -408,7 +420,7 @@ LevelHole.prototype.cropLife = function(){
 }
 
 /**
- * Development function used to debug the game.
+ * Sets where the player respawns depending on the checkpoint reached.
  */
 LevelHole.prototype.endTimer = function() {
 	if(dead == true) {

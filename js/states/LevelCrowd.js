@@ -3,7 +3,6 @@ var checkpoint2;
 var checkpoint3;
 var checkpoint4;
 var temps;
-
 var checkpointRadius;
 var check;
 var TempX;
@@ -19,16 +18,25 @@ var timer;
 var timeEvent;
 var counters=5;
 var dead = false;
+
+/**
+ * This is the crowd level which is the second level of the game.
+ * @param loads the Phaser game framework.
+ */
 var LevelCrowd = function(game) {this.deathText;};
 LevelCrowd.prototype = {
+	
+	/**
+	 * The create function adds and displays objects in the game screen for the player to see.
+	 */
 	create: function() {
-		// //create a custom timer
+		// create a custom timer
 		// timer = game.time.create();
 
-		// //create a event 3s from now
+		// create a event 3s from now
 		// timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
-		Died=game.add.audio('Die');
-		Pad=game.add.audio('pad');
+		Died = game.add.audio('Die');
+		Pad = game.add.audio('pad');
 		Pad.allowMultiple=true;
 		Died.allowMultiple=true;
 		Hit=game.add.audio('hit');
@@ -41,7 +49,7 @@ LevelCrowd.prototype = {
 	    BGM2.play();
 
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		 game.time.advancedTiming = true;
+		game.time.advancedTiming = true;
 		var sky = game.add.sprite(-100, 0, 'bgCrowd');
 	   	sky.scale.setTo(1.01, 0.8);
 	   	map=game.add.tilemap('level2bg');
@@ -51,9 +59,7 @@ LevelCrowd.prototype = {
 	   	game.time.events.loop(Phaser.Timer.SECOND, this.cropLife, this);
 	   	CrowdCheck = 0;
 
-
 	   	map.setCollisionByExclusion([], true, 'layer1', true);
-
 
 	    for (var i =0; i <10; i++) {
 	        //console.log("a");
@@ -336,6 +342,9 @@ LevelCrowd.prototype = {
 		l5.scale.setTo(0.075);
 	},
 
+	/**
+	 * The update function make changes in the game screen when conditions are met.
+	 */
 	update: function() {
 		///console.log(player.x,player.y);
 
@@ -394,6 +403,12 @@ LevelCrowd.prototype = {
 		}
 	},
 
+	/**
+	 * The reachCheckpoint function creates a new checkpoint for the player to start in when player
+	 * and checkpoint collides.
+	 * @param player: the player object
+	 * @param checkpoint: the checkpoint object
+	 */
 	reachCheckpoint: function(player,checkpoint){
 		console.log("a");
 		Ignite.play();
@@ -410,6 +425,13 @@ LevelCrowd.prototype = {
 		saved.LIGHT_RADIUS = 50;
 
 	},
+
+	/**
+	 * The reachCheckpoint2 function starts the player at the second checkpoint when the player and
+	 * the checkpoint collides.
+	 * @param player: the player object
+	 * @param checkpoint: the checkpoint object
+	 */
 	reachCheckpoint2: function(player,checkpoint2){
 		console.log("a");
 		Ignite.play();
@@ -420,13 +442,20 @@ LevelCrowd.prototype = {
 		var saved2=new Checkpoint(game,checkpoint2.x,checkpoint2.y-5,'checkpoint1');
 		game.add.existing(saved2);
 
-	//saved.enableBody = true;
+		//saved.enableBody = true;
 		checkpoint2.kill();
 		this.lights.add(saved2);
 		saved2.LIGHT_RADIUS = 50;
 		
 
 	},
+
+	/**
+	 * The reachCheckpoint3 function starts the player at the third checkpoint when the player and the 
+	 * checkpoint collides.
+	 * @param player: the player object
+	 * @param checkpoint: the checkpoint object
+	 */
 	reachCheckpoint3: function(player,checkpoint3){
 		console.log("a");
 		Ignite.play();
@@ -437,13 +466,20 @@ LevelCrowd.prototype = {
 		var saved3=new Checkpoint(game,checkpoint3.x,checkpoint3.y-5,'checkpoint1');
 		game.add.existing(saved3);
 
-	//saved.enableBody = true;
+		//saved.enableBody = true;
 		checkpoint3.kill();
 		this.lights.add(saved3);
 		saved3.LIGHT_RADIUS = 50;
 		
 
 	},
+
+	/**
+	 * The reachCheckpoint4 function starts the player at the fourth checkpoint when the player and 
+	 * the checkpoint collides.
+	 * @param player: the player object
+	 * @param checkpoint: the checkpoint object
+	 */
 	reachCheckpoint4: function(player,checkpoint4){
 		console.log("a");
 		Ignite.play();
@@ -454,23 +490,22 @@ LevelCrowd.prototype = {
 		var saved4=new Checkpoint(game,checkpoint4.x,checkpoint4.y-5,'checkpoint1');
 		game.add.existing(saved4);
 
-	//saved.enableBody = true;
+		//saved.enableBody = true;
 		checkpoint4.kill();
 		this.lights.add(saved4);
 		saved4.LIGHT_RADIUS = 50;
-		
-
 	},
 
 	
-	updateShadowTexture:function(){
+	/**
+	 * This function updates the shadow texture.
+	 */
+	updateShadowTexture:function() {
 		this.shadowTexture.context.fillStyle = 'rgb(0, 0, 0)';
 		this.shadowTexture.context.fillRect(0,0,game.world.width,game.world.height);
 		// this.shadowTexture.context.fillRect(2000,0,2000,1200);
 		// this.shadowTexture.context.fillRect(4000,0,2000,1200);
 		// this.shadowTexture.context.fillRect(6000,0,2000,1200);
-
-		
 
     	// Iterate through each of the lights and draw the glow
     	this.lights.forEach(function(m) {
@@ -489,63 +524,64 @@ LevelCrowd.prototype = {
         		this.shadowTexture.context.fill();
         		
        	 	}
-    
-        else{
-        	// Randomly change the radius each frame
-        	checkpointRadius = 100 + this.game.rnd.integerInRange(1,10);
+       	 	else {
+        		// Randomly change the radius each frame
+        		checkpointRadius = 100 + this.game.rnd.integerInRange(1,10);
 
-        	// Draw circle of light with a soft edge
-        	var gradient =this.shadowTexture.context.createRadialGradient(m.x, m.y,100 * 0.75,m.x, m.y, checkpointRadius);
-        	gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
-        	gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
+        		// Draw circle of light with a soft edge
+        		var gradient =this.shadowTexture.context.createRadialGradient(m.x, m.y,100 * 0.75,m.x, m.y, checkpointRadius);
+        		gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+        		gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
 
-        	this.shadowTexture.context.beginPath();
-        	this.shadowTexture.context.fillStyle = gradient;
-        	this.shadowTexture.context.arc(m.x, m.y, checkpointRadius, 0, Math.PI*2);
-        	this.shadowTexture.context.fill();
+        		this.shadowTexture.context.beginPath();
+        		this.shadowTexture.context.fillStyle = gradient;
+        		this.shadowTexture.context.arc(m.x, m.y, checkpointRadius, 0, Math.PI*2);
+        		this.shadowTexture.context.fill();
+        	}
+    	}, this);
 
-        }
-    }, this);
+    	// This just tells the engine it should update the texture cache
+    	this.shadowTexture.dirty = true;
+    },
 
-    // This just tells the engine it should update the texture cache
-    this.shadowTexture.dirty = true;
-    
-
-	},
-
-	
 };
-LevelCrowd.prototype.cropLife = function(){
+
+/**
+ * The cropLife function reduces the size of the lifebar.
+ */
+LevelCrowd.prototype.cropLife = function() {
 	if(widthLife.width > 0){
-		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife /30)) }, 1, Phaser.Easing.Linear.None, true);
+		game.add.tween(widthLife).to( { width: (widthLife.width - (totalLife / 30)) }, 1, Phaser.Easing.Linear.None, true);
 	}
 }
 
-LevelCrowd.prototype.endTimer = function(){
-	if(dead == true){
+/**
+ * Sets where the player respawns depending on the checkpoint reached.
+ */
+LevelCrowd.prototype.endTimer = function() {
+	if(dead == true) {
 		timer.stop();
 		widthLife.width = totalLife;
 		counters--;
 		player.alpha = 1;
 		player.facing = 'right';
 		this.lights.add(player);
-		if(CrowdCheck == 0){
+		if(CrowdCheck == 0) {
     		player.x = 10;
     		player.y = 500;
-    	}else if(CrowdCheck == 1){
+    	} else if(CrowdCheck == 1) {
     		player.x = checkpoint.x;
     		player.y = checkpoint.y - 30;
-    	}else if(CrowdCheck == 2){
+    	} else if(CrowdCheck == 2) {
     		player.x = checkpoint2.x;
     		player.y = checkpoint2.y - 30;
-    	}else if(CrowdCheck == 3){
+    	} else if(CrowdCheck == 3) {
     		player.x = checkpoint3.x;
     		player.y = checkpoint3.y - 30;
-    	}else if(CrowdCheck == 4){
+    	} else if(CrowdCheck == 4) {
     		player.x = checkpoint4.x;
     		player.y = checkpoint4.y - 30;
     	}
-
 	}
 	dead = false;
 }
