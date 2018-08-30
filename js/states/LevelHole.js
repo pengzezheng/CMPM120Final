@@ -18,7 +18,7 @@ LevelHole.prototype = {
 	 * The create function adds and displays objects in the game screen for the player to see.
 	 */
 	create: function() {
-		
+		countero=5;
 		var sky = game.add.sprite(-100, 0, 'bg3');
 	   	sky.scale.setTo(1.05, 1);
 	   	Chewing=game.add.audio('chewing');
@@ -256,7 +256,7 @@ LevelHole.prototype = {
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.overlap(player,checkpoint2,this.reachCheckpoint2,null,this);
 		game.physics.arcade.overlap(player,checkpoint3,this.reachCheckpoint3,null,this);
-		//game.physics.arcade.overlap(player,checkpoint4,this.reachCheckpoint4,null,this);
+		game.physics.arcade.overlap(player,checkpoint4,this.reachCheckpoint4,null,this);
 		this.updateShadowTexture();
 		//life.updateCrop();
 		//console.log(healthFire.x,healthFire.y);
@@ -372,19 +372,9 @@ LevelHole.prototype = {
 	 * @param player: the player object
 	 * @param checkpoint: the checkpoint object
 	 */
-	//reachCheckpoint4: function(player,checkpoint4) {
-	//	console.log("a");
-	//	TempX = checkpoint2.x;
-	//	TempY = checkpoint2.y;
-	//	CrowdCheck = 4;
-	//	widthLife.width = totalLife;
-	//	var saved4=new Checkpoint(game,checkpoint4.x,checkpoint4.y-5,'checkpoint1');
-	//	game.add.existing(saved4);
-	//	saved.enableBody = true;
-	//	checkpoint4.kill();
-	//	this.lights.add(saved4);
-	//	saved4.LIGHT_RADIUS = 50;
-	//},
+	reachCheckpoint4: function(player,checkpoint4) {
+		game.state.start('GameWin');
+	},
 
 	updateShadowTexture:function(){
 		this.shadowTexture.context.fillStyle = 'rgb(0, 0, 0)';

@@ -21,7 +21,7 @@ LevelHeight.prototype = {
 	 * The create function adds and displays objects in the game screen for the player to see.
 	 */
 	create: function() {
-		
+		counterh = 5;
 		EAtt=game.add.audio('EA');
 		//Died=game.add.audio('Die');
 		explSound=game.add.audio('EXPLO', 0.25);
@@ -388,19 +388,7 @@ LevelHeight.prototype = {
 	},
 	reachCheckpoint4: function(player,checkpoint4){
 
-		console.log("a");
-		Ignite.play();
-		//TempX = checkpoint2.x;
-    	//TempY = checkpoint2.y;
-		HeightCheck = 4;
-		widthLife.width = totalLife;
-		var saved4=new Checkpoint(game,checkpoint4.x,checkpoint4.y-5,'checkpoint1');
-		game.add.existing(saved4);
-
-	//saved.enableBody = true;
-		checkpoint4.kill();
-		this.lights.add(saved4);
-		saved4.LIGHT_RADIUS = 50;
+		game.state.start('HeightToCrowd');
 
 		
 
