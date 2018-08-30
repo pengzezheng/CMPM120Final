@@ -1,7 +1,11 @@
+
+var counter=5;
+
 /**
  * This is the height level which is the first level of the game.
  * @param loads the Phaser game framework.
  */
+
 var LevelHeight = function(game) {};
 LevelHeight.prototype = {
 	
@@ -16,7 +20,6 @@ LevelHeight.prototype = {
 		//Died.allowMultiple=true;
 		// game.camera(800,600);
 	    //  We're going to be using physics, so enable the Arcade Physics system
-	    game.physics.startSystem(Phaser.Physics.ARCADE);
 	    BGM1=new Phaser.Sound(game,'BGM1',1,true);
 	    BGM1.allowMultiple=true;
 	    BGM1.play();
@@ -68,13 +71,19 @@ LevelHeight.prototype = {
     	bglife.cameraOffset.setTo(630,50);
     	game.time.events.loop(Phaser.Timer.SECOND*3, this.createBombs, this);
 
-    	/*ives=game.add.group();//make a group for life
-		l1 = lives.create(75, 12.5, 'lives');//create sprite life
-		l1.scale.setTo(0.5);//set scale
-		l2 = lives.create(105, 12.5, 'lives'); //create sprite life
-		l2.scale.setTo(0.5);//set scale
-		l3 = lives.create(135, 12.5, 'lives');//create sprite life
-		l3.scale.setTo(0.5);*/
+    	lives=game.add.group();
+    	lives.fixedToCamera = true;
+    	lives.cameraOffset.setTo(50,50);
+    	l1 = lives.create(15, 12.5, 'lives');//create sprite life
+		l1.scale.setTo(0.075);//set scale
+		l2 = lives.create(35, 12.5, 'lives'); //create sprite life
+		l2.scale.setTo(0.075);//set scale
+		l3 = lives.create(55, 12.5, 'lives');//create sprite life
+		l3.scale.setTo(0.075);//set scale
+		l4 = lives.create(75, 12.5, 'lives');//create sprite life
+		l4.scale.setTo(0.075);
+		l5 = lives.create(95, 12.5, 'lives');//create sprite life
+		l5.scale.setTo(0.075);
 	},
 
 	/**
@@ -91,6 +100,23 @@ LevelHeight.prototype = {
 	    if(player.y >= 5000){
 	    	widthLife.width = 0;
 	    }
+
+	    if(counter==4){
+			l5.destroy();
+		}
+		if(counter==3){
+			l4.destroy();
+		}
+		if(counter==2){
+			l3.destroy();
+		}
+		if(counter==1){
+			l2.destroy();
+		}
+		if(counter==0){
+			l1.destroy();
+			//BGM1.stop();
+		}
 	},
 
 	/**
