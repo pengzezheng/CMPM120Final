@@ -10,7 +10,7 @@ function Bullet(game, key){
 function hitBullet(bullet,player){
 	Hit.play();//sound effect
 	this.kill();//kill it
-	widthLife.width = widthLife.width - totalLife/5;//do damage to player
+	life.width = life.width - totalLife/5;//do damage to player
 }
 
 Bullet.prototype = Object.create(Phaser.Sprite.prototype);// make prototype

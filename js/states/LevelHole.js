@@ -18,6 +18,7 @@ LevelHole.prototype = {
 	 * The create function adds and displays objects in the game screen for the player to see.
 	 */
 	create: function() {
+		dead = false;
 		CrowdCheck = 0;
 		countero=5;
 		var sky = game.add.sprite(-100, 0, 'bg3');
@@ -175,19 +176,16 @@ LevelHole.prototype = {
 		this.LIGHT_RADIUS = 300;
 
 		//create shadow texture
-		//var graphics = game.add.graphics(100, 100);
 		this.shadowTexture = this.game.add.bitmapData(game.world.width,game.world.height);
 		
 		//create an object that will use the bitmap as texture
-
-		//var lightSprite = game.add.group();
-		//lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
 		var lightShadow = game.add.image(0,0,this.shadowTexture);
 		lightShadow.blendMode = Phaser.blendModes.MULTIPLY;
 		this.lights = this.game.add.group();
 		this.lights.add(player);
     	player.LIGHT_RADIUS = 100;
 
+    	//this is the final checkpoint of the level
     	checkpoint4 = game.add.sprite(3889,840,'checkpoint1');
 	    game.physics.arcade.enable(checkpoint4);
 		checkpoint4.enableBody = true;
@@ -214,17 +212,19 @@ LevelHole.prototype = {
     	life = game.add.sprite(170- bglife.width/2 + 10, 30, bmd);
     	life.anchor.y = 0.5;
     	life.enableBody = true;
+    	//make health bar could be cropped
     	life.cropEnabled = true;
     	life.crop(widthLife);
     	life.fixedToCamera = true;
     	life.cameraOffset.setTo(170-bglife.width/2 + 10,30);
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(170,30);
-
+    	//heart image
     	var heart = game.add.image(34,30,'heart');
     	heart.scale.setTo(0.3,0.3);
     	heart.anchor.setTo(0.5,0.5);
     	heart.fixedToCamera = true;
+    	//lifeCount image
     	var lifeCount = game.add.image(34,75,'candle');
     	lifeCount.scale.setTo(0.045);
     	lifeCount.anchor.setTo(0.5,0.5);
@@ -259,8 +259,6 @@ LevelHole.prototype = {
 		game.physics.arcade.overlap(player,checkpoint3,this.reachCheckpoint3,null,this);
 		game.physics.arcade.overlap(player,checkpoint4,this.reachCheckpoint4,null,this);
 		this.updateShadowTexture();
-		//life.updateCrop();
-		//console.log(healthFire.x,healthFire.y);
 		if(life.width<0 ){
 			life.width = 0;
 			dead = true;
@@ -273,11 +271,12 @@ LevelHole.prototype = {
 
 
 			timer = game.time.create();
-				//create a event 3s from now
+			//create a event 3s from now
 			timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
 			timer.start();
 		}
 
+		//every time player dies, the number of the lives images decrease
 		if(countero == 4){
 			l5.destroy();
 		}
@@ -305,15 +304,11 @@ LevelHole.prototype = {
 	 */
 	reachCheckpoint: function(player,checkpoint){
 		console.log("a");
-		//TempX = checkpoint.x;
-    	//TempY = checkpoint.y;
     	Ignite.play();
 		CrowdCheck = 1;
 		life.width = totalLife;
 		var saved=new Checkpoint(game,checkpoint.x,checkpoint.y-5,'checkpoint1');
 		game.add.existing(saved);
-
-		//saved.enableBody = true;
 		checkpoint.kill();
 		this.lights.add(saved);
 		saved.LIGHT_RADIUS = 50;
@@ -328,15 +323,11 @@ LevelHole.prototype = {
 	 */
 	reachCheckpoint2: function(player,checkpoint2){
 		console.log("a");
-		//TempX = checkpoint2.x;
-    	//TempY = checkpoint2.y;
     	Ignite.play();
 		CrowdCheck = 2;
 		life.width = totalLife;
 		var saved2=new Checkpoint(game,checkpoint2.x,checkpoint2.y-5,'checkpoint1');
 		game.add.existing(saved2);
-
-		//saved.enableBody = true;
 		checkpoint2.kill();
 		this.lights.add(saved2);
 		saved2.LIGHT_RADIUS = 50;
@@ -352,15 +343,11 @@ LevelHole.prototype = {
 	 */
 	reachCheckpoint3: function(player,checkpoint3){
 		console.log("a");
-		//TempX = checkpoint2.x;
-    	//TempY = checkpoint2.y;
     	Ignite.play();
 		CrowdCheck = 3;
 		life.width = totalLife;
 		var saved3=new Checkpoint(game,checkpoint3.x,checkpoint3.y-5,'checkpoint1');
 		game.add.existing(saved3);
-
-		//saved.enableBody = true;
 		checkpoint3.kill();
 		this.lights.add(saved3);
 		saved3.LIGHT_RADIUS = 50;
@@ -379,9 +366,6 @@ LevelHole.prototype = {
 	updateShadowTexture:function(){
 		this.shadowTexture.context.fillStyle = 'rgb(0, 0, 0)';
 		this.shadowTexture.context.fillRect(0,0,game.world.width,game.world.height);
-		// this.shadowTexture.context.fillRect(2000,0,2000,1200);
-		// this.shadowTexture.context.fillRect(4000,0,2000,1200);
-		// this.shadowTexture.context.fillRect(6000,0,2000,1200);
 
     	// Iterate through each of the lights and draw the glow
     	this.lights.forEach(function(m) {
@@ -458,6 +442,7 @@ LevelHole.prototype.endTimer = function() {
 		player.alpha = 1;
 		player.facing = 'right';
 		this.lights.add(player);
+		//check CrowdCheck where the player should restart
 		if(CrowdCheck == 0) {
     		player.x = 10;
     		player.y = 500;

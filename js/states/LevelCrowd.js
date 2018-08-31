@@ -35,6 +35,7 @@ LevelCrowd.prototype = {
 
 		// create a event 3s from now
 		// timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
+		dead = false;
 		CrowdCheck = 0;
 		counters=5;
 		Died = game.add.audio('Die');
@@ -333,27 +334,29 @@ LevelCrowd.prototype = {
     	life = game.add.sprite(170- bglife.width/2 + 10, 30, bmd);
     	life.anchor.y = 0.5;
     	life.enableBody = true;
+    	//make health bar could be cropped
     	life.cropEnabled = true;
     	life.crop(widthLife);
     	life.fixedToCamera = true;
     	life.cameraOffset.setTo(170-bglife.width/2 + 10,30);
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(170,30);
-
+    	//this is the final checkpoint of the level
     	checkpoint4 = game.add.sprite(3959,522,'checkpoint');
 	    game.physics.arcade.enable(checkpoint4);
 		checkpoint4.enableBody = true;
 		this.lights.add(checkpoint4);
-
+		//heart image
     	var heart = game.add.image(34,30,'heart');
     	heart.scale.setTo(0.3,0.3);
     	heart.anchor.setTo(0.5,0.5);
     	heart.fixedToCamera = true;
+    	//lifeCount image
     	var lifeCount = game.add.image(34,75,'candle');
     	lifeCount.scale.setTo(0.045);
     	lifeCount.anchor.setTo(0.5,0.5);
     	lifeCount.fixedToCamera = true;
-
+    	//lives image
     	lives=game.add.group();
     	lives.fixedToCamera = true;
     	lives.cameraOffset.setTo(50,50);
@@ -392,26 +395,22 @@ LevelCrowd.prototype = {
 		this.updateShadowTexture();
 		life.updateCrop();
 		if(life.width<=0 ){
-			//deathbg=true;
 			console.log(dead);
-			// if(dead=false){
-			// }
 			life.width = 0;
 			dead = true;
-			// Died.play();
 			player.animations.stop(null,true);
-			//Died.play();
 			this.lights.remove(player);
 			player.alpha = 0;
 	
 			//create a custom tim
 
 			timer = game.time.create();
-				//create a event 3s from now
+			//create a event 3s from now
 			timeEvent = timer.add(Phaser.Timer.SECOND*3, this.endTimer, this);
 			timer.start();
 		}
 
+		//every time player dies, the number of lives images decrease
 		if(counters==4){
 			l5.destroy();
 		}
@@ -442,14 +441,11 @@ LevelCrowd.prototype = {
 	reachCheckpoint: function(player,checkpoint){
 		console.log("a");
 		Ignite.play();
-		//TempX = checkpoint.x;
-    	//TempY = checkpoint.y;
 		CrowdCheck = 1;
 		life.width = totalLife;
+		//create a new checkpoint which is lit up
 		var saved=new Checkpoint(game,checkpoint.x,checkpoint.y-5,'checkpoint1');
 		game.add.existing(saved);
-
-	//saved.enableBody = true;
 		checkpoint.kill();
 		this.lights.add(saved);
 		saved.LIGHT_RADIUS = 50;
@@ -465,14 +461,10 @@ LevelCrowd.prototype = {
 	reachCheckpoint2: function(player,checkpoint2){
 		console.log("a");
 		Ignite.play();
-		//TempX = checkpoint2.x;
-    	//TempY = checkpoint2.y;
 		CrowdCheck = 2;
 		life.width = totalLife;
 		var saved2=new Checkpoint(game,checkpoint2.x,checkpoint2.y-5,'checkpoint1');
 		game.add.existing(saved2);
-
-		//saved.enableBody = true;
 		checkpoint2.kill();
 		this.lights.add(saved2);
 		saved2.LIGHT_RADIUS = 50;
@@ -489,14 +481,10 @@ LevelCrowd.prototype = {
 	reachCheckpoint3: function(player,checkpoint3){
 		console.log("a");
 		Ignite.play();
-		//TempX = checkpoint2.x;
-    	//TempY = checkpoint2.y;
 		CrowdCheck = 3;
 		life.width = totalLife;
 		var saved3=new Checkpoint(game,checkpoint3.x,checkpoint3.y-5,'checkpoint1');
 		game.add.existing(saved3);
-
-		//saved.enableBody = true;
 		checkpoint3.kill();
 		this.lights.add(saved3);
 		saved3.LIGHT_RADIUS = 50;
@@ -522,10 +510,6 @@ LevelCrowd.prototype = {
 	updateShadowTexture:function() {
 		this.shadowTexture.context.fillStyle = 'rgb(0, 0, 0)';
 		this.shadowTexture.context.fillRect(0,0,game.world.width,game.world.height);
-		// this.shadowTexture.context.fillRect(2000,0,2000,1200);
-		// this.shadowTexture.context.fillRect(4000,0,2000,1200);
-		// this.shadowTexture.context.fillRect(6000,0,2000,1200);
-
     	// Iterate through each of the lights and draw the glow
     	this.lights.forEach(function(m) {
     		if(m == player){
@@ -586,6 +570,7 @@ LevelCrowd.prototype.endTimer = function() {
 		player.alpha = 1;
 		player.facing = 'right';
 		this.lights.add(player);
+		//check CrowdCheck to see where the player should restart
 		if(CrowdCheck == 0) {
     		player.x = 10;
     		player.y = 500;

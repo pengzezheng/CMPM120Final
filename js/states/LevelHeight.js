@@ -21,6 +21,7 @@ LevelHeight.prototype = {
 	create: function() {
 		HeightCheck = 0;
 		counterh = 5;
+		dead = false;
 		EAtt=game.add.audio('EA');
 		//Died=game.add.audio('Die');
 		explSound=game.add.audio('EXPLO', 0.25);
@@ -204,6 +205,7 @@ LevelHeight.prototype = {
 		checkpoint3 = game.add.sprite(503,711,'checkpoint');
 	    game.physics.arcade.enable(checkpoint3);
 		checkpoint3.enableBody = true;
+		//this is the final checkpoint of the level
 		checkpoint4 = game.add.sprite(475,135,'checkpoint1');
 	    game.physics.arcade.enable(checkpoint4);
 		checkpoint4.enableBody = true;
@@ -248,22 +250,26 @@ LevelHeight.prototype = {
     	life.anchor.y = 0.5;
     	life.enableBody = true;
     	life.cropEnabled = true;
+    	//make health bar could be cropped
     	life.crop(widthLife);
     	life.fixedToCamera = true;
     	life.cameraOffset.setTo(170-bglife.width/2 + 10,30);
     	bglife.fixedToCamera = true;
     	bglife.cameraOffset.setTo(170,30);
+    	//add heart image on the left of the health bar
     	var heart = game.add.image(34,30,'heart');
     	heart.scale.setTo(0.3,0.3);
     	heart.anchor.setTo(0.5,0.5);
     	heart.fixedToCamera = true;
+    	//add lifeCount image on the left of the lives
     	var lifeCount = game.add.image(34,75,'candle');
     	lifeCount.scale.setTo(0.045);
     	lifeCount.anchor.setTo(0.5,0.5);
     	lifeCount.fixedToCamera = true;
+    	//call the loop to crop health bar
     	game.time.events.loop(Phaser.Timer.SECOND*3, this.createBombs, this);
 
-
+    	//create lives image
     	lives=game.add.group();
     	lives.fixedToCamera = true;
     	lives.cameraOffset.setTo(50,50);
@@ -283,6 +289,7 @@ LevelHeight.prototype = {
 	 * The update function make changes in the game screen when conditions are met.
 	 */
 	update: function() {
+		//make player overlap with checkpoints
 		game.physics.arcade.overlap(player,checkpoint,this.reachCheckpoint,null,this);
 		game.physics.arcade.overlap(player,checkpoint2,this.reachCheckpoint2,null,this);
 		game.physics.arcade.overlap(player,checkpoint3,this.reachCheckpoint3,null,this);
@@ -317,6 +324,7 @@ LevelHeight.prototype = {
 			timeEvent = timer.add(Phaser.Timer.SECOND*3,this.endTimer,this);
 			timer.start();
 		}
+		//every time player dies, the number images of life decrease
 		if(counterh == 4) {
 			l5.destroy();
 		}
@@ -343,14 +351,15 @@ LevelHeight.prototype = {
 	 * @param checkpoint: the checkpoint object
 	 */
 	reachCheckpoint: function(player,checkpoint) {
+
 		console.log("a");
     	Ignite.play();
+    	//check HeightCheck to see where the player should restart
 		HeightCheck = 1;
 		life.width = totalLife;
+		//create a lit candle when player overlaps with the old checkpoint
 		var saved=new Checkpoint(game,checkpoint.x,checkpoint.y-5,'checkpoint1');
 		game.add.existing(saved);
-
-		//saved.enableBody = true;
 		checkpoint.kill();
 		this.lights.add(saved);
 		saved.LIGHT_RADIUS = 50;
@@ -403,6 +412,7 @@ LevelHeight.prototype = {
 	 * @param checkpoint: the checkpoint object
 	 */
 	reachCheckpoint4: function(player,checkpoint4) {
+		//when player reaches the last checkpoint, the game would turn to the next state
 		game.state.start('HeightToCrowd');
 		BGM1.stop();
 	},
@@ -413,10 +423,7 @@ LevelHeight.prototype = {
 	updateShadowTexture:function() {
 		this.shadowTexture.context.fillStyle = 'rgb(0, 0, 0)';
 		this.shadowTexture.context.fillRect(0,0,game.world.width,game.world.height);
-		// this.shadowTexture.context.fillRect(2000,0,2000,1200);
-		// this.shadowTexture.context.fillRect(4000,0,2000,1200);
-		// this.shadowTexture.context.fillRect(6000,0,2000,1200);
-
+		
     	// Iterate through each of the lights and draw the glow
     	this.lights.forEach(function(m) {
     		if(m == player) {
@@ -460,14 +467,14 @@ LevelHeight.prototype = {
 	endTimer:function() {
 		timer.stop();
 		if(dead == true) {
-			//player.body.collideWorldBounds = true;
 			timer.stop();
+			//revive the player
 			life.width = totalLife;
 			counterh--;
 			player.alpha = 1;
 			player.facing = 'right';
 			this.lights.add(player);
-
+			//check the HeightCheck to see where the player should start
 			if(HeightCheck == 0) {
 				player.body.gravity.y=2250;
 	    		player.x = 450;
@@ -505,6 +512,7 @@ LevelHeight.prototype = {
 	},
 	cropLife:function(){
 		if(life.width > 0){
+			//the health bar would decrease every second
 			game.add.tween(life).to( { width: (life.width - (totalLife /30)) }, 0.1, Phaser.Easing.Linear.None, true);
 		}
 	},
